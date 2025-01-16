@@ -2,6 +2,7 @@
 using ApiEasier.Server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace ApiEasier.Server.Services
 {
@@ -14,7 +15,7 @@ namespace ApiEasier.Server.Services
             _dbContext = dbContext;
         }
 
-        public async  Task AddToCollectionAsync(string collectionName, object jsonData)
+        public async Task AddDocToCollectionAsync(string collectionName, object jsonData)
         {
             try
             {
@@ -25,6 +26,30 @@ namespace ApiEasier.Server.Services
             catch (Exception ex)
             {
                 Console.WriteLine("error");
+            }
+        }
+
+        public async Task<List<Dictionary<string, object>>> GetDocFromCollectionAsync(string collectionName)
+        {
+            try
+            {
+                var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
+                var documents = await collection.Find(_ => true).ToListAsync();
+
+                // Преобразуем BsonDocument в Dictionary<string, object> для корректного преобразования Bson в Json через Dictionary
+                var jsonList = documents.Select(doc =>
+                {
+                    var bsonDoc = doc.ToDictionary();
+                    bsonDoc["_id"] = doc["_id"].ToString(); // Преобразуем ObjectId в строку
+                    return bsonDoc;
+                }).ToList();
+
+                return jsonList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                throw new ArgumentException("Failed to retrieve documents from the collection.");
             }
         }
     }

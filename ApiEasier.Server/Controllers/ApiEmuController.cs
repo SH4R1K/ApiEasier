@@ -16,9 +16,13 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
-        public IActionResult Get(string apiName, string entityName, string endpoint, [FromQuery] Dictionary<string, string>? filters)
+        public async Task<IActionResult> Get(string apiName, string entityName, string endpoint, [FromQuery] Dictionary<string, string>? filters)
         {
-            return Ok($"{apiName} {entityName} {endpoint}");
+
+            //return Ok($"{apiName} {entityName} {endpoint}");
+
+            var documents = await _dynamicCollectionService.GetDocFromCollectionAsync(entityName);
+            return Ok(documents); // Сериализуем результат из dictionary в json
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
@@ -30,7 +34,7 @@ namespace ApiEasier.Server.Controllers
         [HttpPost("{apiName}/{entityName}/{endpoint}")]
         public IActionResult Post(string entityName, object json)
         {
-            _dynamicCollectionService.AddToCollectionAsync(entityName, json);
+            _dynamicCollectionService.AddDocToCollectionAsync(entityName, json);
 
             return Ok($"{json.ToString()}");
         }

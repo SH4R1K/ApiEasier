@@ -1,7 +1,11 @@
-﻿namespace ApiEasier.Server.Interfaces
+﻿using MongoDB.Bson;
+
+namespace ApiEasier.Server.Interfaces
 {
     public interface IDynamicCollectionService
     {
-        Task AddToCollectionAsync(string collectionName, object jsonData);
+        Task AddDocToCollectionAsync(string collectionName, object jsonData);
+
+        Task<List<Dictionary<string, object>>> GetDocFromCollectionAsync(string collectionName);
     }
 }
