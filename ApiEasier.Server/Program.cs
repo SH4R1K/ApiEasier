@@ -1,5 +1,7 @@
-
+using ApiEasier.Server.DB;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Services;
+using MongoDB.Driver;
 
 namespace ApiEasier.Server
 {
@@ -9,7 +11,7 @@ namespace ApiEasier.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Загрузка конфигураций из файлов в папке "configuration"
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ "configuration"
             LoadConfigurationsFromFolder(builder.Configuration, "configuration");
 
             builder.Services.AddSingleton<JsonService>();
@@ -18,6 +20,14 @@ namespace ApiEasier.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.Configure<DBSettings>(
+                builder.Configuration.GetSection("DatabaseSettings")
+            );
+
+            builder.Services.AddSingleton<MongoDBContext>();
+
+            builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
 
             var app = builder.Build();
 
