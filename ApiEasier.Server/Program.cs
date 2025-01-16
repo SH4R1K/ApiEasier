@@ -1,4 +1,7 @@
 
+using ApiEasier.Server.DB;
+using MongoDB.Driver;
+
 namespace ApiEasier.Server
 {
     public class Program
@@ -13,6 +16,12 @@ namespace ApiEasier.Server
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.Configure<DBSettings>(
+                builder.Configuration.GetSection("DatabaseSettings")
+            );
+
+            builder.Services.AddSingleton<MongoDBContext>();
 
             var app = builder.Build();
 
