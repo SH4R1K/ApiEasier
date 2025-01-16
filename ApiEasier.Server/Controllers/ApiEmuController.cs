@@ -8,12 +8,12 @@ namespace ApiEasier.Server.Controllers
     public class ApiEmuController : ControllerBase
     {
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
-        public IActionResult Get(string apiName, string entityName, string endpoint)
+        public IActionResult Get(string apiName, string entityName, string endpoint, [FromQuery] Dictionary<string, string>? filters)
         {
             return Ok($"{apiName} {entityName} {endpoint}");
         }
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
-        public IActionResult GetById(string apiName, string entityName, string endpoint, int id)
+        public IActionResult GetById(string apiName, string entityName, string endpoint, int id, [FromQuery] Dictionary<string, string>? filters)
         {
             return Ok($"{apiName} {entityName} {endpoint} {id}");
         }
