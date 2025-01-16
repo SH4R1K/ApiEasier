@@ -1,5 +1,7 @@
 
 using ApiEasier.Server.DB;
+using ApiEasier.Server.Interfaces;
+using ApiEasier.Server.Services;
 using MongoDB.Driver;
 
 namespace ApiEasier.Server
@@ -22,6 +24,8 @@ namespace ApiEasier.Server
             );
 
             builder.Services.AddSingleton<MongoDBContext>();
+
+            builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
 
             var app = builder.Build();
 
