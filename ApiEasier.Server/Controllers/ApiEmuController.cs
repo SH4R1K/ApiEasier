@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Server.Interfaces;
+using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,12 @@ namespace ApiEasier.Server.Controllers
     public class ApiEmuController : ControllerBase
     {
         private readonly IDynamicCollectionService _dynamicCollectionService;
+        private readonly JsonService _jsonService;
 
-        public ApiEmuController(IDynamicCollectionService dynamicCollectionService)
+        public ApiEmuController(IDynamicCollectionService dynamicCollectionService, JsonService jsonService)
         {
             _dynamicCollectionService = dynamicCollectionService;
+            _jsonService = jsonService;
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
