@@ -1,4 +1,6 @@
 
+using ApiEasier.Server.Services;
+
 namespace ApiEasier.Server
 {
     public class Program
@@ -7,8 +9,11 @@ namespace ApiEasier.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+            // Загрузка конфигураций из файлов в папке "configuration"
+            LoadConfigurationsFromFolder(builder.Configuration, "configuration");
 
+            builder.Services.AddSingleton<JsonService>();
+            // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -36,6 +41,18 @@ namespace ApiEasier.Server
             app.MapFallbackToFile("/index.html");
 
             app.Run();
+        }
+
+        private static void LoadConfigurationsFromFolder(IConfigurationBuilder configurationBuilder, string folderPath)
+        {
+            if (Directory.Exists(folderPath))
+            {
+                var jsonFiles = Directory.GetFiles(folderPath, "*.json");
+                foreach (var file in jsonFiles)
+                {
+                    configurationBuilder.AddJsonFile(file, optional: true, reloadOnChange: true);
+                }
+            }
         }
     }
 }

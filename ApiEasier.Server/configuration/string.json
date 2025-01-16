@@ -1,0 +1,17 @@
+{
+  "isActive": true,
+  "entities": [
+    {
+      "name": "string",
+      "isActive": true,
+      "structure": null,
+      "actions": [
+        {
+          "route": "string",
+          "type": 0,
+          "isActive": true
+        }
+      ]
+    }
+  ]
+}
