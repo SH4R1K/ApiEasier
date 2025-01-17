@@ -1,4 +1,5 @@
-﻿using ApiEasier.Server.Models;
+﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
@@ -20,36 +21,30 @@ namespace ApiEasier.Server.Controllers
 
         // GET: api/<ApiEntityController>
         [HttpGet("{apiName}")]
-        public async Task<IActionResult> Get(string apiName)
+        public async Task<IActionResult> Get(string apiServiceName)
         {
-            var filePath = _jsonService.GetFilePath(apiName);
+            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
 
             // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiService == null)
             {
-                return NotFound($"Файл {apiName}.json не существует."); // Используем NotFound вместо Conflict
+                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
             }
-
-            var apiService = await _jsonService.DeserializeApiServiceAsync(filePath);
 
             return Ok(apiService.Entities);
         }
 
-        
-
         // GET api/<ApiEntityController>/5
         [HttpGet("{apiName}/{entityName}")]
-        public async Task<IActionResult> Get(string apiName, string entityName)
+        public async Task<IActionResult> Get(string apiServiceName, string entityName)
         {
-            var filePath = _jsonService.GetFilePath(apiName);
+            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
 
             // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiService == null)
             {
-                return NotFound($"Файл {apiName}.json не существует."); // Используем NotFound вместо Conflict
+                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
             }
-
-            var apiService = await _jsonService.DeserializeApiServiceAsync(filePath);
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
 
@@ -58,20 +53,18 @@ namespace ApiEasier.Server.Controllers
 
         // POST api/<ApiEntityController>
         [HttpPost("{apiName}")]
-        public async Task<IActionResult> Post(string apiName, [FromBody] ApiEntity newEntity)
+        public async Task<IActionResult> Post(string apiServiceName, [FromBody] ApiEntity newEntity)
         {
-            var filePath = _jsonService.GetFilePath(apiName);
+            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
 
             // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiService == null)
             {
-                return NotFound($"Файл {apiName}.json не существует."); // Возвращаем 404, если файл не найден
+                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
             }
 
-            var apiService = await _jsonService.DeserializeApiServiceAsync(filePath);
-
             // Проверка на уникальность имени сущности
-            if (apiService.Entities != null && apiService.Entities.Any(e => e.Name == newEntity.Name))
+            if (apiService.Entities.Count > 0 && apiService.Entities.Any(e => e.Name == newEntity.Name))
             {
                 return Conflict($"Сущность с именем {newEntity.Name} уже существует."); // Возвращаем 409, если сущность уже существует
             }   
@@ -80,25 +73,23 @@ namespace ApiEasier.Server.Controllers
             apiService.Entities.Add(newEntity);
 
             // Сериализация обновленного объекта в JSON
-            await _jsonService.SerializeApiServiceAsync(filePath, apiService);
+            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
 
-            return CreatedAtAction("Get", new { apiName, entityName = newEntity.Name }, newEntity);
+            return CreatedAtAction("Get", new { apiServiceName, entityName = newEntity.Name }, newEntity);
 
         }
 
         // PUT api/<ApiEntityController>/5
         [HttpPut("{apiName}/{entityName}")]
-        public async Task<IActionResult> Put(string apiName, string entityName, [FromBody] ApiEntity updatedEntity)
+        public async Task<IActionResult> Put(string apiServiceName, string entityName, [FromBody] ApiEntity updatedEntity)
         {
-            var filePath = _jsonService.GetFilePath(apiName);
+            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
 
             // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiService == null)
             {
-                return NotFound($"Файл {apiName}.json не существует."); // Возвращаем 404, если файл не найден
+                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
             }
-
-            var apiService = await _jsonService.DeserializeApiServiceAsync(filePath);
 
             // Поиск существующей сущности
             var existingEntity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
@@ -113,24 +104,22 @@ namespace ApiEasier.Server.Controllers
             existingEntity.Structure = updatedEntity.Structure;
 
             // Сериализация обновленного объекта в JSON
-            await _jsonService.SerializeApiServiceAsync(filePath, apiService);
+            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
 
             return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
         }
 
         // DELETE api/<ApiEntityController>/5
         [HttpDelete("{apiName}/{entityName}")]
-        public async Task<IActionResult> Delete(string apiName, string entityName)
+        public async Task<IActionResult> Delete(string apiServiceName, string entityName)
         {
-            var filePath = _jsonService.GetFilePath(apiName);
+            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
 
             // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiService == null)
             {
-                return NotFound($"Файл {apiName}.json не существует."); // Возвращаем 404, если файл не найден
+                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
             }
-
-            var apiService = await _jsonService.DeserializeApiServiceAsync(filePath);
 
             // Поиск существующей сущности
             var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
@@ -143,7 +132,7 @@ namespace ApiEasier.Server.Controllers
             apiService.Entities.Remove(entityToRemove);
 
             // Сериализация обновленного объекта в JSON
-            await _jsonService.SerializeApiServiceAsync(filePath, apiService);
+            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
 
             return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
         }

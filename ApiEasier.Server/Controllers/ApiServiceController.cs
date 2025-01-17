@@ -2,6 +2,7 @@
 using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
+using SharpCompress.Common;
 using System.IO;
 using System.Text.Json;
 
@@ -24,53 +25,30 @@ namespace ApiEasier.Server.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
-            DirectoryInfo directory = new DirectoryInfo("configuration");
-            var files = directory.GetFiles();
-            return files.Select(f => Path.GetFileNameWithoutExtension(f.Name));
+            return _jsonService.GetApiServiceNames();
         }
 
         // GET api/<ApiServiceController>/5
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
-            // Определение пути к файлу
-            string directoryPath = "configuration";
-            string filePath = Path.Combine(directoryPath, name + ".json");
+            var apiServiceDto = await _jsonService.GetApiServiceByName(name);
 
-            // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiServiceDto == null)
             {
                 return NotFound($"Файл {name}.json не существует."); // Используем NotFound вместо Conflict
             }
 
-            // Чтение содержимого файла
-            var json = await System.IO.File.ReadAllTextAsync(filePath);
-
-            // Десериализация JSON в объект
-            var apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Уменьшение регистра полей
-                WriteIndented = true // Запись в читаемом формате
-            });
-
-            var apiServiceDto = new ApiServiceDto
-            {
-                Name = name,
-                IsActive = apiService.IsActive,
-                Entities = apiService.Entities
-            };
-
             // Возврат объекта в формате JSON
             return Ok(apiServiceDto);
         }
-
 
         // POST api/<ApiServiceController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ApiServiceDto apiServiceDto)
         {
             // Определение имени файла на основе имени сервиса
-            string fileName = apiServiceDto.Name; // Имя сервиса передается в теле запроса
+            string apiServiceName = apiServiceDto.Name; // Имя сервиса передается в теле запроса
 
             var apiService = new ApiService 
             {
@@ -78,80 +56,60 @@ namespace ApiEasier.Server.Controllers
                 Entities = apiServiceDto.Entities,
             };
 
-            // Сериализация нового объекта в JSON с отступами
-            string json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
+            try
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Уменьшение регистра полей
-                WriteIndented = true // Запись в читаемом формате
-            });
-
-            string filePath = _jsonService.GetFilePath(fileName);
-
-            // Проверка существования файла
-            if (System.IO.File.Exists(filePath))
+                await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
+            }
+            catch (Exception)
             {
-                return Conflict($"Файл {fileName}.json уже существует.");
+                return Conflict($"Файл {apiServiceName}.json уже существует.");
             }
 
-            // Запись JSON в файл
-            await System.IO.File.WriteAllTextAsync(filePath, json);
-
-            return CreatedAtAction(nameof(Post), new { name = fileName }, apiServiceDto);
+            return CreatedAtAction(nameof(Post), new { name = apiServiceName }, apiServiceDto);
         }
 
         // PUT api/<ApiServiceController>/5
         [HttpPut("{oldName}")]
         public async Task<IActionResult> Put(string oldName, [FromBody] ApiServiceDto apiServiceDto)
         {
-            string filePath = _jsonService.GetFilePath(oldName);
+            var apiService = await _jsonService.DeserializeApiServiceAsync(oldName);
 
             // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            if (apiService == null)
             {
                 return NotFound($"Файл {apiServiceDto.Name}.json не существует."); // Возвращаем 404, если файл не найден
             }
 
-            var apiService = await _jsonService.DeserializeApiServiceAsync(filePath);
-
             apiService.IsActive = apiServiceDto.IsActive;
 
-            // Сериализация обновленного объекта в JSON с отступами
-            string json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
+            try
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Уменьшение регистра полей
-                WriteIndented = true // Запись в читаемом формате
-            });
-
-            // Запись JSON в файл
-            await System.IO.File.WriteAllTextAsync(filePath, json);
-
-            if (oldName != apiServiceDto.Name)
-            {
-                // Определение старого и нового путей к файлу
-                string oldFilePath = _jsonService.GetFilePath(oldName);
-                string newFilePath = _jsonService.GetFilePath(apiServiceDto.Name);
-
-                // Переименование файла
-                System.IO.File.Move(oldFilePath, newFilePath);
+                await _jsonService.SerializeApiServiceAsync(oldName, apiService);
             }
+            catch (Exception)
+            {
+                return Conflict($"Файл {oldName}.json уже существует.");
+            }
+
+            _jsonService.RenameApiService(oldName, apiServiceDto);
 
             return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
         }
 
+        
+
         // DELETE api/<ApiServiceController>/5
         [HttpDelete("{name}")]
-        public IActionResult Delete(string name)
+        public IActionResult Delete(string apiServiceName)
         {
-            string filePath = _jsonService.GetFilePath(name);
-
-            // Проверка существования файла
-            if (!System.IO.File.Exists(filePath))
+            try
             {
-                return NotFound($"Файл {name}.json не существует."); // Возвращаем 404, если файл не найден
+                _jsonService.DeleteApiService(apiServiceName);
             }
-
-            System.IO.File.Delete(filePath);
-
+            catch (Exception)
+            {
+                return Conflict($"Файл {apiServiceName}.json уже существует.");
+            }
             return NoContent();
         }
     }

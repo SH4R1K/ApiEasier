@@ -23,7 +23,7 @@ namespace ApiEasier.Server.Services
                 var bsonDocument = BsonDocument.Parse(jsonData.ToString());
                 await collecntion.InsertOneAsync(bsonDocument);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine("error");
             }
