@@ -77,15 +77,8 @@ namespace ApiEasier.Server.Controllers
             // Добавление нового действия
             entity.Actions.Add(newAction);
 
-            // Сериализация обновленного объекта в JSON
-            try
-            {
-                await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-            }
-            catch (Exception)
-            {
-                return Conflict($"Файл {apiServiceName}.json уже существует.");
-            }
+            if (!await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService))
+                return Conflict($"Файл {apiServiceName}.json не существует.");
 
             return CreatedAtAction(nameof(Get), new { apiServiceName, entityName, actionName = newAction.Route }, newAction);
         }
@@ -121,8 +114,8 @@ namespace ApiEasier.Server.Controllers
             existingAction.IsActive = updatedAction.IsActive;
             existingAction.Type = updatedAction.Type;
 
-            // Сериализация обновленного объекта в JSON
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
+            if (!await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService))
+                return Conflict($"Файл {apiServiceName}.json не существует.");
 
             return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
         }
@@ -156,8 +149,8 @@ namespace ApiEasier.Server.Controllers
             // Удаление действия
             entity.Actions.Remove(actionToRemove);
 
-            // Сериализация обновленного объекта в JSON
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
+            if (!await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService))
+                return Conflict($"Файл {apiServiceName}.json не существует.");
 
             return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
         }
