@@ -5,22 +5,23 @@ namespace ApiEasier.Server.Services
 {
     public class JsonService
     {
-        public string GetFilePath(string fileName)
+        private readonly string _path;
+        public JsonService(string path)
         {
-            // Определение пути к файлу
-            string directoryPath = "configuration";
-            string filePath = Path.Combine(directoryPath, fileName + ".json");
-
-            // Создание папки, если она не существует
-            Directory.CreateDirectory(directoryPath);
+            _path = path;
+            Directory.CreateDirectory(_path);
+        }
+        private string GetFilePath(string fileName)
+        {
+            string filePath = Path.Combine(_path, fileName + ".json");
 
             return filePath;
         }
 
-        public async Task<ApiService?> DeserializeApiServiceAsync(string filePath)
+        public async Task<ApiService?> DeserializeApiServiceAsync(string apiServiceName)
         {
-            // Чтение содержимого файла
-            var json = await System.IO.File.ReadAllTextAsync(filePath);
+            var filePath = GetFilePath(apiServiceName);
+            var json = await File.ReadAllTextAsync(filePath);
 
             // Десериализация JSON в объект
             var apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
@@ -31,8 +32,9 @@ namespace ApiEasier.Server.Services
             return apiService;
         }
 
-        public async Task SerializeApiServiceAsync(string filePath, ApiService apiService)
+        public async Task SerializeApiServiceAsync(string fileName, ApiService apiService)
         {
+            var filePath = GetFilePath(fileName);
             // Десериализация JSON в объект
             var json = JsonSerializer.Serialize<ApiService>(apiService, new JsonSerializerOptions
             {
@@ -40,12 +42,13 @@ namespace ApiEasier.Server.Services
                 WriteIndented = true // Запись в читаемом формате
             });
 
-            System.IO.File.WriteAllText(filePath, json);
+           File.WriteAllText(filePath, json);
         }
 
 
-        public async Task<ApiEntity?> GetApiEntity(string entityName, string filePath)
+        public async Task<ApiEntity?> GetApiEntity(string entityName, string fileName)
         {
+            var filePath = GetFilePath(fileName);
             var apiService = await DeserializeApiServiceAsync(filePath);
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
