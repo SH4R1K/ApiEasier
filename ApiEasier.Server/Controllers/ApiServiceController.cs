@@ -53,9 +53,9 @@ namespace ApiEasier.Server.Controllers
                 Entities = apiServiceDto.Entities,
             };
 
-
-            if (!await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService, false))
+            if (_jsonService.IsApiServiceExist(apiServiceName))
                 return Conflict($"Файл {apiServiceName}.json уже существует.");
+            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
 
             return CreatedAtAction(nameof(Post), new
             {
@@ -77,8 +77,9 @@ namespace ApiEasier.Server.Controllers
 
             apiService.IsActive = apiServiceDto.IsActive;
 
-            if (!await _jsonService.SerializeApiServiceAsync(oldName, apiService))
+            if (!_jsonService.IsApiServiceExist(oldName))
                 return Conflict($"Файл {oldName}.json не существует.");
+            await _jsonService.SerializeApiServiceAsync(oldName, apiService);
 
             _jsonService.RenameApiService(oldName, apiServiceDto);
 
@@ -91,14 +92,9 @@ namespace ApiEasier.Server.Controllers
         [HttpDelete("{apiServiceName}")]
         public IActionResult Delete(string apiServiceName)
         {
-            try
-            {
-                _jsonService.DeleteApiService(apiServiceName);
-            }
-            catch (Exception)
-            {
+            if (!_jsonService.IsApiServiceExist(apiServiceName))
                 return Conflict($"Файл {apiServiceName}.json не существует.");
-            }
+            _jsonService.DeleteApiService(apiServiceName);
             return NoContent();
         }
     }
