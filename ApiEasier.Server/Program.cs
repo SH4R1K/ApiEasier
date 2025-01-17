@@ -11,10 +11,7 @@ namespace ApiEasier.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // �������� ������������ �� ������ � ����� "configuration"
-            LoadConfigurationsFromFolder(builder.Configuration, "configuration");
-
-            builder.Services.AddSingleton<JsonService>();
+            builder.Services.AddSingleton<JsonService>(provider => new JsonService("configuration"));
             // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -51,18 +48,6 @@ namespace ApiEasier.Server
             app.MapFallbackToFile("/index.html");
 
             app.Run();
-        }
-
-        private static void LoadConfigurationsFromFolder(IConfigurationBuilder configurationBuilder, string folderPath)
-        {
-            if (Directory.Exists(folderPath))
-            {
-                var jsonFiles = Directory.GetFiles(folderPath, "*.json");
-                foreach (var file in jsonFiles)
-                {
-                    configurationBuilder.AddJsonFile(file, optional: true, reloadOnChange: true);
-                }
-            }
         }
     }
 }
