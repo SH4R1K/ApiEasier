@@ -15,5 +15,11 @@ namespace ApiEasier.Server.DB
 
         public IMongoCollection<T> GetCollection<T>(string name) =>
             _database.GetCollection<T>(name);
+
+        public async Task<List<string>> ListCollectionNamesAsync()
+        {
+            var collections = await _database.ListCollectionNamesAsync();
+            return await collections.ToListAsync();
+        }
     }
 }
