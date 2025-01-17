@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Server.Interfaces;
+using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,11 +12,13 @@ namespace ApiEasier.Server.Controllers
     {
         private readonly IDynamicCollectionService _dynamicCollectionService;
         private readonly JsonService _jsonService;
+        private readonly LogService _logService;
 
-        public ApiEmuController(IDynamicCollectionService dynamicCollectionService, JsonService jsonService)
+        public ApiEmuController(IDynamicCollectionService dynamicCollectionService, JsonService jsonService, LogService logService)
         {
             _dynamicCollectionService = dynamicCollectionService;
             _jsonService = jsonService;
+            _logService = logService;
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
@@ -23,7 +26,7 @@ namespace ApiEasier.Server.Controllers
         {
 
             //return Ok($"{apiName} {entityName} {endpoint}");
-
+            
             var documents = await _dynamicCollectionService.GetDocFromCollectionAsync(entityName);
             return Ok(documents); // Сериализуем результат из dictionary в json
         }
