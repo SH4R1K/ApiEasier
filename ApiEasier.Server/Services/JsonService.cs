@@ -12,7 +12,7 @@ namespace ApiEasier.Server.Services
             _path = path;
             Directory.CreateDirectory(_path);
         }
-        private string GetFilePath(string fileName)
+        public string GetFilePath(string fileName)
         {
             string filePath = Path.Combine(_path, fileName + ".json");
 

@@ -23,7 +23,7 @@ namespace ApiEasier.Server
             );
 
             builder.Services.AddSingleton<MongoDBContext>();
-
+            builder.Services.AddTransient<LogService>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
 
             var app = builder.Build();
