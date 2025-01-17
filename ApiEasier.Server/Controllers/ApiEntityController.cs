@@ -20,7 +20,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // GET: api/<ApiEntityController>
-        [HttpGet("{apiName}")]
+        [HttpGet("{apiServiceName}")]
         public async Task<IActionResult> Get(string apiServiceName)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
@@ -35,7 +35,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // GET api/<ApiEntityController>/5
-        [HttpGet("{apiName}/{entityName}")]
+        [HttpGet("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
@@ -47,12 +47,15 @@ namespace ApiEasier.Server.Controllers
             }
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
+            if (entity == null)
+            {
+                return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+            }
             return Ok(entity);
         }
 
         // POST api/<ApiEntityController>
-        [HttpPost("{apiName}")]
+        [HttpPost("{apiServiceName}")]
         public async Task<IActionResult> Post(string apiServiceName, [FromBody] ApiEntity newEntity)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
@@ -80,7 +83,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // PUT api/<ApiEntityController>/5
-        [HttpPut("{apiName}/{entityName}")]
+        [HttpPut("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Put(string apiServiceName, string entityName, [FromBody] ApiEntity updatedEntity)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
@@ -110,7 +113,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // DELETE api/<ApiEntityController>/5
-        [HttpDelete("{apiName}/{entityName}")]
+        [HttpDelete("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Delete(string apiServiceName, string entityName)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);

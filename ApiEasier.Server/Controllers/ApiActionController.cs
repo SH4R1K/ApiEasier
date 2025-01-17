@@ -19,7 +19,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // GET: api/<ApiEntityController>
-        [HttpGet("{apiName}/{entityName}")]
+        [HttpGet("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName)
         {
             var entity = await _jsonService.GetApiEntity(entityName, apiServiceName);
@@ -32,7 +32,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // GET api/<ApiActionController>/5
-        [HttpGet("{apiName}/{entityName}/{actionName}")]
+        [HttpGet("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName, string actionName)
         {
             var entity = await _jsonService.GetApiEntity(entityName, apiServiceName);
@@ -42,12 +42,15 @@ namespace ApiEasier.Server.Controllers
             }
 
             var action = entity.Actions.FirstOrDefault(a => a.Route == actionName);
-
+            if (action == null)
+            {
+                return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
+            }
             return Ok(action);
         }
 
         // POST api/<ApiActionController>
-        [HttpPost("{apiName}/{entityName}")]
+        [HttpPost("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Post(string apiServiceName, string entityName, [FromBody] ApiAction newAction)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
@@ -88,7 +91,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // PUT api/<ApiActionController>/5
-        [HttpPut("{apiName}/{entityName}/{actionName}")]
+        [HttpPut("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Put(string apiServiceName, string entityName, string actionName, [FromBody] ApiAction updatedAction)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
@@ -125,7 +128,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         // DELETE api/<ApiActionController>/5
-        [HttpDelete("{apiName}/{entityName}/{actionName}")]
+        [HttpDelete("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Delete(string apiServiceName, string entityName, string actionName)
         {
             var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);

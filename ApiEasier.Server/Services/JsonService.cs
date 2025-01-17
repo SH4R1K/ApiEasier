@@ -62,8 +62,7 @@ namespace ApiEasier.Server.Services
 
         public async Task<ApiEntity?> GetApiEntity(string entityName, string apiServiceName)
         {
-            var filePath = GetFilePath(apiServiceName);
-            var apiService = await DeserializeApiServiceAsync(filePath);
+            var apiService = await DeserializeApiServiceAsync(entityName);
             if (apiService == null)
                 return null;
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);

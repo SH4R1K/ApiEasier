@@ -88,7 +88,7 @@ namespace ApiEasier.Server.Controllers
 
 
         // DELETE api/<ApiServiceController>/5
-        [HttpDelete("{name}")]
+        [HttpDelete("{apiServiceName}")]
         public IActionResult Delete(string apiServiceName)
         {
             try
