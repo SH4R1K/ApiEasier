@@ -2,9 +2,6 @@
 using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
-using SharpCompress.Common;
-using System.IO;
-using System.Text.Json;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -50,22 +47,20 @@ namespace ApiEasier.Server.Controllers
             // Определение имени файла на основе имени сервиса
             string apiServiceName = apiServiceDto.Name; // Имя сервиса передается в теле запроса
 
-            var apiService = new ApiService 
+            var apiService = new ApiService
             {
                 IsActive = apiServiceDto.IsActive,
                 Entities = apiServiceDto.Entities,
             };
 
-            try
-            {
-                await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-            }
-            catch (Exception)
-            {
-                return Conflict($"Файл {apiServiceName}.json уже существует.");
-            }
 
-            return CreatedAtAction(nameof(Post), new { name = apiServiceName }, apiServiceDto);
+            if (!await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService, false))
+                return Conflict($"Файл {apiServiceName}.json уже существует.");
+
+            return CreatedAtAction(nameof(Post), new
+            {
+                name = apiServiceName
+            }, apiServiceDto);
         }
 
         // PUT api/<ApiServiceController>/5
@@ -82,21 +77,15 @@ namespace ApiEasier.Server.Controllers
 
             apiService.IsActive = apiServiceDto.IsActive;
 
-            try
-            {
-                await _jsonService.SerializeApiServiceAsync(oldName, apiService);
-            }
-            catch (Exception)
-            {
-                return Conflict($"Файл {oldName}.json уже существует.");
-            }
+            if (!await _jsonService.SerializeApiServiceAsync(oldName, apiService))
+                return Conflict($"Файл {oldName}.json не существует.");
 
             _jsonService.RenameApiService(oldName, apiServiceDto);
 
             return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
         }
 
-        
+
 
         // DELETE api/<ApiServiceController>/5
         [HttpDelete("{name}")]
@@ -108,7 +97,7 @@ namespace ApiEasier.Server.Controllers
             }
             catch (Exception)
             {
-                return Conflict($"Файл {apiServiceName}.json уже существует.");
+                return Conflict($"Файл {apiServiceName}.json не существует.");
             }
             return NoContent();
         }

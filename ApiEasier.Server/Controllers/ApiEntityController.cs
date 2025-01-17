@@ -64,7 +64,7 @@ namespace ApiEasier.Server.Controllers
             }
 
             // Проверка на уникальность имени сущности
-            if (apiService.Entities.Count > 0 && apiService.Entities.Any(e => e.Name == newEntity.Name))
+            if (apiService.Entities.Any(e => e.Name == newEntity.Name))
             {
                 return Conflict($"Сущность с именем {newEntity.Name} уже существует."); // Возвращаем 409, если сущность уже существует
             }   

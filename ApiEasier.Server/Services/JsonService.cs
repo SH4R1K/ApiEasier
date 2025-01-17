@@ -39,13 +39,13 @@ namespace ApiEasier.Server.Services
             return apiService;
         }
 
-        public async Task SerializeApiServiceAsync(string apiServiceName, ApiService apiService)
+        public async Task<bool> SerializeApiServiceAsync(string apiServiceName, ApiService apiService, bool isOverwrited = true)
         {
             var filePath = GetFilePath(apiServiceName);
 
-            if (!File.Exists(filePath))
+            if (File.Exists(filePath) && !isOverwrited || !File.Exists(filePath) && isOverwrited)
             {
-                throw new Exception($"Файл не существует");
+                return false;
             }
 
             // Десериализация JSON в объект
@@ -56,6 +56,7 @@ namespace ApiEasier.Server.Services
             });
 
             await File.WriteAllTextAsync(filePath, json);
+            return true;
         }
 
 

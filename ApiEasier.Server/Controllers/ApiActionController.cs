@@ -25,7 +25,7 @@ namespace ApiEasier.Server.Controllers
             var entity = await _jsonService.GetApiEntity(entityName, apiServiceName);
             if (entity == null) 
             {
-                return NotFound($"Cущность не найдена");
+                return NotFound($"Cущность с именем {entityName} не найдена");
             }
 
             return Ok(entity.Actions);
@@ -38,7 +38,7 @@ namespace ApiEasier.Server.Controllers
             var entity = await _jsonService.GetApiEntity(entityName, apiServiceName);
             if (entity == null)
             {
-                return NotFound($"Cущность не найдена");
+                return NotFound($"Cущность с именем {entityName} не найдена");
             }
 
             var action = entity.Actions.FirstOrDefault(a => a.Route == actionName);
@@ -62,7 +62,7 @@ namespace ApiEasier.Server.Controllers
 
             if (entity == null)
             {
-                return NotFound($"Cущность не найдена");
+                return NotFound($"Cущность с именем {entityName} не найдена");
             }
 
             // Проверка на уникальность имени действия
@@ -103,7 +103,7 @@ namespace ApiEasier.Server.Controllers
 
             if (entity == null)
             {
-                return NotFound($"Cущность не найдена");
+                return NotFound($"Cущность с именем {entityName} не найдена");
             }
 
             // Поиск существующего действия
@@ -140,7 +140,7 @@ namespace ApiEasier.Server.Controllers
 
             if (entity == null)
             {
-                return NotFound($"Cущность не найдена");
+                return NotFound($"Cущность с именем {entityName} не найдена");
             }
 
             // Поиск существующего действия
