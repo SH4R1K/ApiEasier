@@ -38,7 +38,7 @@ namespace ApiEasier.Server.Controllers
                 return NotFound();
             
 
-            var documents = await _dynamicCollectionService.GetDocFromCollectionAsync(entityName);
+            var documents = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}");
             if (documents != null)
                 return Ok(documents); // Сериализуем результат из dictionary в json
             else
@@ -59,7 +59,7 @@ namespace ApiEasier.Server.Controllers
             if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.GetByIndex))
                 return NotFound();
 
-            var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync(entityName, id);
+            var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id);
              if (result != null) 
                 return Ok(result);
              else
@@ -80,7 +80,7 @@ namespace ApiEasier.Server.Controllers
             if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Post))
                 return NotFound();
 
-            var result = await _dynamicCollectionService.AddDocToCollectionAsync(entityName, json);
+            var result = await _dynamicCollectionService.AddDocToCollectionAsync($"{apiName}_{entityName}", json);
 
             return Ok(result);
         }
@@ -99,7 +99,7 @@ namespace ApiEasier.Server.Controllers
             if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint))
                 return NotFound();
 
-            var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync(entityName, json);
+            var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", json);
 
             if (result != null)
                 return Ok(result);
@@ -121,7 +121,7 @@ namespace ApiEasier.Server.Controllers
             if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint))
                 return NotFound();
 
-            var result = await _dynamicCollectionService.DeleteDocFromCollectionAsync(entityName, id);
+            var result = await _dynamicCollectionService.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
             if (result > 0) 
                 return NoContent();
             return NotFound();
