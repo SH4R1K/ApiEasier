@@ -71,7 +71,7 @@ namespace ApiEasier.Server.Services
             return files.Select(f => Path.GetFileNameWithoutExtension(f.Name));
         }
 
-        public async Task<ApiServiceDto?> GetApiServiceByName(string apiServiceName)
+        public async Task<ApiServiceDto?> GetApiServiceByNameAsync(string apiServiceName)
         {
             var apiService = await DeserializeApiServiceAsync(apiServiceName);
             if (apiService == null)

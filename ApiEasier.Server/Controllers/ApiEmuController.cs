@@ -4,6 +4,7 @@ using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using System.Net;
 
 namespace ApiEasier.Server.Controllers
 {
@@ -23,8 +24,20 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
-        public async Task<IActionResult> Get(string apiName, string entityName, string endpoint, [FromQuery] Dictionary<string, string>? filters)
+        public async Task<IActionResult> Get(string apiName, string entityName, string endpoint, [FromQuery] Dictionary<string, object>? filters)
         {
+            var api = await _jsonService.GetApiServiceByNameAsync(apiName);
+            if (api == null)
+                return NotFound();
+
+            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName);
+            if (entity == null)
+                return NotFound();
+           
+            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Get))
+                return NotFound();
+            
+
             var documents = await _dynamicCollectionService.GetDocFromCollectionAsync(entityName);
             if (documents != null)
                 return Ok(documents); // Сериализуем результат из dictionary в json
@@ -33,8 +46,19 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] Dictionary<string, string>? filters)
+        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] Dictionary<string, object>? filters)
         {
+            var api = await _jsonService.GetApiServiceByNameAsync(apiName);
+            if (api == null)
+                return NotFound();
+
+            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName);
+            if (entity == null)
+                return NotFound();
+
+            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.GetByIndex))
+                return NotFound();
+
             var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync(entityName, id);
              if (result != null) 
                 return Ok(result);
@@ -43,16 +67,38 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpPost("{apiName}/{entityName}/{endpoint}")]
-        public async Task<IActionResult> Post(string entityName, object json)
+        public async Task<IActionResult> Post(string apiName, string entityName, string endpoint, object json)
         {
+            var api = await _jsonService.GetApiServiceByNameAsync(apiName);
+            if (api == null)
+                return NotFound();
+
+            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName);
+            if (entity == null)
+                return NotFound();
+
+            if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Post))
+                return NotFound();
+
             var result = await _dynamicCollectionService.AddDocToCollectionAsync(entityName, json);
 
             return Ok(result);
         }
 
         [HttpPut("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> Put(string entityName, object json)
+        public async Task<IActionResult> Put(string apiName, string entityName, string endpoint, object json)
         {
+            var api = await _jsonService.GetApiServiceByNameAsync(apiName);
+            if (api == null)
+                return NotFound();
+
+            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName);
+            if (entity == null)
+                return NotFound();
+
+            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint))
+                return NotFound();
+
             var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync(entityName, json);
 
             if (result != null)
@@ -62,8 +108,19 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpDelete("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> Delete(string entityName,string id)
+        public async Task<IActionResult> Delete(string apiName, string entityName, string endpoint, string id)
         {
+            var api = await _jsonService.GetApiServiceByNameAsync(apiName);
+            if (api == null)
+                return NotFound();
+
+            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName);
+            if (entity == null)
+                return NotFound();
+
+            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint))
+                return NotFound();
+
             var result = await _dynamicCollectionService.DeleteDocFromCollectionAsync(entityName, id);
             if (result > 0) 
                 return NoContent();

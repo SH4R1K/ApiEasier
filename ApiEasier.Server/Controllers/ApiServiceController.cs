@@ -29,7 +29,7 @@ namespace ApiEasier.Server.Controllers
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
-            var apiServiceDto = await _jsonService.GetApiServiceByName(name);
+            var apiServiceDto = await _jsonService.GetApiServiceByNameAsync(name);
 
             if (apiServiceDto == null)
             {
