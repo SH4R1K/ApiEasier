@@ -22,7 +22,7 @@ namespace ApiEasier.Server.Controllers
         [HttpGet("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName)
         {
-            var entity = await _jsonService.GetApiEntity(entityName, apiServiceName);
+            var entity = await _jsonService.GetApiEntityAsync(entityName, apiServiceName);
             if (entity == null) 
             {
                 return NotFound($"Cущность с именем {entityName} не найдена");
@@ -35,7 +35,7 @@ namespace ApiEasier.Server.Controllers
         [HttpGet("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName, string actionName)
         {
-            var entity = await _jsonService.GetApiEntity(entityName, apiServiceName);
+            var entity = await _jsonService.GetApiEntityAsync(entityName, apiServiceName);
             if (entity == null)
             {
                 return NotFound($"Cущность с именем {entityName} не найдена");

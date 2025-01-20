@@ -1,6 +1,6 @@
 ﻿namespace ApiEasier.Server.Models
 {
-    public class RequestLog
+    public class RequestLog // В JSON Формате хранить логи
     {
         public DateTime RequestDate { get; set; }
         public string? RawJson { get; set; }
