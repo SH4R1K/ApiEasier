@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using SharpCompress.Common;
 using System.Net;
 
 namespace ApiEasier.Server.Controllers
@@ -61,9 +62,14 @@ namespace ApiEasier.Server.Controllers
         [HttpPost("{apiName}/{entityName}/{endpoint}")]
         public async Task<IActionResult> Post(string apiName, string entityName, string endpoint, object json)
         {
-            var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
+            var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
             if (!isValid)
                 return NotFound();
+
+            // Валидация структуры для сущности
+            isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
+            if (!isValid)
+                return BadRequest();
 
             var result = await _dynamicCollectionService.AddDocToCollectionAsync($"{apiName}_{entityName}", json);
 
@@ -73,9 +79,15 @@ namespace ApiEasier.Server.Controllers
         [HttpPut("{apiName}/{entityName}/{endpoint}/{id}")]
         public async Task<IActionResult> Put(string apiName, string entityName, string endpoint, string id, object json)
         {
-            var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Put);
+            // Валидация апи, сущности и пути
+            var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Put);
             if (!isValid)
                 return NotFound();
+
+            // Валидация структуры для сущности
+            isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
+            if (!isValid)
+                return BadRequest();
 
             var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
 

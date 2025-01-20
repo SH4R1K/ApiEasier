@@ -14,5 +14,7 @@ namespace ApiEasier.Server.Interfaces
             string entity,
             string endPoint,
             TypeResponse typeResponse);
+
+        Task<bool> ValidateEntityStructureAsync(ApiEntity apiEntity, object document);
     }
 }

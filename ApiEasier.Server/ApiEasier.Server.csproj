@@ -15,6 +15,7 @@
       <Version>8.*-*</Version>
     </PackageReference>
     <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
+    <PackageReference Include="NJsonSchema" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
