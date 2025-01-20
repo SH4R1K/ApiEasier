@@ -34,7 +34,7 @@ namespace ApiEasier.Server.Controllers
             if (entity == null)
                 return NotFound();
            
-            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Get))
+            if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Get))
                 return NotFound();
             
 
@@ -56,7 +56,7 @@ namespace ApiEasier.Server.Controllers
             if (entity == null)
                 return NotFound();
 
-            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.GetByIndex))
+            if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.GetByIndex))
                 return NotFound();
 
             var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id);
@@ -96,7 +96,7 @@ namespace ApiEasier.Server.Controllers
             if (entity == null)
                 return NotFound();
 
-            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint))
+            if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Put))
                 return NotFound();
 
             var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", json);
@@ -118,7 +118,7 @@ namespace ApiEasier.Server.Controllers
             if (entity == null)
                 return NotFound();
 
-            if (entity.Actions.Any(a => a.IsActive && a.Route == endpoint))
+            if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Delete))
                 return NotFound();
 
             var result = await _dynamicCollectionService.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
