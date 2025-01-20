@@ -11,7 +11,6 @@ namespace ApiEasier.Server
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddSingleton<JsonService>(provider => new JsonService("configuration"));
             // Add services to the container.
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,9 +21,11 @@ namespace ApiEasier.Server
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
+            builder.Services.AddSingleton<JsonService>(provider => new JsonService("configuration"));
             builder.Services.AddSingleton<MongoDBContext>();
             builder.Services.AddTransient<LogService>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
+            builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
             var app = builder.Build();
 
