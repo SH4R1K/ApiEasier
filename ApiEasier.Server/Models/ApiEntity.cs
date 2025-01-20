@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Server.Models
+﻿using NJsonSchema;
+
+namespace ApiEasier.Server.Models
 {
     public class ApiEntity
     {

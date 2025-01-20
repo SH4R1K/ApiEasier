@@ -1,6 +1,9 @@
 ﻿using ApiEasier.Server.Dto;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
+using MongoDB.Bson;
+using NJsonSchema;
+using System.Text.Json;
 
 namespace ApiEasier.Server.Services
 {
@@ -37,9 +40,11 @@ namespace ApiEasier.Server.Services
             return (true, api, entity);
         }
 
-        public Task<bool> ValidateEntityStructure(ApiEntity apiEntity)
+        public async Task<bool> ValidateEntityStructure(ApiEntity apiEntity, object document)
         {
-            throw new NotImplementedException();
+            var json = JsonSerializer.Serialize(document);
+            var jsonSchema = await JsonSchema.FromJsonAsync(JsonSerializer.Serialize(apiEntity.Structure));
+            return jsonSchema.Validate(json).Count == 0;
         }
     }
 }

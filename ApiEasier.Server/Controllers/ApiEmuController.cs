@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
+using SharpCompress.Common;
 using System.Net;
 
 namespace ApiEasier.Server.Controllers
@@ -61,9 +62,14 @@ namespace ApiEasier.Server.Controllers
         [HttpPost("{apiName}/{entityName}/{endpoint}")]
         public async Task<IActionResult> Post(string apiName, string entityName, string endpoint, object json)
         {
-            var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
+            var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
             if (!isValid)
                 return NotFound();
+
+            // Валидация структуры для сущности
+            isValid = await _apiServiceValidator.ValidateEntityStructure(entity!, json);
+            if (!isValid)
+                return BadRequest();
 
             var result = await _dynamicCollectionService.AddDocToCollectionAsync($"{apiName}_{entityName}", json);
 
@@ -79,7 +85,7 @@ namespace ApiEasier.Server.Controllers
                 return NotFound();
 
             // Валидация структуры для сущности
-            isValid = await _apiServiceValidator.ValidateEntityStructure(entity!);
+            isValid = await _apiServiceValidator.ValidateEntityStructure(entity!, json);
             if (!isValid)
                 return BadRequest();
 
