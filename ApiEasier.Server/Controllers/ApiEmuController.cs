@@ -67,7 +67,7 @@ namespace ApiEasier.Server.Controllers
                 return NotFound();
 
             // Валидация структуры для сущности
-            isValid = await _apiServiceValidator.ValidateEntityStructure(entity!, json);
+            isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
             if (!isValid)
                 return BadRequest();
 
@@ -85,7 +85,7 @@ namespace ApiEasier.Server.Controllers
                 return NotFound();
 
             // Валидация структуры для сущности
-            isValid = await _apiServiceValidator.ValidateEntityStructure(entity!, json);
+            isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
             if (!isValid)
                 return BadRequest();
 
