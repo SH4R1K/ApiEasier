@@ -2,6 +2,7 @@
 using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;

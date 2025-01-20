@@ -27,7 +27,11 @@ namespace ApiEasier.Server
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
+            builder.Services.AddHttpLogging(o => { });
+
             var app = builder.Build();
+
+            app.UseHttpLogging();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
