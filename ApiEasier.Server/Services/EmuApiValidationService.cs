@@ -36,5 +36,10 @@ namespace ApiEasier.Server.Services
 
             return (true, api, entity);
         }
+
+        public Task<bool> ValidateEntityStructure(ApiEntity apiEntity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

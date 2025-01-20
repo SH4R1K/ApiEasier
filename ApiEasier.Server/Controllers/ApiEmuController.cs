@@ -73,9 +73,15 @@ namespace ApiEasier.Server.Controllers
         [HttpPut("{apiName}/{entityName}/{endpoint}/{id}")]
         public async Task<IActionResult> Put(string apiName, string entityName, string endpoint, string id, object json)
         {
-            var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Put);
+            // Валидация апи, сущности и пути
+            var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Put);
             if (!isValid)
                 return NotFound();
+
+            // Валидация структуры для сущности
+            isValid = await _apiServiceValidator.ValidateEntityStructure(entity!);
+            if (!isValid)
+                return BadRequest();
 
             var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
 
