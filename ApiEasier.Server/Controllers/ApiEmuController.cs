@@ -37,7 +37,7 @@ namespace ApiEasier.Server.Controllers
             if (!isValid) 
                 return NotFound();
                 
-            var documents = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}");
+            var documents = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}", filters);
             if (documents != null)
                 return Ok(documents); // Сериализуем результат из dictionary в json
             else
@@ -45,13 +45,13 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] object? filters)
+        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] string? filters)
         {
             var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.GetByIndex);
             if (!isValid)
                 return NotFound();
 
-            var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id);
+            var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id, filters);
              if (result != null) 
                 return Ok(result);
              else

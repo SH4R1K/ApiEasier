@@ -71,9 +71,6 @@ namespace ApiEasier.Server.Services
                 // Берём документ по id из коллекции
                 if (!ObjectId.TryParse(id, out var objectId))
                     return null;
-
-                var document = await collection.Find(Builders<BsonDocument>.Filter.Eq("_id", objectId)).FirstOrDefaultAsync();
-                var objectId = new ObjectId(id);
                 var idFilter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
                 var documentFilter = BsonSerializer.Deserialize<BsonDocument>(filters);
                 var combineFilter = Builders<BsonDocument>.Filter.And(idFilter, documentFilter);
