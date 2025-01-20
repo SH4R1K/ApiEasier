@@ -1,3 +1,7 @@
+using ApiEasier.Server.DB;
+using ApiEasier.Server.Interfaces;
+using ApiEasier.Server.Services;
+using MongoDB.Driver;
 
 namespace ApiEasier.Server
 {
@@ -8,11 +12,20 @@ namespace ApiEasier.Server
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.Configure<DBSettings>(
+                builder.Configuration.GetSection("DatabaseSettings")
+            );
+
+            builder.Services.AddSingleton<JsonService>(provider => new JsonService("configuration"));
+            builder.Services.AddSingleton<MongoDBContext>();
+            builder.Services.AddTransient<LogService>();
+            builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
+            builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
             var app = builder.Build();
 
