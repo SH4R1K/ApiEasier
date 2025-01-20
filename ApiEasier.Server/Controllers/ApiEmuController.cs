@@ -4,6 +4,7 @@ using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using System.Net;
 
 namespace ApiEasier.Server.Controllers
@@ -24,7 +25,7 @@ namespace ApiEasier.Server.Controllers
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
-        public async Task<IActionResult> Get(string apiName, string entityName, string endpoint, [FromQuery] Dictionary<string, object>? filters)
+        public async Task<IActionResult> Get(string apiName, string entityName, string endpoint, [FromQuery] string? filters)
         {
             var api = await _jsonService.GetApiServiceByNameAsync(apiName);
             if (api == null)
@@ -36,18 +37,20 @@ namespace ApiEasier.Server.Controllers
            
             if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.Get))
                 return NotFound();
-            
 
-            var documents = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}");
-            if (documents != null)
-                return Ok(documents); // Сериализуем результат из dictionary в json
+
+            var result = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}", filters);
+
+            if (result != null)
+                return Ok(result); // Сериализуем результат из dictionary в json
             else
                 return NotFound();
         }
 
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] Dictionary<string, object>? filters)
+        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] object? filters)
         {
+            Console.WriteLine(filters.ToBsonDocument());
             var api = await _jsonService.GetApiServiceByNameAsync(apiName);
             if (api == null)
                 return NotFound();
@@ -59,7 +62,7 @@ namespace ApiEasier.Server.Controllers
             if (!entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == TypeResponse.GetByIndex))
                 return NotFound();
 
-            var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id);
+            var result = new Dictionary<string, string>() ; //await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id, filters);
              if (result != null) 
                 return Ok(result);
              else

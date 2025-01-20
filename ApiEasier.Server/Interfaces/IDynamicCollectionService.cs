@@ -6,9 +6,9 @@ namespace ApiEasier.Server.Interfaces
     {
         Task<Dictionary<string, object>?> AddDocToCollectionAsync(string collectionName, object jsonData);
 
-        Task<List<Dictionary<string, object>?>> GetDocFromCollectionAsync(string collectionName);
+        Task<List<Dictionary<string, object>?>> GetDocFromCollectionAsync(string collectionName, string? filters);
 
-        Task<Dictionary<string, object>?> GetDocByIdFromCollectionAsync(string collectionName, string id);
+        Task<Dictionary<string, object>?> GetDocByIdFromCollectionAsync(string collectionName, string id, string? filters);
 
         Task<Dictionary<string, object>?> UpdateDocFromCollectionAsync(string collectionName, object jsonData);
 
