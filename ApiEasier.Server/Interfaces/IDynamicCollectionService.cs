@@ -10,7 +10,7 @@ namespace ApiEasier.Server.Interfaces
 
         Task<Dictionary<string, object>?> GetDocByIdFromCollectionAsync(string collectionName, string id);
 
-        Task<Dictionary<string, object>?> UpdateDocFromCollectionAsync(string collectionName, object jsonData);
+        Task<Dictionary<string, object>?> UpdateDocFromCollectionAsync(string collectionName, string id, object jsonData);
 
         Task<long?> DeleteDocFromCollectionAsync(string collectionName, string id);
     }
