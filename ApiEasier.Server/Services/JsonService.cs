@@ -54,9 +54,9 @@ namespace ApiEasier.Server.Services
         }
 
 
-        public async Task<ApiEntity?> GetApiEntity(string entityName, string apiServiceName)
+        public async Task<ApiEntity?> GetApiEntityAsync(string entityName, string apiServiceName)
         {
-            var apiService = await DeserializeApiServiceAsync(entityName);
+            var apiService = await DeserializeApiServiceAsync(apiServiceName);
             if (apiService == null)
                 return null;
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);

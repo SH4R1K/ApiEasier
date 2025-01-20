@@ -35,7 +35,7 @@ namespace ApiEasier.Server.Controllers
             var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Get);
             if (!isValid) 
                 return NotFound();
-
+                
             var documents = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}");
             if (documents != null)
                 return Ok(documents); // Сериализуем результат из dictionary в json
