@@ -68,8 +68,11 @@ namespace ApiEasier.Server.Services
 
                 var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
 
-
                 // Берём документ по id из коллекции
+                if (!ObjectId.TryParse(id, out var objectId))
+                    return null;
+
+                var document = await collection.Find(Builders<BsonDocument>.Filter.Eq("_id", objectId)).FirstOrDefaultAsync();
                 var objectId = new ObjectId(id);
                 var idFilter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
                 var documentFilter = BsonSerializer.Deserialize<BsonDocument>(filters);
@@ -94,10 +97,6 @@ namespace ApiEasier.Server.Services
         {
             try
             {
-                var collections = await _dbContext.ListCollectionNamesAsync();
-                if (!collections.Contains(collectionName))
-                    return null;
-
                 var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
 
                 FilterDefinition<BsonDocument> filterDefinition;
@@ -131,7 +130,7 @@ namespace ApiEasier.Server.Services
             }
         }
 
-        public async Task<Dictionary<string, object>?> UpdateDocFromCollectionAsync(string collectionName, object jsonData)
+        public async Task<Dictionary<string, object>?> UpdateDocFromCollectionAsync(string collectionName, string id, object jsonData)
         {
             try
             {
@@ -141,18 +140,19 @@ namespace ApiEasier.Server.Services
 
                 var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
 
-                var bsonDocument = BsonDocument.Parse(jsonData.ToString());
-
-                if (!bsonDocument.Contains("_id"))
+                if (!ObjectId.TryParse(id, out var objectId))
                     return null;
 
-                var objectId = new ObjectId(bsonDocument["_id"].ToString());
-                bsonDocument.Remove("_id"); // Удаляем _id из данных, чтобы не перезаписать его
+                var document = await collection.Find(Builders<BsonDocument>.Filter.Eq("_id", objectId)).FirstOrDefaultAsync();
+                if (document == null)
+                    return null;
+
+                document.Remove("_id"); // Удаляем _id из данных, чтобы не перезаписать его
 
                 // Используем replaceOne для замены всего документа
                 var replacementResult = await collection.ReplaceOneAsync(
                     Builders<BsonDocument>.Filter.Eq("_id", objectId),
-                    bsonDocument
+                    document
                 );
 
                 if (replacementResult.ModifiedCount > 0)
