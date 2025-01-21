@@ -1,6 +1,9 @@
 using ApiEasier.Server.DB;
 using ApiEasier.Server.Interfaces;
+using ApiEasier.Server.LogsService;
+using ApiEasier.Server.Middlewares;
 using ApiEasier.Server.Services;
+using Microsoft.AspNetCore.HttpLogging;
 using MongoDB.Driver;
 
 namespace ApiEasier.Server
@@ -27,11 +30,29 @@ namespace ApiEasier.Server
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
-            builder.Services.AddHttpLogging(o => { });
+            builder.Logging.ClearProviders();
+            builder.Logging.AddProvider(new MongoLoggerProvider(
+                "mongodb://localhost:27017", "LogsApiEasier", "HttpLogs"));
+
+            builder.Services.AddHttpLogging(o => {
+                o.CombineLogs = true;
+
+                o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
+
+                //o.LoggingFields = HttpLoggingFields.RequestQuery
+                //    | HttpLoggingFields.RequestMethod
+                //    | HttpLoggingFields.RequestPath
+                //    | HttpLoggingFields.RequestBody
+                //    | HttpLoggingFields.ResponseStatusCode
+                //    | HttpLoggingFields.ResponseBody
+                //    | HttpLoggingFields.Duration;
+            });
 
             var app = builder.Build();
 
             app.UseHttpLogging();
+
+            //app.UseMiddleware<HttpLoggingMiddleware>();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

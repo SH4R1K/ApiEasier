@@ -1,4 +1,5 @@
-﻿using ApiEasier.Server.Interfaces;
+﻿using ApiEasier.Server.Attributes;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ namespace ApiEasier.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Loggable]
     public class ApiEmuController : ControllerBase
     {
         private readonly IDynamicCollectionService _dynamicCollectionService;
