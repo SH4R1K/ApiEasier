@@ -24,11 +24,11 @@ namespace ApiEasier.Server.Services
         {
             // Проверяем существование api-сервиса в json-файле конфигурации
             var api = await _jsonService.GetApiServiceByNameAsync(apiName);
-            if (api == null)
+            if (api == null || !api.IsActive)
                 return (false, null, null);
 
             // Проверяем наличие сущности у api-сервиса в json-файле конфигурации
-            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName);
+            var entity = api.Entities.FirstOrDefault(e => e.Name == entityName && e.IsActive);
             if (entity == null)
                 return (false, api, null);
 

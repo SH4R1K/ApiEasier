@@ -67,12 +67,19 @@ namespace ApiEasier.Server.Services
                     return null;
 
                 var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
-
+                FilterDefinition<BsonDocument> documentFilter;
                 // Берём документ по id из коллекции
                 if (!ObjectId.TryParse(id, out var objectId))
                     return null;
                 var idFilter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
-                var documentFilter = BsonSerializer.Deserialize<BsonDocument>(filters);
+                try
+                {
+                    documentFilter = BsonSerializer.Deserialize<BsonDocument>(filters);
+                }
+                catch 
+                {
+                    documentFilter = Builders<BsonDocument>.Filter.Empty;
+                }
                 var combineFilter = Builders<BsonDocument>.Filter.And(idFilter, documentFilter);
                 var document = await collection.Find(combineFilter).FirstOrDefaultAsync();
                 if (document == null)
@@ -97,15 +104,15 @@ namespace ApiEasier.Server.Services
                 var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
 
                 FilterDefinition<BsonDocument> filterDefinition;
-                if (string.IsNullOrEmpty(filters))
-                {
-                    // Если filters null или пустой, возвращаем все документы
-                    filterDefinition = Builders<BsonDocument>.Filter.Empty;
-                }
-                else
+                try
                 {
                     // Преобразуем строку фильтров в BsonDocument
                     filterDefinition = BsonSerializer.Deserialize<BsonDocument>(filters);
+                }
+                catch
+                {
+                    // Если filters не преобразуется в bsondocument, возвращаем все документы
+                    filterDefinition = Builders<BsonDocument>.Filter.Empty;
                 }
                 // Берём все документы из коллекции
                 var documents = await collection.Find(filterDefinition).ToListAsync();
