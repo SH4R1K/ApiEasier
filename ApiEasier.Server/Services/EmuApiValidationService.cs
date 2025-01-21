@@ -42,7 +42,7 @@ namespace ApiEasier.Server.Services
 
         public async Task<bool> ValidateEntityStructureAsync(ApiEntity apiEntity, object document)
         {
-            if(document == null)
+            if(apiEntity.Structure == null)
                 return true;
             var json = JsonSerializer.Serialize(document);
             var jsonSchema = await JsonSchema.FromJsonAsync(JsonSerializer.Serialize(apiEntity.Structure));
