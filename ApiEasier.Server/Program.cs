@@ -21,7 +21,7 @@ namespace ApiEasier.Server
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
-            builder.Services.AddSingleton<JsonService>(provider => new JsonService("configuration"));
+            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider => new JsonService("configuration"));
             builder.Services.AddSingleton<MongoDBContext>();
             builder.Services.AddTransient<LogService>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
