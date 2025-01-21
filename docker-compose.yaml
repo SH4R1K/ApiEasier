@@ -5,8 +5,6 @@ services:
     restart: always
     ports:
       - "5239:8080"
-    volumes:
-        - ./configuration:./configuration
     depends_on:
       mongodb:
         condition: service_healthy
