@@ -4,33 +4,29 @@ services:
     hostname: apieasier_api
     restart: always
     ports:
-      - "5239:8080"
-    depends_on:
-      mongodb:
-        condition: service_healthy
-        restart: true
+      - "5240:8080"
     image: apieasier_api
     build:
       context: ./ApiEasier.Server/.
       dockerfile: Dockerfile
+    volumes:
+      - ./configs:/app/configuration
     env_file:
       - path: ./environment/default.env
         required: true
     networks:
       - backend
   mongodb:
-    image: mongo:6.0.20-jammy
+    image: mongo:4.4
     hostname: mongodb
     ports:
       - '27017:27017'
     volumes:
       - ./data:/data/db
       - ./scripts:/docker-entrypoint-initdb.d
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
     networks:
       - backend
-    
+
 
 networks:
   backend:
