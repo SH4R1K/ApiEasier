@@ -4,6 +4,9 @@ using MongoDB.Driver;
 
 namespace ApiEasier.Server.LogsService
 {
+    /// <summary>
+    /// Класс для записи логов в конкретную коллекцию в MongoDB
+    /// </summary>
     public class MongoLogger : ILogger
     {
         private readonly IMongoCollection<BsonDocument> _logCollection;
@@ -19,6 +22,15 @@ namespace ApiEasier.Server.LogsService
 
         public bool IsEnabled(LogLevel logLevel) => true;
 
+        /// <summary>
+        /// Главный метод записи лога
+        /// </summary>
+        /// <typeparam name="TState"></typeparam>
+        /// <param name="logLevel">Уровень логирования (например, Information, Error, и т. д.).</param>
+        /// <param name="eventId">Уникальный идентификатор события</param>
+        /// <param name="state">Данные состояния лога</param>
+        /// <param name="exception">Исключение, которое может быть записано в лог.</param>
+        /// <param name="formatter">Функция, которая используется для форматирования лог-сообщения.</param>
         public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
         {
             var message = formatter(state, exception);
@@ -48,6 +60,7 @@ namespace ApiEasier.Server.LogsService
                     }
                 }
 
+                // запись логов после того как данные собраны в BsonDocument
                 _logCollection.InsertOne(logEntry);
             }
         }

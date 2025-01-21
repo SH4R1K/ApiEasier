@@ -1,7 +1,6 @@
 using ApiEasier.Server.DB;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.LogsService;
-using ApiEasier.Server.Middlewares;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.HttpLogging;
 using MongoDB.Driver;
@@ -30,15 +29,16 @@ namespace ApiEasier.Server
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
+            // Конфигурация логирования в MongoDB
             builder.Logging.ClearProviders();
-            builder.Logging.AddProvider(new MongoLoggerProvider(
-                "mongodb://localhost:27017", "LogsApiEasier", "HttpLogs"));
+            builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
 
             builder.Services.AddHttpLogging(o => {
                 o.CombineLogs = true;
 
                 o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
 
+                // Если нам понадобиться не все данные логов
                 //o.LoggingFields = HttpLoggingFields.RequestQuery
                 //    | HttpLoggingFields.RequestMethod
                 //    | HttpLoggingFields.RequestPath
@@ -51,8 +51,6 @@ namespace ApiEasier.Server
             var app = builder.Build();
 
             app.UseHttpLogging();
-
-            //app.UseMiddleware<HttpLoggingMiddleware>();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
