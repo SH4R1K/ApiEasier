@@ -27,6 +27,8 @@ namespace ApiEasier.Server
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
+            builder.Configuration.AddEnvironmentVariables();
+
             var app = builder.Build();
 
             app.UseDefaultFiles();
