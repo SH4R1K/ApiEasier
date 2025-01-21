@@ -1,147 +1,187 @@
 ﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
-using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ApiEasier.Server.Controllers
 {
+    /// <summary>
+    /// Контроллер для управления сущностями API.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ApiEntityController : ControllerBase
     {
-        private JsonService _jsonService;
+        private readonly IConfigFileApiService _configFileApiService;
 
-        public ApiEntityController(JsonService jsonService)
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="ApiEntityController"/>.
+        /// </summary>
+        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
+        public ApiEntityController(IConfigFileApiService configFileApiService)
         {
-            _jsonService = jsonService;
+            _configFileApiService = configFileApiService;
         }
 
-        // GET: api/<ApiEntityController>
+        // GET api/ApiEntity/{apiServiceName}
         [HttpGet("{apiServiceName}")]
         public async Task<IActionResult> Get(string apiServiceName)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-            }
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
 
-            return Ok(apiService.Entities);
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                return Ok(apiService.Entities);
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // GET api/<ApiEntityController>/5
+        // GET api/ApiEntity/{apiServiceName}/{entityName}
         [HttpGet("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-            }
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
 
-            var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-            if (entity == null)
-            {
-                return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                }
+                return Ok(entity);
             }
-            return Ok(entity);
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // POST api/<ApiEntityController>
+        // POST api/ApiEntity/{apiServiceName}
         [HttpPost("{apiServiceName}")]
         public async Task<IActionResult> Post(string apiServiceName, [FromBody] ApiEntity newEntity)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            if (newEntity == null)
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                return BadRequest("Данные сущности отсутствуют."); // Возвращаем 400, если данные отсутствуют
             }
 
-            // Проверка на уникальность имени сущности
-            if (apiService.Entities.Any(e => e.Name == newEntity.Name))
+            try
             {
-                return Conflict($"Сущность с именем {newEntity.Name} уже существует."); // Возвращаем 409, если сущность уже существует
-            }   
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
 
-            // Добавление новой сущности
-            apiService.Entities.Add(newEntity);
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
 
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
+                if (apiService.Entities.Any(e => e.Name == newEntity.Name))
+                {
+                    return Conflict($"Сущность с именем {newEntity.Name} уже существует."); // Возвращаем 409, если сущность уже существует
+                }
 
-            return CreatedAtAction("Get", new { apiServiceName, entityName = newEntity.Name }, newEntity);
+                apiService.Entities.Add(newEntity);
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
 
+                return CreatedAtAction(nameof(Get), new { apiServiceName, entityName = newEntity.Name }, newEntity);
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // PUT api/<ApiEntityController>/5
+        // PUT api/ApiEntity/{apiServiceName}/{entityName}
         [HttpPut("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Put(string apiServiceName, string entityName, [FromBody] ApiEntity updatedEntity)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            if (updatedEntity == null)
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                return BadRequest("Данные сущности отсутствуют."); // Возвращаем 400, если данные отсутствуют
             }
 
-            // Поиск существующей сущности
-            var existingEntity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-            if (existingEntity == null)
+            try
             {
-                return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var existingEntity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
+                if (existingEntity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                }
+
+                // Обновление сущности
+                existingEntity.Name = updatedEntity.Name; // Обновите свойства по мере необходимости
+                existingEntity.IsActive = updatedEntity.IsActive;
+                existingEntity.Structure = updatedEntity.Structure;
+
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
             }
-
-            // Обновление сущности
-            existingEntity.Name = updatedEntity.Name; // Обновите свойства по мере необходимости
-            existingEntity.IsActive = updatedEntity.IsActive;
-            existingEntity.Structure = updatedEntity.Structure;
-
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-            return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // DELETE api/<ApiEntityController>/5
+        // DELETE api/ApiEntity/{apiServiceName}/{entityName}
         [HttpDelete("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Delete(string apiServiceName, string entityName)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-            }
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
 
-            // Поиск существующей сущности
-            var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-            if (entityToRemove == null)
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
+                if (entityToRemove == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                }
+
+                // Удаление сущности
+                apiService.Entities.Remove(entityToRemove);
+
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
+            }
+            catch (Exception ex)
             {
-                return NotFound($"Сущность с именем {entityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
-
-            // Удаление сущности
-            apiService.Entities.Remove(entityToRemove);
-
-            // Сериализация обновленного объекта в JSON
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-            return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
         }
     }
 }
+
