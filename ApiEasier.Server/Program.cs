@@ -28,7 +28,7 @@ namespace ApiEasier.Server
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
-            // ������������ ����������� � MongoDB
+            // Логгирование в mongoDb
             builder.Logging.ClearProviders();
             builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
 
@@ -37,7 +37,7 @@ namespace ApiEasier.Server
 
                 o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
 
-                // ���� ��� ������������ �� ��� ������ �����
+                // Если нужны конкретные логи
                 //o.LoggingFields = HttpLoggingFields.RequestQuery
                 //    | HttpLoggingFields.RequestMethod
                 //    | HttpLoggingFields.RequestPath
