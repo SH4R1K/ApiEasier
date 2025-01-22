@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Server.Dto;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
+using System.Collections.Concurrent;
 using System.Text.Json;
 
 namespace ApiEasier.Server.Services
@@ -11,6 +12,8 @@ namespace ApiEasier.Server.Services
     public class JsonService : IConfigFileApiService
     {
         private readonly string _path;
+        private readonly ConcurrentDictionary<string, SemaphoreSlim> _fileSemaphores = new();
+        private readonly object _lock = new();
 
         /// <summary>
         /// Базовый конструктор JsonService.
@@ -38,9 +41,11 @@ namespace ApiEasier.Server.Services
             }
         }
 
-        private string GetFilePath(string fileName)
+        private string GetFilePath(string fileName) => Path.Combine(_path, fileName + ".json");
+
+        private SemaphoreSlim GetSemaphore(string fileName)
         {
-            return Path.Combine(_path, fileName + ".json");
+            return _fileSemaphores.GetOrAdd(fileName, _ => new SemaphoreSlim(1, 1));
         }
 
         /// <summary>
@@ -57,10 +62,11 @@ namespace ApiEasier.Server.Services
             var filePath = GetFilePath(apiServiceName);
 
             if (!File.Exists(filePath))
-            {
                 return null;
-            }
 
+            var semaphore = GetSemaphore(filePath);
+
+            await semaphore.WaitAsync();
             try
             {
                 var json = await File.ReadAllTextAsync(filePath);
@@ -90,6 +96,10 @@ namespace ApiEasier.Server.Services
             {
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
             }
+            finally 
+            {
+                semaphore.Release(); 
+            }
         }
 
         /// <summary>
@@ -103,14 +113,20 @@ namespace ApiEasier.Server.Services
         public async Task SerializeApiServiceAsync(string apiServiceName, ApiService apiService)
         {
             var filePath = GetFilePath(apiServiceName);
-            var json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            });
 
+            Directory.CreateDirectory(_path);
+
+            var semapthore = GetSemaphore(filePath);
+
+            await semapthore.WaitAsync();
             try
             {
+                var json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+
                 await File.WriteAllTextAsync(filePath, json);
             }
             catch (UnauthorizedAccessException ex)
@@ -128,6 +144,10 @@ namespace ApiEasier.Server.Services
             catch (Exception ex)
             {
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+            }
+            finally
+            {
+                semapthore.Release();
             }
         }
 
@@ -149,9 +169,12 @@ namespace ApiEasier.Server.Services
         /// <returns>Список имен API-сервисов.</returns>
         public IEnumerable<string> GetApiServiceNames()
         {
-            DirectoryInfo directory = new DirectoryInfo(_path);
-            var files = directory.GetFiles("*.json");
-            return files.Select(f => Path.GetFileNameWithoutExtension(f.Name));
+            lock (_lock)
+            {
+                DirectoryInfo directory = new DirectoryInfo(_path);
+                var files = directory.GetFiles("*.json");
+                return files.Select(f => Path.GetFileNameWithoutExtension(f.Name)).ToList();
+            }
         }
 
         /// <summary>
@@ -186,12 +209,24 @@ namespace ApiEasier.Server.Services
         {
             if (oldName != apiServiceDto.Name)
             {
-                string oldFilePath = GetFilePath(oldName);
-                string newFilePath = GetFilePath(apiServiceDto.Name);
+                var semaphores = new[]
+                {
+                    (Name: oldName, Semaphore: GetSemaphore(oldName)),
+                    (Name: apiServiceDto.Name, Semaphore: GetSemaphore(apiServiceDto.Name))
+                }.OrderBy(s => s.Name).ToList();
 
+                foreach (var (_, semaphore) in semaphores)
+                    semaphore.Wait();
                 try
                 {
+                    string oldFilePath = GetFilePath(oldName);
+                    string newFilePath = GetFilePath(apiServiceDto.Name);
+
                     File.Move(oldFilePath, newFilePath);
+
+                    // Удаляем старый семафор
+                    lock (_lock)
+                        _fileSemaphores.TryRemove(oldName, out _);
                 }
                 catch (FileNotFoundException ex)
                 {
@@ -209,6 +244,11 @@ namespace ApiEasier.Server.Services
                 {
                     throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
                 }
+                finally
+                {
+                    foreach (var (_, semaphore) in semaphores)
+                        semaphore.Release();
+                }
             }
         }
 
@@ -224,9 +264,15 @@ namespace ApiEasier.Server.Services
         {
             string filePath = GetFilePath(apiServiceName);
 
+            var semapthore = GetSemaphore(filePath);
+
+            semapthore.WaitAsync();
             try
             {
                 File.Delete(filePath);
+
+                lock (_lock)
+                    _fileSemaphores.TryRemove(apiServiceName, out _);
             }
             catch (FileNotFoundException ex)
             {
@@ -243,6 +289,10 @@ namespace ApiEasier.Server.Services
             catch (Exception ex)
             {
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+            }
+            finally
+            {
+                semapthore.Release();
             }
         }
 
