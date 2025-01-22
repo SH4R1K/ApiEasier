@@ -1,4 +1,4 @@
-using ApiEasier.Server.DB;
+using ApiEasier.Server.Db;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.LogsService;
 using ApiEasier.Server.Services;
@@ -21,7 +21,7 @@ namespace ApiEasier.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.Configure<DBSettings>(
+            builder.Services.Configure<DbSerttings>(
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
