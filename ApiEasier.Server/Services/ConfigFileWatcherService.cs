@@ -1,12 +1,15 @@
 ﻿using ApiEasier.Server.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ApiEasier.Server.Services
 {
     public class ConfigFileWatcherService : IHostedService
     {
         private FileSystemWatcher _fileSystemWatcher;
+        private readonly IMemoryCache _cache;
 
-        public ConfigFileWatcherService(string path)
+
+        public ConfigFileWatcherService(string path, IMemoryCache cache)
         {
             _fileSystemWatcher = new FileSystemWatcher(path)
             {
@@ -17,6 +20,7 @@ namespace ApiEasier.Server.Services
             _fileSystemWatcher.Changed += OnChanged;
             _fileSystemWatcher.Deleted += OnChanged;
             _fileSystemWatcher.Renamed += OnRenamed;
+            _cache = cache;
         }
 
         public Task StartAsync(CancellationToken cancellationToken)
@@ -34,11 +38,13 @@ namespace ApiEasier.Server.Services
         private void OnChanged(object sender, FileSystemEventArgs e)
         {
             //удаление кэша
+            _cache.Remove(Path.GetFileNameWithoutExtension(e.Name));
         }
 
         private void OnRenamed(object sender, RenamedEventArgs e)
         {
             //удаление кэша по старому имени
+            _cache.Remove(Path.GetFileNameWithoutExtension(e.OldName));
         }
     }
 }
