@@ -1,4 +1,4 @@
-using ApiEasier.Server.DB;
+using ApiEasier.Server.Db;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.LogsService;
 using ApiEasier.Server.Services;
@@ -19,7 +19,7 @@ namespace ApiEasier.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.Configure<DBSettings>(
+            builder.Services.Configure<DbSerttings>(
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
@@ -27,7 +27,7 @@ namespace ApiEasier.Server
                 new JsonService(builder.Configuration["JsonDirectoryPath"] ?? "configuration"));
             builder.Services.AddHostedService(provider => 
                 new ConfigFileWatcherService(builder.Configuration["JsonDirectoryPath"] ?? "configuration"));
-            builder.Services.AddSingleton<MongoDBContext>();
+            builder.Services.AddSingleton<MongoDbContext>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 

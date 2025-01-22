@@ -1,4 +1,4 @@
-﻿using ApiEasier.Server.DB;
+﻿using ApiEasier.Server.Db;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -13,7 +13,7 @@ namespace ApiEasier.Server.LogsService
     {
         private readonly IMongoCollection<BsonDocument> _logCollection;
 
-        public MongoLoggerProvider(IOptions<DBSettings> settings)
+        public MongoLoggerProvider(IOptions<DbSerttings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             var database = client.GetDatabase(settings.Value.LogsDatabaseName);

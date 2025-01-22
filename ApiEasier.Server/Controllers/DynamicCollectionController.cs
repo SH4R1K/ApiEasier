@@ -1,4 +1,4 @@
-﻿using ApiEasier.Server.DB;
+﻿using ApiEasier.Server.Db;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -12,13 +12,13 @@ namespace ApiEasier.Server.Controllers
     [ApiController]
     public class DynamicCollectionController : ControllerBase
     {
-        private readonly MongoDBContext _dbContext;
+        private readonly MongoDbContext _dbContext;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="DynamicCollectionController"/>.
         /// </summary>
         /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicCollectionController(MongoDBContext dbContext)
+        public DynamicCollectionController(MongoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
