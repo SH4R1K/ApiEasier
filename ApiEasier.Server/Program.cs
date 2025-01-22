@@ -1,6 +1,8 @@
 using ApiEasier.Server.DB;
 using ApiEasier.Server.Interfaces;
+using ApiEasier.Server.LogsService;
 using ApiEasier.Server.Services;
+using Microsoft.AspNetCore.HttpLogging;
 using MongoDB.Driver;
 
 namespace ApiEasier.Server
@@ -23,13 +25,32 @@ namespace ApiEasier.Server
 
             builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider => new JsonService("configuration"));
             builder.Services.AddSingleton<MongoDBContext>();
-            builder.Services.AddTransient<LogService>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
+            // Логгирование в mongoDb
+            builder.Logging.ClearProviders();
+            builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
+
+            builder.Services.AddHttpLogging(o => {
+                o.CombineLogs = true;
+
+                o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
+
+                // Если нужны конкретные логи
+                //o.LoggingFields = HttpLoggingFields.RequestQuery
+                //    | HttpLoggingFields.RequestMethod
+                //    | HttpLoggingFields.RequestPath
+                //    | HttpLoggingFields.RequestBody
+                //    | HttpLoggingFields.ResponseStatusCode
+                //    | HttpLoggingFields.ResponseBody
+                //    | HttpLoggingFields.Duration;
+            });
             builder.Configuration.AddEnvironmentVariables();
 
             var app = builder.Build();
+
+            app.UseHttpLogging();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
