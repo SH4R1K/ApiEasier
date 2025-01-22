@@ -38,7 +38,7 @@ namespace ApiEasier.Server.LogsService
             // Попробуем найти "Request and Response" и разобрать его.
             if (message.Contains("Request and Response:"))
             {
-                var parts = message.Split(new[] { "\r\n" }, StringSplitOptions.None);
+                var parts = message.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None);
 
                 var logEntry = new BsonDocument
                 {
