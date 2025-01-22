@@ -37,7 +37,7 @@ namespace ApiEasier.Server
                 var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
                 return new ConfigFileWatcherService(jsonDirectoryPath, memoryCache);
             });
-            builder.Services.AddSingleton<MongoDBContext>();
+            builder.Services.AddSingleton<MongoDbContext>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
