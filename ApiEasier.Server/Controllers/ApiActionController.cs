@@ -1,7 +1,5 @@
-﻿using ApiEasier.Server.Dto;
-using ApiEasier.Server.Interfaces;
+﻿using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
-using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Server.Controllers

@@ -1,7 +1,5 @@
 ﻿using ApiEasier.Server.Dto;
 using ApiEasier.Server.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ApiEasier.Server.Interfaces
 {
