@@ -8,15 +8,15 @@ namespace ApiEasier.Server.Db
     /// <summary>
     /// Контекст для работы с MongoDB.
     /// </summary>
-    public class MongoDBContext
+    public class MongoDbContext
     {
         private readonly IMongoDatabase _database;
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="MongoDBContext"/>.
+        /// Инициализирует новый экземпляр класса <see cref="MongoDbContext"/>.
         /// </summary>
         /// <param name="settings">Настройки базы данных, содержащие строку подключения и имя базы данных.</param>
-        public MongoDBContext(IOptions<DBSettings> settings)
+        public MongoDbContext(IOptions<DbSerttings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             _database = client.GetDatabase(settings.Value.DatabaseName);

@@ -1,4 +1,4 @@
-﻿using ApiEasier.Server.DB;
+﻿using ApiEasier.Server.Db;
 using ApiEasier.Server.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
@@ -15,13 +15,13 @@ namespace ApiEasier.Server.Services
     /// </summary>
     public class DynamicCollectionService : IDynamicCollectionService
     {
-        private readonly MongoDBContext _dbContext;
+        private readonly MongoDbContext _dbContext;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="DynamicCollectionService"/>.
         /// </summary>
         /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicCollectionService(MongoDBContext dbContext)
+        public DynamicCollectionService(MongoDbContext dbContext)
         {
             _dbContext = dbContext;
         }

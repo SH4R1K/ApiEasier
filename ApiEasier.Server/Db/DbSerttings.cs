@@ -3,7 +3,7 @@
     /// <summary>
     /// Настройки базы данных.
     /// </summary>
-    public class DBSettings
+    public class DbSerttings
     {
         /// <summary>
         /// Строка подключения к базе данных.
