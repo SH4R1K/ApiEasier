@@ -18,18 +18,15 @@ namespace ApiEasier.Server.Controllers
     {
         private readonly IDynamicCollectionService _dynamicCollectionService;
         private readonly JsonService _jsonService;
-        private readonly LogService _logService;
         private readonly IEmuApiValidationService _apiServiceValidator;
 
         public ApiEmuController(
             IDynamicCollectionService dynamicCollectionService,
             JsonService jsonService,
-            LogService logService,
             IEmuApiValidationService apiServiceValidator)
         {
             _dynamicCollectionService = dynamicCollectionService;
             _jsonService = jsonService;
-            _logService = logService;
             _apiServiceValidator = apiServiceValidator;
         }
 
