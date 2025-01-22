@@ -1,81 +1,204 @@
 ﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
+using System.Collections.Concurrent;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 
 namespace ApiEasier.Server.Services
 {
-    public class JsonService
+    /// <summary>
+    /// Сервис для получения и редактирования информации про API-сервисы.
+    /// </summary>
+    public class JsonService : IConfigFileApiService
     {
         private readonly string _path;
-        public JsonService(string path)
-        {
-            _path = path;
-            Directory.CreateDirectory(_path);
-        }
-        public string GetFilePath(string fileName)
-        {
-            string filePath = Path.Combine(_path, fileName + ".json");
+        private readonly ConcurrentDictionary<string, SemaphoreSlim> _fileSemaphores = new();
+        private readonly object _lock = new();
+        private readonly IMemoryCache _cache;
 
-            return filePath;
+
+        /// <summary>
+        /// Базовый конструктор JsonService.
+        /// </summary>
+        /// <param name="path">Путь к папке конфигураций.</param>
+        /// <exception cref="InvalidOperationException">Выбрасывается, если не удается создать директорию.</exception>
+        public JsonService(string path, IMemoryCache cache)
+        {
+            try
+            {
+                _path = path;
+                Directory.CreateDirectory(_path);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                throw new InvalidOperationException("Нет доступа к указанной директории.", ex);
+            }
+            catch (IOException ex)
+            {
+                throw new InvalidOperationException("Ошибка при создании директории.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+            }
+            _cache = cache;
         }
 
+        private string GetFilePath(string fileName) => Path.Combine(_path, fileName + ".json");
+
+        private SemaphoreSlim GetSemaphore(string fileName)
+        {
+            return _fileSemaphores.GetOrAdd(fileName, _ => new SemaphoreSlim(1, 1));
+        }
+
+        /// <summary>
+        /// Десериализует API-сервис из файла.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса.</param>
+        /// <returns>Объект <see cref="ApiService"/> или null, если файл не найден.</returns>
+        /// <exception cref="FileNotFoundException">Выбрасывается, если файл не найден.</exception>
+        /// <exception cref="DirectoryNotFoundException">Выбрасывается, если директория не найдена.</exception>
+        /// <exception cref="PathTooLongException">Выбрасывается, если путь к файлу слишком длинный.</exception>
+        /// <exception cref="IOException">Выбрасывается, если произошла ошибка при чтении файла.</exception>
         public async Task<ApiService?> DeserializeApiServiceAsync(string apiServiceName)
         {
             var filePath = GetFilePath(apiServiceName);
 
             if (!File.Exists(filePath))
-            {
                 return null;
-            }
+                
+            var semaphore = GetSemaphore(filePath);
 
-            var json = await File.ReadAllTextAsync(filePath);
-
-            // Десериализация JSON в объект
-            var apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
+            await semaphore.WaitAsync();
+            
+            try
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Уменьшение регистра полей
-                WriteIndented = true // Запись в читаемом формате
-            });
-            return apiService;
+                _cache.TryGetValue(apiServiceName, out ApiService? apiService);
+                if (apiService != null)
+                    return apiService;
+            
+                var json = await File.ReadAllTextAsync(filePath);
+                apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+                _cache.Set(apiServiceName, apiService);
+                return apiService;
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException("Файл API-сервиса не найден.", ex);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new DirectoryNotFoundException("Директория для API-сервиса не найдена.", ex);
+            }
+            catch (PathTooLongException ex)
+            {
+                throw new PathTooLongException("Путь к файлу слишком длинный.", ex);
+            }
+            catch (IOException ex)
+            {
+                throw new IOException("Ошибка при чтении файла API-сервиса.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+            }
+            finally 
+            {
+                semaphore.Release(); 
+            }
         }
 
+        /// <summary>
+        /// Сериализует API-сервис в файл.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса.</param>
+        /// <param name="apiService">Объект <see cref="ApiService"/> для сериализации.</param>
+        /// <exception cref="UnauthorizedAccessException">Выбрасывается, если нет доступа для записи в файл.</exception>
+        /// <exception cref="PathTooLongException">Выбрасывается, если путь к файлу слишком длинный.</exception>
+        /// <exception cref="IOException">Выбрасывается, если произошла ошибка при записи файла.</exception>
         public async Task SerializeApiServiceAsync(string apiServiceName, ApiService apiService)
         {
             var filePath = GetFilePath(apiServiceName);
 
-            // Десериализация JSON в объект
-            var json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Уменьшение регистра полей
-                WriteIndented = true // Запись в читаемом формате
-            });
+            Directory.CreateDirectory(_path);
 
-            await File.WriteAllTextAsync(filePath, json);
+            var semapthore = GetSemaphore(filePath);
+
+            await semapthore.WaitAsync();
+            try
+            {
+                var json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true
+                });
+
+                await File.WriteAllTextAsync(filePath, json);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                throw new UnauthorizedAccessException("Нет доступа для записи в файл API-сервиса.", ex);
+            }
+            catch (PathTooLongException ex)
+            {
+                throw new PathTooLongException("Путь к файлу слишком длинный.", ex);
+            }
+            catch (IOException ex)
+            {
+                throw new IOException("Ошибка при записи файла API-сервиса.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+            }
+            finally
+            {
+                semapthore.Release();
+            }
         }
 
-
+        /// <summary>
+        /// Получает сущность API по имени.
+        /// </summary>
+        /// <param name="entityName">Имя сущности.</param>
+        /// <param name="apiServiceName">Имя API-сервиса.</param>
+        /// <returns>Объект <see cref="ApiEntity"/> или null, если сущность не найдена.</returns>
         public async Task<ApiEntity?> GetApiEntityAsync(string entityName, string apiServiceName)
         {
             var apiService = await DeserializeApiServiceAsync(apiServiceName);
-            if (apiService == null)
-                return null;
-            var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-            return entity;
+            return apiService?.Entities.FirstOrDefault(e => e.Name == entityName);
         }
 
+        /// <summary>
+        /// Получает имена всех API-сервисов в директории.
+        /// </summary>
+        /// <returns>Список имен API-сервисов.</returns>
         public IEnumerable<string> GetApiServiceNames()
         {
-            DirectoryInfo directory = new DirectoryInfo("configuration");
-            var files = directory.GetFiles();
-            return files.Select(f => Path.GetFileNameWithoutExtension(f.Name));
+            lock (_lock)
+            {
+                DirectoryInfo directory = new DirectoryInfo(_path);
+                var files = directory.GetFiles("*.json");
+                return files.Select(f => Path.GetFileNameWithoutExtension(f.Name)).ToList();
+            }
         }
 
+        /// <summary>
+        /// Получает API-сервис по имени.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса.</param>
+        /// <returns>Объект <see cref="ApiServiceDto"/> или null, если сервис не найден.</returns>
         public async Task<ApiServiceDto?> GetApiServiceByNameAsync(string apiServiceName)
         {
             var apiService = await DeserializeApiServiceAsync(apiServiceName);
             if (apiService == null)
                 return null;
+
             return new ApiServiceDto
             {
                 Name = apiServiceName,
@@ -84,24 +207,115 @@ namespace ApiEasier.Server.Services
             };
         }
 
+        /// <summary>
+        /// Переименовывает API-сервис.
+        /// </summary>
+        /// <param name="oldName">Старое имя API-сервиса.</param>
+        /// <param name="apiServiceDto">Объект <see cref="ApiServiceDto"/> с новым именем.</param>
+        /// <exception cref="FileNotFoundException">Выбрасывается, если старый файл API-сервиса не найден.</exception>
+        /// <exception cref="IOException">Выбрасывается, если произошла ошибка при переименовании файла.</exception>
+        /// <exception cref="UnauthorizedAccessException">Выбрасывается, если нет доступа для переименования файла.</exception>
+        /// <exception cref="PathTooLongException">Выбрасывается, если путь к файлу слишком длинный при переименовании.</exception>
         public void RenameApiService(string oldName, ApiServiceDto apiServiceDto)
         {
             if (oldName != apiServiceDto.Name)
             {
-                // Определение старого и нового путей к файлу
-                string oldFilePath = GetFilePath(oldName);
-                string newFilePath = GetFilePath(apiServiceDto.Name);
+                var semaphores = new[]
+                {
+                    (Name: oldName, Semaphore: GetSemaphore(oldName)),
+                    (Name: apiServiceDto.Name, Semaphore: GetSemaphore(apiServiceDto.Name))
+                }.OrderBy(s => s.Name).ToList();
 
-                // Переименование файла
-                File.Move(oldFilePath, newFilePath);
+                foreach (var (_, semaphore) in semaphores)
+                    semaphore.Wait();
+                try
+                {
+                    string oldFilePath = GetFilePath(oldName);
+                    string newFilePath = GetFilePath(apiServiceDto.Name);
+
+                    File.Move(oldFilePath, newFilePath);
+
+                    // Удаляем старый семафор
+                    lock (_lock)
+                        _fileSemaphores.TryRemove(oldName, out _);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    throw new FileNotFoundException("Старый файл API-сервиса не найден.", ex);
+                }
+                catch (IOException ex)
+                {
+                    throw new IOException("Ошибка при переименовании API-сервиса.", ex);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    throw new UnauthorizedAccessException("Нет доступа для переименования файла API-сервиса.", ex);
+                }
+                catch (Exception ex)
+                {
+                    throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+                }
+                finally
+                {
+                    foreach (var (_, semaphore) in semaphores)
+                        semaphore.Release();
+                }
             }
         }
+
+        /// <summary>
+        /// Удаляет API-сервис по имени.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса.</param>
+        /// <exception cref="FileNotFoundException">Выбрасывается, если файл API-сервиса не найден для удаления.</exception>
+        /// <exception cref="IOException">Выбрасывается, если произошла ошибка при удалении файла.</exception>
+        /// <exception cref="UnauthorizedAccessException">Выбрасывается, если нет доступа для удаления файла.</exception>
+        /// <exception cref="PathTooLongException">Выбрасывается, если путь к файлу слишком длинный при удалении.</exception>   
         public void DeleteApiService(string apiServiceName)
         {
             string filePath = GetFilePath(apiServiceName);
-            File.Delete(filePath);
+
+            var semapthore = GetSemaphore(filePath);
+
+            semapthore.WaitAsync();
+            try
+            {
+                File.Delete(filePath);
+
+                lock (_lock)
+                    _fileSemaphores.TryRemove(apiServiceName, out _);
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException("Файл API-сервиса не найден для удаления.", ex);
+            }
+            catch (IOException ex)
+            {
+                throw new IOException("Ошибка при удалении API-сервиса.", ex);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                throw new UnauthorizedAccessException("Нет доступа для удаления файла API-сервиса.", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
+            }
+            finally
+            {
+                semapthore.Release();
+            }
         }
 
-        public bool IsApiServiceExist(string apiServiceName) => File.Exists(GetFilePath(apiServiceName));
+        /// <summary>
+        /// Проверяет, существует ли API-сервис с указанным именем.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса.</param>
+        /// <returns>True, если сервис существует; иначе false.</returns>
+        public bool IsApiServiceExist(string apiServiceName)
+        {
+            return File.Exists(GetFilePath(apiServiceName));
+        }
     }
 }
+

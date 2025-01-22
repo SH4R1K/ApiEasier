@@ -1,101 +1,155 @@
 ﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
-using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiEasier.Server.Controllers
 {
+    /// <summary>
+    /// Контроллер для управления API сервисами.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ApiServiceController : ControllerBase
     {
-        private JsonService _jsonService;
+        private readonly IConfigFileApiService _configFileApiService;
 
-        public ApiServiceController(JsonService jsonService)
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="ApiServiceController"/>.
+        /// </summary>
+        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
+        public ApiServiceController(IConfigFileApiService configFileApiService)
         {
-            _jsonService = jsonService;
+            _configFileApiService = configFileApiService;
         }
 
-        // GET: api/<ApiServiceController>
+        // GET api/ApiService
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<string>> Get()
         {
-            return _jsonService.GetApiServiceNames();
+            try
+            {
+                var serviceNames = _configFileApiService.GetApiServiceNames();
+                return Ok(serviceNames);
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // GET api/<ApiServiceController>/5
+        // GET api/ApiService/{name}
         [HttpGet("{name}")]
         public async Task<IActionResult> Get(string name)
         {
-            var apiServiceDto = await _jsonService.GetApiServiceByNameAsync(name);
-
-            if (apiServiceDto == null)
+            try
             {
-                return NotFound($"Файл {name}.json не существует."); // Используем NotFound вместо Conflict
-            }
+                var apiServiceDto = await _configFileApiService.GetApiServiceByNameAsync(name);
 
-            // Возврат объекта в формате JSON
-            return Ok(apiServiceDto);
+                if (apiServiceDto == null)
+                {
+                    return NotFound($"Файл {name}.json не существует.");
+                }
+
+                return Ok(apiServiceDto);
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // POST api/<ApiServiceController>
+        // POST api/ApiService
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ApiServiceDto apiServiceDto)
         {
-            // Определение имени файла на основе имени сервиса
-            string apiServiceName = apiServiceDto.Name; // Имя сервиса передается в теле запроса
-
-            var apiService = new ApiService
+            if (apiServiceDto == null)
             {
-                IsActive = apiServiceDto.IsActive,
-                Entities = apiServiceDto.Entities,
-            };
+                return BadRequest("Данные API сервиса отсутствуют.");
+            }
 
-            if (_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json уже существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-            return CreatedAtAction(nameof(Post), new
+            try
             {
-                name = apiServiceName
-            }, apiServiceDto);
+                string apiServiceName = apiServiceDto.Name;
+
+                if (_configFileApiService.IsApiServiceExist(apiServiceName))
+                {
+                    return Conflict($"Файл {apiServiceName}.json уже существует.");
+                }
+
+                var apiService = new ApiService
+                {
+                    IsActive = apiServiceDto.IsActive,
+                    Entities = apiServiceDto.Entities,
+                };
+
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return CreatedAtAction(nameof(Get), new { name = apiServiceName }, apiServiceDto);
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-        // PUT api/<ApiServiceController>/5
+        // PUT api/ApiService/{oldName}
         [HttpPut("{oldName}")]
         public async Task<IActionResult> Put(string oldName, [FromBody] ApiServiceDto apiServiceDto)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(oldName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            if (apiServiceDto == null)
             {
-                return NotFound($"Файл {apiServiceDto.Name}.json не существует."); // Возвращаем 404, если файл не найден
+                return BadRequest("Данные API сервиса отсутствуют.");
             }
 
-            apiService.IsActive = apiServiceDto.IsActive;
+            try
+            {
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(oldName);
 
-            if (!_jsonService.IsApiServiceExist(oldName))
-                return Conflict($"Файл {oldName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(oldName, apiService);
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {oldName}.json не существует.");
+                }
 
-            _jsonService.RenameApiService(oldName, apiServiceDto);
+                apiService.IsActive = apiServiceDto.IsActive;
 
-            return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
+                await _configFileApiService.SerializeApiServiceAsync(oldName, apiService);
+                _configFileApiService.RenameApiService(oldName, apiServiceDto);
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
 
-
-
-        // DELETE api/<ApiServiceController>/5
+        // DELETE api/ApiService/{apiServiceName}
         [HttpDelete("{apiServiceName}")]
         public IActionResult Delete(string apiServiceName)
         {
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            _jsonService.DeleteApiService(apiServiceName);
-            return NoContent();
+            try
+            {
+                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
+                {
+                    return Conflict($"Файл {apiServiceName}.json не существует.");
+                }
+
+                _configFileApiService.DeleteApiService(apiServiceName);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
     }
 }
+

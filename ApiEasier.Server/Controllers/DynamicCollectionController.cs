@@ -1,7 +1,10 @@
-﻿using ApiEasier.Server.DB;
+﻿using ApiEasier.Server.Db;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
 
 namespace ApiEasier.Server.Controllers
 {
@@ -9,26 +12,43 @@ namespace ApiEasier.Server.Controllers
     [ApiController]
     public class DynamicCollectionController : ControllerBase
     {
-        private readonly MongoDBContext _dbContext;
+        private readonly MongoDbContext _dbContext;
 
-        public DynamicCollectionController(MongoDBContext dbContext)
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="DynamicCollectionController"/>.
+        /// </summary>
+        /// <param name="dbContext">Контекст MongoDB.</param>
+        public DynamicCollectionController(MongoDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
+        // POST api/DynamicCollection/AddToCollection/{collectionName}
         [HttpPost("{collectionName}")]
-        public async Task<IActionResult> AddToCollecntion(string collectionName, [FromBody] object jsonData)
+        public async Task<IActionResult> AddToCollection(string collectionName, [FromBody] object jsonData)
         {
             try
             {
-                var collecntion = _dbContext.GetCollection<BsonDocument>(collectionName);
+                var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
                 var bsonDocument = BsonDocument.Parse(jsonData.ToString());
-                await collecntion.InsertOneAsync(bsonDocument);
-                return Ok(new { message = "Document added succsessfully!" });
+                await collection.InsertOneAsync(bsonDocument);
+                return Ok(new { message = "Документ успешно добавлен!" });
+            }
+            catch (FormatException ex)
+            {
+                return BadRequest($"Неверный формат JSON: {ex.Message}");
+            }
+            catch (MongoCommandException ex)
+            {
+                return BadRequest($"Ошибка при выполнении команды MongoDB: {ex.Message}");
+            }
+            catch (MongoException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка MongoDB: {ex.Message}");
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Произошла ошибка при добавлении документа: {ex.Message}");
             }
         }
     }
