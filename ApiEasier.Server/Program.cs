@@ -4,7 +4,6 @@ using ApiEasier.Server.LogsService;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Caching.Memory;
-using MongoDB.Driver;
 
 namespace ApiEasier.Server
 {
@@ -21,44 +20,44 @@ namespace ApiEasier.Server
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            // Конфигурация данных для подключения к БД
             builder.Services.Configure<DbSerttings>(
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
+            // Сервис работы с json-файлами конфигураций api-сервисов
             builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
                 var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
                 return new JsonService(jsonDirectoryPath, memoryCache);
             });
+
+            // FileSystemWatcher для отслеживания актуальности кэша
             builder.Services.AddHostedService(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
                 var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
                 return new ConfigFileWatcherService(jsonDirectoryPath, memoryCache);
             });
+
             builder.Services.AddSingleton<MongoDbContext>();
+
+            // Сервис работы с MongoDB
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
+
+            // Сервис валидации данных переданных emuApi и данных в json-файлах конфигураций api-сервисов
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
-            // Логгирование в mongoDb
+            // Логгирование http в MongoDB
             builder.Logging.ClearProviders();
             builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
-
-            builder.Services.AddHttpLogging(o => {
+            builder.Services.AddHttpLogging(o =>
+            {
                 o.CombineLogs = true;
-
                 o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
-
-                // Если нужны конкретные логи
-                //o.LoggingFields = HttpLoggingFields.RequestQuery
-                //    | HttpLoggingFields.RequestMethod
-                //    | HttpLoggingFields.RequestPath
-                //    | HttpLoggingFields.RequestBody
-                //    | HttpLoggingFields.ResponseStatusCode
-                //    | HttpLoggingFields.ResponseBody
-                //    | HttpLoggingFields.Duration;
             });
+
             builder.Configuration.AddEnvironmentVariables();
 
             var app = builder.Build();

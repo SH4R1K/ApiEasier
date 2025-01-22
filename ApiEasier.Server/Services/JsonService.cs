@@ -1,8 +1,8 @@
 ﻿using ApiEasier.Server.Dto;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
-using System.Collections.Concurrent;
 using Microsoft.Extensions.Caching.Memory;
+using System.Collections.Concurrent;
 using System.Text.Json;
 
 namespace ApiEasier.Server.Services
@@ -67,17 +67,17 @@ namespace ApiEasier.Server.Services
 
             if (!File.Exists(filePath))
                 return null;
-                
+
             var semaphore = GetSemaphore(filePath);
 
             await semaphore.WaitAsync();
-            
+
             try
             {
                 _cache.TryGetValue(apiServiceName, out ApiService? apiService);
                 if (apiService != null)
                     return apiService;
-            
+
                 var json = await File.ReadAllTextAsync(filePath);
                 apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
                 {
@@ -107,9 +107,9 @@ namespace ApiEasier.Server.Services
             {
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
             }
-            finally 
+            finally
             {
-                semaphore.Release(); 
+                semaphore.Release();
             }
         }
 

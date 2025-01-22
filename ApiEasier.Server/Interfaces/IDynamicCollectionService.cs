@@ -1,8 +1,4 @@
-﻿using MongoDB.Bson;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace ApiEasier.Server.Interfaces
+﻿namespace ApiEasier.Server.Interfaces
 {
     /// <summary>
     /// Интерфейс для работы с динамическими коллекциями в MongoDB.
