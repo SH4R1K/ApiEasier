@@ -216,6 +216,31 @@ namespace ApiEasier.Server.Services
                 throw new ArgumentException("Ошибка при обновлении документа: " + ex.Message, ex);
             }
         }
+
+        public async Task<string> SaveFileAsync(string collectionName, string fileName, string contentType, byte[] fileData)
+        {
+            try
+            {
+                var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
+
+                var fileDocument = new BsonDocument
+                {
+                    { "FileName", fileName },
+                    { "ContentType", contentType },
+                    { "Data", fileData },
+                    { "UploadedAt", DateTime.UtcNow }
+                };
+
+                await collection.InsertOneAsync(fileDocument);
+
+                return fileDocument["_id"].ToString();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+                throw new ArgumentException("Ошибка при сохранении файла: " + ex.Message, ex);
+            }
+        }
     }
 }
 

@@ -56,5 +56,15 @@
         /// Количество удаленных документов, или <c>null</c>, если коллекция не найдена.
         /// </returns>
         Task<long?> DeleteDocFromCollectionAsync(string collectionName, string id);
+
+        /// <summary>
+        /// Сохраняет файл в указанной коллекции.
+        /// </summary>
+        /// <param name="collectionName">Имя коллекции.</param>
+        /// <param name="fileName">Имя файла.</param>
+        /// <param name="contentType">Тип содержимого файла (MIME-тип).</param>
+        /// <param name="fileData">Содержимое файла в виде массива байтов.</param>
+        /// <returns>Идентификатор сохраненного файла.</returns>
+        public Task<string> SaveFileAsync(string collectionName, string fileName, string contentType, byte[] fileData);
     }
 }

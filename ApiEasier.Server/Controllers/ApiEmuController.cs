@@ -149,6 +149,37 @@ namespace ApiEasier.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
+
+        // POST api/ApiEmu/{apiName}/{entityName}/{endpoint}/upload
+        [HttpPost("{apiName}/{entityName}/{endpoint}/upload")]
+        public async Task<IActionResult> UploadFile(string apiName, string entityName, string endpoint, IFormFile file)
+        {
+            try
+            {
+                // Валидация пути
+                var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
+                if (!isValid)
+                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
+
+                if (file == null || file.Length == 0)
+                    return BadRequest("Файл не найден или пустой");
+
+                // Чтение файла в массив байтов
+                using var memoryStream = new MemoryStream();
+                await file.CopyToAsync(memoryStream);
+                var fileData = memoryStream.ToArray();
+                
+                // Сохранение файла в коллекцию MongoDB
+                var result = await _dynamicCollectionService.SaveFileAsync($"{apiName}_{entityName}",file.FileName, file.ContentType, fileData);
+
+                return Ok(new { Message = "Файл успешно загружен", FileId = result });
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+            }
+        }
     }
 }
 
