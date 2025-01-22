@@ -1,5 +1,4 @@
 ﻿using ApiEasier.Server.Models;
-using System.Collections.Generic;
 
 namespace ApiEasier.Server.Dto
 {

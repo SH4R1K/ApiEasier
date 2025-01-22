@@ -1,12 +1,8 @@
 ﻿using ApiEasier.Server.Db;
 using ApiEasier.Server.Interfaces;
-using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiEasier.Server.Services
 {
