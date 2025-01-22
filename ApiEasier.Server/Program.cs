@@ -3,6 +3,7 @@ using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.LogsService;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.Extensions.Caching.Memory;
 using MongoDB.Driver;
 
 namespace ApiEasier.Server
@@ -15,6 +16,7 @@ namespace ApiEasier.Server
 
             // Add services to the container.
             builder.Services.AddControllers();
+            builder.Services.AddMemoryCache();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -23,11 +25,19 @@ namespace ApiEasier.Server
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
-            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider => 
-                new JsonService(builder.Configuration["JsonDirectoryPath"] ?? "configuration"));
-            builder.Services.AddHostedService(provider => 
-                new ConfigFileWatcherService(builder.Configuration["JsonDirectoryPath"] ?? "configuration"));
-            builder.Services.AddSingleton<MongoDbContext>();
+            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider =>
+            {
+                var memoryCache = provider.GetRequiredService<IMemoryCache>();
+                var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
+                return new JsonService(jsonDirectoryPath, memoryCache);
+            });
+            builder.Services.AddHostedService(provider =>
+            {
+                var memoryCache = provider.GetRequiredService<IMemoryCache>();
+                var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
+                return new ConfigFileWatcherService(jsonDirectoryPath, memoryCache);
+            });
+            builder.Services.AddSingleton<MongoDBContext>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 

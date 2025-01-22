@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Server.Dto;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
+using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 
 namespace ApiEasier.Server.Services
@@ -10,14 +11,16 @@ namespace ApiEasier.Server.Services
     /// </summary>
     public class JsonService : IConfigFileApiService
     {
-        private readonly string _path;
+        private readonly string _path; 
+        private readonly IMemoryCache _cache;
+
 
         /// <summary>
         /// Базовый конструктор JsonService.
         /// </summary>
         /// <param name="path">Путь к папке конфигураций.</param>
         /// <exception cref="InvalidOperationException">Выбрасывается, если не удается создать директорию.</exception>
-        public JsonService(string path)
+        public JsonService(string path, IMemoryCache cache)
         {
             try
             {
@@ -36,6 +39,7 @@ namespace ApiEasier.Server.Services
             {
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
             }
+            _cache = cache;
         }
 
         private string GetFilePath(string fileName)
@@ -60,15 +64,19 @@ namespace ApiEasier.Server.Services
             {
                 return null;
             }
-
+            _cache.TryGetValue(apiServiceName, out ApiService? apiService);
+            if (apiService != null)
+                return apiService;
             try
             {
                 var json = await File.ReadAllTextAsync(filePath);
-                return JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
+                apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
                 {
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     WriteIndented = true
                 });
+                _cache.Set(apiServiceName, apiService);
+                return apiService;
             }
             catch (FileNotFoundException ex)
             {
