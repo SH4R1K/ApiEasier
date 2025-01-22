@@ -23,12 +23,12 @@ namespace ApiEasier.Server
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
-            builder.Services.AddSingleton<JsonService>(provider => new JsonService("configuration"));
+            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider => new JsonService("configuration"));
             builder.Services.AddSingleton<MongoDBContext>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
 
-            // Конфигурация логирования в MongoDB
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ MongoDB
             builder.Logging.ClearProviders();
             builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
 
@@ -37,7 +37,7 @@ namespace ApiEasier.Server
 
                 o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
 
-                // Если нам понадобиться не все данные логов
+                // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
                 //o.LoggingFields = HttpLoggingFields.RequestQuery
                 //    | HttpLoggingFields.RequestMethod
                 //    | HttpLoggingFields.RequestPath
@@ -46,6 +46,7 @@ namespace ApiEasier.Server
                 //    | HttpLoggingFields.ResponseBody
                 //    | HttpLoggingFields.Duration;
             });
+            builder.Configuration.AddEnvironmentVariables();
 
             var app = builder.Build();
 
@@ -55,11 +56,8 @@ namespace ApiEasier.Server
             app.UseStaticFiles();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 

@@ -1,161 +1,203 @@
 ﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
 using ApiEasier.Server.Services;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace ApiEasier.Server.Controllers
 {
+    /// <summary>
+    /// Контроллер для обработки действий API.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ApiActionController : ControllerBase
     {
-        private JsonService _jsonService;
+        private readonly IConfigFileApiService _configFileApiService;
 
-        public ApiActionController(JsonService jsonService)
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="ApiActionController"/>.
+        /// </summary>
+        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
+        public ApiActionController(IConfigFileApiService configFileApiService)
         {
-            _jsonService = jsonService;
+            _configFileApiService = configFileApiService;
         }
 
-        // GET: api/<ApiEntityController>
+        // GET api/ApiAction/{apiServiceName}/{entityName}
         [HttpGet("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName)
         {
-            var entity = await _jsonService.GetApiEntityAsync(entityName, apiServiceName);
-            if (entity == null) 
+            try
             {
-                return NotFound($"Cущность с именем {entityName} не найдена");
-            }
+                var entity = await _configFileApiService.GetApiEntityAsync(entityName, apiServiceName);
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена");
+                }
 
-            return Ok(entity.Actions);
+                return Ok(entity.Actions);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+            }
         }
 
-        // GET api/<ApiActionController>/5
+        // GET api/ApiAction/{apiServiceName}/{entityName}/{actionName}
         [HttpGet("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Get(string apiServiceName, string entityName, string actionName)
         {
-            var entity = await _jsonService.GetApiEntityAsync(entityName, apiServiceName);
-            if (entity == null)
+            try
             {
-                return NotFound($"Cущность с именем {entityName} не найдена");
-            }
+                var entity = await _configFileApiService.GetApiEntityAsync(entityName, apiServiceName);
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена");
+                }
 
-            var action = entity.Actions.FirstOrDefault(a => a.Route == actionName);
-            if (action == null)
-            {
-                return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
+                var action = entity.Actions.FirstOrDefault(a => a.Route == actionName);
+                if (action == null)
+                {
+                    return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
+                }
+                return Ok(action);
             }
-            return Ok(action);
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+            }
         }
 
-        // POST api/<ApiActionController>
+        // POST api/ApiAction/{apiServiceName}/{entityName}
         [HttpPost("{apiServiceName}/{entityName}")]
         public async Task<IActionResult> Post(string apiServiceName, string entityName, [FromBody] ApiAction newAction)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                // Проверка существования файла
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
+
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена");
+                }
+
+                // Проверка на уникальность имени действия
+                if (entity.Actions.Any(a => a.Route == newAction.Route))
+                {
+                    return Conflict($"Действие с именем {newAction.Route} уже существует."); // Возвращаем 409, если действие уже существует
+                }
+
+                // Добавление нового действия
+                entity.Actions.Add(newAction);
+
+                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
+                    return Conflict($"Файл {apiServiceName}.json не существует.");
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return CreatedAtAction(nameof(Get), new { apiServiceName, entityName, actionName = newAction.Route }, newAction);
             }
-
-            var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-            if (entity == null)
+            catch (Exception ex)
             {
-                return NotFound($"Cущность с именем {entityName} не найдена");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
-
-            // Проверка на уникальность имени действия
-            if (entity.Actions.Any(a => a.Route == newAction.Route))
-            {
-                return Conflict($"Действие с именем {newAction.Route} уже существует."); // Возвращаем 409, если действие уже существует
-            }
-
-            // Добавление нового действия
-            entity.Actions.Add(newAction);
-
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-            return CreatedAtAction(nameof(Get), new { apiServiceName, entityName, actionName = newAction.Route }, newAction);
         }
 
-        // PUT api/<ApiActionController>/5
+        // PUT api/ApiAction/{apiServiceName}/{entityName}/{actionName}
         [HttpPut("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Put(string apiServiceName, string entityName, string actionName, [FromBody] ApiAction updatedAction)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                // Проверка существования файла
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
+
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена");
+                }
+
+                // Поиск существующего действия
+                var existingAction = entity.Actions.FirstOrDefault(a => a.Route == actionName);
+                if (existingAction == null)
+                {
+                    return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
+                }
+
+                // Обновление действия
+                existingAction.Route = updatedAction.Route; // Обновите свойства по мере необходимости
+                existingAction.IsActive = updatedAction.IsActive;
+                existingAction.Type = updatedAction.Type;
+
+                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
+                    return Conflict($"Файл {apiServiceName}.json не существует.");
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
             }
-
-            var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-            if (entity == null)
+            catch (Exception ex)
             {
-                return NotFound($"Cущность с именем {entityName} не найдена");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
-
-            // Поиск существующего действия
-            var existingAction = entity.Actions.FirstOrDefault(a => a.Route == actionName);
-            if (existingAction == null)
-            {
-                return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
-            }
-
-            // Обновление действия
-            existingAction.Route = updatedAction.Route; // Обновите свойства по мере необходимости
-            existingAction.IsActive = updatedAction.IsActive;
-            existingAction.Type = updatedAction.Type;
-
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-            return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
         }
 
-        // DELETE api/<ApiActionController>/5
+        // DELETE api/ApiAction/{apiServiceName}/{entityName}/{actionName}
         [HttpDelete("{apiServiceName}/{entityName}/{actionName}")]
         public async Task<IActionResult> Delete(string apiServiceName, string entityName, string actionName)
         {
-            var apiService = await _jsonService.DeserializeApiServiceAsync(apiServiceName);
-
-            // Проверка существования файла
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                // Проверка существования файла
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
+
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {entityName} не найдена");
+                }
+
+                // Поиск существующего действия
+                var actionToRemove = entity.Actions.FirstOrDefault(a => a.Route == actionName);
+                if (actionToRemove == null)
+                {
+                    return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
+                }
+
+                // Удаление действия
+                entity.Actions.Remove(actionToRemove);
+
+                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
+                    return Conflict($"Файл {apiServiceName}.json не существует.");
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
             }
-
-            var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-            if (entity == null)
+            catch (Exception ex)
             {
-                return NotFound($"Cущность с именем {entityName} не найдена");
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
-
-            // Поиск существующего действия
-            var actionToRemove = entity.Actions.FirstOrDefault(a => a.Route == actionName);
-            if (actionToRemove == null)
-            {
-                return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
-            }
-
-            // Удаление действия
-            entity.Actions.Remove(actionToRemove);
-
-            if (!_jsonService.IsApiServiceExist(apiServiceName))
-                return Conflict($"Файл {apiServiceName}.json не существует.");
-            await _jsonService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-            return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
         }
     }
 }
+
