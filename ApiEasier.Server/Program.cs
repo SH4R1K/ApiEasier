@@ -23,7 +23,10 @@ namespace ApiEasier.Server
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
-            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider => new JsonService("configuration"));
+            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider => 
+                new JsonService(builder.Configuration["JsonDirectoryPath"] ?? "configuration"));
+            builder.Services.AddHostedService(provider => 
+                new ConfigFileWatcherService(builder.Configuration["JsonDirectoryPath"] ?? "configuration"));
             builder.Services.AddSingleton<MongoDBContext>();
             builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
             builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
