@@ -1,10 +1,6 @@
-﻿using ApiEasier.Server.Dto;
-using ApiEasier.Server.Interfaces;
+﻿using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ApiEasier.Server.Controllers
 {

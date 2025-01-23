@@ -1,9 +1,4 @@
-﻿using ApiEasier.Server.Interfaces;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Hosting;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Caching.Memory;
 
 namespace ApiEasier.Server.Services
 {

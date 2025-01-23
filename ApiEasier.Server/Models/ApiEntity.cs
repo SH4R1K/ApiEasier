@@ -1,7 +1,4 @@
-﻿using NJsonSchema;
-using System.Collections.Generic;
-
-namespace ApiEasier.Server.Models
+﻿namespace ApiEasier.Server.Models
 {
     /// <summary>
     /// Модель для представления сущности API.
