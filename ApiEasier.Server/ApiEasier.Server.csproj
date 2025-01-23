@@ -25,4 +25,8 @@
     </ProjectReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="configuration\" />
+  </ItemGroup>
+
 </Project>
