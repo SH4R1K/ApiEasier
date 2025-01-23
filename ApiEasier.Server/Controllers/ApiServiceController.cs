@@ -117,6 +117,7 @@ namespace ApiEasier.Server.Controllers
                 }
 
                 apiService.IsActive = apiServiceDto.IsActive;
+                apiService.Description = apiServiceDto.Description;
 
                 await _configFileApiService.SerializeApiServiceAsync(oldName, apiService);
                 _configFileApiService.RenameApiService(oldName, apiServiceDto);

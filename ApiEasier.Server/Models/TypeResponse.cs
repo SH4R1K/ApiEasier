@@ -1,5 +1,9 @@
-﻿namespace ApiEasier.Server.Models
+﻿using ApiEasier.Server.Converters;
+using System.Text.Json.Serialization;
+
+namespace ApiEasier.Server.Models
 {
+    [JsonConverter(typeof(JsonStringEnumCamelCaseConverter<TypeResponse>))]
     /// <summary>
     /// Перечисление, представляющее типы ответов API.
     /// </summary>

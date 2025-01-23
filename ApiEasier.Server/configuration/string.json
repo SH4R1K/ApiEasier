@@ -1,5 +1,6 @@
 {
   "isActive": true,
+  "description": null,
   "entities": [
     {
       "name": "string",
@@ -8,7 +9,12 @@
       "actions": [
         {
           "route": "string",
-          "type": 0,
+          "type": "Get",
+          "isActive": true
+        },
+        {
+          "route": "delete",
+          "type": "Delete",
           "isActive": true
         }
       ]
@@ -126,12 +132,12 @@
       "actions": [
         {
           "route": "get",
-          "type": 0,
+          "type": "Get",
           "isActive": true
         },
         {
           "route": "post",
-          "type": 1,
+          "type": "Post",
           "isActive": true
         }
       ]

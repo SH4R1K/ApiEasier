@@ -19,6 +19,11 @@ namespace ApiEasier.Server.Dto
         public bool IsActive { get; set; }
 
         /// <summary>
+        /// Описание API-сервиса.
+        /// </summary>
+        public string Description { get; set; }
+
+        /// <summary>
         /// Список сущностей, связанных с API-сервисом.
         /// </summary>
         public List<ApiEntity> Entities { get; set; } = new List<ApiEntity>();
