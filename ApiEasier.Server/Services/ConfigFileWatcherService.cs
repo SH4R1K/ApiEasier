@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using ApiEasier.Server.Db;
+using ApiEasier.Server.Interfaces;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ApiEasier.Server.Services
 {
@@ -9,23 +11,26 @@ namespace ApiEasier.Server.Services
     {
         private FileSystemWatcher _fileSystemWatcher;
         private readonly IMemoryCache _cache;
+        private readonly IDynamicCollectionService _dynamicCollectionService;
+        private readonly IConfiguration _config;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ConfigFileWatcherService"/>.
         /// </summary>
-        /// <param name="path">Путь к директории, в которой будут отслеживаться изменения файлов.</param>
-        public ConfigFileWatcherService(string path, IMemoryCache cache)
+        public ConfigFileWatcherService(IMemoryCache cache, IDynamicCollectionService dynamicCollectionService, IConfiguration config)
         {
-            _fileSystemWatcher = new FileSystemWatcher(path)
+            _config = config;
+            _fileSystemWatcher = new FileSystemWatcher(_config["JsonDirectoryPath"])
             {
                 NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.FileName | NotifyFilters.DirectoryName,
                 Filter = "*.json"
             };
 
             _fileSystemWatcher.Changed += OnChanged;
-            _fileSystemWatcher.Deleted += OnChanged;
+            _fileSystemWatcher.Deleted += OnDeleted;
             _fileSystemWatcher.Renamed += OnRenamed;
             _cache = cache;
+            _dynamicCollectionService = dynamicCollectionService;
         }
 
         /// <summary>
@@ -33,10 +38,9 @@ namespace ApiEasier.Server.Services
         /// </summary>
         /// <param name="cancellationToken">Токен отмены для управления жизненным циклом сервиса.</param>
         /// <returns>Задача, представляющая асинхронную операцию.</returns>
-        public Task StartAsync(CancellationToken cancellationToken)
+        public async Task StartAsync(CancellationToken cancellationToken)
         {
             _fileSystemWatcher.EnableRaisingEvents = true;
-            return Task.CompletedTask;
         }
 
         /// <summary>
@@ -44,22 +48,37 @@ namespace ApiEasier.Server.Services
         /// </summary>
         /// <param name="cancellationToken">Токен отмены для управления жизненным циклом сервиса.</param>
         /// <returns>Задача, представляющая асинхронную операцию.</returns>
-        public Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
             _fileSystemWatcher.EnableRaisingEvents = false;
-            return Task.CompletedTask;
         }
 
-        private void OnChanged(object sender, FileSystemEventArgs e)
+        private async void OnChanged(object sender, FileSystemEventArgs e)
         {
+            var apiServiceName = Path.GetFileNameWithoutExtension(e.Name);
             //удаление кэша
-            _cache.Remove(Path.GetFileNameWithoutExtension(e.Name));
+            _cache.Remove(Path.GetFileNameWithoutExtension(apiServiceName));
+
+            await _dynamicCollectionService.DeleteCollectionsByChangedApiServiceAsync(apiServiceName);
         }
 
-        private void OnRenamed(object sender, RenamedEventArgs e)
+        private async void OnDeleted(object sender, FileSystemEventArgs e)
         {
+            var apiServiceName = Path.GetFileNameWithoutExtension(e.Name);
+            //удаление кэша
+            _cache.Remove(Path.GetFileNameWithoutExtension(apiServiceName));
+
+            await _dynamicCollectionService.DeleteCollectionsByDeletedApiServiceAsync(apiServiceName);
+        }
+
+        private async void OnRenamed(object sender, RenamedEventArgs e)
+        {
+            var oldApiServiceName = Path.GetFileNameWithoutExtension(e.OldName);
+            var apiServiceName = Path.GetFileNameWithoutExtension(e.Name);
             //удаление кэша по старому имени
-            _cache.Remove(Path.GetFileNameWithoutExtension(e.OldName));
+            _cache.Remove(Path.GetFileNameWithoutExtension(oldApiServiceName));
+
+            await _dynamicCollectionService.RenameCollectionsByApiServiceAsync(oldApiServiceName, apiServiceName);
         }
     }
 }

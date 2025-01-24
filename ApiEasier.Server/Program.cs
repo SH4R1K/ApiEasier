@@ -21,33 +21,25 @@ namespace ApiEasier.Server
             builder.Services.AddSwaggerGen();
 
             // Конфигурация данных для подключения к БД
-            builder.Services.Configure<DbSerttings>(
+            builder.Services.Configure<DbSettings>(
                 builder.Configuration.GetSection("DatabaseSettings")
             );
 
             // Сервис работы с json-файлами конфигураций api-сервисов
-            builder.Services.AddSingleton<IConfigFileApiService, JsonService>(provider =>
-            {
-                var memoryCache = provider.GetRequiredService<IMemoryCache>();
-                var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
-                return new JsonService(jsonDirectoryPath, memoryCache);
-            });
+            builder.Services.AddSingleton<IConfigFileApiService, JsonService>();
 
             // FileSystemWatcher для отслеживания актуальности кэша
-            builder.Services.AddHostedService(provider =>
-            {
-                var memoryCache = provider.GetRequiredService<IMemoryCache>();
-                var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
-                return new ConfigFileWatcherService(jsonDirectoryPath, memoryCache);
-            });
+            builder.Services.AddHostedService<ConfigFileWatcherService>();
+
+            builder.Services.AddHostedService<TakeOutDbTrashService>();
 
             builder.Services.AddSingleton<MongoDbContext>();
 
             // Сервис работы с MongoDB
-            builder.Services.AddScoped<IDynamicCollectionService, DynamicCollectionService>();
+            builder.Services.AddSingleton<IDynamicCollectionService, DynamicCollectionService>();
 
             // Сервис валидации данных переданных emuApi и данных в json-файлах конфигураций api-сервисов
-            builder.Services.AddScoped<IEmuApiValidationService, EmuApiValidationService>();
+            builder.Services.AddSingleton<IEmuApiValidationService, EmuApiValidationService>();
 
             // Логгирование http в MongoDB
             builder.Logging.ClearProviders();

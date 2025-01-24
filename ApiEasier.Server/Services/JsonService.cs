@@ -16,18 +16,19 @@ namespace ApiEasier.Server.Services
         private readonly ConcurrentDictionary<string, SemaphoreSlim> _fileSemaphores = new();
         private readonly object _lock = new();
         private readonly IMemoryCache _cache;
+        private readonly IConfiguration _config;
 
 
         /// <summary>
         /// Базовый конструктор JsonService.
         /// </summary>
-        /// <param name="path">Путь к папке конфигураций.</param>
         /// <exception cref="InvalidOperationException">Выбрасывается, если не удается создать директорию.</exception>
-        public JsonService(string path, IMemoryCache cache)
+        public JsonService( IMemoryCache cache, IConfiguration config)
         {
             try
             {
-                _path = path;
+                _config = config;
+                _path = _config["JsonDirectoryPath"];
                 Directory.CreateDirectory(_path);
             }
             catch (UnauthorizedAccessException ex)
@@ -43,6 +44,7 @@ namespace ApiEasier.Server.Services
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
             }
             _cache = cache;
+            _config = config;
         }
 
         private string GetFilePath(string fileName) => Path.Combine(_path, fileName + ".json");
@@ -84,7 +86,7 @@ namespace ApiEasier.Server.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     WriteIndented = true
                 });
-                _cache.Set(apiServiceName, apiService);
+                _cache.Set(apiServiceName, apiService, new MemoryCacheEntryOptions { SlidingExpiration = TimeSpan.FromHours(1)});
                 return apiService;
             }
             catch (FileNotFoundException ex)
