@@ -56,5 +56,29 @@
         /// Количество удаленных документов, или <c>null</c>, если коллекция не найдена.
         /// </returns>
         Task<long?> DeleteDocFromCollectionAsync(string collectionName, string id);
+
+        /// <summary>
+        /// Удаляет коллекции по удалении конфигурации API-сервиса.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
+        Task DeleteCollectionsByDeletedApiServiceAsync(string apiServiceName);
+
+        /// <summary>
+        /// Удаляет коллекцию по изменении конфигурации API-сервиса.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
+        Task DeleteCollectionsByChangedApiServiceAsync(string apiServiceName);
+
+        /// <summary>
+        /// Переименовывает коллекцию по новому имени API-сервиса.
+        /// </summary>
+        /// <param name="oldApiServiceName">Старое имя API-сервиса</param>
+        /// <param name="apiServiceName">Новое имя API-сервиса</param>
+        Task RenameCollectionsByApiServiceAsync(string oldApiServiceName, string apiServiceName);
+
+        /// <summary>
+        /// Находит неиспользуемые коллекции по всем файлам конфигурации и удаляет их
+        /// </summary>
+        Task DeleteTrashCollectionAsync();
     }
 }
