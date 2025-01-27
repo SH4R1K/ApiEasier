@@ -25,25 +25,11 @@ namespace ApiEasier.Server.Controllers
 
         // GET api/ApiService
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<IActionResult> GetAllWithData([FromQuery] int? page, [FromQuery] string? searchTerm, [FromQuery] int? pageSize)
         {
             try
             {
-                var serviceNames = _configFileApiService.GetApiServiceNames();
-                return Ok(serviceNames);
-            }
-            catch (Exception ex)
-            {
-                // Логирование исключения (не показано здесь)
-                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
-            }
-        }
-        [HttpGet("getallwithdata")]
-        public async Task<IActionResult> GetAllWithData()
-        {
-            try
-            {
-                return Ok(await _configFileApiService.GetAllServicesAsync());
+                return Ok(await _configFileApiService.GetApiServicesAsync(page, searchTerm, pageSize));
             }
             catch (Exception ex)
             {
@@ -95,6 +81,7 @@ namespace ApiEasier.Server.Controllers
                 var apiService = new ApiService
                 {
                     IsActive = apiServiceDto.IsActive,
+                    Description = apiServiceDto.Description,
                     Entities = apiServiceDto.Entities,
                 };
 

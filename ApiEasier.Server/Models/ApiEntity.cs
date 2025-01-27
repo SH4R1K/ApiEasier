@@ -18,7 +18,7 @@
         /// <summary>
         /// Структура сущности API.
         /// </summary>
-        public object? Structure { get; set; }
+        public object? Structure { get; set; } = null;
 
         /// <summary>
         /// Список конечных точек, связанных с сущностью API.
