@@ -38,7 +38,7 @@ namespace ApiEasier.Server.Controllers
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
-        [HttpGet("api/[controller]/getallwithdata")]
+        [HttpGet("getallwithdata")]
         public async Task<IActionResult> GetAllWithData()
         {
             try
