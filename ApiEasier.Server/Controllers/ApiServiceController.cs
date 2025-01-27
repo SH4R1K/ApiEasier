@@ -149,6 +149,23 @@ namespace ApiEasier.Server.Controllers
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
+
+        //PATCH api/ApiService/{apiServiceName}/{isActive}
+        [HttpPatch("{apiServiceName}/{isActive}")]
+        public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
+        {
+            var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+            if (apiService == null)
+            {
+                return NotFound($"Файл {apiServiceName}.json не существует.");
+            }
+
+            apiService.IsActive = isActive;
+
+            await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+            return NoContent();
+        }
     }
 }
 
