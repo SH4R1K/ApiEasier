@@ -29,7 +29,18 @@ namespace ApiEasier.Server.Controllers
         {
             try
             {
-                return Ok(await _configFileApiService.GetApiServicesAsync(page, searchTerm, pageSize));
+                var shortApiServices = new List<ShortApiServiceDto>();
+                foreach (var apiService in await _configFileApiService.GetApiServicesAsync(page, searchTerm, pageSize))
+                {
+                    shortApiServices.Add(
+                        new ShortApiServiceDto
+                        {
+                            Name = apiService.Name,
+                            IsActive = apiService.IsActive,
+                            Description = apiService.Description
+                        });
+                }
+                return Ok(shortApiServices);
             }
             catch (Exception ex)
             {
@@ -154,17 +165,25 @@ namespace ApiEasier.Server.Controllers
         [HttpPatch("{apiServiceName}/{isActive}")]
         public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
         {
-            var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
-
-            if (apiService == null)
+            try
             {
-                return NotFound($"Файл {apiServiceName}.json не существует.");
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует.");
+                }
+
+                apiService.IsActive = isActive;
+
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+                return NoContent();
             }
-
-            apiService.IsActive = isActive;
-
-            await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-            return NoContent();
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
         }
     }
 }
