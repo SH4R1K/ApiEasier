@@ -36,7 +36,7 @@ namespace ApiEasier.Server
             builder.Services.AddSingleton<MongoDbContext>();
 
             // Сервис работы с MongoDB
-            builder.Services.AddSingleton<IDynamicCollectionService, DynamicCollectionService>();
+            builder.Services.AddSingleton<IMongoRepository, DynamicCollectionService>();
 
             // Сервис валидации данных переданных emuApi и данных в json-файлах конфигураций api-сервисов
             builder.Services.AddSingleton<IEmuApiValidationService, EmuApiValidationService>();
