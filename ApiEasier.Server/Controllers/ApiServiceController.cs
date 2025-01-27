@@ -38,6 +38,19 @@ namespace ApiEasier.Server.Controllers
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
+        [HttpGet("api/[controller]/getallwithdata")]
+        public async Task<IActionResult> GetAllWithData()
+        {
+            try
+            {
+                return Ok(await _configFileApiService.GetAllServicesAsync());
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
+        }
 
         // GET api/ApiService/{name}
         [HttpGet("{name}")]

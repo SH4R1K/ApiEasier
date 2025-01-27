@@ -41,6 +41,7 @@ namespace ApiEasier.Server.Interfaces
         /// </summary>
         /// <param name="apiServiceName">Имя API-сервиса для получения.</param>
         /// <returns>Объект <see cref="ApiServiceDto"/>, если сервис найден; иначе <c>null</c>.</returns>
+        Task<List<ApiServiceDto>?> GetAllServicesAsync();
         Task<ApiServiceDto?> GetApiServiceByNameAsync(string apiServiceName);
 
         /// <summary>

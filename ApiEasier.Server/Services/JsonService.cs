@@ -308,7 +308,24 @@ namespace ApiEasier.Server.Services
                 semapthore.Release();
             }
         }
-
+        public async Task<List<ApiServiceDto>> GetAllServicesAsync()
+        {
+            var apiServiceNames = GetApiServiceNames();
+            List<ApiServiceDto> apiServices = new List<ApiServiceDto>();
+            ApiService apiService;
+            foreach (var apiServiceName in apiServiceNames)
+            {
+                apiService = await DeserializeApiServiceAsync(apiServiceName);
+                apiServices.Add(new ApiServiceDto
+                {
+                    Name = apiServiceName,
+                    Description = apiService.Description,
+                    IsActive = apiService.IsActive,
+                    Entities = apiService.Entities,
+                });
+            }
+            return apiServices;
+        }
         /// <summary>
         /// Проверяет, существует ли API-сервис с указанным именем.
         /// </summary>
