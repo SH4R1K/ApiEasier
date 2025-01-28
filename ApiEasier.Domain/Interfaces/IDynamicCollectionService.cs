@@ -3,7 +3,7 @@
     /// <summary>
     /// Интерфейс для работы с динамическими коллекциями в MongoDB.
     /// </summary>
-    public interface IMongoRepository
+    public interface IDynamicCollectionService
     {
         /// <summary>
         /// Асинхронно добавляет документ в указанную коллекцию.

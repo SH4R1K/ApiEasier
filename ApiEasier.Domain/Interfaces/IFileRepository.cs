@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ApiEasier.Domain.Interfaces
 {
-    public interface IMongoRepository
+    public interface IFileRepository
     {
-        Task<Dictionary<string, object>?> AddDocToCollectionAsync(string collectionName, object jsonData);
+        string GetFilePath<T>();
+        Task<T> ReadFromFileAsync<T>();
+        Task WriteToFileAsync<T>(T data);
     }
 }

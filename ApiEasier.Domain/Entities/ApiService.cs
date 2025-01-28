@@ -5,6 +5,7 @@
     /// </summary>
     public class ApiService
     {
+        public string Name { get; set; }
         /// <summary>
         /// Указывает, активен ли API-сервис.
         /// </summary>
