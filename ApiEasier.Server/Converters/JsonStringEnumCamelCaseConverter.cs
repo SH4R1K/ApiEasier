@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ApiEasier.Server.Converters
+namespace ApiEasier.Api.Converters
 {
     public class JsonStringEnumCamelCaseConverter<T> : JsonConverter<T> where T : Enum
     {

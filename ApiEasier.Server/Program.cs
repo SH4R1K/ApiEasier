@@ -1,11 +1,7 @@
-using ApiEasier.Server.Db;
-using ApiEasier.Server.Interfaces;
-using ApiEasier.Server.LogsService;
-using ApiEasier.Server.Services;
+using ApiEasier.Dal.DB;
 using Microsoft.AspNetCore.HttpLogging;
-using Microsoft.Extensions.Caching.Memory;
 
-namespace ApiEasier.Server
+namespace ApiEasier.Api
 {
     public class Program
     {

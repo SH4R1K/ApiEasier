@@ -1,9 +1,9 @@
-﻿using ApiEasier.Server.Dto;
-using ApiEasier.Server.Interfaces;
+﻿using ApiEasier.Bll.Dto;
+using ApiEasier.Bll.Interfaces;
 using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEasier.Server.Controllers
+namespace ApiEasier.Api.Controllers
 {
     /// <summary>
     /// Контроллер для управления API сервисами.

@@ -1,8 +1,8 @@
-﻿using ApiEasier.Server.Interfaces;
-using ApiEasier.Server.Models;
+﻿using ApiEasier.Bll.Interfaces;
+using ApiEasier.Dm.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEasier.Server.Controllers
+namespace ApiEasier.Api.Controllers
 {
     /// <summary>
     /// Контроллер для обработки запросов эмуляции API.

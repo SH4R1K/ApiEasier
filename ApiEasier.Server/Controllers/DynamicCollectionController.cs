@@ -1,9 +1,9 @@
-﻿using ApiEasier.Server.Db;
+﻿using ApiEasier.Dal.DB;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace ApiEasier.Server.Controllers
+namespace ApiEasier.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
