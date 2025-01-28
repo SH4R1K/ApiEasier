@@ -13,6 +13,6 @@ namespace ApiEasier.Domain.Interfaces
         Task UpdateAsync(ApiService apiService);
         Task DeleteAsync(ApiService apiService);
         Task<IEnumerable<ApiService>> GetAllAsync();
-        Task<ApiService> GetByIdAsync(string id);
+        Task<ApiService?> GetByIdAsync(string id);
     }
 }

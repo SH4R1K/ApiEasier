@@ -1,11 +1,15 @@
-﻿namespace ApiEasier.Server.Models
+﻿using System.Text.Json.Serialization;
+
+namespace ApiEasier.Server.Models
 {
     /// <summary>
     /// Модель для представления API-сервиса.
     /// </summary>
     public class ApiService
     {
+        [JsonIgnore]
         public string Name { get; set; }
+
         /// <summary>
         /// Указывает, активен ли API-сервис.
         /// </summary>

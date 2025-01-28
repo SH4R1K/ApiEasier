@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ApiEasier.Domain\ApiEasier.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,28 +1,21 @@
 ﻿using ApiEasier.Domain.Interfaces;
-using ApiEasier.Server.Db;
 using ApiEasier.Server.Models;
-using MongoDB.Bson;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ApiEasier.Infrastructure.Repositories
 {
     public class ApiServiceRepository : IApiServiceRepository
     {
-        private readonly IFileRepository _fileRepository;
+        private readonly IJsonRepository _jsonRepository;
 
-        public ApiServiceRepository(IFileRepository fileRepository)
+        public ApiServiceRepository(IJsonRepository jsonRepository)
         {
-            _fileRepository = fileRepository;
+            _jsonRepository = jsonRepository;
         }
 
-        public Task AddAsync(ApiService service)
+        public async Task AddAsync(ApiService service)
         {
-            throw new NotImplementedException();
+            await _jsonRepository.WriteJsonAsync<ApiService>(service.Name, service);
         }
 
         public Task DeleteAsync(ApiService service)
@@ -35,9 +28,15 @@ namespace ApiEasier.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public async Task<ApiService> GetByIdAsync(string id)
+        /// <summary>
+        /// Дессериализация данных из файла json в инстанс ApiSerive
+        /// </summary>
+        /// <param name="id">название файла</param>
+        /// <returns></returns>
+        public async Task<ApiService?> GetByIdAsync(string id)
         {
-            var apiService = await _fileRepository.ReadFromFileAsync<ApiService>();
+            var apiService = await _jsonRepository.ReadJsonAsync<ApiService>(id);
+            apiService.Name = id;
             return apiService;
         }
 
