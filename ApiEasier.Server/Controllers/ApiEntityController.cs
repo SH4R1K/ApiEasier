@@ -1,6 +1,8 @@
-﻿using ApiEasier.Server.Interfaces;
+﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ApiEasier.Server.Controllers
 {
@@ -35,7 +37,19 @@ namespace ApiEasier.Server.Controllers
                     return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
                 }
 
-                return Ok(apiService.Entities);
+                var apiEntities = new List<ShortApiEntityDto>();
+                foreach (var apiEntity in apiService.Entities)
+                {
+                    apiEntities.Add(
+                        new ShortApiEntityDto
+                        {
+                            Name = apiEntity.Name,
+                            IsActive = apiEntity.IsActive,
+                            Structure = apiEntity.Structure
+                        });
+                }
+
+                return Ok(apiEntities);
             }
             catch (Exception ex)
             {
