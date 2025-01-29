@@ -11,19 +11,14 @@ namespace ApiEasier.Api.Controllers
     public class ApiEmuController : ControllerBase
     {
         private readonly IDynamicApiService _dynamicApiService;
-        private readonly IEmuApiValidationService _apiServiceValidator;
+        private readonly IValidatorDynamicApiService _validatorDynamicApiService;
 
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ApiEmuController"/>.
-        /// </summary>
-        /// <param name="dynamicCollectionService">Сервис для операций с динамическими коллекциями.</param>
-        /// <param name="apiServiceValidator">Сервис для валидации API.</param>
         public ApiEmuController(
             IDynamicApiService dynamicCollectionService,
-            IEmuApiValidationService apiServiceValidator)
+            IValidatorDynamicApiService validatorDynamicApiService)
         {
             _dynamicApiService = dynamicCollectionService;
-            _apiServiceValidator = apiServiceValidator;
+            _validatorDynamicApiService = validatorDynamicApiService;
         }
 
         // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}
@@ -32,7 +27,7 @@ namespace ApiEasier.Api.Controllers
         {
             try
             {
-                // проверка существование в конфиге
+                //проверка существование в конфиге
 
                 // работа с бд
 
@@ -41,9 +36,11 @@ namespace ApiEasier.Api.Controllers
                 //if (!isValid)
                 //    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
+                var isValid = _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, )
+
                 var data = await _dynamicApiService.GetDataAsync($"{apiName}_{entityName}", filters);
                 if (data != null)
-                    return Ok(data); // Сериализуем результат из dictionary в json
+                    return Ok(data); 
                 else
                     return NotFound("Не найдены данные");
             }

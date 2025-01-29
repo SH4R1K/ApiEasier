@@ -1,10 +1,13 @@
-﻿namespace ApiEasier.Dm.Models
+﻿using System.Text.Json.Serialization;
+
+namespace ApiEasier.Dm.Models
 {
     /// <summary>
     /// Модель для представления API-сервиса.
     /// </summary>
     public class ApiService
     {
+        [JsonIgnore]
         public string Name { get; set; }
 
         /// <summary>

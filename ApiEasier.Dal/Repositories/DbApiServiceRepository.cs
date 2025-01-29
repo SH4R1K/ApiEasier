@@ -1,10 +1,8 @@
 ﻿using ApiEasier.Dal.DB;
 using ApiEasier.Dal.Helpers;
 using ApiEasier.Dal.Interfaces;
-using ApiEasier.Dm.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Collections;
 
 namespace ApiEasier.Dal.Repositories
 {

@@ -1,8 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Server.Models;
-using NJsonSchema;
+using ApiEasier.Dal.Interfaces;
 using System.Text.Json;
 
 namespace ApiEasier.Bll.Services.ApiEmu
@@ -10,17 +8,17 @@ namespace ApiEasier.Bll.Services.ApiEmu
     /// <summary>
     /// Сервис для валидации API и его сущностей.
     /// </summary>
-    public class EmuApiValidationService : IEmuApiValidationService
+    public class ValidatorDynamicApiService : IValidatorDynamicApiService
     {
-        private readonly IConfigFileApiService _configFileApiService;
+        private readonly IFileApiServiceRepository _fileApiServiceRepository;
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="EmuApiValidationService"/>.
+        /// Инициализирует новый экземпляр класса <see cref="ValidatorDynamicApiService"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public EmuApiValidationService(IConfigFileApiService configFileApiService)
+        public ValidatorDynamicApiService(IFileApiServiceRepository fileApiServiceRepository)
         {
-            _configFileApiService = configFileApiService;
+            _fileApiServiceRepository = fileApiServiceRepository;
         }
 
         /// <summary>
