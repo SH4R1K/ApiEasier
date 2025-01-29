@@ -3,7 +3,7 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Repositories
 {
-    public class ApiServiceRepository : IApiServiceRepository
+    public class FileApiServiceRepository : IFileApiServiceRepository
     {
         public Task AddAsync(ApiService apiService)
         {

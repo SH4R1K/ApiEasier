@@ -23,7 +23,7 @@
         /// <returns>
         /// Список словарей, представляющих документы, или <c>null</c>, если не найдено.
         /// </returns>
-        Task<List<Dictionary<string, object>?>> GetDocFromCollectionAsync(string collectionName, string? filters);
+        Task<List<Dictionary<string, object>?>> GetApiServiceDataAsync(string collectionName, string? filters);
 
         /// <summary>
         /// Асинхронно получает документ из указанной коллекции по его ID.

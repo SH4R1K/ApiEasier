@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ApiEasier.Dal.Helpers;
+using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Interfaces
 {
     public interface IDbApiServiceRepository
     {
+        Task<DynamicApiService> GetApiServiceData(string apiServiceName);
     }
 }

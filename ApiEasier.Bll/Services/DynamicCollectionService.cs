@@ -1,10 +1,7 @@
 ﻿using ApiEasier.Bll.Interfaces;
-using ApiEasier.Server.Db;
-using ApiEasier.Server.Dto;
-using ApiEasier.Server.Models;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization;
-using MongoDB.Driver;
+using ApiEasier.Dal.Helpers;
+using ApiEasier.Dal.Interfaces;
+using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services
 {
@@ -13,17 +10,17 @@ namespace ApiEasier.Bll.Services
     /// </summary>
     public class DynamicCollectionService : IDynamicCollectionService
     {
-        private readonly MongoDbContext _dbContext;
         private readonly IConfigFileApiService _configFileApiService;
+        private readonly IDbApiServiceRepository _dbApiServiceRepository;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="DynamicCollectionService"/>.
         /// </summary>
         /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicCollectionService(MongoDbContext dbContext, IConfigFileApiService configFileApiService)
+        public DynamicCollectionService(IConfigFileApiService configFileApiService, IDbApiServiceRepository dbApiServiceRepository)
         {
-            _dbContext = dbContext;
             _configFileApiService = configFileApiService;
+            _dbApiServiceRepository = dbApiServiceRepository;
         }
 
         /// <summary>
@@ -135,31 +132,27 @@ namespace ApiEasier.Bll.Services
         /// <param name="filters">Фильтры для получения документов.</param>
         /// <returns>Список словарей, представляющих документы, или null, если не найдено.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<List<Dictionary<string, object>>?> GetDocFromCollectionAsync(string collectionName, string? filters)
+        public async Task<DynamicApiService> GetApiServiceDataAsync(string collectionName, string? filters)
         {
             try
             {
-                var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
-                FilterDefinition<BsonDocument> filterDefinition;
+                var data = await _dbApiServiceRepository.GetApiServiceData(collectionName);
 
-                try
-                {
-                    filterDefinition = BsonSerializer.Deserialize<BsonDocument>(filters);
-                }
-                catch
-                {
-                    filterDefinition = Builders<BsonDocument>.Filter.Empty;
-                }
+                //var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
+                //FilterDefinition<BsonDocument> filterDefinition;
 
-                var documents = await collection.Find(filterDefinition).ToListAsync();
-                var jsonList = documents.Select(doc =>
-                {
-                    var bsonDoc = doc.ToDictionary();
-                    bsonDoc["_id"] = doc["_id"].ToString(); // Преобразуем ObjectId в строку для корректного отображения
-                    return bsonDoc;
-                }).ToList();
+                //try
+                //{
+                //    filterDefinition = BsonSerializer.Deserialize<BsonDocument>(filters);
+                //}
+                //catch
+                //{
+                //    filterDefinition = Builders<BsonDocument>.Filter.Empty;
+                //}
 
-                return jsonList;
+                //var documents = await collection.Find(filterDefinition).ToListAsync();
+
+                return data;
             }
             catch (Exception ex)
             {

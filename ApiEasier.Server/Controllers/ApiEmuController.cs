@@ -33,13 +33,18 @@ namespace ApiEasier.Api.Controllers
         {
             try
             {
+                // проверка существование в конфиге
+
+                // работа с бд
+
+
                 var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Get);
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var documents = await _dynamicCollectionService.GetDocFromCollectionAsync($"{apiName}_{entityName}", filters);
-                if (documents != null)
-                    return Ok(documents); // Сериализуем результат из dictionary в json
+                var data = await _dynamicCollectionService.GetApiServiceDataAsync($"{apiName}_{entityName}", filters);
+                if (data != null)
+                    return Ok(data); // Сериализуем результат из dictionary в json
                 else
                     return NotFound("Не найдены данные");
             }
