@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 
-namespace ApiEasier.Bll.Interfaces
+namespace ApiEasier.Bll.Interfaces.ApiConfigure
 {
     /// <summary>
     /// Интерфейс для работы с конфигурационными файлами API-сервисов.

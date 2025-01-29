@@ -1,5 +1,4 @@
-﻿using ApiEasier.Bll.Interfaces;
-using ApiEasier.Dm.Models;
+﻿using ApiEasier.Bll.Interfaces.ApiEmu;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers

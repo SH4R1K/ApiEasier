@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Server.Models;
 
-namespace ApiEasier.Bll.Interfaces
+namespace ApiEasier.Bll.Interfaces.ApiEmu
 {
     /// <summary>
     /// Интерфейс для валидации эмулированных API-сервисов.

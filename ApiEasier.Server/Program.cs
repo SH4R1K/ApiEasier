@@ -1,3 +1,5 @@
+using ApiEasier.Bll.Interfaces.ApiEmu;
+using ApiEasier.Bll.Services.ApiEmu;
 using ApiEasier.Dal.DB;
 using Microsoft.AspNetCore.HttpLogging;
 
@@ -21,6 +23,9 @@ namespace ApiEasier.Api
             {
                 return new MongoDbContext("mongodb://localhost:27017", "apiEasier");
             });
+
+            // Эумалятор апи сервисов
+            builder.Services.AddScoped<IDynamicApiService, DynamicApiService>();
 
             // Сервис работы с json-файлами конфигураций api-сервисов
             //builder.Services.AddSingleton<IConfigFileApiService, JsonService>();

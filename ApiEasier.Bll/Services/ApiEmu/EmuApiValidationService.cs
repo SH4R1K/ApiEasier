@@ -1,10 +1,11 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces;
+using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Server.Models;
 using NJsonSchema;
 using System.Text.Json;
 
-namespace ApiEasier.Bll.Services
+namespace ApiEasier.Bll.Services.ApiEmu
 {
     /// <summary>
     /// Сервис для валидации API и его сущностей.

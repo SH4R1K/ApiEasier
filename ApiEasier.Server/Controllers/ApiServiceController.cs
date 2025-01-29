@@ -1,5 +1,5 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces;
+using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 

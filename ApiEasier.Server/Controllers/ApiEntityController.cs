@@ -1,4 +1,4 @@
-﻿using ApiEasier.Bll.Interfaces;
+﻿using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Dm.Models;
 using Microsoft.AspNetCore.Mvc;
 

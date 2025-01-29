@@ -1,14 +1,15 @@
-﻿using ApiEasier.Bll.Interfaces;
+﻿using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Dal.Helpers;
 using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 
-namespace ApiEasier.Bll.Services
+namespace ApiEasier.Bll.Services.ApiEmu
 {
     /// <summary>
     /// Сервис для управления динамическими коллекциями в MongoDB.
     /// </summary>
-    public class DynamicApiService //: IDynamicApiService
+    public class DynamicApiService : IDynamicApiService
     {
         private readonly IConfigFileApiService _configFileApiService;
         private readonly IDbApiServiceRepository _dbApiServiceRepository;

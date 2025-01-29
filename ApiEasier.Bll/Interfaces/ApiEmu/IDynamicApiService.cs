@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Dal.Helpers;
 
-namespace ApiEasier.Bll.Interfaces
+namespace ApiEasier.Bll.Interfaces.ApiEmu
 {
     /// <summary>
     /// Интерфейс для работы с динамическими коллекциями в MongoDB.
