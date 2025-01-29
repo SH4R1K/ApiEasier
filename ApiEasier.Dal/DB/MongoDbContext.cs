@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Dal.DB
+﻿using MongoDB.Driver;
+
+namespace ApiEasier.Dal.DB
 {
     /// <summary>
     /// Контекст для работы с MongoDB.
@@ -11,10 +13,10 @@
         /// Инициализирует новый экземпляр класса <see cref="MongoDbContext"/>.
         /// </summary>
         /// <param name="settings">Настройки базы данных, содержащие строку подключения и имя базы данных.</param>
-        public MongoDbContext(IOptions<DbSettings> settings)
+        public MongoDbContext(string connectionString, string databaseName)
         {
-            var client = new MongoClient(settings.Value.ConnectionString);
-            _database = client.GetDatabase(settings.Value.DatabaseName);
+            var client = new MongoClient(connectionString);
+            _database = client.GetDatabase(databaseName);
         }
 
         /// <summary>
@@ -25,7 +27,7 @@
         /// <returns>Коллекция документов указанного типа.</returns>
         public IMongoCollection<T> GetCollection<T>(string name) =>
             _database.GetCollection<T>(name);
-
+        
         /// <summary>
         /// Асинхронно получает список имен коллекций в базе данных.
         /// </summary>

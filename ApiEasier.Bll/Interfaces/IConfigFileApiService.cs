@@ -1,5 +1,4 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Server.Models;
 
 namespace ApiEasier.Bll.Interfaces
 {

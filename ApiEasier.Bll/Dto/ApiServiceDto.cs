@@ -1,6 +1,4 @@
-﻿using ApiEasier.Server.Models;
-
-namespace ApiEasier.Bll.Dto
+﻿namespace ApiEasier.Bll.Dto
 {
     /// <summary>
     /// DTO для представления API-сервиса с именем.

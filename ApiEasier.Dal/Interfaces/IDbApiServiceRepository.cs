@@ -5,6 +5,7 @@ namespace ApiEasier.Dal.Interfaces
 {
     public interface IDbApiServiceRepository
     {
-        Task<DynamicApiService> GetApiServiceData(string apiServiceName);
+        Task<List<DynamicApiServiceModel>?> GetDataAsync(string apiServiceName);
+        Task<DynamicApiServiceModel> CreateAsync(dynamic apiServiceName, object data);
     }
 }

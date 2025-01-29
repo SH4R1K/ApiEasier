@@ -11,7 +11,7 @@ namespace ApiEasier.Api.Controllers
     [ApiController]
     public class ApiEmuController : ControllerBase
     {
-        private readonly IDynamicCollectionService _dynamicCollectionService;
+        private readonly IDynamicApiService _dynamicApiService;
         private readonly IEmuApiValidationService _apiServiceValidator;
 
         /// <summary>
@@ -20,10 +20,10 @@ namespace ApiEasier.Api.Controllers
         /// <param name="dynamicCollectionService">Сервис для операций с динамическими коллекциями.</param>
         /// <param name="apiServiceValidator">Сервис для валидации API.</param>
         public ApiEmuController(
-            IDynamicCollectionService dynamicCollectionService,
+            IDynamicApiService dynamicCollectionService,
             IEmuApiValidationService apiServiceValidator)
         {
-            _dynamicCollectionService = dynamicCollectionService;
+            _dynamicApiService = dynamicCollectionService;
             _apiServiceValidator = apiServiceValidator;
         }
 
@@ -38,11 +38,11 @@ namespace ApiEasier.Api.Controllers
                 // работа с бд
 
 
-                var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Get);
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
+                //var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Get);
+                //if (!isValid)
+                //    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var data = await _dynamicCollectionService.GetApiServiceDataAsync($"{apiName}_{entityName}", filters);
+                var data = await _dynamicApiService.GetDataAsync($"{apiName}_{entityName}", filters);
                 if (data != null)
                     return Ok(data); // Сериализуем результат из dictionary в json
                 else
@@ -61,11 +61,11 @@ namespace ApiEasier.Api.Controllers
         {
             try
             {
-                var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.GetByIndex);
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
+                //var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.GetByIndex);
+                //if (!isValid)
+                //    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicCollectionService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id, filters);
+                var result = await _dynamicApiService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id, filters);
                 if (result != null)
                     return Ok(result);
                 else
@@ -84,16 +84,16 @@ namespace ApiEasier.Api.Controllers
         {
             try
             {
-                var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
+                //var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Post);
+                //if (!isValid)
+                //    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
                 // Валидация структуры для сущности
-                isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
-                if (!isValid)
-                    return BadRequest();
+                //isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
+                //if (!isValid)
+                //    return BadRequest();
 
-                var result = await _dynamicCollectionService.AddDocToCollectionAsync($"{apiName}_{entityName}", json);
+                var result = await _dynamicApiService.AddDataAsync($"{apiName}_{entityName}", json);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -110,16 +110,16 @@ namespace ApiEasier.Api.Controllers
             try
             {
                 // Валидация API, сущности и пути
-                var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Put);
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
+                //var (isValid, _, entity) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Put);
+                //if (!isValid)
+                //    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                // Валидация структуры для сущности
-                isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
-                if (!isValid)
-                    return BadRequest();
+                //// Валидация структуры для сущности
+                //isValid = await _apiServiceValidator.ValidateEntityStructureAsync(entity!, json);
+                //if (!isValid)
+                //    return BadRequest();
 
-                var result = await _dynamicCollectionService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
+                var result = await _dynamicApiService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
 
                 if (result != null)
                     return Ok(result);
@@ -139,11 +139,11 @@ namespace ApiEasier.Api.Controllers
         {
             try
             {
-                var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Delete);
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
+                //var (isValid, _, _) = await _apiServiceValidator.ValidateApiAsync(apiName, entityName, endpoint, TypeResponse.Delete);
+                //if (!isValid)
+                //    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicCollectionService.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
+                var result = await _dynamicApiService.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
                 if (result > 0)
                     return NoContent();
                 return NotFound();

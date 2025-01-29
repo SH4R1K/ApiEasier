@@ -17,29 +17,28 @@ namespace ApiEasier.Api
             builder.Services.AddSwaggerGen();
 
             // Конфигурация данных для подключения к БД
-            builder.Services.Configure<DbSettings>(
-                builder.Configuration.GetSection("DatabaseSettings")
-            );
+            builder.Services.AddSingleton<MongoDbContext>(serviceProvider =>
+            {
+                return new MongoDbContext("mongodb://localhost:27017", "apiEasier");
+            });
 
             // Сервис работы с json-файлами конфигураций api-сервисов
-            builder.Services.AddSingleton<IConfigFileApiService, JsonService>();
+            //builder.Services.AddSingleton<IConfigFileApiService, JsonService>();
 
             // FileSystemWatcher для отслеживания актуальности кэша
-            builder.Services.AddHostedService<ConfigFileWatcherService>();
+            //builder.Services.AddHostedService<ConfigFileWatcherService>();
 
-            builder.Services.AddHostedService<TakeOutDbTrashService>();
-
-            builder.Services.AddSingleton<MongoDbContext>();
+            //builder.Services.AddHostedService<TakeOutDbTrashService>();
 
             // Сервис работы с MongoDB
-            builder.Services.AddSingleton<IDynamicCollectionService, DynamicCollectionService>();
+            //builder.Services.AddSingleton<IDynamicCollectionService, DynamicCollectionService>();
 
             // Сервис валидации данных переданных emuApi и данных в json-файлах конфигураций api-сервисов
-            builder.Services.AddSingleton<IEmuApiValidationService, EmuApiValidationService>();
+            //builder.Services.AddSingleton<IEmuApiValidationService, EmuApiValidationService>();
 
             // Логгирование http в MongoDB
             builder.Logging.ClearProviders();
-            builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
+            //builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
             builder.Services.AddHttpLogging(o =>
             {
                 o.CombineLogs = true;

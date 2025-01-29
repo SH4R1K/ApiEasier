@@ -1,29 +1,16 @@
-﻿namespace ApiEasier.Bll.Interfaces
+﻿using ApiEasier.Dal.Helpers;
+
+namespace ApiEasier.Bll.Interfaces
 {
     /// <summary>
     /// Интерфейс для работы с динамическими коллекциями в MongoDB.
     /// </summary>
-    public interface IDynamicCollectionService
+    public interface IDynamicApiService
     {
-        /// <summary>
-        /// Асинхронно добавляет документ в указанную коллекцию.
-        /// </summary>
-        /// <param name="collectionName">Имя коллекции, в которую будет добавлен документ.</param>
-        /// <param name="jsonData">Данные документа в формате JSON.</param>
-        /// <returns>
-        /// Словарь, представляющий добавленный документ, или <c>null</c>, если добавление не удалось.
-        /// </returns>
-        Task<Dictionary<string, object>?> AddDocToCollectionAsync(string collectionName, object jsonData);
 
-        /// <summary>
-        /// Асинхронно получает документы из указанной коллекции с применением фильтров.
-        /// </summary>
-        /// <param name="collectionName">Имя коллекции, из которой будут получены документы.</param>
-        /// <param name="filters">Фильтры для получения документов, или <c>null</c> для получения всех документов.</param>
-        /// <returns>
-        /// Список словарей, представляющих документы, или <c>null</c>, если не найдено.
-        /// </returns>
-        Task<List<Dictionary<string, object>?>> GetApiServiceDataAsync(string collectionName, string? filters);
+        Task<DynamicApiServiceModel> AddDataAsync(string collectionName, object jsonData);
+
+        Task<List<DynamicApiServiceModel>> GetDataAsync(string collectionName, string? filters);
 
         /// <summary>
         /// Асинхронно получает документ из указанной коллекции по его ID.

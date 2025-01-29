@@ -2,7 +2,7 @@
 
 namespace ApiEasier.Dm.Models
 {
-    [JsonConverter(typeof(JsonStringEnumCamelCaseConverter<TypeResponse>))]
+    //[JsonConverter(typeof(JsonStringEnumCamelCaseConverter<TypeResponse>))]
     /// <summary>
     /// Перечисление, представляющее типы ответов API.
     /// </summary>
