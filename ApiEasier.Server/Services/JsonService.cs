@@ -105,6 +105,10 @@ namespace ApiEasier.Server.Services
             {
                 throw new IOException("Ошибка при чтении файла API-сервиса.", ex);
             }
+            catch (JsonException ex)
+            {
+                throw new JsonException($"Некоректный файл конфигурации {filePath}.", ex);
+            }
             catch (Exception ex)
             {
                 throw new InvalidOperationException("Произошла непредвиденная ошибка.", ex);
@@ -338,14 +342,21 @@ namespace ApiEasier.Server.Services
             ApiService apiService;
             foreach (var apiServiceName in apiServiceNames)
             {
-                apiService = await DeserializeApiServiceAsync(apiServiceName);
-                apiServices.Add(new ApiServiceDto
+                try
                 {
-                    Name = apiServiceName,
-                    Description = apiService.Description,
-                    IsActive = apiService.IsActive,
-                    Entities = apiService.Entities,
-                });
+                    apiService = await DeserializeApiServiceAsync(apiServiceName);
+                    apiServices.Add(new ApiServiceDto
+                    {
+                        Name = apiServiceName,
+                        Description = apiService.Description,
+                        IsActive = apiService.IsActive,
+                        Entities = apiService.Entities,
+                    });
+                }
+                catch (JsonException ex) 
+                {
+                    continue;
+                }
             }
             return apiServices;
         }

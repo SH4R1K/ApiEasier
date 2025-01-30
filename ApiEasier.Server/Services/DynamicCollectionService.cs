@@ -1,7 +1,5 @@
 ﻿using ApiEasier.Server.Db;
-using ApiEasier.Server.Dto;
 using ApiEasier.Server.Interfaces;
-using ApiEasier.Server.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
@@ -266,10 +264,18 @@ namespace ApiEasier.Server.Services
         /// </summary>
         public async Task DeleteTrashCollectionAsync()
         {
-            var apiServices = await _configFileApiService.GetApiServicesAsync();
-            foreach (var collection in (await _dbContext.GetListCollectionNamesAsync())
-                .Where(c => !apiServices.Any(asn => c.Split("_")[0] == asn.Name) || !apiServices.Any(ase => ase.Entities.Any(e => e.Name == c.Split("_")[1]))))
-                await _dbContext.DropCollectionAsync(collection);
+            try
+            {
+                var apiServices = await _configFileApiService.GetApiServicesAsync();
+                foreach (var collection in (await _dbContext.GetListCollectionNamesAsync())
+                    .Where(c => !apiServices.Any(asn => c.Split("_")[0] == asn.Name) || !apiServices.Any(ase => ase.Entities.Any(e => e.Name == c.Split("_")[1]))))
+                    await _dbContext.DropCollectionAsync(collection);
+            }
+            catch (Exception ex) 
+            { 
+                //Нужен логгер
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
