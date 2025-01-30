@@ -23,6 +23,6 @@
         /// <summary>
         /// Список сущностей, связанных с API-сервисом.
         /// </summary>
-        public List<ApiEntity> Entities { get; set; } = new List<ApiEntity>();
+        public List<ApiEntityDto> Entities { get; set; } = new List<ApiEntityDto>();
     }
 }

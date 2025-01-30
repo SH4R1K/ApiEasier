@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NJsonSchema" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ApiEasier.Dal\ApiEasier.Dal.csproj" />
   </ItemGroup>
 

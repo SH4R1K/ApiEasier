@@ -1,25 +1,22 @@
 ﻿using ApiEasier.Bll.Dto;
+using ApiEasier.Bll.Interfaces;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Dal.Interfaces;
+using ApiEasier.Dm.Models;
+using NJsonSchema;
 using System.Text.Json;
 
 namespace ApiEasier.Bll.Services.ApiEmu
 {
-    /// <summary>
-    /// Сервис для валидации API и его сущностей.
-    /// </summary>
-    public class ValidatorDynamicApiService : IValidatorDynamicApiService
-    {
-        private readonly IFileApiServiceRepository _fileApiServiceRepository;
 
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ValidatorDynamicApiService"/>.
-        /// </summary>
-        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ValidatorDynamicApiService(IFileApiServiceRepository fileApiServiceRepository)
-        {
-            _fileApiServiceRepository = fileApiServiceRepository;
-        }
+    public class ValidatorDynamicApiService(
+        IFileApiServiceRepository fileApiServiceRepository,
+        IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
+        IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter) : IValidatorDynamicApiService
+    {
+        private readonly IFileApiServiceRepository _fileApiServiceRepository = fileApiServiceRepository;
+        private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter = apiServiceToDtoConverter;
+        private readonly IConverter<ApiEntity, ApiEntityDto> _apiEntityToDtoConverter = apiEntityToDtoConverter;
 
         /// <summary>
         /// Проверяет валидность API, сущности и конечной точки.
@@ -30,30 +27,30 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="typeResponse">Тип ответа.</param>
         /// <returns>Кортеж, содержащий информацию о валидности, API-сервисе и сущности.</returns>
         /// <exception cref="InvalidOperationException">Выбрасывается, если произошла ошибка при валидации API.</exception>
-        public async Task<(bool isValid, ApiServiceDto? apiService, ApiEntity? apiEntity)> ValidateApiAsync(
+        public async Task<(bool isValid, ApiServiceDto? apiService, ApiEntityDto? apiEntity)> ValidateApiAsync(
             string apiName,
             string entityName,
             string endpoint,
-            TypeResponse typeResponse)
+            string typeResponse)
         {
             try
             {
                 // Проверяем существование api-сервиса в json-файле конфигурации
-                var api = await _configFileApiService.GetApiServiceByNameAsync(apiName);
+                var api = await _fileApiServiceRepository.GetByIdAsync(apiName);
                 if (api == null || !api.IsActive)
                     return (false, null, null);
 
                 // Проверяем наличие сущности у api-сервиса в json-файле конфигурации
                 var entity = api.Entities.FirstOrDefault(e => e.Name == entityName && e.IsActive);
                 if (entity == null)
-                    return (false, api, null);
+                    return (false, _apiServiceToDtoConverter.Convert(api), null);
 
                 // Проверяем маршрут и тип ответа у api-сервиса в json-файле конфигурации
-                var isEndpointValid = entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type == typeResponse);
+                var isEndpointValid = entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type.ToString().ToLower() == typeResponse.ToLower());
                 if (!isEndpointValid)
-                    return (false, api, entity);
+                    return (false, _apiServiceToDtoConverter.Convert(api), _apiEntityToDtoConverter.Convert(entity));
 
-                return (true, api, entity);
+                return (true, _apiServiceToDtoConverter.Convert(api), _apiEntityToDtoConverter.Convert(entity));
             }
             catch (Exception ex)
             {
@@ -69,7 +66,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="document">Документ для проверки.</param>
         /// <returns>True, если структура документа соответствует схеме; иначе false.</returns>
         /// <exception cref="InvalidOperationException">Выбрасывается, если произошла ошибка при валидации структуры сущности.</exception>
-        public async Task<bool> ValidateEntityStructureAsync(ApiEntity apiEntity, object document)
+        public async Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object document)
         {
             try
             {

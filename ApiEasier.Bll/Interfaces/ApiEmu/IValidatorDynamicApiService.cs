@@ -22,11 +22,11 @@ namespace ApiEasier.Bll.Interfaces.ApiEmu
         /// <item><description><c>apiEntity</c> - объект, представляющий сущность API, если она валидна.</description></item>
         /// </list>
         /// </returns>
-        Task<(bool isValid, ApiServiceDto? apiService, ApiEntity? apiEntity)> ValidateApiAsync(
+        Task<(bool isValid, ApiServiceDto? apiService, ApiEntityDto? apiEntity)> ValidateApiAsync(
             string apiName,
             string entity,
             string endPoint,
-            TypeResponse typeResponse);
+            string typeResponse);
 
         /// <summary>
         /// Асинхронно валидирует структуру сущности на основе предоставленного объекта сущности.
@@ -34,6 +34,6 @@ namespace ApiEasier.Bll.Interfaces.ApiEmu
         /// <param name="apiEntity">Сущность API для валидации.</param>
         /// <param name="document">Объект сущности, структура которого будет проверяться.</param>
         /// <returns>Возвращает <c>true</c>, если структура документа соответствует сущности, иначе <c>false</c>.</returns>
-        Task<bool> ValidateEntityStructureAsync(ApiEntity apiEntity, object document);
+        Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object document);
     }
 }
