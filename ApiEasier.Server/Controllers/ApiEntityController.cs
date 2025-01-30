@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Dm.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,15 +12,15 @@ namespace ApiEasier.Api.Controllers
     [ApiController]
     public class ApiEntityController : ControllerBase
     {
-        private readonly IConfigFileApiService _configFileApiService;
+        private readonly IDynamicApiService _dynamicApiService;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ApiEntityController"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiEntityController(IConfigFileApiService configFileApiService)
+        public ApiEntityController(IDynamicApiService dynamicApiService)
         {
-            _configFileApiService = configFileApiService;
+            _dynamicApiService = dynamicApiService;
         }
 
         // GET api/ApiEntity/{apiServiceName}

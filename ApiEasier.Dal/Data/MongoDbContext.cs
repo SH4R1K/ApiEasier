@@ -1,4 +1,6 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
+using System.Collections;
 
 namespace ApiEasier.Dal.DB
 {
@@ -43,9 +45,14 @@ namespace ApiEasier.Dal.DB
         /// </summary>
         /// <param name="name">Имя коллекции для удаления.</param>
         /// <returns>Задача, представляющая асинхронную операцию.</returns>
-        public async Task DropCollectionAsync(string name)
+        public async Task<bool> DropCollectionAsync(string name)
         {
             await _database.DropCollectionAsync(name);
+            // Проверяем, осталась ли коллекция после удаления
+            var filter = new BsonDocument("name", name);
+            var collectionsCursor = await _database.ListCollectionsAsync(new ListCollectionsOptions { Filter = filter });
+
+            return !(await collectionsCursor.AnyAsync()); // true, если коллекции больше нет
         }
 
         /// <summary>f

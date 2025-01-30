@@ -33,7 +33,7 @@ namespace ApiEasier.Api.Controllers
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
                 // работа с бд
-                var data = await _dynamicApiService.GetDataAsync($"{apiName}_{entityName}", filters);
+                var data = await _dynamicApiService.GetDataAsync(apiName, entityName, filters);
                 if (data != null)
                     return Ok(data); 
                 else
@@ -56,7 +56,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicApiService.GetDocByIdFromCollectionAsync($"{apiName}_{entityName}", id, filters);
+                var result = await _dynamicApiService.GetDataByIdAsync(apiName, entityName, id, filters);
                 if (result != null)
                     return Ok(result);
                 else

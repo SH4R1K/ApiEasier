@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApiEasier.Dal.Helpers
 {
-    public class DynamicApiServiceModel
+    public class DynamicCollectionModel
     {
         public string Name { get; set; }
         public Dictionary<string, object> Data { get; set; }

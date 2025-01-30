@@ -11,13 +11,13 @@ namespace ApiEasier.Api.Controllers
     [ApiController]
     public class ApiActionController : ControllerBase
     {
-        private readonly IConfigFileApiService _configFileApiService;
+        private readonly IConfigDynamicApiService _configFileApiService;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ApiActionController"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiActionController(IConfigFileApiService configFileApiService)
+        public ApiActionController(IConfigDynamicApiService configFileApiService)
         {
             _configFileApiService = configFileApiService;
         }

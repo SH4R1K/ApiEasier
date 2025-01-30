@@ -11,31 +11,31 @@ namespace ApiEasier.Bll.Services.ApiEmu
     /// </summary>
     public class DynamicApiService : IDynamicApiService
     {
-        private readonly IConfigFileApiService _configFileApiService;
         private readonly IDbApiServiceRepository _dbApiServiceRepository;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="DynamicApiService"/>.
         /// </summary>
         /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicApiService(IConfigFileApiService configFileApiService, IDbApiServiceRepository dbApiServiceRepository)
+        public DynamicApiService(IDbApiServiceRepository dbApiServiceRepository)
         {
-            _configFileApiService = configFileApiService;
             _dbApiServiceRepository = dbApiServiceRepository;
         }
 
         /// <summary>
         /// Добавляет документ в указанную коллекцию.
         /// </summary>
-        /// <param name="collectionName">Имя коллекции.</param>
+        /// <param name="apiServiceName">Имя коллекции.</param>
         /// <param name="jsonData">Данные в формате JSON для добавления.</param>
         /// <returns>Словарь, представляющий добавленный документ.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<DynamicApiServiceModel> AddDataAsync(string collectionName, object jsonData)
+        public async Task<DynamicCollectionModel> AddDataAsync(string apiName, string apiEntityName, object jsonData)
         {
             try
             {
-                var result = await _dbApiServiceRepository.CreateAsync(collectionName, jsonData);
+                string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
+
+                var result = await _dbApiServiceRepository.CreateAsync(apiServiceName, jsonData);
                 return result ?? throw new InvalidOperationException("Не удалось добавить данные");
             }
             catch (Exception ex)
@@ -82,57 +82,65 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="filters">Дополнительные фильтры для применения.</param>
         /// <returns>Словарь, представляющий документ, или null, если не найден.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        //public async Task<Dictionary<string, object>?> GetDocByIdFromCollectionAsync(string collectionName, string id, string? filters)
-        //{
-        //    try
-        //    {
-        //        var collections = await _dbContext.GetListCollectionNamesAsync();
-        //        if (!collections.Contains(collectionName))
-        //            return null;
+        public async Task<DynamicCollectionModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
+        {
+            try
+            {
+                string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-        //        var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
-        //        if (!ObjectId.TryParse(id, out var objectId))
-        //            return null;
+                var data = await _dbApiServiceRepository.GetDataByIdAsync(apiServiceName, id);
 
-        //        FilterDefinition<BsonDocument> documentFilter;
-        //        try
-        //        {
-        //            documentFilter = BsonSerializer.Deserialize<BsonDocument>(filters);
-        //        }
-        //        catch
-        //        {
-        //            documentFilter = Builders<BsonDocument>.Filter.Empty;
-        //        }
+                //var collections = await _dbContext.GetListCollectionNamesAsync();
+                //if (!collections.Contains(collectionName))
+                //    return null;
 
-        //        var idFilter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
-        //        var combineFilter = Builders<BsonDocument>.Filter.And(idFilter, documentFilter);
-        //        var document = await collection.Find(combineFilter).FirstOrDefaultAsync();
-        //        if (document == null)
-        //            return null;
+                //var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
+                //if (!ObjectId.TryParse(id, out var objectId))
+                //    return null;
 
-        //        var bsonDoc = document.ToDictionary();
-        //        bsonDoc["_id"] = document["_id"].ToString();
-        //        return bsonDoc;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Ошибка: " + ex.Message);
-        //        throw new ArgumentException("Ошибка при получении документа: " + ex.Message, ex);
-        //    }
-        //}
+                //FilterDefinition<BsonDocument> documentFilter;
+                //try
+                //{
+                //    documentFilter = BsonSerializer.Deserialize<BsonDocument>(filters);
+                //}
+                //catch
+                //{
+                //    documentFilter = Builders<BsonDocument>.Filter.Empty;
+                //}
+
+                //var idFilter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
+                //var combineFilter = Builders<BsonDocument>.Filter.And(idFilter, documentFilter);
+                //var document = await collection.Find(combineFilter).FirstOrDefaultAsync();
+                //if (document == null)
+                //    return null;
+
+                //var bsonDoc = document.ToDictionary();
+                //bsonDoc["_id"] = document["_id"].ToString();
+
+
+                return bsonDoc;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+                throw new ArgumentException("Ошибка при получении документа: " + ex.Message, ex);
+            }
+        }
 
         /// <summary>
         /// Получает документы из указанной коллекции с применением фильтров.
         /// </summary>
-        /// <param name="collectionName">Имя коллекции.</param>
+        /// <param name="apiServiceName">Имя коллекции.</param>
         /// <param name="filters">Фильтры для получения документов.</param>
         /// <returns>Список словарей, представляющих документы, или null, если не найдено.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<List<DynamicApiServiceModel>?> GetDataAsync(string collectionName, string? filters)
+        public async Task<List<DynamicCollectionModel>?> GetDataAsync(string apiName, string apiEntityName, string? filters)
         {
             try
             {
-                var data = await _dbApiServiceRepository.GetDataAsync(collectionName);
+                string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
+
+                var data = await _dbApiServiceRepository.GetDataAsync(apiServiceName);
 
                 //var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
                 //FilterDefinition<BsonDocument> filterDefinition;

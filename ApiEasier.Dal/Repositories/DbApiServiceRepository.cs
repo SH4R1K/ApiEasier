@@ -15,7 +15,7 @@ namespace ApiEasier.Dal.Repositories
             _dbContext = context;
         }
 
-        public async Task<DynamicApiServiceModel?> CreateAsync(dynamic apiServiceName, object jsonData)
+        public async Task<DynamicCollectionModel?> CreateAsync(dynamic apiServiceName, object jsonData)
         {
             var collection = await _dbContext.GetCollection<BsonDocument>(apiServiceName);
             var bsonDocument = BsonDocument.Parse(jsonData.ToString());
@@ -29,7 +29,7 @@ namespace ApiEasier.Dal.Repositories
                 kvp => (object)kvp.Value
             );
 
-            var result = new DynamicApiServiceModel
+            var result = new DynamicCollectionModel
             {
                 Name = apiServiceName,
                 Data = data
@@ -38,19 +38,35 @@ namespace ApiEasier.Dal.Repositories
             return result;
         }
 
-        public async Task<List<DynamicApiServiceModel>?> GetDataAsync(string apiServiceName)
+        public async Task<bool> DeleteAsync(string apiServiceName)
+        {
+            var result = await _dbContext.DropCollectionAsync(apiServiceName);
+            return result;
+        }
+
+        public Task<DynamicCollectionModel> GetDataByIdAsync(dynamic apiServiceName, string id)
+        {
+            var collection = _dbContext.GetCollection<BsonDocument>(apiServiceName);
+        }
+
+        public async Task<List<DynamicCollectionModel>?> GetDataAsync(string apiServiceName)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(apiServiceName);
 
             var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 
-            var result = documents.Select(doc => new DynamicApiServiceModel
+            var result = documents.Select(doc => new DynamicCollectionModel
             {
                 Name = doc["_id"].AsObjectId.ToString(), // Если _id это ObjectId, его можно привести к строке
                 Data = doc.Elements.ToDictionary(element => element.Name, element => (object)element.Value)
             }).ToList();
 
             return result ?? null;
+        }
+
+        public Task<DynamicCollectionModel> UpdateAsync(dynamic apiServiceName, dynamic data)
+        {
+            throw new NotImplementedException();
         }
     }
 }
