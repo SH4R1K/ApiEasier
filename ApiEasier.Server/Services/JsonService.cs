@@ -23,7 +23,7 @@ namespace ApiEasier.Server.Services
         /// Базовый конструктор JsonService.
         /// </summary>
         /// <exception cref="InvalidOperationException">Выбрасывается, если не удается создать директорию.</exception>
-        public JsonService( IMemoryCache cache, IConfiguration config)
+        public JsonService(IMemoryCache cache, IConfiguration config)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace ApiEasier.Server.Services
                     PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                     WriteIndented = true
                 });
-                _cache.Set(apiServiceName, apiService, new MemoryCacheEntryOptions { SlidingExpiration = TimeSpan.FromHours(1)});
+                _cache.Set(apiServiceName, apiService, new MemoryCacheEntryOptions { SlidingExpiration = TimeSpan.FromHours(1) });
                 return apiService;
             }
             catch (FileNotFoundException ex)
@@ -177,16 +177,30 @@ namespace ApiEasier.Server.Services
         }
 
         /// <summary>
-        /// Получает имена всех API-сервисов в директории.
+        /// Получает имена API-сервисов в директории.
         /// </summary>
+        /// <param name="searchTerm">Термин для поиска по именам API-сервисов (необязательно).</param>
+        /// <param name="page">Номер страницы для пагинации (необязательно).</param>
+        /// <param name="pageSize">Количество элементов на странице (необязательно, по умолчанию 10).</param>
         /// <returns>Список имен API-сервисов.</returns>
-        public IEnumerable<string> GetApiServiceNames()
+        private IEnumerable<string> GetApiServiceNames(int? page = null, string? searchTerm = null, int? pageSize = 10)
         {
             lock (_lock)
             {
                 DirectoryInfo directory = new DirectoryInfo(_path);
                 var files = directory.GetFiles("*.json");
-                return files.Select(f => Path.GetFileNameWithoutExtension(f.Name)).ToList();
+
+                // Получаем имена файлов и фильтруем по поисковому термину, если он задан
+                var apiServiceNames = files
+                    .Where(f => string.IsNullOrEmpty(searchTerm) || f.Name.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+                // Если пагинация задана, применяем ее
+                if (page != null && page > 0 && pageSize != null && pageSize > 0)
+                {
+                    apiServiceNames = apiServiceNames
+                    .Skip(((page ?? 0) - 1) * pageSize ?? 0)
+                    .Take(pageSize ?? 0);
+                }
+                return apiServiceNames.Select(f => Path.GetFileNameWithoutExtension(f.Name)).ToList();
             }
         }
 
@@ -309,9 +323,17 @@ namespace ApiEasier.Server.Services
                 semapthore.Release();
             }
         }
-        public async Task<List<ApiServiceDto>> GetAllServicesAsync()
+
+        /// <summary>
+        /// Получает данныне API-сервисов в директории.
+        /// </summary>
+        /// <param name="searchTerm">Термин для поиска по именам API-сервисов (необязательно).</param>
+        /// <param name="page">Номер страницы для пагинации (необязательно).</param>
+        /// <param name="pageSize">Количество элементов на странице (необязательно, по умолчанию 10).</param>
+        /// <returns>Список имен API-сервисов.</returns>
+        public async Task<List<ApiServiceDto>> GetApiServicesAsync(int? page = null, string? searchTerm = null, int? pageSize = 10)
         {
-            var apiServiceNames = GetApiServiceNames();
+            var apiServiceNames = GetApiServiceNames(page, searchTerm, pageSize);
             List<ApiServiceDto> apiServices = new List<ApiServiceDto>();
             ApiService apiService;
             foreach (var apiServiceName in apiServiceNames)

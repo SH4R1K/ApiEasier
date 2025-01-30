@@ -1,6 +1,8 @@
-﻿using ApiEasier.Server.Interfaces;
+﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace ApiEasier.Server.Controllers
 {
@@ -35,7 +37,19 @@ namespace ApiEasier.Server.Controllers
                     return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
                 }
 
-                return Ok(apiService.Entities);
+                var apiEntities = new List<ShortApiEntityDto>();
+                foreach (var apiEntity in apiService.Entities)
+                {
+                    apiEntities.Add(
+                        new ShortApiEntityDto
+                        {
+                            Name = apiEntity.Name,
+                            IsActive = apiEntity.IsActive,
+                            Structure = apiEntity.Structure
+                        });
+                }
+
+                return Ok(apiEntities);
             }
             catch (Exception ex)
             {
@@ -171,6 +185,39 @@ namespace ApiEasier.Server.Controllers
                 await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
 
                 return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
+        }
+
+        //PATCH api/ApiService/{apiServiceName}/{apiEntityName}/{isActive}
+        [HttpPatch("{apiServiceName}/{apiEntityName}/{isActive}")]
+        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName)
+        {
+            try
+            {
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var existingEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
+                if (existingEntity == null)
+                {
+                    return NotFound($"Сущность с именем {apiEntityName} не найдена."); // Возвращаем 404, если сущность не найдена
+                }
+
+                // Обновление сущности
+                existingEntity.IsActive = isActive;
+
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
             }
             catch (Exception ex)
             {

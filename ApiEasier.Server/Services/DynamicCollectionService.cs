@@ -266,20 +266,7 @@ namespace ApiEasier.Server.Services
         /// </summary>
         public async Task DeleteTrashCollectionAsync()
         {
-            var apiServiceNames = _configFileApiService.GetApiServiceNames();
-            List<ApiServiceDto> apiServices = new List<ApiServiceDto>();
-            ApiService apiService;
-            foreach (var apiServiceName in apiServiceNames)
-            {
-                apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
-                apiServices.Add(new ApiServiceDto
-                {
-                    Name = apiServiceName,
-                    Description = apiService.Description,
-                    IsActive = apiService.IsActive,
-                    Entities = apiService.Entities,
-                });
-            }
+            var apiServices = await _configFileApiService.GetApiServicesAsync();
             foreach (var collection in (await _dbContext.GetListCollectionNamesAsync())
                 .Where(c => !apiServices.Any(asn => c.Split("_")[0] == asn.Name) || !apiServices.Any(ase => ase.Entities.Any(e => e.Name == c.Split("_")[1]))))
                 await _dbContext.DropCollectionAsync(collection);

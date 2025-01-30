@@ -1,9 +1,6 @@
-﻿namespace ApiEasier.Server.Models
+﻿namespace ApiEasier.Server.Dto
 {
-    /// <summary>
-    /// Модель для представления сущности API.
-    /// </summary>
-    public class ApiEntity
+    public class ShortApiEntityDto
     {
         /// <summary>
         /// Имя сущности API.
@@ -19,10 +16,5 @@
         /// Структура сущности API.
         /// </summary>
         public object? Structure { get; set; } = null;
-
-        /// <summary>
-        /// Список конечных точек, связанных с сущностью API.
-        /// </summary>
-        public List<ApiAction> Actions { get; set; } = new List<ApiAction>();
     }
 }
