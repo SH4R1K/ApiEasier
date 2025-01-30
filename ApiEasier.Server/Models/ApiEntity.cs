@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Server.Models
+﻿using ApiEasier.Server.Dto.JsonShemaDto;
+
+namespace ApiEasier.Server.Models
 {
     /// <summary>
     /// Модель для представления сущности API.
@@ -18,7 +20,7 @@
         /// <summary>
         /// Структура сущности API.
         /// </summary>
-        public object? Structure { get; set; } = null;
+        public JsonSchema Structure { get; set; } = null!;
 
         /// <summary>
         /// Список конечных точек, связанных с сущностью API.
