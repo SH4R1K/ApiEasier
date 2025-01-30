@@ -205,6 +205,7 @@ namespace ApiEasier.Server.Services
             {
                 Name = apiServiceName,
                 IsActive = apiService.IsActive,
+                Description = apiService.Description,
                 Entities = apiService.Entities
             };
         }
