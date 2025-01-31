@@ -15,7 +15,7 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<DynamicCollectionModel?> CreateDataAsync(string resourceName, object jsonData)
+        public async Task<DynamicResourceModel?> CreateDataAsync(string resourceName, object jsonData)
         {
             // Проверяем, существует ли коллекция
             var collectionExists = await _dbContext.CreateCollectionIfNotExistsAsync(resourceName);
@@ -38,26 +38,26 @@ namespace ApiEasier.Dal.Repositories.Db
                 kvp => (object)kvp.Value
             );
 
-            return new DynamicCollectionModel
+            return new DynamicResourceModel
             {
                 Name = resourceName,
                 Data = data
             };
         }
 
-        public Task<DynamicCollectionModel> GetDataByIdAsync(string resourceName, string id)
+        public Task<DynamicResourceModel> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
             return collection;
         }
 
-        public async Task<List<DynamicCollectionModel>?> GetAllDataAsync(string resourceName)
+        public async Task<List<DynamicResourceModel>?> GetAllDataAsync(string resourceName)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 
-            var result = documents.Select(doc => new DynamicCollectionModel
+            var result = documents.Select(doc => new DynamicResourceModel
             {
                 Name = doc["_id"].AsObjectId.ToString(), // Если _id это ObjectId, его можно привести к строке
                 Data = doc.Elements.ToDictionary(element => element.Name, element => (object)element.Value)
@@ -66,7 +66,7 @@ namespace ApiEasier.Dal.Repositories.Db
             return result ?? null;
         }
 
-        public Task<DynamicCollectionModel> UpdateDataAsync(string resourceName, dynamic data)
+        public Task<DynamicResourceModel> UpdateDataAsync(string resourceName, dynamic data)
         {
             throw new NotImplementedException();
         }

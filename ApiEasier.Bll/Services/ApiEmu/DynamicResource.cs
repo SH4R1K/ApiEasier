@@ -29,13 +29,13 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="jsonData">Данные в формате JSON для добавления.</param>
         /// <returns>Словарь, представляющий добавленный документ.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<DynamicCollectionModel> AddDataAsync(string apiName, string apiEntityName, object jsonData)
+        public async Task<DynamicResourceModel> AddDataAsync(string apiName, string apiEntityName, object jsonData)
         {
             try
             {
-                string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
+                string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var result = await _dbResourceRepository.CreateDataAsync(apiServiceName, jsonData);
+                var result = await _dbResourceRepository.CreateDataAsync(resourceName, jsonData);
                 return result ?? throw new InvalidOperationException("Не удалось добавить данные");
             }
             catch (Exception ex)
@@ -82,13 +82,13 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="filters">Дополнительные фильтры для применения.</param>
         /// <returns>Словарь, представляющий документ, или null, если не найден.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<DynamicCollectionModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
+        public async Task<DynamicResourceModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
         {
             try
             {
-                string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
+                string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var data = await _dbResourceRepository.GetDataByIdAsync(apiServiceName, id);
+                var data = await _dbResourceRepository.GetDataByIdAsync(resourceName, id);
 
                 //var collections = await _dbContext.GetListCollectionNamesAsync();
                 //if (!collections.Contains(collectionName))
@@ -134,7 +134,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="filters">Фильтры для получения документов.</param>
         /// <returns>Список словарей, представляющих документы, или null, если не найдено.</returns>
         /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<List<DynamicCollectionModel>?> GetDataAsync(string apiName, string apiEntityName, string? filters)
+        public async Task<List<DynamicResourceModel>?> GetDataAsync(string apiName, string apiEntityName, string? filters)
         {
             try
             {

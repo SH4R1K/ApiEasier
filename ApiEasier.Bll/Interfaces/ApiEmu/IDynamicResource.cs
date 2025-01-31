@@ -8,10 +8,10 @@ namespace ApiEasier.Bll.Interfaces.ApiEmu
     public interface IDynamicResource
     {
 
-        Task<DynamicCollectionModel> AddDataAsync(string apiName, string apiEntityName, object jsonData);
+        Task<DynamicResourceModel> AddDataAsync(string apiName, string apiEntityName, object jsonData);
 
-        Task<List<DynamicCollectionModel>> GetDataAsync(string apiName, string apiEntityName, string? filters);
+        Task<List<DynamicResourceModel>> GetDataAsync(string apiName, string apiEntityName, string? filters);
 
-        Task<DynamicCollectionModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters);
+        Task<DynamicResourceModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters);
     }
 }

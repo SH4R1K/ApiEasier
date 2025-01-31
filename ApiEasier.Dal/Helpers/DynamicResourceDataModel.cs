@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace ApiEasier.Dal.Helpers
 {
-    public class DynamicCollectionModel
+    public class DynamicResourceDataModel
     {
-        public string Name { get; set; }
         public Dictionary<string, object> Data { get; set; }
     }
 }

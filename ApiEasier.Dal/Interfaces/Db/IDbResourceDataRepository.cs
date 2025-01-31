@@ -5,10 +5,10 @@ namespace ApiEasier.Dal.Interfaces.Db
 {
     public interface IDbResourceDataRepository
     {
-        Task<List<DynamicCollectionModel>?> GetAllDataAsync(string resourceName);
-        Task<DynamicCollectionModel> CreateDataAsync(string resourceName, object data);
-        Task<DynamicCollectionModel> UpdateDataAsync(string resourceName, object data);
+        Task<List<DynamicResourceModel>?> GetAllDataAsync(string resourceName);
+        Task<DynamicResourceModel> CreateDataAsync(string resourceName, object data);
+        Task<DynamicResourceModel> UpdateDataAsync(string resourceName, object data);
         Task<bool> DeleteDataAsync(string resourceName, string id);
-        Task<DynamicCollectionModel> GetDataByIdAsync(string resourceName, string id);
+        Task<DynamicResourceModel> GetDataByIdAsync(string resourceName, string id);
     }
 }
