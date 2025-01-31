@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Dal.Helpers;
-using ApiEasier.Dal.Interfaces;
+using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiEmu
@@ -9,17 +9,17 @@ namespace ApiEasier.Bll.Services.ApiEmu
     /// <summary>
     /// Сервис для управления динамическими коллекциями в MongoDB.
     /// </summary>
-    public class DynamicApiService : IDynamicApiService
+    public class DynamicResource : IDynamicResource
     {
-        private readonly IDbApiServiceRepository _dbApiServiceRepository;
+        private readonly IDbResourceDataRepository _dbResourceRepository;
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="DynamicApiService"/>.
+        /// Инициализирует новый экземпляр класса <see cref="DynamicResource"/>.
         /// </summary>
         /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicApiService(IDbApiServiceRepository dbApiServiceRepository)
+        public DynamicResource(IDbResourceDataRepository dbResourceRepository)
         {
-            _dbApiServiceRepository = dbApiServiceRepository;
+            _dbResourceRepository = dbResourceRepository;
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             {
                 string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var result = await _dbApiServiceRepository.CreateAsync(apiServiceName, jsonData);
+                var result = await _dbResourceRepository.CreateDataAsync(apiServiceName, jsonData);
                 return result ?? throw new InvalidOperationException("Не удалось добавить данные");
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             {
                 string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var data = await _dbApiServiceRepository.GetDataByIdAsync(apiServiceName, id);
+                var data = await _dbResourceRepository.GetDataByIdAsync(apiServiceName, id);
 
                 //var collections = await _dbContext.GetListCollectionNamesAsync();
                 //if (!collections.Contains(collectionName))
@@ -138,9 +138,9 @@ namespace ApiEasier.Bll.Services.ApiEmu
         {
             try
             {
-                string apiServiceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
+                string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var data = await _dbApiServiceRepository.GetDataAsync(apiServiceName);
+                var data = await _dbResourceRepository.GetAllDataAsync(resourceName);
 
                 //var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
                 //FilterDefinition<BsonDocument> filterDefinition;

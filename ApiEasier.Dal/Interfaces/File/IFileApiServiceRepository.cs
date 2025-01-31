@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Dm.Models;
 
-namespace ApiEasier.Dal.Interfaces
+namespace ApiEasier.Dal.Interfaces.File
 {
     public interface IFileApiServiceRepository
     {

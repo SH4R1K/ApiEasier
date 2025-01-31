@@ -5,7 +5,7 @@ namespace ApiEasier.Bll.Interfaces.ApiEmu
     /// <summary>
     /// Интерфейс для работы с динамическими коллекциями в MongoDB.
     /// </summary>
-    public interface IDynamicApiService
+    public interface IDynamicResource
     {
 
         Task<DynamicCollectionModel> AddDataAsync(string apiName, string apiEntityName, object jsonData);

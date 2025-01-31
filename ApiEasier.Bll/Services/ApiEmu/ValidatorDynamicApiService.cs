@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces;
 using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Dal.Interfaces;
+using ApiEasier.Dal.Interfaces.File;
 using ApiEasier.Dm.Models;
 using NJsonSchema;
 using System.Text.Json;

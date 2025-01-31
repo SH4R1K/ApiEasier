@@ -1,10 +1,10 @@
-﻿using ApiEasier.Dal.Interfaces;
-using ApiEasier.Dm.Models;
+﻿using ApiEasier.Dm.Models;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using ApiEasier.Dal.Interfaces.File;
 
-namespace ApiEasier.Dal.Repositories
+namespace ApiEasier.Dal.Repositories.File
 {
     public class FileApiServiceRepository : IFileApiServiceRepository
     {
@@ -49,7 +49,7 @@ namespace ApiEasier.Dal.Repositories
             {
                 result.Add(await GetByIdAsync(file.Name));
             }
-            
+
             return result;
         }
 

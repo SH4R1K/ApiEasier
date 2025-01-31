@@ -25,7 +25,7 @@ namespace ApiEasier.Api
             });
 
             // Эумалятор апи сервисов
-            builder.Services.AddScoped<IDynamicApiService, DynamicApiService>();
+            builder.Services.AddScoped<IDynamicResource, DynamicResource>();
 
             // Сервис работы с json-файлами конфигураций api-сервисов
             //builder.Services.AddSingleton<IConfigFileApiService, JsonService>();

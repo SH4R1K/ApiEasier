@@ -12,13 +12,13 @@ namespace ApiEasier.Api.Controllers
     [ApiController]
     public class ApiEntityController : ControllerBase
     {
-        private readonly IDynamicApiService _dynamicApiService;
+        private readonly IDynamicResource _dynamicApiService;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ApiEntityController"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiEntityController(IDynamicApiService dynamicApiService)
+        public ApiEntityController(IDynamicResource dynamicApiService)
         {
             _dynamicApiService = dynamicApiService;
         }

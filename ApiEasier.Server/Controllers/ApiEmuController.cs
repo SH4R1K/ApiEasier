@@ -10,14 +10,14 @@ namespace ApiEasier.Api.Controllers
     [ApiController]
     public class ApiEmuController : ControllerBase
     {
-        private readonly IDynamicApiService _dynamicApiService;
+        private readonly IDynamicResource _dynamicResource;
         private readonly IValidatorDynamicApiService _validatorDynamicApiService;
 
         public ApiEmuController(
-            IDynamicApiService dynamicCollectionService,
+            IDynamicResource dynamicResourceService,
             IValidatorDynamicApiService validatorDynamicApiService)
         {
-            _dynamicApiService = dynamicCollectionService;
+            _dynamicResource = dynamicResourceService;
             _validatorDynamicApiService = validatorDynamicApiService;
         }
 
@@ -33,7 +33,7 @@ namespace ApiEasier.Api.Controllers
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
                 // работа с бд
-                var data = await _dynamicApiService.GetDataAsync(apiName, entityName, filters);
+                var data = await _dynamicResource.GetDataAsync(apiName, entityName, filters);
                 if (data != null)
                     return Ok(data); 
                 else
@@ -56,7 +56,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicApiService.GetDataByIdAsync(apiName, entityName, id, filters);
+                var result = await _dynamicResource.GetDataByIdAsync(apiName, entityName, id, filters);
                 if (result != null)
                     return Ok(result);
                 else
@@ -84,7 +84,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return BadRequest();
 
-                var result = await _dynamicApiService.AddDataAsync($"{apiName}_{entityName}", json);
+                var result = await _dynamicResource.AddDataAsync($"{apiName}_{entityName}", json);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return BadRequest();
 
-                var result = await _dynamicApiService.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
+                var result = await _dynamicResource.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
 
                 if (result != null)
                     return Ok(result);
@@ -134,7 +134,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicApiService.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
+                var result = await _dynamicResource.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
                 if (result > 0)
                     return NoContent();
                 return NotFound();

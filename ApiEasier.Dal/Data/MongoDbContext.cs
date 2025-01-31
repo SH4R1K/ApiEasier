@@ -55,6 +55,25 @@ namespace ApiEasier.Dal.DB
             return !(await collectionsCursor.AnyAsync()); // true, если коллекции больше нет
         }
 
+        /// <summary>
+        /// Асинхронно создаёт коллекцию, если её нет.
+        /// </summary>
+        /// <param name="name">Имя коллекции.</param>
+        /// <returns>True, если коллекция была создана, false, если уже существовала.</returns>
+        public async Task<bool> CreateCollectionIfNotExistsAsync(string name)
+        {
+            var filter = new BsonDocument("name", name);
+            var collectionsCursor = await _database.ListCollectionsAsync(new ListCollectionsOptions { Filter = filter });
+
+            if (await collectionsCursor.AnyAsync())
+            {
+                return false; // Коллекция уже существует
+            }
+
+            await _database.CreateCollectionAsync(name);
+            return true; // Коллекция была создана
+        }
+
         /// <summary>f
         /// Асинхронно переименовывает коллекцию.
         /// </summary>
