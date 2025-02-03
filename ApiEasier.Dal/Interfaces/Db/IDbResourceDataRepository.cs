@@ -7,8 +7,8 @@ namespace ApiEasier.Dal.Interfaces.Db
     {
         Task<List<DynamicResourceModel>?> GetAllDataAsync(string resourceName);
         Task<DynamicResourceModel> CreateDataAsync(string resourceName, object data);
-        Task<DynamicResourceModel> UpdateDataAsync(string resourceName, object data);
+        Task<DynamicResourceModel> UpdateDataAsync(string resourceName, string id, object data);
         Task<bool> DeleteDataAsync(string resourceName, string id);
-        Task<DynamicResourceModel> GetDataByIdAsync(string resourceName, string id);
+        Task<DynamicResourceDataModel> GetDataByIdAsync(string resourceName, string id);
     }
 }

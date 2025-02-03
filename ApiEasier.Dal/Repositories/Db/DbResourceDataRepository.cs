@@ -6,6 +6,8 @@ using MongoDB.Driver;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
+
+    //TODO Возможно переделать на другой возврат
     public class DbResourceDataRepository : IDbResourceDataRepository
     {
         private readonly MongoDbContext _dbContext;
@@ -45,10 +47,22 @@ namespace ApiEasier.Dal.Repositories.Db
             };
         }
 
-        public Task<DynamicResourceModel> GetDataByIdAsync(string resourceName, string id)
+        public async Task<DynamicResourceDataModel> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
-            return collection;
+
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
+            var document = await collection.Find(filter).FirstOrDefaultAsync();
+
+            var result = document.ToDictionary(
+                kvp => kvp.Name,
+                kvp => (object)kvp.Value
+            );
+
+            return new DynamicResourceDataModel
+            {
+                Data = result
+            };
         }
 
         public async Task<List<DynamicResourceModel>?> GetAllDataAsync(string resourceName)
@@ -66,14 +80,42 @@ namespace ApiEasier.Dal.Repositories.Db
             return result ?? null;
         }
 
-        public Task<DynamicResourceModel> UpdateDataAsync(string resourceName, dynamic data)
+        public async Task<bool> DeleteDataAsync(string resourceName, string id)
         {
-            throw new NotImplementedException();
+            var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
+
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
+
+            var result = await collection.DeleteOneAsync(filter);
+
+            if (result.DeletedCount > 0)
+                return true;
+
+            return false;
+
         }
 
-        public Task<bool> DeleteDataAsync(string resourceName, string id)
+        public async Task<DynamicResourceModel> UpdateDataAsync(string resourceName, string id, object data)
         {
-            throw new NotImplementedException();
+            var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
+
+            var objectId = new ObjectId(id);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
+            var update = Builders<BsonDocument>.Update.Set("data", data.ToBsonDocument());
+
+            var result = await collection.UpdateOneAsync(filter, update);
+
+            if (result.ModifiedCount > 0)
+            {
+                var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
+                return new DynamicResourceModel
+                {
+                    Name = id,
+                    Data = updatedDocument.ToDictionary()
+                };
+            }
+
+            return null;
         }
     }
 }

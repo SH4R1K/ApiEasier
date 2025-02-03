@@ -8,6 +8,7 @@ namespace ApiEasier.Dal.Interfaces.Db
 {
     public interface IDbResourceRepository
     {
-        Task<bool> DeleteAsync(string apiServiceName);
+        Task<string> GetAsync(string resourceName);
+        Task<bool> DeleteAsync(string resourceName);
     }
 }

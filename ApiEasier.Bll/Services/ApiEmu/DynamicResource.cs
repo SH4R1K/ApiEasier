@@ -1,41 +1,26 @@
-﻿using ApiEasier.Bll.Interfaces.ApiConfigure;
-using ApiEasier.Bll.Interfaces.ApiEmu;
+﻿using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Dal.Helpers;
 using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiEmu
 {
-    /// <summary>
-    /// Сервис для управления динамическими коллекциями в MongoDB.
-    /// </summary>
+    // TODO: так же возможно сменить тип возврата
     public class DynamicResource : IDynamicResource
     {
-        private readonly IDbResourceDataRepository _dbResourceRepository;
+        private readonly IDbResourceDataRepository _dbResourceDataRepository;
 
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="DynamicResource"/>.
-        /// </summary>
-        /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicResource(IDbResourceDataRepository dbResourceRepository)
+        public DynamicResource(IDbResourceDataRepository dbResourceDataRepository)
         {
-            _dbResourceRepository = dbResourceRepository;
+            _dbResourceDataRepository = dbResourceDataRepository;
         }
 
-        /// <summary>
-        /// Добавляет документ в указанную коллекцию.
-        /// </summary>
-        /// <param name="apiServiceName">Имя коллекции.</param>
-        /// <param name="jsonData">Данные в формате JSON для добавления.</param>
-        /// <returns>Словарь, представляющий добавленный документ.</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
         public async Task<DynamicResourceModel> AddDataAsync(string apiName, string apiEntityName, object jsonData)
         {
             try
             {
                 string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var result = await _dbResourceRepository.CreateDataAsync(resourceName, jsonData);
+                var result = await _dbResourceDataRepository.CreateDataAsync(resourceName, jsonData);
                 return result ?? throw new InvalidOperationException("Не удалось добавить данные");
             }
             catch (Exception ex)
@@ -45,50 +30,13 @@ namespace ApiEasier.Bll.Services.ApiEmu
             }
         }
 
-        /// <summary>
-        /// Удаляет документ из указанной коллекции по его ID.
-        /// </summary>
-        /// <param name="collectionName">Имя коллекции.</param>
-        /// <param name="id">ID документа для удаления.</param>
-        /// <returns>Количество удаленных документов.</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        //public async Task<long?> DeleteDocFromCollectionAsync(string collectionName, string id)
-        //{
-        //    try
-        //    {
-        //        var collections = await _dbContext.GetListCollectionNamesAsync();
-        //        if (!collections.Contains(collectionName))
-        //            return null;
-
-        //        var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
-        //        if (!ObjectId.TryParse(id, out var objectId))
-        //            return null;
-
-        //        var result = await collection.DeleteOneAsync(Builders<BsonDocument>.Filter.Eq("_id", objectId));
-        //        return result.DeletedCount;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Ошибка: " + ex.Message);
-        //        throw new ArgumentException("Ошибка при удалении документа: " + ex.Message, ex);
-        //    }
-        //}
-
-        /// <summary>
-        /// Получает документ из указанной коллекции по его ID.
-        /// </summary>
-        /// <param name="collectionName">Имя коллекции.</param>
-        /// <param name="id">ID документа для получения.</param>
-        /// <param name="filters">Дополнительные фильтры для применения.</param>
-        /// <returns>Словарь, представляющий документ, или null, если не найден.</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        public async Task<DynamicResourceModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
+        public async Task<DynamicResourceDataModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
         {
             try
             {
                 string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var data = await _dbResourceRepository.GetDataByIdAsync(resourceName, id);
+                var data = await _dbResourceDataRepository.GetDataByIdAsync(resourceName, id);
 
                 //var collections = await _dbContext.GetListCollectionNamesAsync();
                 //if (!collections.Contains(collectionName))
@@ -118,7 +66,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
                 //bsonDoc["_id"] = document["_id"].ToString();
 
 
-                return bsonDoc;
+                return data;
             }
             catch (Exception ex)
             {
@@ -127,20 +75,14 @@ namespace ApiEasier.Bll.Services.ApiEmu
             }
         }
 
-        /// <summary>
-        /// Получает документы из указанной коллекции с применением фильтров.
-        /// </summary>
-        /// <param name="apiServiceName">Имя коллекции.</param>
-        /// <param name="filters">Фильтры для получения документов.</param>
-        /// <returns>Список словарей, представляющих документы, или null, если не найдено.</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
+
         public async Task<List<DynamicResourceModel>?> GetDataAsync(string apiName, string apiEntityName, string? filters)
         {
             try
             {
                 string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-                var data = await _dbResourceRepository.GetAllDataAsync(resourceName);
+                var data = await _dbResourceDataRepository.GetAllDataAsync(resourceName);
 
                 //var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
                 //FilterDefinition<BsonDocument> filterDefinition;
@@ -165,58 +107,23 @@ namespace ApiEasier.Bll.Services.ApiEmu
             }
         }
 
-        /// <summary>
-        /// Обновляет документ в указанной коллекции по его ID.
-        /// </summary>
-        /// <param name="collectionName">Имя коллекции.</param>
-        /// <param name="id">ID документа для обновления.</param>
-        /// <param name="jsonData">Данные в формате JSON для обновления.</param>
-        /// <returns>Словарь, представляющий обновленный документ, или null, если документ не найден.</returns>
-        /// <exception cref="ArgumentException">Выбрасывается, когда происходит ошибка во время операции.</exception>
-        //public async Task<Dictionary<string, object>?> UpdateDocFromCollectionAsync(string collectionName, string id, object jsonData)
-        //{
-        //    try
-        //    {
-        //        var collections = await _dbContext.GetListCollectionNamesAsync();
-        //        if (!collections.Contains(collectionName))
-        //            return null;
+        public async Task<bool> DeleteDataAsync(string apiName, string apiEntityName, string id)
+        {
+            string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-        //        var collection = _dbContext.GetCollection<BsonDocument>(collectionName);
-        //        if (!ObjectId.TryParse(id, out var objectId))
-        //            return null;
+            var result = await _dbResourceDataRepository.DeleteDataAsync(resourceName, id);
 
-        //        var document = await collection.Find(Builders<BsonDocument>.Filter.Eq("_id", objectId)).FirstOrDefaultAsync();
-        //        if (document == null)
-        //            return null;
+            return result;
+        }
 
-        //        document.Remove("_id"); // Удаляем _id из данных, чтобы не перезаписать его
+        public async Task<DynamicResourceModel> UpdateDataAsync(string apiName, string apiEntityName, string id, object jsonData)
+        {
+            string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
-        //        // Используем ReplaceOne для замены всего документа
-        //        var replacementResult = await collection.ReplaceOneAsync(
-        //            Builders<BsonDocument>.Filter.Eq("_id", objectId),
-        //            BsonDocument.Parse(jsonData.ToString())
-        //        );
+            var result = await _dbResourceDataRepository.UpdateDataAsync(resourceName, id, jsonData);
 
-        //        if (replacementResult.ModifiedCount > 0)
-        //        {
-        //            // Если документ заменен, возвращаем обновленный документ
-        //            var updatedDocument = await collection.Find(Builders<BsonDocument>.Filter.Eq("_id", objectId)).FirstOrDefaultAsync();
-        //            if (updatedDocument != null)
-        //            {
-        //                var bsonDoc = updatedDocument.ToDictionary();
-        //                bsonDoc["_id"] = updatedDocument["_id"].ToString();
-        //                return bsonDoc;
-        //            }
-        //        }
-
-        //        return null; // Если документ не был заменен
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Ошибка: " + ex.Message);
-        //        throw new ArgumentException("Ошибка при обновлении документа: " + ex.Message, ex);
-        //    }
-        //}
+            return result;
+        }
 
         /// <summary>
         /// Удаляет коллекции по удалении конфигурации API-сервиса.

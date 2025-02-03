@@ -84,7 +84,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return BadRequest();
 
-                var result = await _dynamicResource.AddDataAsync($"{apiName}_{entityName}", json);
+                var result = await _dynamicResource.AddDataAsync(apiName, entityName, json);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -110,7 +110,7 @@ namespace ApiEasier.Api.Controllers
                 if (!isValid)
                     return BadRequest();
 
-                var result = await _dynamicResource.UpdateDocFromCollectionAsync($"{apiName}_{entityName}", id, json);
+                var result = await _dynamicResource.UpdateDataAsync(apiName, entityName, id, json);
 
                 if (result != null)
                     return Ok(result);
@@ -131,13 +131,16 @@ namespace ApiEasier.Api.Controllers
             try
             {
                 var (isValid, _, _) = await _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, "delete");
+
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicResource.DeleteDocFromCollectionAsync($"{apiName}_{entityName}", id);
-                if (result > 0)
-                    return NoContent();
-                return NotFound();
+                var result = await _dynamicResource.DeleteDataAsync(apiName, entityName, id);
+
+                if (result)
+                    return NotFound();
+
+                return NoContent();
             }
             catch (Exception ex)
             {
