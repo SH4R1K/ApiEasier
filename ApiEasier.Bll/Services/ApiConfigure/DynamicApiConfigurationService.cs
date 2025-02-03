@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
 
@@ -9,17 +10,20 @@ namespace ApiEasier.Bll.Services.ApiConfigure
     class DynamicApiConfigurationService : IDynamicApiConfigurationService
     {
         private readonly IFileApiServiceRepository _fileApiServiceRepository;
+        private readonly IDbResourceRepository _dbResourceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;
         private readonly IConverter<ApiServiceDto, ApiService> _dtoToApiServiceConverter;
 
         public DynamicApiConfigurationService(
             IFileApiServiceRepository fileApiServiceRepository,
+            IDbResourceRepository dbResourceRepository,
             IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
             IConverter<ApiServiceDto, ApiService> dtoToApiServiceConverter)
         {
             _fileApiServiceRepository = fileApiServiceRepository;
             _apiServiceToDtoConverter = apiServiceToDtoConverter;
             _dtoToApiServiceConverter = dtoToApiServiceConverter;
+            _dbResourceRepository = dbResourceRepository;
         }
 
         public async Task<bool> CreateAsync(ApiServiceDto dto)
@@ -31,9 +35,14 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return result;
         }
 
-        public bool Delete(string id)
+        public async Task<bool> Delete(string id)
         {
             var result = _fileApiServiceRepository.Delete(id);
+
+            if (!result)
+                return false;
+
+            result = await _dbResourceRepository.DeleteAsync(id);
 
             return result;
         }

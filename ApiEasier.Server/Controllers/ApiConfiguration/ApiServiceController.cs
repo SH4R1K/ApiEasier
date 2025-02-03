@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.ApiEmu;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
@@ -11,10 +12,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     public class ApiServiceController : ControllerBase
     {
         private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
+        private readonly IDynamicResourceService _dynamicResourceService;
 
-        public ApiServiceController(IDynamicApiConfigurationService dynamicApiConfigurationService)
+        public ApiServiceController(
+            IDynamicApiConfigurationService dynamicApiConfigurationService,
+            IDynamicResourceService dynamicResourceService)
         {
             _dynamicApiConfigurationService = dynamicApiConfigurationService;
+            _dynamicResourceService = dynamicResourceService;
         }
 
         // GET api/ApiService
@@ -56,6 +61,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
+                
                 return Ok(result);
             }
             catch (Exception ex)
@@ -83,15 +89,17 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // DELETE api/ApiService/{apiServiceName}
         [HttpDelete("{apiServiceName}")]
-        public IActionResult Delete(string apiServiceName)
+        public async Task<IActionResult> Delete(string apiServiceName)
         {
             try
             {
                 var result = _dynamicApiConfigurationService.Delete(apiServiceName);
-                if (result)
-                    return NoContent();
+                if (!result)
+                    return NotFound();
 
-                return NotFound();
+                result = await _dynamicResourceService.DeleteAsync(apiServiceName);
+
+                return NoContent();
             }
             catch (Exception ex)
             {

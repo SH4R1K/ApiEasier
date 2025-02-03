@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApiEasier.Dm.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace ApiEasier.Dal.Interfaces.Db
 {
     public interface IDbResourceRepository
     {
-        Task<string> GetAsync(string resourceName);
+        Task<List<string>> GetNamesAsync();
         Task<bool> DeleteAsync(string resourceName);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Dal.DB;
 using ApiEasier.Dal.Interfaces.Db;
+using ApiEasier.Dm.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,17 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<bool> DeleteAsync(string apiServiceName)
+        public async Task<bool> DeleteAsync(string resourceName)
         {
-            var result = await _dbContext.DropCollectionAsync(apiServiceName);
+            var result = await _dbContext.DropCollectionAsync(resourceName);
             return result;
+        }
+
+        public async Task<List<string>> GetNamesAsync()
+        {
+            var result = await _dbContext.GetListCollectionNamesAsync();
+            return result;
+
         }
     }
 }

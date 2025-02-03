@@ -38,7 +38,7 @@ namespace ApiEasier.Api
 
             // BLL
             // ApiEmu
-            builder.Services.AddScoped<IDynamicResource, DynamicResource>();
+            builder.Services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
             builder.Services.AddScoped<IValidatorDynamicApiService, ValidatorDynamicApiService>();
             //ApiConfigure
 

@@ -6,9 +6,9 @@ namespace ApiEasier.Bll.Services
 {
     public class TakeOutDbTrashService : IHostedService
     {
-        private readonly IDynamicResource _dynamicCollectionService;
+        private readonly IDynamicResourceDataService _dynamicCollectionService;
 
-        public TakeOutDbTrashService(IDynamicResource dynamicCollectionService)
+        public TakeOutDbTrashService(IDynamicResourceDataService dynamicCollectionService)
         {
             _dynamicCollectionService = dynamicCollectionService;
         }

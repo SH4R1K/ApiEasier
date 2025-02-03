@@ -11,13 +11,13 @@ namespace ApiEasier.Bll.Services
     {
         private FileSystemWatcher _fileSystemWatcher;
         private readonly IMemoryCache _cache;
-        private readonly IDynamicResource _dynamicCollectionService;
+        private readonly IDynamicResourceDataService _dynamicCollectionService;
         private readonly IConfiguration _config;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ConfigFileWatcherService"/>.
         /// </summary>
-        public ConfigFileWatcherService(IMemoryCache cache, IDynamicResource dynamicCollectionService, IConfiguration config)
+        public ConfigFileWatcherService(IMemoryCache cache, IDynamicResourceDataService dynamicCollectionService, IConfiguration config)
         {
             _config = config;
             _fileSystemWatcher = new FileSystemWatcher(_config["JsonDirectoryPath"])

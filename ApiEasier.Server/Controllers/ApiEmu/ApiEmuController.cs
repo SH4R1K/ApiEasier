@@ -10,14 +10,14 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     [ApiController]
     public class ApiEmuController : ControllerBase
     {
-        private readonly IDynamicResource _dynamicResource;
+        private readonly IDynamicResourceDataService _dynamicResourceDataService;
         private readonly IValidatorDynamicApiService _validatorDynamicApiService;
 
         public ApiEmuController(
-            IDynamicResource dynamicResourceService,
+            IDynamicResourceDataService dynamicResourceDataService,
             IValidatorDynamicApiService validatorDynamicApiService)
         {
-            _dynamicResource = dynamicResourceService;
+            _dynamicResourceDataService = dynamicResourceDataService;
             _validatorDynamicApiService = validatorDynamicApiService;
         }
 
@@ -33,11 +33,12 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
                 // работа с бд
-                var data = await _dynamicResource.GetDataAsync(apiName, entityName, filters);
-                if (data != null)
-                    return Ok(data);
-                else
+                var data = await _dynamicResourceDataService.GetDataAsync(apiName, entityName, filters);
+
+                if (data == null)
                     return NotFound("Не найдены данные");
+
+                return Ok(data);
             }
             catch (Exception ex)
             {
@@ -56,11 +57,12 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicResource.GetDataByIdAsync(apiName, entityName, id, filters);
-                if (result != null)
-                    return Ok(result);
-                else
+                var result = await _dynamicResourceDataService.GetDataByIdAsync(apiName, entityName, id, filters);
+
+                if (result == null)
                     return NotFound("Не найдены данные");
+
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -84,7 +86,8 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 if (!isValid)
                     return BadRequest();
 
-                var result = await _dynamicResource.AddDataAsync(apiName, entityName, json);
+                var result = await _dynamicResourceDataService.AddDataAsync(apiName, entityName, json);
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -110,12 +113,13 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 if (!isValid)
                     return BadRequest();
 
-                var result = await _dynamicResource.UpdateDataAsync(apiName, entityName, id, json);
+                var result = await _dynamicResourceDataService.UpdateDataAsync(apiName, entityName, id, json);
 
-                if (result != null)
-                    return Ok(result);
-                else
+                if (result == null)
                     return NotFound($"Не найдены данные");
+
+                return Ok(result);
+
             }
             catch (Exception ex)
             {
@@ -135,12 +139,12 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 if (!isValid)
                     return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
 
-                var result = await _dynamicResource.DeleteDataAsync(apiName, entityName, id);
+                var result = await _dynamicResourceDataService.DeleteDataAsync(apiName, entityName, id);
 
-                if (result)
-                    return NoContent();
+                if (!result)
+                    return NotFound();
 
-                return NotFound();
+                return NoContent();
             }
             catch (Exception ex)
             {

@@ -82,6 +82,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 return default;
 
             var json = await File.ReadAllTextAsync(filePath);
+
             return JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

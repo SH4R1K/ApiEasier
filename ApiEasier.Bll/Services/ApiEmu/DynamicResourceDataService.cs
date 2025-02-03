@@ -5,11 +5,11 @@ using ApiEasier.Dal.Interfaces.Db;
 namespace ApiEasier.Bll.Services.ApiEmu
 {
     // TODO: так же возможно сменить тип возврата
-    public class DynamicResource : IDynamicResource
+    public class DynamicResourceDataService : IDynamicResourceDataService
     {
         private readonly IDbResourceDataRepository _dbResourceDataRepository;
 
-        public DynamicResource(IDbResourceDataRepository dbResourceDataRepository)
+        public DynamicResourceDataService(IDbResourceDataRepository dbResourceDataRepository)
         {
             _dbResourceDataRepository = dbResourceDataRepository;
         }

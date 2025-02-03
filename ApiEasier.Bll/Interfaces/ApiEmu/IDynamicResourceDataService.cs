@@ -2,7 +2,7 @@
 
 namespace ApiEasier.Bll.Interfaces.ApiEmu
 {
-    public interface IDynamicResource
+    public interface IDynamicResourceDataService
     {
         Task<DynamicResourceModel> AddDataAsync(string apiName, string apiEntityName, object jsonData);
 
