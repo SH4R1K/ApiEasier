@@ -138,9 +138,9 @@ namespace ApiEasier.Api.Controllers
                 var result = await _dynamicResource.DeleteDataAsync(apiName, entityName, id);
 
                 if (result)
-                    return NotFound();
+                    return NoContent();
 
-                return NoContent();
+                return NotFound();
             }
             catch (Exception ex)
             {

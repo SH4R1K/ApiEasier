@@ -1,6 +1,10 @@
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Services.ApiEmu;
 using ApiEasier.Dal.DB;
+using ApiEasier.Dal.Interfaces.Db;
+using ApiEasier.Dal.Interfaces.File;
+using ApiEasier.Dal.Repositories.Db;
+using ApiEasier.Dal.Repositories.File;
 using Microsoft.AspNetCore.HttpLogging;
 
 namespace ApiEasier.Api
@@ -18,28 +22,33 @@ namespace ApiEasier.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // Конфигурация данных для подключения к БД
+
+            // DB
+            var mongoSettings = builder.Configuration.GetSection("MongoDb");
+            string connectionString = mongoSettings["ConnectionString"];
+            string databaseName = mongoSettings["DatabaseName"];
+
+            if (connectionString == null || databaseName == null)
+                throw new InvalidOperationException("MongoDB settings are missing in appsettings.json");
+
             builder.Services.AddSingleton<MongoDbContext>(serviceProvider =>
             {
-                return new MongoDbContext("mongodb://localhost:27017", "apiEasier");
+                return new MongoDbContext(connectionString, databaseName);
             });
 
-            // Эумалятор апи сервисов
+            // BLL
+            // ApiEmu
             builder.Services.AddScoped<IDynamicResource, DynamicResource>();
+            builder.Services.AddScoped<IValidatorDynamicApiService, ValidatorDynamicApiService>();
+            //ApiConfigure
 
-            // Сервис работы с json-файлами конфигураций api-сервисов
-            //builder.Services.AddSingleton<IConfigFileApiService, JsonService>();
+            // DAL
+            builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
+            builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
+            builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
 
-            // FileSystemWatcher для отслеживания актуальности кэша
-            //builder.Services.AddHostedService<ConfigFileWatcherService>();
 
-            //builder.Services.AddHostedService<TakeOutDbTrashService>();
 
-            // Сервис работы с MongoDB
-            //builder.Services.AddSingleton<IDynamicCollectionService, DynamicCollectionService>();
-
-            // Сервис валидации данных переданных emuApi и данных в json-файлах конфигураций api-сервисов
-            //builder.Services.AddSingleton<IEmuApiValidationService, EmuApiValidationService>();
 
             // Логгирование http в MongoDB
             builder.Logging.ClearProviders();

@@ -10,7 +10,7 @@ namespace ApiEasier.Bll.Services
     /// <summary>
     /// Сервис для получения и редактирования информации про API-сервисы.
     /// </summary>
-    public class JsonService : IConfigDynamicApiService
+    public class JsonService : IDynamicApiConfigurationService
     {
         private readonly string _path;
         private readonly ConcurrentDictionary<string, SemaphoreSlim> _fileSemaphores = new();

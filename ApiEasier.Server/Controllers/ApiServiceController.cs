@@ -1,68 +1,46 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
-using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers
 {
-    /// <summary>
-    /// Контроллер для управления API сервисами.
-    /// </summary>
+
+    // Возможно приедтся изменить тип у создания и изменения чтобы было без entity (добавить dto и converter)
     [Route("api/[controller]")]
     [ApiController]
     public class ApiServiceController : ControllerBase
     {
-        private readonly IConfigDynamicApiService _configFileApiService;
+        private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
 
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ApiServiceController"/>.
-        /// </summary>
-        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiServiceController(IConfigDynamicApiService configFileApiService)
+        public ApiServiceController(IDynamicApiConfigurationService dynamicApiConfigurationService)
         {
-            _configFileApiService = configFileApiService;
+            _dynamicApiConfigurationService = dynamicApiConfigurationService;
         }
 
         // GET api/ApiService
         [HttpGet]
-        public async Task<IActionResult> GetAllWithData([FromQuery] int? page, [FromQuery] string? searchTerm, [FromQuery] int? pageSize)
+        public async Task<IActionResult> GetAll([FromQuery] int? page, [FromQuery] string? searchTerm, [FromQuery] int? pageSize)
         {
             try
             {
-                var shortApiServices = new List<ShortApiServiceDto>();
-                foreach (var apiService in await _configFileApiService.GetApiServicesAsync(page, searchTerm, pageSize))
-                {
-                    shortApiServices.Add(
-                        new ShortApiServiceDto
-                        {
-                            Name = apiService.Name,
-                            IsActive = apiService.IsActive,
-                            Description = apiService.Description
-                        });
-                }
-                return Ok(shortApiServices);
+                var result = await _dynamicApiConfigurationService.GetAsync();
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
 
         // GET api/ApiService/{name}
         [HttpGet("{name}")]
-        public async Task<IActionResult> Get(string name)
+        public async Task<IActionResult> GetByName(string name)
         {
             try
             {
-                var apiServiceDto = await _configFileApiService.GetApiServiceByNameAsync(name);
+                var result = await _dynamicApiConfigurationService.GetByIdAsync(name);
 
-                if (apiServiceDto == null)
-                {
-                    return NotFound($"Файл {name}.json не существует.");
-                }
-
-                return Ok(apiServiceDto);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -75,30 +53,10 @@ namespace ApiEasier.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] ApiServiceDto apiServiceDto)
         {
-            if (apiServiceDto == null)
-            {
-                return BadRequest("Данные API сервиса отсутствуют.");
-            }
-
             try
             {
-                string apiServiceName = apiServiceDto.Name;
-
-                if (_configFileApiService.IsApiServiceExist(apiServiceName))
-                {
-                    return Conflict($"Файл {apiServiceName}.json уже существует.");
-                }
-
-                var apiService = new ApiService
-                {
-                    IsActive = apiServiceDto.IsActive,
-                    Description = apiServiceDto.Description,
-                    Entities = apiServiceDto.Entities,
-                };
-
-                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-                return CreatedAtAction(nameof(Get), new { name = apiServiceName }, apiServiceDto);
+                var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -109,29 +67,12 @@ namespace ApiEasier.Api.Controllers
 
         // PUT api/ApiService/{oldName}
         [HttpPut("{oldName}")]
-        public async Task<IActionResult> Put(string oldName, [FromBody] ApiServiceDto apiServiceDto)
+        public async Task<IActionResult> Put(string name, [FromBody] ApiServiceDto apiServiceDto)
         {
-            if (apiServiceDto == null)
-            {
-                return BadRequest("Данные API сервиса отсутствуют.");
-            }
-
             try
             {
-                var apiService = await _configFileApiService.DeserializeApiServiceAsync(oldName);
-
-                if (apiService == null)
-                {
-                    return NotFound($"Файл {oldName}.json не существует.");
-                }
-
-                apiService.IsActive = apiServiceDto.IsActive;
-                apiService.Description = apiServiceDto.Description;
-
-                await _configFileApiService.SerializeApiServiceAsync(oldName, apiService);
-                _configFileApiService.RenameApiService(oldName, apiServiceDto);
-
-                return NoContent();
+                var result = await _dynamicApiConfigurationService.UpdateAsync(name, apiServiceDto);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -146,13 +87,11 @@ namespace ApiEasier.Api.Controllers
         {
             try
             {
-                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
-                {
-                    return Conflict($"Файл {apiServiceName}.json не существует.");
-                }
+                var result = _dynamicApiConfigurationService.Delete(apiServiceName);
+                if (result)
+                    return NoContent();
 
-                _configFileApiService.DeleteApiService(apiServiceName);
-                return NoContent();
+                return NotFound();
             }
             catch (Exception ex)
             {
@@ -162,29 +101,29 @@ namespace ApiEasier.Api.Controllers
         }
 
         //PATCH api/ApiService/{apiServiceName}/{isActive}
-        [HttpPatch("{apiServiceName}/{isActive}")]
-        public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
-        {
-            try
-            {
-                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+        //[HttpPatch("{apiServiceName}/{isActive}")]
+        //public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
+        //{
+        //    try
+        //    {
+        //        var apiService = await _dynamicApiConfigurationService.DeserializeApiServiceAsync(apiServiceName);
 
-                if (apiService == null)
-                {
-                    return NotFound($"Файл {apiServiceName}.json не существует.");
-                }
+        //        if (apiService == null)
+        //        {
+        //            return NotFound($"Файл {apiServiceName}.json не существует.");
+        //        }
 
-                apiService.IsActive = isActive;
+        //        apiService.IsActive = isActive;
 
-                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                // Логирование исключения (не показано здесь)
-                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
-            }
-        }
+        //        await _dynamicApiConfigurationService.SerializeApiServiceAsync(apiServiceName, apiService);
+        //        return NoContent();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Логирование исключения (не показано здесь)
+        //        return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+        //    }
+        //}
     }
 }
 
