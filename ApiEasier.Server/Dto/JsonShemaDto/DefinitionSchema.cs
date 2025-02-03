@@ -7,6 +7,7 @@ namespace ApiEasier.Server.Dto.JsonShemaDto
         [JsonPropertyName("type")]
         public string Type { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("additionalProperties")]
         public bool? AdditionalProperties { get; set; }
 
