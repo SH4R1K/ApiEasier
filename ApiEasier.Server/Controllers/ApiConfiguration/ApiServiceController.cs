@@ -2,7 +2,7 @@
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEasier.Api.Controllers
+namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
 
     // Возможно приедтся изменить тип у создания и изменения чтобы было без entity (добавить dto и converter)

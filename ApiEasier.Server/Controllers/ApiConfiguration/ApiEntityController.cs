@@ -3,7 +3,7 @@ using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Dm.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEasier.Api.Controllers
+namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
     /// <summary>
     /// Контроллер для управления сущностями API.

@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiEmu;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ApiEasier.Api.Controllers
+namespace ApiEasier.Api.Controllers.ApiEmu
 {
     /// <summary>
     /// Контроллер для обработки запросов эмуляции API.
@@ -35,7 +35,7 @@ namespace ApiEasier.Api.Controllers
                 // работа с бд
                 var data = await _dynamicResource.GetDataAsync(apiName, entityName, filters);
                 if (data != null)
-                    return Ok(data); 
+                    return Ok(data);
                 else
                     return NotFound("Не найдены данные");
             }
