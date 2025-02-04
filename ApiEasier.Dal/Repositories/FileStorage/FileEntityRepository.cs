@@ -7,9 +7,14 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 {
     public class FileEntityRepository : IFileEntityRepository
     {
-        public Task<bool> CreateAsync(string apiServiceName, ApiEntity apiEntity)
+        public async Task<bool> CreateAsync(string apiServiceName, ApiEntity apiEntity)
         {
-            throw new NotImplementedException();
+            var filePath = GetFilePath(apiServiceName);
+
+            if (!File.Exists(filePath))
+                return false;
+
+
         }
 
         private readonly string _folderPath;
@@ -60,9 +65,21 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             return true;
         }
 
-        public Task<bool> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity)
+        public async Task<bool> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var filePath = GetFilePath(apiServiceName);
+
+                if (!File.Exists(filePath))
+                    return false;
+
+                
+            }
+            catch
+            {
+                return default;
+            }
         }
     }
 }
