@@ -20,7 +20,7 @@ namespace ApiEasier.Server.Models
         /// <summary>
         /// Структура сущности API.
         /// </summary>
-        public JsonSchema Structure { get; set; } = null!;
+        public JsonSchema? Structure { get; set; } = null!;
 
         /// <summary>
         /// Список конечных точек, связанных с сущностью API.
