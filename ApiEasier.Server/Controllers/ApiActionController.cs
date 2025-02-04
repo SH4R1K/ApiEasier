@@ -219,10 +219,10 @@ namespace ApiEasier.Server.Controllers
                 }
 
                 // Поиск существующего действия
-                var existingAction = entity.Actions.FirstOrDefault(a => a.Route == apiEntityName);
+                var existingAction = entity.Actions.FirstOrDefault(a => a.Route == apiActionName);
                 if (existingAction == null)
                 {
-                    return NotFound($"Действие с именем {apiEntityName} не найдено."); // Возвращаем 404, если действие не найдено
+                    return NotFound($"Действие с именем {apiActionName} не найдено."); // Возвращаем 404, если действие не найдено
                 }
 
                 // Обновление действия
