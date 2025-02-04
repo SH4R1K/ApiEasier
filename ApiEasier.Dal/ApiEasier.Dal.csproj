@@ -14,8 +14,4 @@
     <ProjectReference Include="..\ApiEasier.Dm\ApiEasier.Dm.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
 </Project>
