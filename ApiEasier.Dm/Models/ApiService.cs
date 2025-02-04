@@ -8,7 +8,7 @@ namespace ApiEasier.Dm.Models
     public class ApiService
     {
         [JsonIgnore]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         /// <summary>
         /// Указывает, активен ли API-сервис.

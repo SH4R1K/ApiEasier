@@ -11,12 +11,19 @@ namespace ApiEasier.Bll.Converters
 {
     public class DtoToApiServiceConverter : IConverter<ApiServiceDto, ApiService>
     {
+        private readonly IConverter<ApiEntityDto, ApiEntity> _dtoToApiEntityConverter;
+
+        public DtoToApiServiceConverter(IConverter<ApiEntityDto, ApiEntity> dtoToApiEntityConverter)
+        {
+            _dtoToApiEntityConverter = dtoToApiEntityConverter;
+        }
+
         public ApiService Convert(ApiServiceDto apiServiceDto) => new()
         {
             Name = apiServiceDto.Name,
             IsActive = apiServiceDto.IsActive,
             Description = apiServiceDto.Description,
-            Entities = apiServiceDto.Entities,
+            Entities = apiServiceDto.Entities.Select(_dtoToApiEntityConverter.Convert).ToList(),
         };
     }
 }

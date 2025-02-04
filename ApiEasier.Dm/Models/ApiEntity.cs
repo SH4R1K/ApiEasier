@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Dm.Models
+﻿using System.Text.Json.Serialization;
+
+namespace ApiEasier.Dm.Models
 {
     /// <summary>
     /// Модель для представления сущности API.

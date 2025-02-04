@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
@@ -31,7 +32,12 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 return false;
 
             var json = await File.ReadAllTextAsync(filePath);
-            var apiService = JsonSerializer.Deserialize<ApiService>(json);
+            var apiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            });
 
             if (apiService == null)
                 return false;
@@ -45,7 +51,8 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             var updatedJson = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
+                WriteIndented = true,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             });
 
             await File.WriteAllTextAsync(filePath, updatedJson);

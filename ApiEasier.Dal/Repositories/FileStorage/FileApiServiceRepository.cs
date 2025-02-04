@@ -1,7 +1,7 @@
-﻿using ApiEasier.Dm.Models;
-using System.Text.Json.Serialization;
+﻿using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dm.Models;
 using System.Text.Json;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using System.Text.Json.Serialization;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
@@ -15,7 +15,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         }
 
         private string GetFilePath(string fileName)
-        { 
+        {
             return Path.Combine(_folderPath, fileName + ".json");
         }
 
@@ -39,7 +39,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             {
                 return false;
             }
-            
+
         }
 
         public bool Delete(string id)
@@ -83,12 +83,19 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var json = await File.ReadAllTextAsync(filePath);
 
-            return JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
+            if (json == null)
+                return default;
+
+            var result = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true,
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
             });
+
+            result.Name = id;
+
+            return result;
         }
 
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
