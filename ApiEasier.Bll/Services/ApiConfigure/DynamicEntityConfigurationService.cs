@@ -1,7 +1,9 @@
 ﻿using ApiEasier.Bll.Dto;
+using ApiEasier.Bll.Interfaces;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dm.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,29 +14,40 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 {
     public class DynamicEntityConfigurationService : IDynamicEntityConfigurationService
     {
-        private readonly IFileApiServiceRepository _fileApiServiceRepository;
         private readonly IDbResourceRepository _dbResourceRepository;
+        private readonly IFileEntityRepository _fileEntityRepository;
+        private readonly IConverter<ApiEntityDto, ApiEntity> _dtoToApiEntityConverter;
 
         public DynamicEntityConfigurationService(
-            IFileApiServiceRepository fileApiServiceRepository,
-            IDbResourceRepository dbResourceRepository)
+            IFileEntityRepository fileEntityRepository,
+            IDbResourceRepository dbResourceRepository,
+            IConverter<ApiEntityDto, ApiEntity> dtoToApiEntityConverter)
         {
-            _fileApiServiceRepository = fileApiServiceRepository;
+            _fileEntityRepository = fileEntityRepository;
             _dbResourceRepository = dbResourceRepository;
+            _dtoToApiEntityConverter = dtoToApiEntityConverter;
         }
 
-        public Task<bool> DeleteAsync(string apiServiceName, string id)
+        public async Task<bool> DeleteAsync(string apiServiceName, string id)
         {
+            var result = await _fileEntityRepository.DeleteAsync(apiServiceName, id);
+
+            if (!result)
+                return false;
+
             string resourceName = apiServiceName.Trim().Replace(" ", "") + "_" + id.Trim().Replace(" ", "");
 
-            _dbResourceRepository.DeleteAsync(resourceName);
+            result = await _dbResourceRepository.DeleteAsync(resourceName);
 
-            _fileApiServiceRepository.Delete(id);
+            if (!result)
+                return false;
+
+            return true;
         }
 
-        public Task<bool> UpdateAsync(string apiServiceName, ApiEntityDto entity)
+        public async Task<bool> UpdateAsync(string apiServiceName, string entityName, ApiEntityDto entity)
         {
-            throw new NotImplementedException();
+            var result = await _fileEntityRepository.UpdateAsync(apiServiceName, entityName, entity)
         }
 
         Task<bool> IDynamicEntityConfigurationService.CreateAsync(string apiServiceName, ApiEntityDto entity)

@@ -6,6 +6,6 @@ namespace ApiEasier.Dal.Interfaces.FileStorage
     {
         Task<bool> CreateAsync(string apiServiceName, ApiEntity apiEntity);
         Task<bool> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity);
-        bool Delete(string apiServiceName, string id);
+        Task<bool> DeleteAsync(string apiServiceName, string id);
     }
 }

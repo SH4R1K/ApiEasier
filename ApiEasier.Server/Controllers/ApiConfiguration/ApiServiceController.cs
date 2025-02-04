@@ -29,6 +29,10 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicApiConfigurationService.GetAsync();
+
+                if (result == null)
+                    return NotFound();
+
                 return Ok(result);
             }
             catch (Exception ex)
@@ -39,11 +43,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // GET api/ApiService/{name}
         [HttpGet("{name}")]
-        public async Task<IActionResult> GetByName(string name)
+        public async Task<IActionResult> GetByName(string apiServiceName)
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.GetByIdAsync(name);
+                var result = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
+
+                if (result == null)
+                    return NotFound($"api-сервис: {apiServiceName} не найден");
 
                 return Ok(result);
             }
@@ -61,6 +68,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
+
+                if (!result)
+                    return NotFound("Не удалось создать api-сервис");
                 
                 return Ok(result);
             }
@@ -79,14 +89,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var fileResult = await _dynamicApiConfigurationService.UpdateAsync(apiServiceName, apiServiceDto);
                 if (fileResult == null)
-                    return NotFound();
+                    return NotFound($"api-сервис: {apiServiceName} не найден");
 
                 if (apiServiceName != fileResult.Name)
                 {
                     var dbResult = await _dynamicResourceService.UpdateNameAsync(fileResult.Name, apiServiceName);
 
                     if (!dbResult)
-                        return NotFound();
+                        return NotFound($"не удалось обновить api-сервис {apiServiceName}");
                 }
 
                 return NoContent();
@@ -106,9 +116,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = _dynamicApiConfigurationService.Delete(apiServiceName);
                 if (!result)
-                    return NotFound();
+                    return NotFound($"Не удалось удалить конфиг api-сервиса {apiServiceName}");
 
                 result = await _dynamicResourceService.DeleteAsync(apiServiceName);
+                if (!result)
+                    return NotFound($"Не удалось удалить api-сервис {apiServiceName}");
 
                 return NoContent();
             }
@@ -128,7 +140,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, status);
 
                 if (!result)
-                    return NotFound();
+                    return NotFound($"Не удалось сменить статус api-сервиса {apiServiceName}");
 
                 return NoContent();
             }
