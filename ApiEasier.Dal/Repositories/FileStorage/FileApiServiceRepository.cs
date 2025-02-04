@@ -1,4 +1,5 @@
-﻿using ApiEasier.Dal.Interfaces.FileStorage;
+﻿using ApiEasier.Dal.Helpers;
+using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -7,36 +8,27 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 {
     public class FileApiServiceRepository : IFileApiServiceRepository
     {
-        private readonly string _folderPath;
+        private readonly FileHelper _fileHelper;
 
-        public FileApiServiceRepository(string folderPath)
+        public FileApiServiceRepository(FileHelper fileHelper)
         {
-            _folderPath = folderPath;
-        }
-
-        private string GetFilePath(string fileName)
-        {
-            return Path.Combine(_folderPath, fileName + ".json");
+            _fileHelper = fileHelper;
         }
 
         public async Task<bool> CreateAsync(ApiService apiService)
         {
             try
             {
-                var filePath = GetFilePath(apiService.Name);
+                var filePath = _fileHelper.GetFilePath(apiService.Name);
 
-                var json = JsonSerializer.Serialize(apiService, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-                });
+                var json = JsonHelper.Serialize(apiService);
 
-                await File.WriteAllTextAsync(filePath, json);
+                await _fileHelper.WriteFileAsync(filePath, json);
                 return true;
             }
             catch
             {
+                Console.WriteLine($"Ошибка при записи файла");
                 return false;
             }
 
@@ -46,7 +38,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var filePath = GetFilePath(id);
+                var filePath = _fileHelper.GetFilePath(id);
 
                 if (!File.Exists(filePath))
                     return false;
@@ -62,73 +54,54 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<List<ApiService>> GetAllAsync()
         {
-            DirectoryInfo directory = new DirectoryInfo(_folderPath);
-            var files = directory.GetFiles("*.json");
-            List<ApiService> result = new List<ApiService>();
+            var files = _fileHelper.GetAllFiles();
+            var tasks = files.Select(file => GetByIdAsync(Path.GetFileNameWithoutExtension(file)));
 
-            foreach (var file in files)
-            {
-                result.Add(await GetByIdAsync(file.Name));
-            }
-
-            return result;
+            var result = await Task.WhenAll(tasks);
+            return result.Where(apiService => apiService != null).ToList();
         }
 
         public async Task<ApiService?> GetByIdAsync(string id)
         {
-            var filePath = GetFilePath(id);
+            var filePath = _fileHelper.GetFilePath(id);
 
             if (!File.Exists(filePath))
                 return default;
 
-            var json = await File.ReadAllTextAsync(filePath);
+            var json = await _fileHelper.ReadFileAsync(id);
 
             if (json == null)
                 return default;
 
-            var result = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-            });
+            var apiService = JsonHelper.Deserialize<ApiService>(json);
 
-            result.Name = id;
+            apiService.Name = id;
 
-            return result;
+            return apiService;
         }
 
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
         {
             try
             {
-                var oldfilePath = GetFilePath(id);
-                var newFilePath = GetFilePath(apiService.Name);
+                var oldfilePath = _fileHelper.GetFilePath(id);
+                var newFilePath = _fileHelper.GetFilePath(apiService.Name);
 
                 if (!File.Exists(oldfilePath))
                     return default;
 
-                var jsonOld = await File.ReadAllTextAsync(oldfilePath);
+                var jsonOld = await _fileHelper.ReadFileAsync(oldfilePath);
 
-                var newApiService = JsonSerializer.Deserialize<ApiService>(jsonOld, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-                });
+                var newApiService = JsonHelper.Deserialize<ApiService>(jsonOld);
 
                 newApiService.IsActive = apiService.IsActive;
                 newApiService.Description = apiService.Description;
                 newApiService.Entities = apiService.Entities;
 
-                var json = JsonSerializer.Serialize(newApiService, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-                });
+                var json = JsonHelper.Serialize(newApiService);
 
                 File.WriteAllText(newFilePath, json);
+
                 return newApiService;
             }
             catch
@@ -141,28 +114,18 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var filePath = GetFilePath(id);
+                var filePath = _fileHelper.GetFilePath(id);
 
                 if (!File.Exists(filePath))
                     return false;
 
-                var json = await File.ReadAllTextAsync(filePath);
+                var json = await _fileHelper.ReadFileAsync(filePath);
 
-                var newApiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-                });
+                var newApiService = JsonHelper.Deserialize<ApiService>(json);       
 
                 newApiService.IsActive = status;
 
-                var newJson = JsonSerializer.Serialize(newApiService, new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                    WriteIndented = true,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
-                });
+                var newJson = JsonHelper.Serialize(newApiService);
 
                 File.WriteAllText(filePath, newJson);
 

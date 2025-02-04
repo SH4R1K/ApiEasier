@@ -14,15 +14,20 @@
             return Path.Combine(_folderPath, fileName + ".json");
         }
 
-        public async Task<string?> ReadFileAsync(string fileName)
+        public List<string?> GetAllFiles()
         {
-            var filePath = GetFilePath(fileName);
+            return Directory.GetFiles(_folderPath, "*.json")
+                            .Select(Path.GetFileName)
+                            .ToList();
+        }
+
+        public async Task<string?> ReadFileAsync(string filePath)
+        {
             return File.Exists(filePath) ? await File.ReadAllTextAsync(filePath) : null;
         }
 
-        public async Task WriteFileAsync(string fileName, string content)
+        public async Task WriteFileAsync(string filePath, string content)
         {
-            var filePath = GetFilePath(fileName);
             await File.WriteAllTextAsync(filePath, content);
         }
     }
