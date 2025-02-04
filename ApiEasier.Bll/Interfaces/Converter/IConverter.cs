@@ -1,4 +1,4 @@
-﻿namespace ApiEasier.Bll.Interfaces
+﻿namespace ApiEasier.Bll.Interfaces.Converter
 {
     public interface IConverter<TSource, TDestination>
     {

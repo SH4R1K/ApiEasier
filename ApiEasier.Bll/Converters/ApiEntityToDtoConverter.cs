@@ -1,5 +1,5 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces;
+using ApiEasier.Bll.Interfaces.Converter;
 using ApiEasier.Dm.Models;
 using System;
 using System.Collections.Generic;

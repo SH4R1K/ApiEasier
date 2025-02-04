@@ -1,14 +1,9 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.Converter;
 using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
@@ -47,10 +42,12 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 
         public async Task<bool> UpdateAsync(string apiServiceName, string entityName, ApiEntityDto entity)
         {
-            var result = await _fileEntityRepository.UpdateAsync(apiServiceName, entityName, entity)
+            var result = await _fileEntityRepository.UpdateAsync(apiServiceName, entityName, _dtoToApiEntityConverter.Convert(entity));
+
+            return result;
         }
 
-        Task<bool> IDynamicEntityConfigurationService.CreateAsync(string apiServiceName, ApiEntityDto entity)
+        public Task<bool> CreateAsync(string apiServiceName, ApiEntityDto entity)
         {
             throw new NotImplementedException();
         }
