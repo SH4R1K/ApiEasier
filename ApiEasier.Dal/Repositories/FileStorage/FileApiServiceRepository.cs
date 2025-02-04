@@ -59,6 +59,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var result = await Task.WhenAll(tasks);
             return result.Where(apiService => apiService != null).ToList();
+
         }
 
         public async Task<ApiService?> GetByIdAsync(string id)
