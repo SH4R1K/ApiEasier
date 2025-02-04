@@ -1,9 +1,8 @@
-﻿namespace ApiEasier.Dm.Models
+﻿using ApiEasier.Dm.Models;
+
+namespace ApiEasier.Bll.Dto
 {
-    /// <summary>
-    /// Модель для представления действия API.
-    /// </summary>
-    public class ApiAction
+    public class ApiEndpointDto
     {
         /// <summary>
         /// Маршрут для действия API.

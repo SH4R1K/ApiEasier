@@ -9,15 +9,15 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiActionController : ControllerBase
+    public class ApiEndpointController : ControllerBase
     {
         private readonly IDynamicApiConfigurationService _configFileApiService;
 
         /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ApiActionController"/>.
+        /// Инициализирует новый экземпляр класса <see cref="ApiEndpointController"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiActionController(IDynamicApiConfigurationService configFileApiService)
+        public ApiEndpointController(IDynamicApiConfigurationService configFileApiService)
         {
             _configFileApiService = configFileApiService;
         }
@@ -69,7 +69,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // POST api/ApiAction/{apiServiceName}/{entityName}
         [HttpPost("{apiServiceName}/{entityName}")]
-        public async Task<IActionResult> Post(string apiServiceName, string entityName, [FromBody] ApiAction newAction)
+        public async Task<IActionResult> Post(string apiServiceName, string entityName, [FromBody] ApiEndpoint newAction)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // PUT api/ApiAction/{apiServiceName}/{entityName}/{actionName}
         [HttpPut("{apiServiceName}/{entityName}/{actionName}")]
-        public async Task<IActionResult> Put(string apiServiceName, string entityName, string actionName, [FromBody] ApiAction updatedAction)
+        public async Task<IActionResult> Put(string apiServiceName, string entityName, string actionName, [FromBody] ApiEndpoint updatedAction)
         {
             try
             {

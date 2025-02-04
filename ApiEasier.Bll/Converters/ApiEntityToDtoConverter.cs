@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 namespace ApiEasier.Bll.Converters
 {
     public class ApiEntityToDtoConverter(
-        IConverter<ApiAction, ApiActionDto> apiActionToDtoConverter) : IConverter<ApiEntity, ApiEntityDto>
+        IConverter<ApiEndpoint, ApiEndpointDto> apiEndpointToDtoConverter) : IConverter<ApiEntity, ApiEntityDto>
     {
-        private readonly IConverter<ApiAction, ApiActionDto> _apiActionToDtoConverter = apiActionToDtoConverter;
+        private readonly IConverter<ApiEndpoint, ApiEndpointDto> _apiEndpointToDtoConverter = apiEndpointToDtoConverter;
 
         public ApiEntityDto Convert(ApiEntity apiEntity) => new()
         {
             Name = apiEntity.Name,
             Structure = apiEntity.Structure,
             IsActive = apiEntity.IsActive,
-            Actions = apiEntity.Actions.Select(_apiActionToDtoConverter.Convert).ToList(),
+            Endpoints = apiEntity.Endpoints.Select(_apiEndpointToDtoConverter.Convert).ToList(),
         };
     }
 }

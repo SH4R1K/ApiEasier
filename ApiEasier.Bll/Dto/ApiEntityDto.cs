@@ -20,6 +20,6 @@
         /// <summary>
         /// Список конечных точек, связанных с сущностью API.
         /// </summary>
-        public List<ApiActionDto> Actions { get; set; } = new List<ApiActionDto>();
+        public List<ApiEndpointDto> Endpoints { get; set; } = new List<ApiEndpointDto>();
     }
 }
