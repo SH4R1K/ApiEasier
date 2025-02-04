@@ -26,6 +26,11 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             _dbResourceRepository = dbResourceRepository;
         }
 
+        public async Task<bool> ChangeActiveStatusAsync(string id, bool status)
+        {
+            return await _fileApiServiceRepository.ChangeActiveStatusAsync(id, status);
+        }
+
         public async Task<bool> CreateAsync(ApiServiceDto dto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(dto);
@@ -35,16 +40,9 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return result;
         }
 
-        public async Task<bool> Delete(string id)
+        public bool Delete(string id)
         {
-            var result = _fileApiServiceRepository.Delete(id);
-
-            if (!result)
-                return false;
-
-            result = await _dbResourceRepository.DeleteAsync(id);
-
-            return result;
+            return _fileApiServiceRepository.Delete(id);
         }
 
         public async Task<List<ApiServiceDto>> GetAsync()
@@ -63,12 +61,16 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return _apiServiceToDtoConverter.Convert(result);
         }
 
-        public async Task<bool> UpdateAsync(string id, ApiServiceDto dto)
+        public async Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto dto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(dto);
 
             var result = await _fileApiServiceRepository.UpdateAsync(id, apiService);
-            return result;
+
+            if (result == null)
+                return default;
+
+            return _apiServiceToDtoConverter.Convert(result);
         }
     }
 }

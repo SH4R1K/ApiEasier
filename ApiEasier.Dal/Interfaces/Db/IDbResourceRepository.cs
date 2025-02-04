@@ -11,5 +11,6 @@ namespace ApiEasier.Dal.Interfaces.Db
     {
         Task<List<string>> GetNamesAsync();
         Task<bool> DeleteAsync(string resourceName);
+        Task<bool> UpdateNameAsync(string oldName, string name);
     }
 }

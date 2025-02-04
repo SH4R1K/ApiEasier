@@ -20,19 +20,40 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         {
             try
             {
-                var apiServices = await _dbResourceRepository.GetNamesAsync();
+                var resourceNames = await _dbResourceRepository.GetNamesAsync();
 
-                foreach (var apiService in apiServices)
+                foreach (var name in resourceNames)
                 {
-                    if (apiService.StartsWith(id))
+                    if (name.StartsWith(id))
                     {
-                        await _dbResourceRepository.DeleteAsync(apiService + "_" + id.Trim());
+                        await _dbResourceRepository.DeleteAsync(name);
                     }
                 }
                 return true;
             }
             catch
             {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateNameAsync(string resourceName, string newResourceName)
+        {
+            try
+            {
+                var resourceNames = await _dbResourceRepository.GetNamesAsync();
+
+                var collectionsToUpdate = resourceNames.Where(name => name.StartsWith(resourceName + "_")).ToList();
+
+                // Асинхронное обновление коллекций параллельно
+                var tasks = collectionsToUpdate.Select(name => _dbResourceRepository.UpdateNameAsync(name, newResourceName));
+                await Task.WhenAll(tasks);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error during update: {ex.Message}");
                 return false;
             }
         }

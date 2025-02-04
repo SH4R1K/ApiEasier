@@ -1,7 +1,10 @@
 ﻿using ApiEasier.Dal.DB;
 using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dm.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,6 +32,11 @@ namespace ApiEasier.Dal.Repositories.Db
             var result = await _dbContext.GetListCollectionNamesAsync();
             return result;
 
+        }
+
+        public async Task UpdateNameAsync(string oldName, string name)
+        {
+            await _dbContext.RenameCollectionAsync(oldName, name);
         }
     }
 }

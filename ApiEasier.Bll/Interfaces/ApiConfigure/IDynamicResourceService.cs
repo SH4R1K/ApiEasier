@@ -9,5 +9,6 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
     public interface IDynamicResourceService
     {
         Task<bool> DeleteAsync(string id);
+        Task<bool> UpdateNameAsync(string resourceName, string newResourceName);
     }
 }

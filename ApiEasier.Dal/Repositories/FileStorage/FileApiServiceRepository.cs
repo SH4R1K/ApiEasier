@@ -91,7 +91,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             });
         }
 
-        public async Task<bool> UpdateAsync(string id, ApiService apiService)
+        public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 var newFilePath = GetFilePath(apiService.Name);
 
                 if (!File.Exists(oldfilePath))
-                    return false;
+                    return default;
 
                 var jsonOld = await File.ReadAllTextAsync(oldfilePath);
 
@@ -122,6 +122,43 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 });
 
                 File.WriteAllText(newFilePath, json);
+                return newApiService;
+            }
+            catch
+            {
+                return default;
+            }
+        }
+
+        public async Task<bool> ChangeActiveStatusAsync(string id, bool status)
+        {
+            try
+            {
+                var filePath = GetFilePath(id);
+
+                if (!File.Exists(filePath))
+                    return false;
+
+                var json = await File.ReadAllTextAsync(filePath);
+
+                var newApiService = JsonSerializer.Deserialize<ApiService>(json, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                });
+
+                newApiService.IsActive = status;
+
+                var newJson = JsonSerializer.Serialize(newApiService, new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    WriteIndented = true,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                });
+
+                File.WriteAllText(filePath, newJson);
+
                 return true;
             }
             catch

@@ -72,13 +72,24 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         // PUT api/ApiService/{oldName}
-        [HttpPut("{oldName}")]
-        public async Task<IActionResult> Put(string name, [FromBody] ApiServiceDto apiServiceDto)
+        [HttpPut("{apiServiceName}")]
+        public async Task<IActionResult> Put(string apiServiceName, [FromBody] ApiServiceDto apiServiceDto)
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.UpdateAsync(name, apiServiceDto);
-                return Ok(result);
+                var fileResult = await _dynamicApiConfigurationService.UpdateAsync(apiServiceName, apiServiceDto);
+                if (fileResult == null)
+                    return NotFound();
+
+                if (apiServiceName != fileResult.Name)
+                {
+                    var dbResult = await _dynamicResourceService.UpdateNameAsync(fileResult.Name, apiServiceName);
+
+                    if (!dbResult)
+                        return NotFound();
+                }
+
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -110,28 +121,23 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         //PATCH api/ApiService/{apiServiceName}/{isActive}
         //[HttpPatch("{apiServiceName}/{isActive}")]
-        //public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
-        //{
-        //    try
-        //    {
-        //        var apiService = await _dynamicApiConfigurationService.DeserializeApiServiceAsync(apiServiceName);
+        public async Task<IActionResult> ChangeActiveApiService(bool status, string apiServiceName)
+        {
+            try
+            {
+                var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, status);
 
-        //        if (apiService == null)
-        //        {
-        //            return NotFound($"Файл {apiServiceName}.json не существует.");
-        //        }
+                if (!result)
+                    return NotFound();
 
-        //        apiService.IsActive = isActive;
-
-        //        await _dynamicApiConfigurationService.SerializeApiServiceAsync(apiServiceName, apiService);
-        //        return NoContent();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // Логирование исключения (не показано здесь)
-        //        return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
-        //    }
-        //}
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
+        }
     }
 }
 
