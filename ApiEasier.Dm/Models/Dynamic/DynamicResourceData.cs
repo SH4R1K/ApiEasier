@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEasier.Dal.Helpers
+namespace ApiEasier.Dm.Models.Dynamic
 {
-    public class DynamicResourceModel
+    public class DynamicResourceData
     {
-        public string Name { get; set; }
         public Dictionary<string, object> Data { get; set; }
     }
 }

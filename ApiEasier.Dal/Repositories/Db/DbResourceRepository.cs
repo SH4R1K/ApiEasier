@@ -1,4 +1,4 @@
-﻿using ApiEasier.Dal.DB;
+﻿using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dm.Models;
 using MongoDB.Bson;

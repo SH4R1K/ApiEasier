@@ -1,8 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Collections;
 
-namespace ApiEasier.Dal.DB
+namespace ApiEasier.Dal.Data
 {
     /// <summary>
     /// Контекст для работы с MongoDB.
@@ -29,7 +28,7 @@ namespace ApiEasier.Dal.DB
         /// <returns>Коллекция документов указанного типа.</returns>
         public IMongoCollection<T> GetCollection<T>(string name) =>
             _database.GetCollection<T>(name);
-        
+
         /// <summary>
         /// Асинхронно получает список имен коллекций в базе данных.
         /// </summary>
@@ -52,7 +51,7 @@ namespace ApiEasier.Dal.DB
             var filter = new BsonDocument("name", name);
             var collectionsCursor = await _database.ListCollectionsAsync(new ListCollectionsOptions { Filter = filter });
 
-            return !(await collectionsCursor.AnyAsync()); // true, если коллекции больше нет
+            return !await collectionsCursor.AnyAsync(); // true, если коллекции больше нет
         }
 
         /// <summary>

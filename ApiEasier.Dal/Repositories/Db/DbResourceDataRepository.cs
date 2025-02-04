@@ -1,6 +1,6 @@
-﻿using ApiEasier.Dal.DB;
-using ApiEasier.Dal.Helpers;
+﻿using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Interfaces.Db;
+using ApiEasier.Dm.Models.Dynamic;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
@@ -17,7 +17,7 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<DynamicResourceModel?> CreateDataAsync(string resourceName, object jsonData)
+        public async Task<DynamicResource?> CreateDataAsync(string resourceName, object jsonData)
         {
             // Проверяем, существует ли коллекция
             var collectionExists = await _dbContext.CreateCollectionIfNotExistsAsync(resourceName);
@@ -40,14 +40,14 @@ namespace ApiEasier.Dal.Repositories.Db
                 kvp => (object)kvp.Value
             );
 
-            return new DynamicResourceModel
+            return new DynamicResource
             {
                 Name = resourceName,
                 Data = data
             };
         }
 
-        public async Task<DynamicResourceDataModel> GetDataByIdAsync(string resourceName, string id)
+        public async Task<DynamicResourceData> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -59,19 +59,19 @@ namespace ApiEasier.Dal.Repositories.Db
                 kvp => (object)kvp.Value
             );
 
-            return new DynamicResourceDataModel
+            return new DynamicResourceData
             {
                 Data = result
             };
         }
 
-        public async Task<List<DynamicResourceModel>?> GetAllDataAsync(string resourceName)
+        public async Task<List<DynamicResource>?> GetAllDataAsync(string resourceName)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 
-            var result = documents.Select(doc => new DynamicResourceModel
+            var result = documents.Select(doc => new DynamicResource
             {
                 Name = doc["_id"].AsObjectId.ToString(), // Если _id это ObjectId, его можно привести к строке
                 Data = doc.Elements.ToDictionary(element => element.Name, element => (object)element.Value)
@@ -95,7 +95,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
         }
 
-        public async Task<DynamicResourceModel> UpdateDataAsync(string resourceName, string id, object data)
+        public async Task<DynamicResource> UpdateDataAsync(string resourceName, string id, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -108,7 +108,7 @@ namespace ApiEasier.Dal.Repositories.Db
             if (result.ModifiedCount > 0)
             {
                 var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
-                return new DynamicResourceModel
+                return new DynamicResource
                 {
                     Name = id,
                     Data = updatedDocument.ToDictionary()

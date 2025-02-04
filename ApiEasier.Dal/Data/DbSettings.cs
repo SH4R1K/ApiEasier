@@ -1,4 +1,4 @@
-﻿namespace ApiEasier.Dal.DB
+﻿namespace ApiEasier.Dal.Data
 {
     /// <summary>
     /// Настройки базы данных.

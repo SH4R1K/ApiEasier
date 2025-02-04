@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Dal.Helpers;
 using ApiEasier.Dal.Interfaces.Db;
+using ApiEasier.Dm.Models.Dynamic;
 
 namespace ApiEasier.Bll.Services.ApiEmu
 {
@@ -14,7 +14,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             _dbResourceDataRepository = dbResourceDataRepository;
         }
 
-        public async Task<DynamicResourceModel> AddDataAsync(string apiName, string apiEntityName, object jsonData)
+        public async Task<DynamicResource> AddDataAsync(string apiName, string apiEntityName, object jsonData)
         {
             try
             {
@@ -30,7 +30,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             }
         }
 
-        public async Task<DynamicResourceDataModel> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
+        public async Task<DynamicResourceData> GetDataByIdAsync(string apiName, string apiEntityName, string id, string? filters)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
         }
 
 
-        public async Task<List<DynamicResourceModel>?> GetDataAsync(string apiName, string apiEntityName, string? filters)
+        public async Task<List<DynamicResource>?> GetDataAsync(string apiName, string apiEntityName, string? filters)
         {
             try
             {
@@ -116,7 +116,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             return result;
         }
 
-        public async Task<DynamicResourceModel> UpdateDataAsync(string apiName, string apiEntityName, string id, object jsonData)
+        public async Task<DynamicResource> UpdateDataAsync(string apiName, string apiEntityName, string id, object jsonData)
         {
             string resourceName = apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
