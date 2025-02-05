@@ -10,11 +10,11 @@ namespace ApiEasier.Bll.Services.ApiConfigure
     public class DynamicEntityConfigurationService : IDynamicEntityConfigurationService
     {
         private readonly IDbResourceRepository _dbResourceRepository;
-        private readonly IFileEntityRepository _fileEntityRepository;
+        private readonly IFileApiEntityRepository _fileEntityRepository;
         private readonly IConverter<ApiEntityDto, ApiEntity> _dtoToApiEntityConverter;
 
         public DynamicEntityConfigurationService(
-            IFileEntityRepository fileEntityRepository,
+            IFileApiEntityRepository fileEntityRepository,
             IDbResourceRepository dbResourceRepository,
             IConverter<ApiEntityDto, ApiEntity> dtoToApiEntityConverter)
         {
@@ -47,9 +47,16 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return result;
         }
 
-        public Task<bool> CreateAsync(string apiServiceName, ApiEntityDto entity)
+        public async Task<bool> CreateAsync(string apiServiceName, ApiEntityDto entity)
         {
-            throw new NotImplementedException();
+            var result = await _fileEntityRepository.CreateAsync(apiServiceName, _dtoToApiEntityConverter.Convert(entity));
+
+            return result;
+        }
+
+        public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string entityName, bool status)
+        {
+            return await _fileEntityRepository.ChangeActiveStatusAsync(apiServiceName, entityName, status);
         }
     }
 }

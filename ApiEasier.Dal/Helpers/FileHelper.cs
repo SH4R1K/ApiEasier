@@ -1,18 +1,17 @@
-﻿namespace ApiEasier.Dal.Helpers
+﻿using ApiEasier.Dal.Interfaces.Helpers;
+
+namespace ApiEasier.Dal.Helpers
 {
-    public class FileHelper
+    public class FileHelper : IFileHelper
     {
-        private readonly string _folderPath;
+        public required string _folderPath;
 
         public FileHelper(string folderPath)
         {
-            _folderPath = folderPath;
+            _folderPath = folderPath ?? throw new ArgumentException(nameof(folderPath));
         }
 
-        public string GetFilePath(string fileName)
-        {
-            return Path.Combine(_folderPath, fileName + ".json");
-        }
+        private string GetFilePath(string fileName) => Path.Combine(_folderPath, fileName + ".json");
 
         public List<string?> GetAllFiles()
         {
@@ -21,14 +20,42 @@
                             .ToList();
         }
 
-        public async Task<string?> ReadFileAsync(string filePath)
+        public async Task<T?> ReadJsonAsync<T>(string fileName)
         {
-            return File.Exists(filePath) ? await File.ReadAllTextAsync(filePath) : null;
+            var filePath = GetFilePath(fileName);
+
+            if (!File.Exists(filePath))
+                return default;
+
+            var json = await File.ReadAllTextAsync(filePath);
+            return JsonHelper.Deserialize<T>(json);
         }
 
-        public async Task WriteFileAsync(string filePath, string content)
+        public async Task WriteJsonAsync<T>(string fileName, T data)
         {
-            await File.WriteAllTextAsync(filePath, content);
+            var filePath = GetFilePath(fileName);
+            var json = JsonHelper.Serialize(data);
+            await File.WriteAllTextAsync(filePath, json);
+        }
+
+        public bool DeleteFile(string fileName)
+        {
+            try
+            {
+                var filePath = GetFilePath(fileName);
+                if (!File.Exists(filePath))
+                    return false;
+
+                File.Delete(filePath);
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine($"Ошибка при удалении файла {fileName}");
+                return false;
+            }
+
+            
         }
     }
 }

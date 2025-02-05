@@ -160,29 +160,24 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         //PATCH api/ApiService/{apiServiceName}/{apiEntityName}/{isActive}
         [HttpPatch("{apiServiceName}/{apiEntityName}/{isActive}")]
-        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName)
+        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string entityName)
         {
             try
             {
-                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
 
                 if (apiService == null)
-                {
-                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-                }
+                    return NotFound($"api-сервис: {apiServiceName} не найден");
 
-                var existingEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
-                if (existingEntity == null)
-                {
-                    return NotFound($"Сущность с именем {apiEntityName} не найдена."); // Возвращаем 404, если сущность не найдена
-                }
+                if (!apiService.Entities.Any(e => e.Name == entityName))
+                    return NotFound($"сущность {entityName} у api-сервиса {apiServiceName} не найдена");
 
-                // Обновление сущности
-                existingEntity.IsActive = isActive;
+                var result = await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, entityName, isActive);
 
-                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+                if (!result)
+                    return NotFound($"статус у сущности {entityName} у api-сервиса {apiServiceName} не был изменен");
 
-                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
+                return NoContent();
             }
             catch (Exception ex)
             {
