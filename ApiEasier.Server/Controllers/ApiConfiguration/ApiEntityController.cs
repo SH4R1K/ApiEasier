@@ -81,14 +81,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-
-                if (apiService == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
-
-                if (apiService.Entities.Any(e => e.Name == apiEntityDto.Name))
-                    return Conflict($"Сущность с именем {apiEntityDto.Name} уже существует.");
-
                 var result = await _dynamicEntityConfigurationService.CreateAsync(apiServiceName, apiEntityDto); 
 
                 if (!result)

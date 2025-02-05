@@ -2,9 +2,6 @@
 
 namespace ApiEasier.Bll.Interfaces.ApiConfigure
 {
-    /// <summary>
-    /// Интерфейс для работы с конфигурационными файлами API-сервисов.
-    /// </summary>
     public interface IDynamicApiConfigurationService
     {
         Task<bool> CreateAsync(ApiServiceDto dto);

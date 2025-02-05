@@ -21,7 +21,13 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             try
             {
                 var apiService = await _fileHelper.ReadJsonAsync<ApiService>(apiServiceName);
+
+                // проверка существования api-сервиса
                 if (apiService == null)
+                    return false;
+
+                // проверка уникальности
+                if (apiService.Entities.Any(e => e.Name == apiEntity.Name))
                     return false;
 
                 apiService.Entities.Add(apiEntity);
