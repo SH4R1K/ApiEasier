@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Server.Dto.JsonShemaDto;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Server.Models
 {
@@ -10,6 +11,7 @@ namespace ApiEasier.Server.Models
         /// <summary>
         /// Имя сущности API.
         /// </summary>
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
         public string? Name { get; set; }
 
         /// <summary>
