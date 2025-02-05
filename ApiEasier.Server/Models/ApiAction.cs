@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Server.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ApiEasier.Server.Models
 {
     /// <summary>
     /// Модель для представления действия API.
@@ -8,6 +10,7 @@
         /// <summary>
         /// Маршрут для действия API.
         /// </summary>
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
         public string Route { get; set; }
 
         /// <summary>
