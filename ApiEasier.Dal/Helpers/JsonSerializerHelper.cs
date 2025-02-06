@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ApiEasier.Dal.Helpers
 {
-    public class JsonHelper
+    public class JsonSerializerHelper
     {
         private static readonly JsonSerializerOptions Options = new JsonSerializerOptions
         {

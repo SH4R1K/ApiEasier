@@ -11,11 +11,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 {
     public class FileApiEndpointRepository : IFileApiEndpointRepository
     {
-        private readonly IFileHelper _fileHelper;
+        private readonly IFileHelper _jsonFileHelper;
 
-        public FileApiEndpointRepository(IFileHelper fileHelper)
+        public FileApiEndpointRepository(IFileHelper jsonFileHelper)
         {
-            _fileHelper = fileHelper;
+            _jsonFileHelper = jsonFileHelper;
         }
 
         public Task<bool> ChangeActiveStatusAsync(string apiServiceName, string apiEntityName, string id, bool status)

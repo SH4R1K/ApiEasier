@@ -1,5 +1,4 @@
-﻿using ApiEasier.Dal.Helpers;
-using ApiEasier.Dal.Interfaces.FileStorage;
+﻿using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
 
@@ -7,18 +6,36 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 {
     public class FileApiServiceRepository : IFileApiServiceRepository
     {
-        private readonly IFileHelper _fileHelper;
+        private readonly IFileHelper _jsonFileHelper;
 
-        public FileApiServiceRepository(IFileHelper fileHelper)
+        public FileApiServiceRepository(IFileHelper jsonFileHelper)
         {
-            _fileHelper = fileHelper;
+            _jsonFileHelper = jsonFileHelper;
+        }
+
+        /// <summary>
+        /// Требуется метод маппинга который будет заполнять поле имени у apiService
+        /// т.к в json-файле конфигурации имя api-сервсиа не хранится,
+        /// оно содержится в самом названии файла
+        /// </summary>
+        /// <param name="name">название файла</param>
+        /// <param name="apiService">объект с данными для apiService</param>
+        /// <returns></returns>
+        private ApiService MapApiService(string name, ApiService apiService)
+        {
+            return new ApiService(name)
+            {
+                IsActive = apiService.IsActive,
+                Description = apiService.Description,
+                Entities = apiService.Entities
+            };
         }
 
         public async Task<bool> CreateAsync(ApiService apiService)
         {
             try
             {
-                await _fileHelper.WriteJsonAsync(apiService.Name, apiService);
+                await _jsonFileHelper.WriteAsync(apiService.Name, apiService);
                 return true;
             }
             catch
@@ -33,7 +50,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var filePath = _fileHelper.DeleteFile(id);
+                var filePath = _jsonFileHelper.Delete(id);
                 return true;
             }
             catch
@@ -44,30 +61,38 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<List<ApiService>> GetAllAsync()
         {
-            var files = _fileHelper.GetAllFiles();
-            var tasks = files.Select(file => GetByIdAsync(Path.GetFileNameWithoutExtension(file)));
+            var filesNames = await _jsonFileHelper.GetAllFiles();
 
-            var result = await Task.WhenAll(tasks);
-            return result.Where(apiService => apiService != null).ToList();
+            List<ApiService> apiServices = new List<ApiService>();
+            
+            foreach (var fileName in filesNames)
+            {
+                var apiServiceData = await _jsonFileHelper.ReadAsync<ApiService>(fileName); 
+
+                if (apiServiceData == null)
+                    continue;
+
+                var apiService = MapApiService(fileName, apiServiceData);
+
+                if (apiService != null)
+                    apiServices.Add(apiService);
+            }
+
+            return apiServices;
         }
 
         public async Task<ApiService?> GetByIdAsync(string id)
         {
-            var apiService = await _fileHelper.ReadJsonAsync<ApiService>(id);
-            if (apiService == null)
-                return null;
+            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
 
-            // так как name в json не содержится нужно присовить полю с null значение
-            apiService.Name = id;
-
-            return apiService;
+            return apiService == null ? null : MapApiService(id, apiService);
         }
 
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
         {
             try
             {
-                var oldApiService = await _fileHelper.ReadJsonAsync<ApiService>(id);
+                var oldApiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
 
                 oldApiService.IsActive = apiService.IsActive;
                 oldApiService.Description = apiService.Description;
@@ -75,11 +100,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
 
                 if (id != apiService.Name)
-                    _fileHelper.DeleteFile(id);
+                    _jsonFileHelper.Delete(id);
 
-                await _fileHelper.WriteJsonAsync(apiService.Name, oldApiService);
+                await _jsonFileHelper.WriteAsync(apiService.Name, oldApiService);
 
-                return oldApiService;
+                return oldApiService == null ? null : MapApiService(apiService.Name, apiService);
             }
             catch
             {
@@ -91,11 +116,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _fileHelper.ReadJsonAsync<ApiService>(id);
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
 
                 apiService.IsActive = status;
 
-                await _fileHelper.WriteJsonAsync(id, apiService);
+                await _jsonFileHelper.WriteAsync(id, apiService);
 
                 return true;
             }

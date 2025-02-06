@@ -2,9 +2,9 @@
 {
     public interface IFileHelper
     {
-        public List<string?> GetAllFiles();
-        public Task<T?> ReadJsonAsync<T>(string fileName);
-        public Task WriteJsonAsync<T>(string fileName, T data);
-        public bool DeleteFile(string fileName);
+        public Task<List<string>> GetAllFiles();
+        public Task<T?> ReadAsync<T>(string fileName);
+        public Task WriteAsync<T>(string fileName, T data);
+        public bool Delete(string fileName);
     }
 }

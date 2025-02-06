@@ -1,10 +1,5 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Dal.Interfaces.Db;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
@@ -20,15 +15,17 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         {
             try
             {
-                var resourceNames = await _dbResourceRepository.GetNamesAsync();
+                var resourcesNames = await _dbResourceRepository.GetNamesAsync();
 
-                foreach (var name in resourceNames)
+                var resourcesToDelete = resourcesNames.Where(r => r.StartsWith(id + "_")).ToList();
+
+                var tasks = resourcesToDelete.Select(async resourceName =>
                 {
-                    if (name.StartsWith(id))
-                    {
-                        await _dbResourceRepository.DeleteAsync(name);
-                    }
-                }
+                    await _dbResourceRepository.DeleteAsync(resourceName);
+                });
+
+                await Task.WhenAll(tasks);
+
                 return true;
             }
             catch

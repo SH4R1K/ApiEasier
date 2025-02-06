@@ -10,47 +10,72 @@ namespace ApiEasier.Bll.Services.ApiConfigure
     class DynamicApiConfigurationService : IDynamicApiConfigurationService
     {
         private readonly IFileApiServiceRepository _fileApiServiceRepository;
-        private readonly IDbResourceRepository _dbResourceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;
         private readonly IConverter<ApiServiceDto, ApiService> _dtoToApiServiceConverter;
 
         public DynamicApiConfigurationService(
             IFileApiServiceRepository fileApiServiceRepository,
-            IDbResourceRepository dbResourceRepository,
             IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
             IConverter<ApiServiceDto, ApiService> dtoToApiServiceConverter)
         {
             _fileApiServiceRepository = fileApiServiceRepository;
             _apiServiceToDtoConverter = apiServiceToDtoConverter;
             _dtoToApiServiceConverter = dtoToApiServiceConverter;
-            _dbResourceRepository = dbResourceRepository;
         }
 
+        /// <summary>
+        /// Изменение статуса активности api-сервиса в его файле конфигурации
+        /// </summary>
+        /// <param name="id">название api-сервиса</param>
+        /// <param name="status">новый статус активности</param>
+        /// <returns></returns>
         public async Task<bool> ChangeActiveStatusAsync(string id, bool status)
         {
             return await _fileApiServiceRepository.ChangeActiveStatusAsync(id, status);
         }
 
+        /// <summary>
+        /// Создание файла конфигурации api-сервиса 
+        /// </summary>
+        /// <param name="dto">данные для создания</param>
+        /// <returns></returns>
         public async Task<bool> CreateAsync(ApiServiceDto dto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(dto);
 
-            var result = await _fileApiServiceRepository.CreateAsync(apiService);
-          
+            return await _fileApiServiceRepository.CreateAsync(apiService);
+
+        }
+
+        /// <summary>
+        /// Удаление файла конфигурации api-сервиса
+        /// </summary>
+        /// <param name="id">название api-сервиса</param>
+        /// <returns></returns>
+        public bool Delete(string id)
+        {
+            var result = _fileApiServiceRepository.Delete(id);
+            if (!result)
+                return false;
+
             return result;
         }
 
-        public bool Delete(string id)
-        {
-            return _fileApiServiceRepository.Delete(id);
-        }
-
+        /// <summary>
+        /// Вывод всех api-сервисов
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<ApiServiceDto>> GetAsync()
         {
             var result = await _fileApiServiceRepository.GetAllAsync();
             return result.Select(_apiServiceToDtoConverter.Convert).ToList();
         }
 
+        /// <summary>
+        /// Вывод api-сервиса по названию
+        /// </summary>
+        /// <param name="id">название файла конфигурации</param>
+        /// <returns></returns>
         public async Task<ApiServiceDto?> GetByIdAsync(string id)
         {
             var result = await _fileApiServiceRepository.GetByIdAsync(id);
@@ -61,6 +86,12 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return _apiServiceToDtoConverter.Convert(result);
         }
 
+        /// <summary>
+        /// Обновление данных у api-сервиса в файле конфигурации
+        /// </summary>
+        /// <param name="id">название файла</param>
+        /// <param name="dto">данные</param>
+        /// <returns></returns>
         public async Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto dto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(dto);

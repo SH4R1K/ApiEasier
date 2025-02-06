@@ -9,18 +9,18 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 {
     public class FileApiEntityRepository : IFileApiEntityRepository
     {
-        private readonly IFileHelper _fileHelper;
+        private readonly IFileHelper _jsonFileHelper;
 
-        public FileApiEntityRepository(IFileHelper fileHelper)
+        public FileApiEntityRepository(IFileHelper jsonFileHelper)
         {
-            _fileHelper = fileHelper;
+            _jsonFileHelper = jsonFileHelper;
         }
 
         public async Task<bool> CreateAsync(string apiServiceName, ApiEntity apiEntity)
         {
             try
             {
-                var apiService = await _fileHelper.ReadJsonAsync<ApiService>(apiServiceName);
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
 
                 // проверка существования api-сервиса
                 if (apiService == null)
@@ -32,7 +32,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 apiService.Entities.Add(apiEntity);
 
-                await _fileHelper.WriteJsonAsync(apiServiceName, apiService);
+                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
 
                 return true;
             }
@@ -48,7 +48,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _fileHelper.ReadJsonAsync<ApiService>(apiServiceName);
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
                 if (apiService == null)
                     return false;
 
@@ -58,7 +58,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 apiService.Entities.Remove(entityToRemove);
 
-                await _fileHelper.WriteJsonAsync(apiServiceName, apiService);
+                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
                 return true;
             }
             catch
@@ -72,7 +72,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _fileHelper.ReadJsonAsync<ApiService>(apiServiceName);
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
 
                 if (apiService == null || apiService.Entities == null)
                     return false;
@@ -86,7 +86,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 entity.IsActive = apiEntity.IsActive;
                 entity.Endpoints = apiEntity.Endpoints;
 
-                await _fileHelper.WriteJsonAsync(apiServiceName, apiService);
+                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
                 return true;
             }
             catch
@@ -100,7 +100,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _fileHelper.ReadJsonAsync<ApiService>(id);
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
                 if (apiService == null || apiService.Entities == null)
                     return false;
 
@@ -110,7 +110,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 entity.IsActive = status;
 
-                await _fileHelper.WriteJsonAsync(id, apiService);
+                await _jsonFileHelper.WriteAsync(id, apiService);
 
                 return true;
             }

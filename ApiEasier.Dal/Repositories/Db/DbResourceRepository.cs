@@ -34,7 +34,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
         }
 
-        public async Task UpdateNameAsync(string oldName, string name)
+        public async Task<bool> UpdateNameAsync(string oldName, string name)
         {
             await _dbContext.RenameCollectionAsync(oldName, name);
         }
