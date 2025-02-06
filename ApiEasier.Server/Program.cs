@@ -50,6 +50,15 @@ namespace ApiEasier.Server
                 o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
             });
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin() // Разрешить любой источник
+                                      .AllowAnyMethod() // Разрешить любые методы
+                                      .AllowAnyHeader()); // Разрешить любые заголовки
+            });
+
+
             builder.Configuration.AddEnvironmentVariables();
 
             var app = builder.Build();
