@@ -1,11 +1,11 @@
 ﻿using ApiEasier.Bll.Dto;
 
-namespace ApiEasier.Bll.Interfaces.ApiEmu
+namespace ApiEasier.Bll.Interfaces.Validators
 {
     /// <summary>
     /// Интерфейс для валидации эмулированных API-сервисов.
     /// </summary>
-    public interface IValidatorDynamicApiService
+    public interface IDynamicResourceValidator
     {
         /// <summary>
         /// Асинхронно валидирует API-сервис по заданным параметрам.

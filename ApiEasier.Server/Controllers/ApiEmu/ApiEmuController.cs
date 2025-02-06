@@ -10,15 +10,11 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     [ApiController]
     public class ApiEmuController : ControllerBase
     {
-        private readonly IDynamicResourceDataService _dynamicResourceDataService;
-        private readonly IValidatorDynamicApiService _validatorDynamicApiService;
+        private readonly IDynamicResourceService _dynamicResourceService;
 
-        public ApiEmuController(
-            IDynamicResourceDataService dynamicResourceDataService,
-            IValidatorDynamicApiService validatorDynamicApiService)
+        public ApiEmuController(IDynamicResourceService dynamicResourceService)
         {
-            _dynamicResourceDataService = dynamicResourceDataService;
-            _validatorDynamicApiService = validatorDynamicApiService;
+            _dynamicResourceService = dynamicResourceService;   
         }
 
         // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}
@@ -27,18 +23,12 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                //проверка существование в конфиге
-                var (isValid, _, _) = await _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, "get");
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
-
-                // работа с бд
-                var data = await _dynamicResourceDataService.GetDataAsync(apiName, entityName, filters);
-
+                var data = await _dynamicResourceService.GetAsync(apiName, entityName, endpoint, filters);
+                
                 if (data == null)
                     return NotFound("Не найдены данные");
 
-                return Ok(data);
+                return Ok(data.Select(d => d.Data));
             }
             catch (Exception ex)
             {
@@ -53,16 +43,12 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var (isValid, _, _) = await _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, "getbyindex");
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
-
-                var result = await _dynamicResourceDataService.GetDataByIdAsync(apiName, entityName, id, filters);
+                var result = await _dynamicResourceService.GetByIdAsync(apiName, entityName, endpoint, id, filters);
 
                 if (result == null)
                     return NotFound("Не найдены данные");
 
-                return Ok(result);
+                return Ok(result.Data);
             }
             catch (Exception ex)
             {
@@ -77,16 +63,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var (isValid, _, entity) = await _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, "post");
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
-
-                //Валидация структуры для сущности
-                isValid = await _validatorDynamicApiService.ValidateEntityStructureAsync(entity!, json);
-                if (!isValid)
-                    return BadRequest();
-
-                var result = await _dynamicResourceDataService.AddDataAsync(apiName, entityName, json);
+                var result = await _dynamicResourceService.AddAsync(apiName, entityName, endpoint, json);
                 if (result == null)
                     return NotFound("Данные не были добавлены");
 
@@ -105,17 +82,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                //Валидация API, сущности и пути
-                var (isValid, _, entity) = await _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, "put");
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
-
-                // Валидация структуры для сущности
-                isValid = await _validatorDynamicApiService.ValidateEntityStructureAsync(entity!, json);
-                if (!isValid)
-                    return BadRequest();
-
-                var result = await _dynamicResourceDataService.UpdateDataAsync(apiName, entityName, id, json);
+                var result = await _dynamicResourceService.UpdateAsync(apiName, entityName, endpoint, id, json);
 
                 if (result == null)
                     return NotFound($"Не найдены данные");
@@ -136,12 +103,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var (isValid, _, _) = await _validatorDynamicApiService.ValidateApiAsync(apiName, entityName, endpoint, "delete");
-
-                if (!isValid)
-                    return NotFound($"Не найден путь {apiName}/{entityName}/{endpoint}");
-
-                var result = await _dynamicResourceDataService.DeleteDataAsync(apiName, entityName, id);
+                var result = await _dynamicResourceService.Delete(apiName, entityName, endpoint, id);
 
                 if (!result)
                     return NotFound();

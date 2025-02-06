@@ -3,11 +3,10 @@ using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dm.Models.Dynamic;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text.Json.Nodes;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
-
-    //TODO Возможно переделать на другой возврат
     public class DbResourceDataRepository : IDbResourceDataRepository
     {
         private readonly MongoDbContext _dbContext;
@@ -17,58 +16,41 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<DynamicResourceData> CreateDataAsync(string resourceName, object jsonData)
+        public async Task<DynamicResource> CreateDataAsync(string resourceName, object jsonData)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
             var bsonDocument = BsonDocument.Parse(jsonData.ToString());
             await collection.InsertOneAsync(bsonDocument);
 
-            var count = await collection.CountDocumentsAsync(FilterDefinition<BsonDocument>.Empty);
-            if (count == 0)
-                return default;
-
-            var data = bsonDocument.ToDictionary(
-                kvp => kvp.Name,
-                kvp => (object)kvp.Value
-            );
-
-            return new DynamicResourceData
+            return new DynamicResource
             {
-                Data = data
+                Data = JsonNode.Parse(bsonDocument.ToJson())
             };
         }
 
-        public async Task<DynamicResourceData> GetDataByIdAsync(string resourceName, string id)
+        public async Task<DynamicResource> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
-            var document = await collection.Find(filter).FirstOrDefaultAsync();
+            var bsonDocument = await collection.Find(filter).FirstOrDefaultAsync();
 
-            var result = document.ToDictionary(
-                kvp => kvp.Name,
-                kvp => (object)kvp.Value
-            );
-
-            return new DynamicResourceData
+            return new DynamicResource
             {
-                Data = result
+                Data = JsonNode.Parse(bsonDocument.ToJson())
             };
         }
 
-        public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName)
+        public async Task<List<DynamicResource>?> GetAllDataAsync(string resourceName)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 
-            var result = documents.Select(doc => new DynamicResource
+            return documents.Select(doc => new DynamicResource
             {
-                Name = doc["_id"].AsObjectId.ToString(), // Если _id это ObjectId, его можно привести к строке
-                Data = doc.Elements.ToDictionary(element => element.Name, element => (object)element.Value)
+                Data = JsonNode.Parse(doc.ToJson())
             }).ToList();
-
-            return result ?? null;
         }
 
         public async Task<bool> DeleteDataAsync(string resourceName, string id)
@@ -79,14 +61,13 @@ namespace ApiEasier.Dal.Repositories.Db
 
             var result = await collection.DeleteOneAsync(filter);
 
-            if (result.DeletedCount > 0)
-                return true;
+            if (result.DeletedCount == 0)
+                return false;
 
-            return false;
-
+            return true;
         }
 
-        public async Task<DynamicResourceData> UpdateDataAsync(string resourceName, string id, object data)
+        public async Task<DynamicResource> UpdateDataAsync(string resourceName, string id, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -96,16 +77,15 @@ namespace ApiEasier.Dal.Repositories.Db
 
             var result = await collection.UpdateOneAsync(filter, update);
 
-            if (result.ModifiedCount > 0)
-            {
-                var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
-                return new DynamicResourceData
-                {
-                    Data = updatedDocument.ToDictionary()
-                };
-            }
+            if (result.ModifiedCount == 0)
+                return null;
 
-            return null;
+            var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
+
+            return new DynamicResource
+            {
+                Data = JsonNode.Parse(updatedDocument.ToJson())
+            };
         }
     }
 }

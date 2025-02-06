@@ -1,18 +1,18 @@
 ﻿using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
 using NJsonSchema;
 using System.Text.Json;
 
-namespace ApiEasier.Bll.Services.ApiEmu
+namespace ApiEasier.Bll.Validators
 {
 
-    public class ValidatorDynamicApiService(
+    public class DynamicResourceValidator(
         IFileApiServiceRepository fileApiServiceRepository,
         IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
-        IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter) : IValidatorDynamicApiService
+        IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter) : IDynamicResourceValidator
     {
         private readonly IFileApiServiceRepository _fileApiServiceRepository = fileApiServiceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter = apiServiceToDtoConverter;

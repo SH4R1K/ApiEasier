@@ -3,10 +3,10 @@ using ApiEasier.Dal.Interfaces.Db;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
-    public class DynamicResourceService : IDynamicResourceService
+    public class DynamicResourceServiceOld
     {
         private readonly IDbResourceRepository _dbResourceRepository;
-        public DynamicResourceService(IDbResourceRepository dbResourceRepository)
+        public DynamicResourceServiceOld(IDbResourceRepository dbResourceRepository)
         {
             _dbResourceRepository = dbResourceRepository;
         }

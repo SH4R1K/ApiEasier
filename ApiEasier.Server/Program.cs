@@ -1,5 +1,6 @@
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Services.ApiEmu;
+using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.File;
@@ -38,14 +39,11 @@ namespace ApiEasier.Api
 
             // BLL
             // ApiEmu
-            builder.Services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
-            builder.Services.AddScoped<IValidatorDynamicApiService, ValidatorDynamicApiService>();
             //ApiConfigure
 
             // DAL
             builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
             builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
-            builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
 
 
 
