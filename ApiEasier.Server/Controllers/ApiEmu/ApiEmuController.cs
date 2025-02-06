@@ -87,6 +87,8 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                     return BadRequest();
 
                 var result = await _dynamicResourceDataService.AddDataAsync(apiName, entityName, json);
+                if (result == null)
+                    return NotFound("Данные не были добавлены");
 
                 return Ok(result);
             }

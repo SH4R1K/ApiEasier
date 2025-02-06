@@ -17,16 +17,8 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<DynamicResource?> CreateDataAsync(string resourceName, object jsonData)
+        public async Task<DynamicResourceData> CreateDataAsync(string resourceName, object jsonData)
         {
-            // Проверяем, существует ли коллекция
-            var collectionExists = await _dbContext.CreateCollectionIfNotExistsAsync(resourceName);
-
-            if (!collectionExists)
-            {
-                throw new Exception($"Коллекция '{resourceName}' не найдена. Создайте её перед добавлением данных.");
-            }
-
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
             var bsonDocument = BsonDocument.Parse(jsonData.ToString());
             await collection.InsertOneAsync(bsonDocument);
@@ -40,9 +32,8 @@ namespace ApiEasier.Dal.Repositories.Db
                 kvp => (object)kvp.Value
             );
 
-            return new DynamicResource
+            return new DynamicResourceData
             {
-                Name = resourceName,
                 Data = data
             };
         }
@@ -65,7 +56,7 @@ namespace ApiEasier.Dal.Repositories.Db
             };
         }
 
-        public async Task<List<DynamicResource>?> GetAllDataAsync(string resourceName)
+        public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -95,7 +86,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
         }
 
-        public async Task<DynamicResource> UpdateDataAsync(string resourceName, string id, object data)
+        public async Task<DynamicResourceData> UpdateDataAsync(string resourceName, string id, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -108,9 +99,8 @@ namespace ApiEasier.Dal.Repositories.Db
             if (result.ModifiedCount > 0)
             {
                 var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
-                return new DynamicResource
+                return new DynamicResourceData
                 {
-                    Name = id,
                     Data = updatedDocument.ToDictionary()
                 };
             }

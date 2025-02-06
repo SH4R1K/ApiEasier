@@ -46,7 +46,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
                     return (false, _apiServiceToDtoConverter.Convert(api), null);
 
                 // Проверяем маршрут и тип ответа у api-сервиса в json-файле конфигурации
-                var isEndpointValid = entity.Actions.Any(a => a.IsActive && a.Route == endpoint && a.Type.ToString().ToLower() == typeResponse.ToLower());
+                var isEndpointValid = entity.Endpoints.Any(a => a.IsActive && a.Route == endpoint && a.Type.ToString().ToLower() == typeResponse.ToLower());
                 if (!isEndpointValid)
                     return (false, _apiServiceToDtoConverter.Convert(api), _apiEntityToDtoConverter.Convert(entity));
 
