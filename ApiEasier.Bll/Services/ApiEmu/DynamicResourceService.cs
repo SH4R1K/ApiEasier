@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dm.Models.Dynamic;
+using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiEmu
 {

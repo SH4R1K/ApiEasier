@@ -1,4 +1,4 @@
-﻿using ApiEasier.Dm.Models.Dynamic;
+﻿using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Interfaces.Db
 {

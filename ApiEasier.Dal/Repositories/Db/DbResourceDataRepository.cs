@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dm.Models.Dynamic;
+using ApiEasier.Dm.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Text.Json.Nodes;
