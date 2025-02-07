@@ -6,7 +6,7 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
-    class DynamicApiConfigurationService : IDynamicApiConfigurationService
+    public class DynamicApiConfigurationService : IDynamicApiConfigurationService
     {
         private readonly IFileApiServiceRepository _fileApiServiceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;

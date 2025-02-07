@@ -1,12 +1,21 @@
-using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Bll.Services.ApiEmu;
+using ApiEasier.Bll.Converters;
+using ApiEasier.Bll.Dto;
+using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Interfaces.File;
 using ApiEasier.Dal.Repositories.Db;
-using ApiEasier.Dal.Repositories.File;
+using ApiEasier.Dm.Models;
 using Microsoft.AspNetCore.HttpLogging;
+using ApiEasier.Bll.Services.ApiConfigure;
+using ApiEasier.Bll.Interfaces.ApiEmu;
+using ApiEasier.Bll.Services.ApiEmu;
+using ApiEasier.Dal.Interfaces.Helpers;
+using ApiEasier.Dal.Helpers;
+using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Repositories.FileStorage;
 
 namespace ApiEasier.Api
 {
@@ -37,25 +46,54 @@ namespace ApiEasier.Api
                 return new MongoDbContext(connectionString, databaseName);
             });
 
-            // BLL
-            // ApiEmu
-            //ApiConfigure
+            // BLL ------------------------------------------
+            //Converters
+            builder.Services.AddScoped<IConverter<ApiService, ApiServiceDto>, ApiServiceToDtoConverter>();
+            builder.Services.AddScoped<IConverter<ApiService, ApiServiceSummaryDto>, ApiServiceToDtoSummaryConverter>();
+            builder.Services.AddScoped<IConverter<ApiServiceDto, ApiService>, DtoToApiServiceConverter>();
+
+            builder.Services.AddScoped<IConverter<ApiEntity,  ApiEntityDto>, ApiEntityToDtoConverter>();
+            builder.Services.AddScoped<IConverter<ApiEntity, ApiEntitySummaryDto>, ApiEntityToDtoSummaryConverter>();
+            builder.Services.AddScoped<IConverter<ApiEntityDto, ApiEntity>, DtoToApiEntityConverter>();
+
+            builder.Services.AddScoped<IConverter<ApiEndpoint, ApiEndpointDto>, ApiEndpointToDtoConverter>();
+            builder.Services.AddScoped<IConverter<ApiEndpointDto, ApiEndpoint>, DtoToApiEndpointConverter>();
+
+            //Validators
+            builder.Services.AddScoped<IDynamicResourceValidator, DynamicResourceValidator>();
+
+            //Services
+            builder.Services.AddScoped<IDynamicApiConfigurationService, DynamicApiConfigurationService>();
+            builder.Services.AddScoped<IDynamicEntityConfigurationService, DynamicEntityConfigurationService>();
+            builder.Services.AddScoped<IDynamicEndpointConfigurationService, DynamicEndpointConfigurationService>();
+            builder.Services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
+            // ------------------------------------------
+
 
             // DAL
             builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
-            builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
 
+            //Helpers
+            var folderPath = builder.Configuration["JsonFileSettings:FolderPath"];
+            if (string.IsNullOrWhiteSpace(folderPath))
+                throw new Exception("JsonFileSettings:FolderPath не задан в конфигурации.");
+            //builder.Services.AddSingleton<IJsonFileHelper>(sp => new JsonFileHelper(folderPath));
+            builder.Services.AddSingleton(sp => new JsonFileHelper(".\\ApiConfigurations\\"));
+            builder.Services.AddSingleton(sp => new JsonSerializerHelper());
 
+            builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
+            builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
+            builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
 
 
             // Логгирование http в MongoDB
-            builder.Logging.ClearProviders();
+            //builder.Logging.ClearProviders();
             //builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
-            builder.Services.AddHttpLogging(o =>
-            {
-                o.CombineLogs = true;
-                o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
-            });
+            //builder.Services.AddHttpLogging(o =>
+            //{
+            //    o.CombineLogs = true;
+            //    o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
+            //});
 
             builder.Configuration.AddEnvironmentVariables();
 

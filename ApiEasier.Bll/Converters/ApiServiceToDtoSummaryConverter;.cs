@@ -4,7 +4,7 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Converters
 {
-    public class ApiServiceToDtoSummaryConverter_ : IConverter<ApiService, ApiServiceSummaryDto>
+    public class ApiServiceToDtoSummaryConverter : IConverter<ApiService, ApiServiceSummaryDto>
     {
         public ApiServiceSummaryDto Convert(ApiService apiService) => new()
         {

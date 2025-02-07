@@ -32,4 +32,8 @@
     <ProjectReference Include="..\ApiEasier.Dm\ApiEasier.Dm.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ApiConfigurations\" />
+  </ItemGroup>
+
 </Project>

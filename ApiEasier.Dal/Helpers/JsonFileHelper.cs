@@ -5,21 +5,21 @@ namespace ApiEasier.Dal.Helpers
     /// <summary>
     /// Класс для работы с файлами json
     /// </summary>
-    public class JsonFileHelper : IJsonFileHelper
+    public class JsonFileHelper
     {
-        public required string _folderPath;
+        public string FolderPath { get; init; }
 
         public JsonFileHelper(string folderPath)
         {
-            _folderPath = folderPath ?? throw new ArgumentException(nameof(folderPath));
+            FolderPath = folderPath ?? throw new ArgumentException(nameof(folderPath));
         }
 
-        private string GetFilePath(string fileName) => Path.Combine(_folderPath, fileName + ".json");
+        private string GetFilePath(string fileName) => Path.Combine(FolderPath, fileName + ".json");
 
         public async Task<List<string>> GetAllFiles()
         {
             return await Task.Run(() =>
-                Directory.GetFiles(_folderPath, "*.json")
+                Directory.GetFiles(FolderPath, "*.json")
                 .Select(f => Path.GetFileNameWithoutExtension(f)!)
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList());
