@@ -38,7 +38,6 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 Console.WriteLine("Ошибка при добавлении сущности");
                 return false;
             }
-
         }
 
         public async Task<bool> DeleteAsync(string apiServiceName, string id)

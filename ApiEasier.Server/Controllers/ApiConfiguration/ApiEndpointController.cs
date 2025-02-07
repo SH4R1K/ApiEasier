@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Services.ApiConfigure;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
@@ -11,7 +12,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     [ApiController]
     public class ApiEndpointController : ControllerBase
     {
-        private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
         private readonly IDynamicEndpointConfigurationService _dynamicEndpointConfigurationService;
 
         /// <summary>
@@ -19,29 +19,18 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
         public ApiEndpointController(
-            IDynamicApiConfigurationService dynamicApiConfigurationService,
             IDynamicEndpointConfigurationService dynamicEndpointConfigurationService)
         {
-            _dynamicApiConfigurationService = dynamicApiConfigurationService;
             _dynamicEndpointConfigurationService = dynamicEndpointConfigurationService;
         }
 
         // GET api/ApiAction/{apiServiceName}/{entityName}
-        [HttpGet("{apiServiceName}/{entityName}")]
-        public async Task<IActionResult> GetAllEndpoints(string apiServiceName, string entityName)
+        [HttpGet("{apiServiceName}/{apiEntityName}")]
+        public async Task<IActionResult> GetAllEndpoints(string apiServiceName, string apiEntityName)
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-
-                if (apiService == null)
-                    return NotFound($"api-сервис {apiServiceName} не найден");
-
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-                if (entity == null)
-                    return NotFound($"сущность {entityName} у api-сервиса {apiServiceName} не найдена");
-
-                return Ok(entity.Endpoints);
+                return Ok(await _dynamicEndpointConfigurationService.GetAsync(apiServiceName, apiEntityName));
             }
             catch (Exception ex)
             {
@@ -50,25 +39,16 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         // GET api/ApiAction/{apiServiceName}/{entityName}/{actionName}
-        [HttpGet("{apiServiceName}/{entityName}/{actionName}")]
-        public async Task<IActionResult> GetEndpoint(string apiServiceName, string entityName, string endpointName)
+        [HttpGet("{apiServiceName}/{apiEntityName}/{apiEndpointName}")]
+        public async Task<IActionResult> GetEndpointByName(string apiServiceName, string apiEntityName, string apiEndpointName)
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
+                var result = await _dynamicEndpointConfigurationService.GetByIdAsync(apiServiceName, apiEntityName, apiEndpointName);
+                if (result == null)
+                    return NotFound($"Эндпоинт {apiEndpointName} не найден");
 
-                if (apiService == null)
-                    return NotFound($"api-сервис {apiServiceName} не найден");
-
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-                if (entity == null)
-                    return NotFound($"сущность {entityName} у api-сервиса {apiServiceName} не найдена");
-
-                var endpoint = entity.Endpoints.FirstOrDefault(ep => ep.Route == endpointName);
-                if (endpoint == null)
-                    return NotFound($"эндпоинт {endpointName} у сущности {entityName} у api-сервиса {apiServiceName} не найден");
-
-                return Ok(endpoint);
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -77,12 +57,16 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         // POST api/ApiAction/{apiServiceName}/{entityName}
-        [HttpPost("{apiServiceName}/{entityName}")]
-        public async Task<IActionResult> CreateEndpoint(string apiServiceName, string entityName, [FromBody] ApiEndpointDto apiEndpoitn)
+        [HttpPost("{apiServiceName}/{apiEntityName}")]
+        public async Task<IActionResult> CreateEndpoint(string apiServiceName, string apiEntityName, [FromBody] ApiEndpointDto apiEndpoitn)
         {
             try
             {
-                var result = _dynamicEndpointConfigurationService.CreateAsync(apiServiceName, entityName, apiEndpoitn);
+                var result = await _dynamicEndpointConfigurationService.CreateAsync(apiServiceName, apiEntityName, apiEndpoitn);
+                if (!result)
+                    return BadRequest("Не удалось создать эндпоинт");
+
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -91,43 +75,16 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         // PUT api/ApiAction/{apiServiceName}/{entityName}/{actionName}
-        [HttpPut("{apiServiceName}/{entityName}/{actionName}")]
-        public async Task<IActionResult> Put(string apiServiceName, string entityName, string actionName, [FromBody] ApiEndpoint updatedAction)
+        [HttpPut("{apiServiceName}/{apiEntityName}/{apiEndpointName}")]
+        public async Task<IActionResult> Put(string apiServiceName, string apiEntityName, string apiEndpointName, [FromBody] ApiEndpointDto apiEndpointDto)
         {
             try
             {
-                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+                var result =  await _dynamicEndpointConfigurationService.UpdateAsync(apiServiceName, apiEntityName, apiEndpointName, apiEndpointDto);
+                if (!result)
+                    return BadRequest();
 
-                // Проверка существования файла
-                if (apiService == null)
-                {
-                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-                }
-
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-                if (entity == null)
-                {
-                    return NotFound($"Сущность с именем {entityName} не найдена");
-                }
-
-                // Поиск существующего действия
-                var existingAction = entity.Actions.FirstOrDefault(a => a.Route == actionName);
-                if (existingAction == null)
-                {
-                    return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
-                }
-
-                // Обновление действия
-                existingAction.Route = updatedAction.Route; // Обновите свойства по мере необходимости
-                existingAction.IsActive = updatedAction.IsActive;
-                existingAction.Type = updatedAction.Type;
-
-                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
-                    return Conflict($"Файл {apiServiceName}.json не существует.");
-                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -136,41 +93,17 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         // DELETE api/ApiAction/{apiServiceName}/{entityName}/{actionName}
-        [HttpDelete("{apiServiceName}/{entityName}/{actionName}")]
-        public async Task<IActionResult> Delete(string apiServiceName, string entityName, string actionName)
+        [HttpDelete("{apiServiceName}/{apiEntityName}/{apiEndpointName}")]
+        public async Task<IActionResult> Delete(string apiServiceName, string apiEntityName, string apiEndpointName)
         {
             try
             {
-                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+                var result = await _dynamicEndpointConfigurationService.DeleteAsync(apiServiceName, apiEntityName, apiEndpointName);
 
-                // Проверка существования файла
-                if (apiService == null)
-                {
-                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-                }
+                if (!result)
+                    return NotFound($"эндпоинт не был удален");
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-                if (entity == null)
-                {
-                    return NotFound($"Сущность с именем {entityName} не найдена");
-                }
-
-                // Поиск существующего действия
-                var actionToRemove = entity.Actions.FirstOrDefault(a => a.Route == actionName);
-                if (actionToRemove == null)
-                {
-                    return NotFound($"Действие с именем {actionName} не найдено."); // Возвращаем 404, если действие не найдено
-                }
-
-                // Удаление действия
-                entity.Actions.Remove(actionToRemove);
-
-                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
-                    return Conflict($"Файл {apiServiceName}.json не существует.");
-                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-                return NoContent(); // Возвращаем 204 No Content, так как удаление прошло успешно
+                return NoContent();
             }
             catch (Exception ex)
             {
@@ -179,45 +112,22 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         //PATCH api/ApiService/{apiServiceName}/{apiEntityName}/{apiActionName}/{isActive}
-        [HttpPatch("{apiServiceName}/{apiEntityName}/{apiActionName}/{isActive}")]
-        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName, string apiActionName)
+        [HttpPatch("{apiServiceName}/{apiEntityName}/{apiEndpointName}/{isActive}")]
+        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName, string apiEndpointName)
         {
             try
             {
-                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+                var result = await _dynamicEndpointConfigurationService.ChangeActiveStatusAsync(apiServiceName, apiEntityName, apiEndpointName, isActive);
 
-                // Проверка существования файла
-                if (apiService == null)
-                {
-                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
-                }
+                if (!result)
+                    return NotFound($"статус у эндпоинта не был изменен");
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
-
-                if (entity == null)
-                {
-                    return NotFound($"Сущность с именем {apiEntityName} не найдена");
-                }
-
-                // Поиск существующего действия
-                var existingAction = entity.Actions.FirstOrDefault(a => a.Route == apiEntityName);
-                if (existingAction == null)
-                {
-                    return NotFound($"Действие с именем {apiEntityName} не найдено."); // Возвращаем 404, если действие не найдено
-                }
-
-                // Обновление действия
-                existingAction.IsActive = isActive;
-
-                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
-                    return Conflict($"Файл {apiServiceName}.json не существует.");
-                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-
-                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
+                return NoContent();
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+                // Логирование исключения (не показано здесь)
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
     }

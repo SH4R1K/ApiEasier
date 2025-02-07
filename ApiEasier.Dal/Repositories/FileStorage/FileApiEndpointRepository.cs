@@ -1,11 +1,6 @@
 ﻿using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
@@ -18,24 +13,142 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             _jsonFileHelper = jsonFileHelper;
         }
 
-        public Task<bool> ChangeActiveStatusAsync(string apiServiceName, string apiEntityName, string id, bool status)
+        public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string apiEntityName, string id, bool status)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                if (apiService == null || apiService.Entities == null)
+                    return false;
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+                if (entity == null)
+                    return false;
+
+                var endpoint = entity.Endpoints.FirstOrDefault(e => e.Route == id);
+                if (endpoint == null)
+                    return false;
+
+                endpoint.IsActive = status;
+
+                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public Task<bool> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpoint apiEndpoint)
+        public async Task<bool> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpoint apiEndpoint)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+                // проверка существования api-сервиса
+                if (apiService == null)
+                    return false;
+
+                var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
+                if (apiEntity == null)
+                    return false;
+
+                apiEntity.Endpoints.Add(apiEndpoint);
+
+                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Ошибка при добавлении сущности");
+                return false;
+            }
         }
 
-        public Task<bool> DeleteAsync(string apiServiceName, string apiEntityName, string id)
+        public async Task<bool> DeleteAsync(string apiServiceName, string apiEntityName, string id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+                // проверка существования api-сервиса
+                if (apiService == null)
+                    return false;
+
+                var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
+                if (apiEntity == null)
+                    return false;
+
+                var apiEndpointToRemove = apiEntity.Endpoints.FirstOrDefault(e => e.Route == id);
+                if (apiEndpointToRemove == null)
+                    return false;
+
+                apiEntity.Endpoints.Remove(apiEndpointToRemove);
+                return true;
+            }
+            catch
+            {
+                Console.WriteLine("Не удалось удалить сущность");
+                return false;
+            }
         }
 
-        public Task<bool> UpdateAsync(string apiServiceName, string apiEntityName, string id, ApiEndpoint apiEndpoint)
+        public async Task<List<ApiEndpoint>> GetAllAsync(string apiServiceName, string apiEntityName)
         {
-            throw new NotImplementedException();
+            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                return [];
+
+            var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
+            if (apiEntity == null)
+                return [];
+
+            return apiEntity.Endpoints;
+        }
+
+        public async Task<ApiEndpoint?> GetByIdAsync(string apiServiceName, string apiEntityName, string id)
+        {
+            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                return null;
+
+            var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
+            if (apiEntity == null)
+                return null;
+
+
+            return apiEntity.Endpoints.FirstOrDefault(ep => ep.Route == id);
+        }
+
+        public async Task<bool> UpdateAsync(string apiServiceName, string apiEntityName, string id, ApiEndpoint apiEndpoint)
+        {
+            try
+            {
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                if (apiService == null || apiService.Entities == null)
+                    return false;
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+                if (entity == null)
+                    return false;
+
+                var endpoint = entity.Endpoints.FirstOrDefault(e => e.Route == id);
+                if (endpoint == null)
+                    return false;
+
+                endpoint.Route = apiEndpoint.Route;
+                endpoint.IsActive = apiEndpoint.IsActive;
+                endpoint.Type = apiEndpoint.Type;
+
+                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }
