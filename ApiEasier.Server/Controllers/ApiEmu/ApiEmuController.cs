@@ -10,11 +10,11 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     [ApiController]
     public class ApiEmuController : ControllerBase
     {
-        private readonly IDynamicResourceService _dynamicResourceService;
+        private readonly IDynamicResourceDataService _dynamicResourceDataService;
 
-        public ApiEmuController(IDynamicResourceService dynamicResourceService)
+        public ApiEmuController(IDynamicResourceDataService dynamicResourceDataService)
         {
-            _dynamicResourceService = dynamicResourceService;   
+            _dynamicResourceDataService = dynamicResourceDataService;   
         }
 
         // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}
@@ -23,7 +23,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var data = await _dynamicResourceService.GetAsync(apiName, entityName, endpoint, filters);
+                var data = await _dynamicResourceDataService.GetAsync(apiName, entityName, endpoint, filters);
                 
                 if (data == null)
                     return NotFound("Не найдены данные");
@@ -43,7 +43,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var result = await _dynamicResourceService.GetByIdAsync(apiName, entityName, endpoint, id, filters);
+                var result = await _dynamicResourceDataService.GetByIdAsync(apiName, entityName, endpoint, id, filters);
 
                 if (result == null)
                     return NotFound("Не найдены данные");
@@ -63,7 +63,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var result = await _dynamicResourceService.AddAsync(apiName, entityName, endpoint, json);
+                var result = await _dynamicResourceDataService.AddAsync(apiName, entityName, endpoint, json);
                 if (result == null)
                     return NotFound("Данные не были добавлены");
 
@@ -82,7 +82,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var result = await _dynamicResourceService.UpdateAsync(apiName, entityName, endpoint, id, json);
+                var result = await _dynamicResourceDataService.UpdateAsync(apiName, entityName, endpoint, id, json);
 
                 if (result == null)
                     return NotFound($"Не найдены данные");
@@ -103,7 +103,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         {
             try
             {
-                var result = await _dynamicResourceService.Delete(apiName, entityName, endpoint, id);
+                var result = await _dynamicResourceDataService.Delete(apiName, entityName, endpoint, id);
 
                 if (!result)
                     return NotFound();

@@ -12,15 +12,18 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         private readonly IFileApiServiceRepository _fileApiServiceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;
         private readonly IConverter<ApiServiceDto, ApiService> _dtoToApiServiceConverter;
+        private readonly IConverter<ApiService, ApiServiceSummaryDto> _apiServiceToDtoSummaryConverter;
 
         public DynamicApiConfigurationService(
             IFileApiServiceRepository fileApiServiceRepository,
             IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
-            IConverter<ApiServiceDto, ApiService> dtoToApiServiceConverter)
+            IConverter<ApiServiceDto, ApiService> dtoToApiServiceConverter,
+            IConverter<ApiService, ApiServiceSummaryDto> apiServiceToDtoSummaryConverter)
         {
             _fileApiServiceRepository = fileApiServiceRepository;
             _apiServiceToDtoConverter = apiServiceToDtoConverter;
             _dtoToApiServiceConverter = dtoToApiServiceConverter;
+            _apiServiceToDtoSummaryConverter = apiServiceToDtoSummaryConverter;
         }
 
         /// <summary>
@@ -62,13 +65,13 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         }
 
         /// <summary>
-        /// Вывод всех api-сервисов
+        /// Вывод всех api-сервисов без их сущностей
         /// </summary>
         /// <returns></returns>
-        public async Task<List<ApiServiceDto>> GetAsync()
+        public async Task<List<ApiServiceSummaryDto>> GetAsync()
         {
             var result = await _fileApiServiceRepository.GetAllAsync();
-            return result.Select(_apiServiceToDtoConverter.Convert).ToList();
+            return result.Select(_apiServiceToDtoSummaryConverter.Convert).ToList();
         }
 
         /// <summary>

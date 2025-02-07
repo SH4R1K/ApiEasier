@@ -16,38 +16,38 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<DynamicResource> CreateDataAsync(string resourceName, object jsonData)
+        public async Task<DynamicResourceData> CreateDataAsync(string resourceName, object jsonData)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
             var bsonDocument = BsonDocument.Parse(jsonData.ToString());
             await collection.InsertOneAsync(bsonDocument);
 
-            return new DynamicResource
+            return new DynamicResourceData
             {
                 Data = JsonNode.Parse(bsonDocument.ToJson())
             };
         }
 
-        public async Task<DynamicResource> GetDataByIdAsync(string resourceName, string id)
+        public async Task<DynamicResourceData> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
             var bsonDocument = await collection.Find(filter).FirstOrDefaultAsync();
 
-            return new DynamicResource
+            return new DynamicResourceData
             {
                 Data = JsonNode.Parse(bsonDocument.ToJson())
             };
         }
 
-        public async Task<List<DynamicResource>?> GetAllDataAsync(string resourceName)
+        public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 
-            return documents.Select(doc => new DynamicResource
+            return documents.Select(doc => new DynamicResourceData
             {
                 Data = JsonNode.Parse(doc.ToJson())
             }).ToList();
@@ -67,7 +67,7 @@ namespace ApiEasier.Dal.Repositories.Db
             return true;
         }
 
-        public async Task<DynamicResource> UpdateDataAsync(string resourceName, string id, object data)
+        public async Task<DynamicResourceData> UpdateDataAsync(string resourceName, string id, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -82,7 +82,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
             var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
 
-            return new DynamicResource
+            return new DynamicResourceData
             {
                 Data = JsonNode.Parse(updatedDocument.ToJson())
             };

@@ -12,14 +12,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     public class ApiServiceController : ControllerBase
     {
         private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
-        private readonly IDynamicResourceService _dynamicResourceService;
 
         public ApiServiceController(
-            IDynamicApiConfigurationService dynamicApiConfigurationService,
-            IDynamicResourceService dynamicResourceService)
+            IDynamicApiConfigurationService dynamicApiConfigurationService)
         {
             _dynamicApiConfigurationService = dynamicApiConfigurationService;
-            _dynamicResourceService = dynamicResourceService;
         }
 
         // GET api/ApiService
@@ -91,14 +88,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 if (fileResult == null)
                     return NotFound($"api-сервис: {apiServiceName} не найден");
 
-                if (apiServiceName != fileResult.Name)
-                {
-                    var dbResult = await _dynamicResourceService.UpdateNameAsync(fileResult.Name, apiServiceName);
-
-                    if (!dbResult)
-                        return NotFound($"не удалось обновить api-сервис {apiServiceName}");
-                }
-
                 return NoContent();
             }
             catch (Exception ex)
@@ -116,11 +105,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = _dynamicApiConfigurationService.Delete(apiServiceName);
                 if (!result)
-                    return NotFound($"Не удалось удалить конфиг api-сервиса {apiServiceName}");
-
-                result = await _dynamicResourceService.DeleteAsync(apiServiceName);
-                if (!result)
-                    return NotFound($"Не удалось удалить api-сервис {apiServiceName}");
+                    return NotFound($"Не удалось найти api-сервис {apiServiceName}");
 
                 return NoContent();
             }
