@@ -1,32 +1,21 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
-using ApiEasier.Bll.Interfaces.ApiEmu;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
     /// <summary>
-    /// Контроллер для управления сущностями API.
+    /// Контроллер для управления сущностями api-сервиса.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ApiEntityController : ControllerBase
     {
-        private readonly IDynamicResourceDataService _dynamicApiService;
-        private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
         private readonly IDynamicEntityConfigurationService _dynamicEntityConfigurationService;
 
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ApiEntityController"/>.
-        /// </summary>
-        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
         public ApiEntityController(
-            IDynamicResourceDataService dynamicApiService,
-            IDynamicApiConfigurationService dynamicApiConfigurationService,
             IDynamicEntityConfigurationService dynamicEntityConfigurationService)
         {
-            _dynamicApiService = dynamicApiService;
-            _dynamicApiConfigurationService = dynamicApiConfigurationService;
             _dynamicEntityConfigurationService = dynamicEntityConfigurationService;
         }
 
@@ -36,12 +25,12 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-               
-                if (apiService == null)
+                var apiEntities = await _dynamicEntityConfigurationService.GetAsync(apiServiceName);
+
+                if (apiEntities == null)
                     return NotFound();
 
-                return Ok(apiService.Entities);
+                return Ok(apiEntities);
             }
             catch (Exception ex)
             {
@@ -56,17 +45,12 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-                
-                if (apiService == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
+                var apiEntity = await _dynamicEntityConfigurationService.GetByIdAsync(apiServiceName, entityName);
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == entityName);
-
-                if (entity == null)
+                if (apiEntity == null)
                     return NotFound($"Сущность {entityName} в api-сервисе {apiServiceName} не найдена.");
 
-                return Ok(entity);
+                return Ok(apiEntity);
             }
             catch (Exception ex)
             {
@@ -81,7 +65,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicEntityConfigurationService.CreateAsync(apiServiceName, apiEntityDto); 
+                var result = await _dynamicEntityConfigurationService.CreateAsync(apiServiceName, apiEntityDto);
 
                 if (!result)
                     return BadRequest($"Не удалось создать сущность у api-сервиса {apiServiceName}.");
@@ -101,14 +85,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-
-                if (apiService == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
-
-                if (!apiService.Entities.Any(e => e.Name == entityName))
-                    return NotFound($"сущность {entityName} у api-сервиса {apiServiceName} не найдена");
-
                 var result = await _dynamicEntityConfigurationService.UpdateAsync(apiServiceName, entityName, apiEntityDto);
 
                 if (!result)
@@ -129,14 +105,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-
-                if (apiService == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
-
-                if (!apiService.Entities.Any(e => e.Name == entityName))
-                    return NotFound($"сущность {entityName} у api-сервиса {apiServiceName} не найдена");
-
                 var result = await _dynamicEntityConfigurationService.DeleteAsync(apiServiceName, entityName);
 
                 if (!result)
@@ -156,14 +124,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var apiService = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
-
-                if (apiService == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
-
-                if (!apiService.Entities.Any(e => e.Name == entityName))
-                    return NotFound($"сущность {entityName} у api-сервиса {apiServiceName} не найдена");
-
                 var result = await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, entityName, isActive);
 
                 if (!result)

@@ -1,9 +1,6 @@
-﻿using ApiEasier.Dal.Helpers;
-using ApiEasier.Dal.Interfaces.FileStorage;
+﻿using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
@@ -41,7 +38,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 Console.WriteLine("Ошибка при добавлении сущности");
                 return false;
             }
-            
+
         }
 
         public async Task<bool> DeleteAsync(string apiServiceName, string id)
@@ -118,6 +115,24 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             {
                 return false;
             }
+        }
+
+        public async Task<List<ApiEntity>> GetAllAsync(string apiServiceName)
+        {
+            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                return [];
+
+            return apiService.Entities;
+        }
+
+        public async Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id)
+        {
+            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                return null;
+
+            return apiService.Entities.FirstOrDefault(e => e.Name == id);
         }
     }
 }

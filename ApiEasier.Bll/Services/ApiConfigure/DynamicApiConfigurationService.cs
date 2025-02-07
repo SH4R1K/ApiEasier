@@ -1,7 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.Converter;
-using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
 
@@ -47,7 +46,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             var apiService = _dtoToApiServiceConverter.Convert(dto);
 
             return await _fileApiServiceRepository.CreateAsync(apiService);
-
         }
 
         /// <summary>

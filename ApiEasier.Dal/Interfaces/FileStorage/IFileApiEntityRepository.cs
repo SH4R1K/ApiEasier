@@ -4,6 +4,8 @@ namespace ApiEasier.Dal.Interfaces.FileStorage
 {
     public interface IFileApiEntityRepository
     {
+        Task<List<ApiEntity>> GetAllAsync(string apiServiceName);
+        Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id);
         Task<bool> CreateAsync(string apiServiceName, ApiEntity apiEntity);
         Task<bool> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity);
         Task<bool> DeleteAsync(string apiServiceName, string id);
