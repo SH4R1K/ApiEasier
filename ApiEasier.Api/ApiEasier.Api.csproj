@@ -15,6 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="ApiConfigurations\test.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
     <PackageReference Include="NJsonSchema" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
