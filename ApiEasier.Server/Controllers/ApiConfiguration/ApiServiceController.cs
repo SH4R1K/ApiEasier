@@ -117,7 +117,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         //PATCH api/ApiService/{apiServiceName}/{isActive}
-        //[HttpPatch("{apiServiceName}/{isActive}")]
+        [HttpPatch("{apiServiceName}/{isActive}")]
         public async Task<IActionResult> ChangeActiveApiService(bool status, string apiServiceName)
         {
             try

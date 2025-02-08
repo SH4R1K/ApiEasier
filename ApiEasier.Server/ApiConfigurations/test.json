@@ -1,0 +1,21 @@
+{
+  "isActive": true,
+  "entities": [
+    {
+      "name": "test",
+      "isActive": true,
+      "endpoints": [
+        {
+          "route": "get",
+          "type": 0,
+          "isActive": true
+        },
+        {
+          "route": "post",
+          "type": 1,
+          "isActive": true
+        }
+      ]
+    }
+  ]
+}

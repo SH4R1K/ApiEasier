@@ -16,6 +16,7 @@ using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dal.Helpers;
 using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dal.Repositories.FileStorage;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace ApiEasier.Api
 {
@@ -34,7 +35,7 @@ namespace ApiEasier.Api
 
 
             // DB
-            var mongoSettings = builder.Configuration.GetSection("MongoDb");
+            var mongoSettings = builder.Configuration.GetSection("DatabaseSettings");
             string connectionString = mongoSettings["ConnectionString"];
             string databaseName = mongoSettings["DatabaseName"];
 
@@ -74,12 +75,20 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
 
             //Helpers
-            var folderPath = builder.Configuration["JsonFileSettings:FolderPath"];
-            if (string.IsNullOrWhiteSpace(folderPath))
-                throw new Exception("JsonFileSettings:FolderPath не задан в конфигурации.");
+            //var folderPath = builder.Configuration["JsonFileSettings:FolderPath"];
+            //if (string.IsNullOrWhiteSpace(folderPath))
+            //    throw new Exception("JsonFileSettings:FolderPath не задан в конфигурации.");
             //builder.Services.AddSingleton<IJsonFileHelper>(sp => new JsonFileHelper(folderPath));
-            builder.Services.AddSingleton(sp => new JsonFileHelper(".\\ApiConfigurations\\"));
+
+            
             builder.Services.AddSingleton(sp => new JsonSerializerHelper());
+
+            builder.Services.AddSingleton<IJsonFileHelper, JsonFileHelper>(provider =>
+            {
+                var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
+                return new JsonFileHelper(jsonDirectoryPath);
+            });
+            builder.Services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
 
             builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
@@ -99,7 +108,7 @@ namespace ApiEasier.Api
 
             var app = builder.Build();
 
-            app.UseHttpLogging();
+            //app.UseHttpLogging();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

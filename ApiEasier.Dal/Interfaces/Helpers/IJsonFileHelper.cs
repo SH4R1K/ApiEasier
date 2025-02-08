@@ -2,5 +2,9 @@
 {
     public interface IJsonFileHelper : IFileHelper
     {
+        public new Task<List<string>> GetAllFiles();
+        public new Task<T?> ReadAsync<T>(string fileName);
+        public new Task WriteAsync<T>(string fileName, T data);
+        public new bool Delete(string fileName);
     }
 }

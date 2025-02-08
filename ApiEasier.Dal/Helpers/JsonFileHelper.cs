@@ -5,7 +5,7 @@ namespace ApiEasier.Dal.Helpers
     /// <summary>
     /// Класс для работы с файлами json
     /// </summary>
-    public class JsonFileHelper
+    public class JsonFileHelper : IJsonFileHelper
     {
         public string FolderPath { get; init; }
 
