@@ -32,7 +32,7 @@ namespace ApiEasier.Dal.Repositories.Db
             };
         }
 
-        public async Task<DynamicResourceData> GetDataByIdAsync(string resourceName, string id)
+        public async Task<DynamicResourceData?> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
@@ -87,7 +87,7 @@ namespace ApiEasier.Dal.Repositories.Db
             return true;
         }
 
-        public async Task<DynamicResourceData> UpdateDataAsync(string resourceName, string id, object data)
+        public async Task<DynamicResourceData?> UpdateDataAsync(string resourceName, string id, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 

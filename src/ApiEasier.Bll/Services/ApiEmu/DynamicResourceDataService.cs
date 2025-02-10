@@ -43,7 +43,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             return result;
         }
 
-        public async Task<DynamicResourceData> AddAsync(string apiName, string apiEntityName, string endpoint, object json)
+        public async Task<DynamicResourceData?> AddAsync(string apiName, string apiEntityName, string endpoint, object json)
         {
             var (isValid, _, entity) = await _validator.ValidateApiAsync(apiName, apiEntityName, endpoint, "post");
             if (!isValid)
@@ -69,7 +69,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             return result;
         }
 
-        public async Task<DynamicResourceData> UpdateAsync(string apiName, string apiEntityName, string endpoint, string id, object json)
+        public async Task<DynamicResourceData?> UpdateAsync(string apiName, string apiEntityName, string endpoint, string id, object json)
         {
             var (isValid, _, entity) = await _validator.ValidateApiAsync(apiName, apiEntityName, endpoint, "put");
             if (!isValid)

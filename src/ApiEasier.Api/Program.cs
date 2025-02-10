@@ -84,10 +84,11 @@ namespace ApiEasier.Api
             });
             builder.Services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
 
+            // Repositories
             builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
-
+            // ------------------------------------------
 
             // Логгирование http в MongoDB
             //builder.Logging.ClearProviders();
