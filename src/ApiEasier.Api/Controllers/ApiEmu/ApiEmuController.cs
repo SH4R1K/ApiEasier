@@ -67,7 +67,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 if (result == null)
                     return NotFound("Данные не были добавлены");
 
-                return Ok(result);
+                return Ok(result.Data);
             }
             catch (Exception ex)
             {
@@ -87,7 +87,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 if (result == null)
                     return NotFound($"Не найдены данные");
 
-                return Ok(result);
+                return Ok(result.Data);
 
             }
             catch (Exception ex)

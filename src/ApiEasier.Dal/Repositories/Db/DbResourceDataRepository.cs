@@ -3,6 +3,7 @@ using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dm.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace ApiEasier.Dal.Repositories.Db
@@ -22,9 +23,12 @@ namespace ApiEasier.Dal.Repositories.Db
             var bsonDocument = BsonDocument.Parse(jsonData.ToString());
             await collection.InsertOneAsync(bsonDocument);
 
+            var bsonDoc = bsonDocument.ToDictionary();
+            bsonDoc["_id"] = bsonDocument["_id"].ToString();
+
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDocument.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())
             };
         }
 
@@ -32,12 +36,18 @@ namespace ApiEasier.Dal.Repositories.Db
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
+            if(!ObjectId.TryParse(id, out var objectId))
+                    return null;
+
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
             var bsonDocument = await collection.Find(filter).FirstOrDefaultAsync();
+
+            var bsonDoc = bsonDocument.ToDictionary();
+            bsonDoc["_id"] = bsonDocument["_id"].ToString();
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDocument.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())
             };
         }
 
@@ -47,9 +57,16 @@ namespace ApiEasier.Dal.Repositories.Db
 
             var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
 
-            return documents.Select(doc => new DynamicResourceData
+            return documents.Select(doc =>
             {
-                Data = JsonNode.Parse(doc.ToJson())
+                var bsonDoc = doc.ToDictionary();
+                bsonDoc["_id"] = doc["_id"].ToString();
+
+                return new DynamicResourceData
+                {
+                    Data = JsonNode.Parse(bsonDoc.ToJson())
+                };
+
             }).ToList();
         }
 
@@ -57,7 +74,10 @@ namespace ApiEasier.Dal.Repositories.Db
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", id);
+            if (!ObjectId.TryParse(id, out var objectId))
+                return false;
+
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
 
             var result = await collection.DeleteOneAsync(filter);
 
@@ -71,20 +91,30 @@ namespace ApiEasier.Dal.Repositories.Db
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
-            var objectId = new ObjectId(id);
-            var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
-            var update = Builders<BsonDocument>.Update.Set("data", data.ToBsonDocument());
+            if (!ObjectId.TryParse(id, out var objectId))
+                return null;
 
-            var result = await collection.UpdateOneAsync(filter, update);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
+
+            var dataStr = data.ToString();
+            var newDocument = BsonDocument.Parse(dataStr);
+
+            // Сохраняем _id в новом документе, чтобы оно не изменилось
+            newDocument["_id"] = objectId;
+
+            var result = await collection.ReplaceOneAsync(filter, newDocument);
 
             if (result.ModifiedCount == 0)
                 return null;
 
             var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
 
+            var bsonDoc = updatedDocument.ToDictionary();
+            bsonDoc["_id"] = updatedDocument["_id"].ToString();
+
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(updatedDocument.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())
             };
         }
     }

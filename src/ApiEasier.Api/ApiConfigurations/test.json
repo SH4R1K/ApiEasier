@@ -14,6 +14,21 @@
           "route": "post",
           "type": 1,
           "isActive": true
+        },
+        {
+          "route": "put",
+          "type": 2,
+          "isActive": true
+        },
+        {
+          "route": "delete",
+          "type": 3,
+          "isActive": true
+        },
+        {
+          "route": "getByIndex",
+          "type": 4,
+          "isActive": true
         }
       ]
     }

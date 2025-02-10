@@ -75,12 +75,6 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
 
             //Helpers
-            //var folderPath = builder.Configuration["JsonFileSettings:FolderPath"];
-            //if (string.IsNullOrWhiteSpace(folderPath))
-            //    throw new Exception("JsonFileSettings:FolderPath не задан в конфигурации.");
-            //builder.Services.AddSingleton<IJsonFileHelper>(sp => new JsonFileHelper(folderPath));
-
-            
             builder.Services.AddSingleton(sp => new JsonSerializerHelper());
 
             builder.Services.AddSingleton<IJsonFileHelper, JsonFileHelper>(provider =>
