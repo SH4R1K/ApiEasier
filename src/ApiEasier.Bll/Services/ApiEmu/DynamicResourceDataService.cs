@@ -31,7 +31,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             return result;
         }
 
-        public async Task<DynamicResourceData> GetByIdAsync(string apiName, string apiEntityName, string endpoint, string id, string? filters)
+        public async Task<DynamicResourceData?> GetByIdAsync(string apiName, string apiEntityName, string endpoint, string id, string? filters)
         {
 
             var (isValid, _, _) = await _validator.ValidateApiAsync(apiName, apiEntityName, endpoint, "getByIndex");

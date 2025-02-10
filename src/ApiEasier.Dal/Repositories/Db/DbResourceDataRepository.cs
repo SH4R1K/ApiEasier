@@ -3,7 +3,6 @@ using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dm.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Text.Json;
 using System.Text.Json.Nodes;
 
 namespace ApiEasier.Dal.Repositories.Db
@@ -36,8 +35,8 @@ namespace ApiEasier.Dal.Repositories.Db
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
-            if(!ObjectId.TryParse(id, out var objectId))
-                    return null;
+            if (!ObjectId.TryParse(id, out var objectId))
+                return null;
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
             var bsonDocument = await collection.Find(filter).FirstOrDefaultAsync();
