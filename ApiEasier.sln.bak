@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEasier.Api", "ApiEasier.Server\ApiEasier.Api.csproj", "{7420A425-EA64-4BB3-870F-BB9CFCA7DCB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEasier.Api", "ApiEasier.Api\ApiEasier.Api.csproj", "{7420A425-EA64-4BB3-870F-BB9CFCA7DCB6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEasier.Bll", "ApiEasier.Bll\ApiEasier.Bll.csproj", "{75B8DC5E-9CBA-4E47-A242-311B51C750D6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEasier.Dal", "ApiEasier.Dal\ApiEasier.Dal.csproj", "{50B4FB02-AE4A-440D-A1D9-2A34624AA654}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEasier.Dm", "ApiEasier.Dm\ApiEasier.Dm.csproj", "{3AFC9669-FA2C-46D2-849A-66FE930ED3F6}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D677B80D-31AA-43AD-AFF3-5D385A7A2811}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{86010D18-FB8C-4D6E-AD52-E933A0852452}"
 EndProject
@@ -40,12 +38,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{7420A425-EA64-4BB3-870F-BB9CFCA7DCB6} = {D677B80D-31AA-43AD-AFF3-5D385A7A2811}
-		{75B8DC5E-9CBA-4E47-A242-311B51C750D6} = {D677B80D-31AA-43AD-AFF3-5D385A7A2811}
-		{50B4FB02-AE4A-440D-A1D9-2A34624AA654} = {D677B80D-31AA-43AD-AFF3-5D385A7A2811}
-		{3AFC9669-FA2C-46D2-849A-66FE930ED3F6} = {D677B80D-31AA-43AD-AFF3-5D385A7A2811}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8791CEEC-B371-49C4-AC07-687CF5477504}
