@@ -31,6 +31,17 @@
           "isActive": true
         }
       ]
+    },
+    {
+      "name": "abob",
+      "isActive": true,
+      "endpoints": []
+    },
+    {
+      "name": "string",
+      "isActive": true,
+      "structure": "string",
+      "endpoints": []
     }
   ]
 }

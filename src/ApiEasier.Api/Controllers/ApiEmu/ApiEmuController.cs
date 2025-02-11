@@ -8,7 +8,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiEmuController : ControllerBase
+    public class ApiEmuController : ControllerBase 
     {
         private readonly IDynamicResourceDataService _dynamicResourceDataService;
 

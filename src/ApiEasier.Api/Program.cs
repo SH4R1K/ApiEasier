@@ -1,21 +1,22 @@
 using ApiEasier.Bll.Converters;
 using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Bll.Interfaces.FileWatcher;
 using ApiEasier.Bll.Interfaces.Validators;
+using ApiEasier.Bll.Services.ApiConfigure;
+using ApiEasier.Bll.Services.ApiEmu;
+using ApiEasier.Bll.Services.FileWatcher;
 using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Data;
-using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Repositories.Db;
-using ApiEasier.Dm.Models;
-using Microsoft.AspNetCore.HttpLogging;
-using ApiEasier.Bll.Services.ApiConfigure;
-using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Bll.Services.ApiEmu;
-using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dal.Helpers;
+using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces.Helpers;
+using ApiEasier.Dal.Repositories.Db;
 using ApiEasier.Dal.Repositories.FileStorage;
+using ApiEasier.Dm.Models;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace ApiEasier.Api
@@ -32,7 +33,6 @@ namespace ApiEasier.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
 
             // DB
             var mongoSettings = builder.Configuration.GetSection("DatabaseSettings");
@@ -53,7 +53,7 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IConverter<ApiService, ApiServiceSummaryDto>, ApiServiceToDtoSummaryConverter>();
             builder.Services.AddScoped<IConverter<ApiServiceDto, ApiService>, DtoToApiServiceConverter>();
 
-            builder.Services.AddScoped<IConverter<ApiEntity,  ApiEntityDto>, ApiEntityToDtoConverter>();
+            builder.Services.AddScoped<IConverter<ApiEntity, ApiEntityDto>, ApiEntityToDtoConverter>();
             builder.Services.AddScoped<IConverter<ApiEntity, ApiEntitySummaryDto>, ApiEntityToDtoSummaryConverter>();
             builder.Services.AddScoped<IConverter<ApiEntityDto, ApiEntity>, DtoToApiEntityConverter>();
 
@@ -73,6 +73,8 @@ namespace ApiEasier.Api
 
             // DAL
             builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
+            // синглтон т.к FileSystemWatcher требует
+            builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
 
             //Helpers
             builder.Services.AddSingleton(sp => new JsonSerializerHelper());
@@ -89,6 +91,23 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
+
+            //FileSystemWatcherService
+            builder.Services.AddScoped<IApiConfigChangeHandler, ApiConfigChangeHandler>();
+            builder.Services.AddHostedService(sp =>
+            {
+                using (var scope = sp.CreateScope())
+                {
+                    var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
+                    var apiConfigChangeHandler = scope.ServiceProvider.GetRequiredService<IApiConfigChangeHandler>();
+                    var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"];
+                    if (jsonDirectoryPath != null)
+                        throw new ArgumentNullException(nameof(jsonDirectoryPath));
+
+                    return new ConfigFileWatcherService(cache, jsonDirectoryPath, apiConfigChangeHandler);
+                }
+            });
+
 
             // Логгирование http в MongoDB
             //builder.Logging.ClearProviders();

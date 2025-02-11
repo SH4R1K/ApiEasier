@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="ApiConfigurations\" />
+    <Folder Include="Cache\" />
   </ItemGroup>
 
 </Project>
