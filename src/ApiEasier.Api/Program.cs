@@ -101,7 +101,7 @@ namespace ApiEasier.Api
                     var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
                     var apiConfigChangeHandler = scope.ServiceProvider.GetRequiredService<IApiConfigChangeHandler>();
                     var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"];
-                    if (jsonDirectoryPath != null)
+                    if (jsonDirectoryPath == null)
                         throw new ArgumentNullException(nameof(jsonDirectoryPath));
 
                     return new ConfigFileWatcherService(cache, jsonDirectoryPath, apiConfigChangeHandler);
