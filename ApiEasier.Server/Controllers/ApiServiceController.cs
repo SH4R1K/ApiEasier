@@ -1,7 +1,9 @@
 ﻿using ApiEasier.Server.Dto;
+using ApiEasier.Server.Hubs;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ApiEasier.Server.Controllers
 {
@@ -13,14 +15,16 @@ namespace ApiEasier.Server.Controllers
     public class ApiServiceController : ControllerBase
     {
         private readonly IConfigFileApiService _configFileApiService;
+        private readonly IHubContext<ApiListHub, IApiListHub> _hubContext;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ApiServiceController"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiServiceController(IConfigFileApiService configFileApiService)
+        public ApiServiceController(IConfigFileApiService configFileApiService, IHubContext<ApiListHub, IApiListHub> hubContext)
         {
             _configFileApiService = configFileApiService;
+            _hubContext = hubContext;
         }
 
         // GET api/ApiService
@@ -79,7 +83,6 @@ namespace ApiEasier.Server.Controllers
             {
                 return BadRequest("Данные API сервиса отсутствуют.");
             }
-
             try
             {
                 string apiServiceName = apiServiceDto.Name;
@@ -97,7 +100,13 @@ namespace ApiEasier.Server.Controllers
                 };
 
                 await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
-
+                await _hubContext.Clients.All.AddService(
+                            new ShortApiServiceDto
+                            {
+                                Name = apiServiceDto.Name,
+                                IsActive = apiServiceDto.IsActive,
+                                Description = apiServiceDto.Description
+                            });
                 return CreatedAtAction(nameof(Get), new { name = apiServiceName }, apiServiceDto);
             }
             catch (Exception ex)
@@ -124,13 +133,19 @@ namespace ApiEasier.Server.Controllers
                 {
                     return NotFound($"Файл {oldName}.json не существует.");
                 }
-
+                
                 apiService.IsActive = apiServiceDto.IsActive;
                 apiService.Description = apiServiceDto.Description;
 
                 await _configFileApiService.SerializeApiServiceAsync(oldName, apiService);
                 _configFileApiService.RenameApiService(oldName, apiServiceDto);
-
+                await _hubContext.Clients.All.UpdateService(oldName,
+                            new ShortApiServiceDto
+                            {
+                                Name = apiServiceDto.Name,
+                                IsActive = apiServiceDto.IsActive,
+                                Description = apiServiceDto.Description
+                            });
                 return NoContent();
             }
             catch (Exception ex)
@@ -142,7 +157,7 @@ namespace ApiEasier.Server.Controllers
 
         // DELETE api/ApiService/{apiServiceName}
         [HttpDelete("{apiServiceName}")]
-        public IActionResult Delete(string apiServiceName)
+        public async Task<IActionResult> Delete(string apiServiceName)
         {
             try
             {
@@ -152,6 +167,7 @@ namespace ApiEasier.Server.Controllers
                 }
 
                 _configFileApiService.DeleteApiService(apiServiceName);
+                await _hubContext.Clients.All.RemoveService(apiServiceName);
                 return NoContent();
             }
             catch (Exception ex)
@@ -177,6 +193,7 @@ namespace ApiEasier.Server.Controllers
                 apiService.IsActive = isActive;
 
                 await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+                await _hubContext.Clients.All.UpdateStatusService(apiServiceName, isActive);
                 return NoContent();
             }
             catch (Exception ex)
