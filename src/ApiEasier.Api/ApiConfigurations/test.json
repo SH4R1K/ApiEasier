@@ -33,11 +33,6 @@
       ]
     },
     {
-      "name": "abob",
-      "isActive": true,
-      "endpoints": []
-    },
-    {
       "name": "string",
       "isActive": true,
       "structure": "string",

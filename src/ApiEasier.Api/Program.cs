@@ -73,7 +73,6 @@ namespace ApiEasier.Api
 
             // DAL
             builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
-            // синглтон т.к FileSystemWatcher требует
             builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
 
             //Helpers
