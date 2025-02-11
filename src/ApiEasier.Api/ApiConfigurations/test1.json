@@ -1,0 +1,18 @@
+{
+  "isActive": true,
+  "description": "string",
+  "entities": [
+    {
+      "name": "test1",
+      "isActive": true,
+      "structure": "string",
+      "endpoints": [
+        {
+          "route": "get",
+          "type": 0,
+          "isActive": true
+        }
+      ]
+    }
+  ]
+}

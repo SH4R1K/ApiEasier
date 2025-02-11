@@ -81,7 +81,9 @@ namespace ApiEasier.Api
             builder.Services.AddSingleton<IJsonFileHelper, JsonFileHelper>(provider =>
             {
                 var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
-                return new JsonFileHelper(jsonDirectoryPath);
+                var memoryCache = provider.GetRequiredService<IMemoryCache>();
+
+                return new JsonFileHelper(jsonDirectoryPath, memoryCache);
             });
             builder.Services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
 
