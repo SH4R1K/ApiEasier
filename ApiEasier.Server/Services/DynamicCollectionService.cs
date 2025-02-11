@@ -12,14 +12,16 @@ namespace ApiEasier.Server.Services
     public class DynamicCollectionService : IDynamicCollectionService
     {
         private readonly MongoDbContext _dbContext;
+        private readonly IConfigFileApiService _configFileApiService;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="DynamicCollectionService"/>.
         /// </summary>
         /// <param name="dbContext">Контекст MongoDB.</param>
-        public DynamicCollectionService(MongoDbContext dbContext)
+        public DynamicCollectionService(MongoDbContext dbContext, IConfigFileApiService configFileApiService)
         {
             _dbContext = dbContext;
+            _configFileApiService = configFileApiService;
         }
 
         /// <summary>
@@ -59,7 +61,7 @@ namespace ApiEasier.Server.Services
         {
             try
             {
-                var collections = await _dbContext.ListCollectionNamesAsync();
+                var collections = await _dbContext.GetListCollectionNamesAsync();
                 if (!collections.Contains(collectionName))
                     return null;
 
@@ -89,7 +91,7 @@ namespace ApiEasier.Server.Services
         {
             try
             {
-                var collections = await _dbContext.ListCollectionNamesAsync();
+                var collections = await _dbContext.GetListCollectionNamesAsync();
                 if (!collections.Contains(collectionName))
                     return null;
 
@@ -176,7 +178,7 @@ namespace ApiEasier.Server.Services
         {
             try
             {
-                var collections = await _dbContext.ListCollectionNamesAsync();
+                var collections = await _dbContext.GetListCollectionNamesAsync();
                 if (!collections.Contains(collectionName))
                     return null;
 
@@ -214,6 +216,65 @@ namespace ApiEasier.Server.Services
             {
                 Console.WriteLine("Ошибка: " + ex.Message);
                 throw new ArgumentException("Ошибка при обновлении документа: " + ex.Message, ex);
+            }
+        }
+
+        /// <summary>
+        /// Удаляет коллекции по удалении конфигурации API-сервиса.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
+        public async Task DeleteCollectionsByDeletedApiServiceAsync(string apiServiceName)
+        {
+            foreach (var collection in (await _dbContext.GetListCollectionNamesAsync()).Where(c => c.Split("_")[0] == apiServiceName))
+            {
+                await _dbContext.DropCollectionAsync(collection);
+            }
+        }
+
+        /// <summary>
+        /// Удаляет коллекцию по изменении конфигурации API-сервиса.
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
+        public async Task DeleteCollectionsByChangedApiServiceAsync(string apiServiceName)
+        {
+            var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+            foreach (var collection in (await _dbContext.GetListCollectionNamesAsync()).Where(c => c.Split("_")[0] == apiServiceName && !apiService.Entities.Any(e => e.Name == c.Split("_")[1])))
+            {
+                await _dbContext.DropCollectionAsync(collection);
+            }
+        }
+
+        /// <summary>
+        /// Переименовывает коллекцию по новому имени API-сервиса.
+        /// </summary>
+        /// <param name="oldApiServiceName">Старое имя API-сервиса</param>
+        /// <param name="apiServiceName">Новое имя API-сервиса</param>
+        public async Task RenameCollectionsByApiServiceAsync(string oldApiServiceName, string apiServiceName)
+        {
+            var list = await _dbContext.GetListCollectionNamesAsync();
+            var temp = list.FirstOrDefault().Split("_")[0];
+            foreach (var collection in (await _dbContext.GetListCollectionNamesAsync()).Where(c => c.Split("_")[0] == oldApiServiceName))
+            {
+                await _dbContext.RenameCollectionAsync(collection, $"{apiServiceName}_{collection.Split("_")[1]}");
+            }
+        }
+
+        /// <summary>
+        /// Находит неиспользуемые коллекции по всем файлам конфигурации и удаляет их
+        /// </summary>
+        public async Task DeleteTrashCollectionAsync()
+        {
+            try
+            {
+                var apiServices = await _configFileApiService.GetApiServicesAsync();
+                foreach (var collection in (await _dbContext.GetListCollectionNamesAsync())
+                    .Where(c => !apiServices.Any(asn => c.Split("_")[0] == asn.Name) || !apiServices.Any(ase => ase.Entities.Any(e => e.Name == c.Split("_")[1]))))
+                    await _dbContext.DropCollectionAsync(collection);
+            }
+            catch (Exception ex) 
+            { 
+                //Нужен логгер
+                Console.WriteLine(ex.ToString());
             }
         }
     }

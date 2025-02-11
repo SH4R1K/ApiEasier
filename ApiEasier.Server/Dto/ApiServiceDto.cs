@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Server.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Server.Dto
 {
@@ -7,15 +8,22 @@ namespace ApiEasier.Server.Dto
     /// </summary>
     public class ApiServiceDto
     {
+
         /// <summary>
         /// Имя API-сервиса.
         /// </summary>
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
         public string Name { get; set; }
 
         /// <summary>
         /// Указывает, активен ли API-сервис.
         /// </summary>
         public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Описание API-сервиса.
+        /// </summary>
+        public string? Description { get; set; }
 
         /// <summary>
         /// Список сущностей, связанных с API-сервисом.

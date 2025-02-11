@@ -31,12 +31,6 @@ namespace ApiEasier.Server.Interfaces
         Task<ApiEntity?> GetApiEntityAsync(string entityName, string apiServiceName);
 
         /// <summary>
-        /// Получает имена всех доступных API-сервисов.
-        /// </summary>
-        /// <returns>Перечисление имен API-сервисов.</returns>
-        IEnumerable<string> GetApiServiceNames();
-
-        /// <summary>
         /// Асинхронно получает API-сервис по его имени.
         /// </summary>
         /// <param name="apiServiceName">Имя API-сервиса для получения.</param>
@@ -62,5 +56,14 @@ namespace ApiEasier.Server.Interfaces
         /// <param name="apiServiceName">Имя API-сервиса для проверки.</param>
         /// <returns><c>true</c>, если сервис существует; иначе <c>false</c>.</returns>
         bool IsApiServiceExist(string apiServiceName);
+
+        /// <summary>
+        /// Получает данныне API-сервисов в директории.
+        /// </summary>
+        /// <param name="searchTerm">Термин для поиска по именам API-сервисов (необязательно).</param>
+        /// <param name="page">Номер страницы для пагинации (необязательно).</param>
+        /// <param name="pageSize">Количество элементов на странице (необязательно, по умолчанию 10).</param>
+        /// <returns>Список имен API-сервисов.</returns>
+        Task<List<ApiServiceDto>> GetApiServicesAsync(int? page = null, string? searchTerm = null, int? pageSize = 10);
     }
 }

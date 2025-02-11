@@ -196,6 +196,49 @@ namespace ApiEasier.Server.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
+
+        //PATCH api/ApiService/{apiServiceName}/{apiEntityName}/{apiActionName}/{isActive}
+        [HttpPatch("{apiServiceName}/{apiEntityName}/{apiActionName}/{isActive}")]
+        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName, string apiActionName)
+        {
+            try
+            {
+                var apiService = await _configFileApiService.DeserializeApiServiceAsync(apiServiceName);
+
+                // Проверка существования файла
+                if (apiService == null)
+                {
+                    return NotFound($"Файл {apiServiceName}.json не существует."); // Возвращаем 404, если файл не найден
+                }
+
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
+
+                if (entity == null)
+                {
+                    return NotFound($"Сущность с именем {apiEntityName} не найдена");
+                }
+
+                // Поиск существующего действия
+                var existingAction = entity.Actions.FirstOrDefault(a => a.Route == apiActionName);
+                if (existingAction == null)
+                {
+                    return NotFound($"Действие с именем {apiActionName} не найдено."); // Возвращаем 404, если действие не найдено
+                }
+
+                // Обновление действия
+                existingAction.IsActive = isActive;
+
+                if (!_configFileApiService.IsApiServiceExist(apiServiceName))
+                    return Conflict($"Файл {apiServiceName}.json не существует.");
+                await _configFileApiService.SerializeApiServiceAsync(apiServiceName, apiService);
+
+                return NoContent(); // Возвращаем 204 No Content, так как обновление прошло успешно
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+            }
+        }
     }
 }
 

@@ -13,7 +13,7 @@ namespace ApiEasier.Server.LogsService
     {
         private readonly IMongoCollection<BsonDocument> _logCollection;
 
-        public MongoLoggerProvider(IOptions<DbSerttings> settings)
+        public MongoLoggerProvider(IOptions<DbSettings> settings)
         {
             var client = new MongoClient(settings.Value.ConnectionString);
             var database = client.GetDatabase(settings.Value.LogsDatabaseName);
