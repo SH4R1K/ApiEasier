@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Bll.Dto
+﻿using ApiEasier.Bll.Dto.JsonShemaDto;
+
+namespace ApiEasier.Bll.Dto
 {
     public class ApiEntityDto
     {
@@ -15,7 +17,7 @@
         /// <summary>
         /// Структура сущности API.
         /// </summary>
-        public object? Structure { get; set; } = null;
+        public JsonSchema? Structure { get; set; } = null;
 
         /// <summary>
         /// Список конечных точек, связанных с сущностью API.
