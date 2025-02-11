@@ -1,4 +1,5 @@
 using ApiEasier.Server.Db;
+using ApiEasier.Server.Hubs;
 using ApiEasier.Server.Interfaces;
 using ApiEasier.Server.LogsService;
 using ApiEasier.Server.Services;
@@ -58,12 +59,17 @@ namespace ApiEasier.Server
                                       .AllowAnyHeader()); // Разрешить любые заголовки
             });
 
+            builder.Services.AddSignalR();
 
             builder.Configuration.AddEnvironmentVariables();
 
             var app = builder.Build();
 
             app.UseHttpLogging();
+
+            app.MapHub<ApiListHub>("/hubs/apilisthub");
+
+            app.UseCors("AllowAllOrigins");
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
