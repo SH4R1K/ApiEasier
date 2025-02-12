@@ -1,6 +1,5 @@
 ﻿using ApiEasier.Dal.Interfaces.Helpers;
 using Microsoft.Extensions.Caching.Memory;
-using SharpCompress.Common;
 
 namespace ApiEasier.Dal.Helpers
 {
@@ -43,16 +42,9 @@ namespace ApiEasier.Dal.Helpers
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList());
             }
-            catch(DirectoryNotFoundException)
+            catch (DirectoryNotFoundException)
             {
-                try
-                {
-                    Directory.CreateDirectory(FolderPath);
-                }
-                catch 
-                {
-                    return null;
-                }
+                Directory.CreateDirectory(FolderPath);
 
                 return await GetAllFilesAsync();
             }
@@ -69,7 +61,7 @@ namespace ApiEasier.Dal.Helpers
 
             if (!File.Exists(filePath))
                 return default;
-                
+
             var json = await File.ReadAllTextAsync(filePath);
             var data = JsonSerializerHelper.Deserialize<T>(json);
 

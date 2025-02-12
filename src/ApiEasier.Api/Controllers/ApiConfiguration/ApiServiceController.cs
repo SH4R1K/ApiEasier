@@ -21,7 +21,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // GET api/ApiService
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] int? page, [FromQuery] string? searchTerm, [FromQuery] int? pageSize)
+        public async Task<IActionResult> GetAll()
         {
             try
             {
