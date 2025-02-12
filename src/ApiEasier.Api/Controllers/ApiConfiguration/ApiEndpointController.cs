@@ -58,11 +58,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // POST api/ApiAction/{apiServiceName}/{entityName}
         [HttpPost("{apiServiceName}/{apiEntityName}")]
-        public async Task<IActionResult> CreateEndpoint(string apiServiceName, string apiEntityName, [FromBody] ApiEndpointDto apiEndpoitn)
+        public async Task<IActionResult> CreateEndpoint(string apiServiceName, string apiEntityName, [FromBody] ApiEndpointDto apiEndpoint)
         {
             try
             {
-                var result = await _dynamicEndpointConfigurationService.CreateAsync(apiServiceName, apiEntityName, apiEndpoitn);
+                var result = await _dynamicEndpointConfigurationService.CreateAsync(apiServiceName, apiEntityName, apiEndpoint);
                 if (!result)
                     return BadRequest("Не удалось создать эндпоинт");
 
