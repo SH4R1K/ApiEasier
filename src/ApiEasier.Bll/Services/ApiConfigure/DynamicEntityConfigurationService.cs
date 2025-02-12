@@ -41,7 +41,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 
         public async Task<bool> UpdateAsync(string apiServiceName, string entityName, ApiEntityDto apiEntity)
         {
-            // ошибка если коллекции нет
             if (entityName != apiEntity.Name)
             {
                 await _dbResourceRepository.UpdateByApiEntityNameAsync(apiServiceName, entityName, apiEntity.Name);
