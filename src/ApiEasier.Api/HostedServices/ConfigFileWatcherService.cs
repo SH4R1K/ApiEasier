@@ -10,13 +10,11 @@ namespace ApiEasier.Bll.Services.FileWatcher
     public class ConfigFileWatcherService : IHostedService
     {
         private FileSystemWatcher _fileSystemWatcher;
-        private readonly IApiConfigChangeHandler _apiConfigChangeHandler;
         private readonly IMemoryCache _cache;
 
         public ConfigFileWatcherService(
             IMemoryCache cache,
-            string directoryPath,
-            IApiConfigChangeHandler apiConfigChangeHandler)
+            string directoryPath)
         {
             _cache = cache;
 
@@ -27,7 +25,6 @@ namespace ApiEasier.Bll.Services.FileWatcher
                 EnableRaisingEvents = false
             };
 
-            _apiConfigChangeHandler = apiConfigChangeHandler;
 
             _fileSystemWatcher.Changed += OnChanged;
 
@@ -54,8 +51,6 @@ namespace ApiEasier.Bll.Services.FileWatcher
         private async void OnDeleted(object sender, FileSystemEventArgs e)
         {
             _cache.Remove(Path.GetFileNameWithoutExtension(e.Name));
-
-            await _apiConfigChangeHandler.OnConfigDeletedAsync(Path.GetFileNameWithoutExtension(e.Name));
         }
 
         private async void OnRenamed(object sender, RenamedEventArgs e)

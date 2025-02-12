@@ -35,6 +35,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
+                var apiServiceExist = GetByIdAsync(apiService.Name);
+                if (apiServiceExist != null)
+                    return default;
+
                 var result = await _jsonFileHelper.WriteAsync(apiService.Name, apiService);
                 return result;
             }

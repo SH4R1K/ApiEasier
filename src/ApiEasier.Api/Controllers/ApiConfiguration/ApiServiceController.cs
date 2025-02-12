@@ -103,7 +103,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = _dynamicApiConfigurationService.Delete(apiServiceName);
+                var result = await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
                 if (!result)
                     return NotFound($"Не удалось найти api-сервис {apiServiceName}");
 
