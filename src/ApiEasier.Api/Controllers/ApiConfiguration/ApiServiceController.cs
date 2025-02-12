@@ -39,7 +39,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         }
 
         // GET api/ApiService/{name}
-        [HttpGet("{name}")]
+        [HttpGet("{apiServiceName}")]
         public async Task<IActionResult> GetByName(string apiServiceName)
         {
             try
