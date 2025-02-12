@@ -67,10 +67,10 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = await _dynamicEntityConfigurationService.CreateAsync(apiServiceName, apiEntityDto);
 
-                if (!result)
+                if (result == null)
                     return BadRequest($"Не удалось создать сущность у api-сервиса {apiServiceName}.");
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {

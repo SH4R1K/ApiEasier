@@ -49,7 +49,7 @@ namespace ApiEasier.Dal.Helpers
             return data;
         }
 
-        public async Task WriteAsync<T>(string fileName, T data)
+        public async Task<T?> WriteAsync<T>(string fileName, T data)
         {
             //на случай отказа от FileSystemWatcherService
             //_cache.Remove(fileName);
@@ -57,6 +57,8 @@ namespace ApiEasier.Dal.Helpers
             var filePath = GetFilePath(fileName);
             var json = JsonSerializerHelper.Serialize(data);
             await File.WriteAllTextAsync(filePath, json);
+
+            return data;
         }
 
         public bool Delete(string fileName)
