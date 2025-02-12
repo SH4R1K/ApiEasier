@@ -33,7 +33,7 @@ namespace ApiEasier.Dal.Helpers
         }
 
 
-        public async Task<List<string>> GetAllFiles()
+        public async Task<List<string>> GetAllFilesAsync()
         {
             try
             {
@@ -43,15 +43,18 @@ namespace ApiEasier.Dal.Helpers
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList());
             }
-            catch
+            catch(DirectoryNotFoundException)
             {
-                Directory.CreateDirectory(FolderPath);
+                try
+                {
+                    Directory.CreateDirectory(FolderPath);
+                }
+                catch 
+                {
+                    return null;
+                }
 
-                return await Task.Run(() =>
-                Directory.GetFiles(FolderPath, "*.json")
-                .Select(f => Path.GetFileNameWithoutExtension(f)!)
-                .Where(x => !string.IsNullOrEmpty(x))
-                .ToList());
+                return await GetAllFilesAsync();
             }
         }
 

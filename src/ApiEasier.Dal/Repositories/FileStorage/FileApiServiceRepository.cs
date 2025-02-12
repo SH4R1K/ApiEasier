@@ -61,7 +61,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<List<ApiService>> GetAllAsync()
         {
-            var filesNames = await _jsonFileHelper.GetAllFiles();
+            var filesNames = await _jsonFileHelper.GetAllFilesAsync();
 
             List<ApiService> apiServices = new List<ApiService>();
             
