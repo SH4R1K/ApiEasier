@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Dal.Interfaces.Helpers;
 using Microsoft.Extensions.Caching.Memory;
+using SharpCompress.Common;
 
 namespace ApiEasier.Dal.Helpers
 {
@@ -14,24 +15,49 @@ namespace ApiEasier.Dal.Helpers
 
         public JsonFileHelper(string folderPath, IMemoryCache cache)
         {
-            FolderPath = folderPath ?? throw new ArgumentException(nameof(folderPath));
+            if (string.IsNullOrWhiteSpace(folderPath))
+                throw new ArgumentException("Путь к папке не может быть пустым.", nameof(folderPath));
+
+            FolderPath = folderPath;
             _cache = cache;
         }
 
-        private string GetFilePath(string fileName) => Path.Combine(FolderPath, fileName + ".json");
+        private string GetFilePath(string fileName)
+        {
+            if (!Directory.Exists(FolderPath))
+            {
+                Directory.CreateDirectory(FolderPath);
+            }
+
+            return Path.Combine(FolderPath, fileName + ".json");
+        }
+
 
         public async Task<List<string>> GetAllFiles()
         {
-            return await Task.Run(() =>
+            try
+            {
+                return await Task.Run(() =>
                 Directory.GetFiles(FolderPath, "*.json")
                 .Select(f => Path.GetFileNameWithoutExtension(f)!)
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList());
+            }
+            catch
+            {
+                Directory.CreateDirectory(FolderPath);
+
+                return await Task.Run(() =>
+                Directory.GetFiles(FolderPath, "*.json")
+                .Select(f => Path.GetFileNameWithoutExtension(f)!)
+                .Where(x => !string.IsNullOrEmpty(x))
+                .ToList());
+            }
         }
 
         public async Task<T?> ReadAsync<T>(string fileName)
         {
-            if(_cache.TryGetValue(fileName, out T? value))
+            if (_cache.TryGetValue(fileName, out T? value))
             {
                 return value;
             }
@@ -40,7 +66,7 @@ namespace ApiEasier.Dal.Helpers
 
             if (!File.Exists(filePath))
                 return default;
-
+                
             var json = await File.ReadAllTextAsync(filePath);
             var data = JsonSerializerHelper.Deserialize<T>(json);
 
@@ -55,6 +81,7 @@ namespace ApiEasier.Dal.Helpers
             //_cache.Remove(fileName);
 
             var filePath = GetFilePath(fileName);
+
             var json = JsonSerializerHelper.Serialize(data);
             await File.WriteAllTextAsync(filePath, json);
 
@@ -67,7 +94,7 @@ namespace ApiEasier.Dal.Helpers
             {
                 var filePath = GetFilePath(fileName);
                 if (!File.Exists(filePath))
-                    return false;
+                    Directory.CreateDirectory(FolderPath);
 
                 File.Delete(filePath);
                 return true;
