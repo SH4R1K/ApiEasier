@@ -25,9 +25,20 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string entityName, string endpointName, bool status)
             => await _fileApiEndpointRepository.ChangeActiveStatusAsync(apiServiceName, entityName, endpointName, status);
 
-        public async Task<bool> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpointDto apiEndpointDto)
-        => await _fileApiEndpointRepository.CreateAsync(apiServiceName, apiEntityName, _dtoToApiEndpointConverter.Convert(apiEndpointDto));
+        public async Task<ApiEndpointDto?> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpointDto apiEndpointDto)
+        {
+            var result = await _fileApiEndpointRepository.CreateAsync(
+                apiServiceName,
+                apiEntityName,
+                _dtoToApiEndpointConverter.Convert(apiEndpointDto)
+            );
 
+            if (result == null )
+                return null;
+
+            return _apiEndpointToDtoConverter.Convert(result);
+        }
+        
         public async Task<bool> DeleteAsync(string apiServiceName, string apiEntityName, string id)
             => await _fileApiEndpointRepository.DeleteAsync(apiServiceName, apiEntityName, id);
 

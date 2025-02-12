@@ -41,11 +41,15 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         /// </summary>
         /// <param name="dto">данные для создания</param>
         /// <returns></returns>
-        public async Task<bool> CreateAsync(ApiServiceDto dto)
+        public async Task<ApiServiceDto?> CreateAsync(ApiServiceDto dto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(dto);
 
-            return await _fileApiServiceRepository.CreateAsync(apiService);
+            var result = await _fileApiServiceRepository.CreateAsync(apiService);
+            if (result == null)
+                return null;
+
+            return _apiServiceToDtoConverter.Convert(result);
         }
 
         /// <summary>

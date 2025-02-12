@@ -41,29 +41,31 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             }
         }
 
-        public async Task<bool> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpoint apiEndpoint)
+        public async Task<ApiEndpoint?> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpoint apiEndpoint)
         {
             try
             {
                 var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
                 // проверка существования api-сервиса
                 if (apiService == null)
-                    return false;
+                    return null;
 
                 var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
                 if (apiEntity == null)
-                    return false;
+                    return null;
 
                 apiEntity.Endpoints.Add(apiEndpoint);
 
-                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                var result = await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                if (result == null) 
+                    return null;
 
-                return true;
+                return apiEndpoint;
             }
             catch
             {
                 Console.WriteLine("Ошибка при добавлении сущности");
-                return false;
+                return null;
             }
         }
 

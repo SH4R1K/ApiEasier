@@ -63,10 +63,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicEndpointConfigurationService.CreateAsync(apiServiceName, apiEntityName, apiEndpoint);
-                if (!result)
+                if (result == null)
+
                     return BadRequest("Не удалось создать эндпоинт");
 
-                return NoContent();
+                return Ok(result);
             }
             catch (Exception ex)
             {

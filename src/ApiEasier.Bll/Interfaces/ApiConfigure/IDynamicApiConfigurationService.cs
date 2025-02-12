@@ -4,7 +4,7 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
 {
     public interface IDynamicApiConfigurationService
     {
-        Task<bool> CreateAsync(ApiServiceDto dto);
+        Task<ApiServiceDto?> CreateAsync(ApiServiceDto dto);
         Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto dto);
         bool Delete(string id);
         Task<List<ApiServiceSummaryDto>> GetAsync();

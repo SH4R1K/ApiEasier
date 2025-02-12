@@ -66,7 +66,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
 
-                if (!result)
+                if (result == null)
                     return NotFound("Не удалось создать api-сервис");
                 
                 return Ok(result);
