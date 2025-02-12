@@ -126,6 +126,7 @@ namespace ApiEasier.Api
             var app = builder.Build();
 
             //app.UseHttpLogging();
+            app.UseMiddleware<HttpLoggingMiddleware>();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

@@ -34,7 +34,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                _logger.LogInfo(apiServiceName + apiEntityName);
+                _logger.LogDebug(apiServiceName);
                 return Ok(await _dynamicEndpointConfigurationService.GetAsync(apiServiceName, apiEntityName));
             }
             catch (Exception ex)
