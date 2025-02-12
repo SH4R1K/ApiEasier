@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Bll.Interfaces.Logger;
 using ApiEasier.Bll.Services.ApiConfigure;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,15 +14,18 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     public class ApiEndpointController : ControllerBase
     {
         private readonly IDynamicEndpointConfigurationService _dynamicEndpointConfigurationService;
+        private readonly ILoggerService _logger;
 
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="ApiEndpointController"/>.
         /// </summary>
         /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
         public ApiEndpointController(
-            IDynamicEndpointConfigurationService dynamicEndpointConfigurationService)
+            IDynamicEndpointConfigurationService dynamicEndpointConfigurationService,
+            ILoggerService logger)
         {
             _dynamicEndpointConfigurationService = dynamicEndpointConfigurationService;
+            _logger = logger;
         }
 
         // GET api/ApiAction/{apiServiceName}/{entityName}
@@ -30,6 +34,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
+                _logger.LogInfo(apiServiceName + apiEntityName);
                 return Ok(await _dynamicEndpointConfigurationService.GetAsync(apiServiceName, apiEntityName));
             }
             catch (Exception ex)

@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="NJsonSchema" Version="11.1.0" />
+    <PackageReference Include="NLog" Version="5.4.0" />
+    <PackageReference Include="NLog.Mongo" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,6 +3,7 @@ using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Bll.Interfaces.Logger;
 using ApiEasier.Bll.Interfaces.FileWatcher;
 using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Bll.Services.ApiConfigure;
@@ -18,6 +19,7 @@ using ApiEasier.Dal.Repositories.Db;
 using ApiEasier.Dal.Repositories.FileStorage;
 using ApiEasier.Dm.Models;
 using Microsoft.Extensions.Caching.Memory;
+using ApiEasier.Bll.Services.Logger;
 
 namespace ApiEasier.Api
 {
@@ -109,7 +111,7 @@ namespace ApiEasier.Api
                 }
             });
 
-
+            builder.Services.AddSingleton<ILoggerService, NLogService>();
             // Логгирование http в MongoDB
             //builder.Logging.ClearProviders();
             //builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
