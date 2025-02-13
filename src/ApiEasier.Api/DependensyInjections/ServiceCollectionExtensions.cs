@@ -110,8 +110,9 @@ namespace ApiEasier.Api.DependensyInjections
                 using (var scope = sp.CreateScope())
                 {
                     var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
+                    var logger = scope.ServiceProvider.GetRequiredService<ILoggerService>();
 
-                    return new DataCleanupService(dbDataCleanupService);
+                    return new DataCleanupService(dbDataCleanupService, logger);
                 }
             });
 
