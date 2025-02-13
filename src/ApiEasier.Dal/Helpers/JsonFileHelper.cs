@@ -4,7 +4,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace ApiEasier.Dal.Helpers
 {
     /// <summary>
-    /// Класс для работы с файлами json
+    /// Обеспечивает работу с файлами JSON
     /// </summary>
     public class JsonFileHelper : IJsonFileHelper
     {
@@ -21,6 +21,11 @@ namespace ApiEasier.Dal.Helpers
             _cache = cache;
         }
 
+        /// <summary>
+        /// Возвращает полный путь к файлу JSON по его имени без расширения
+        /// </summary>
+        /// <param name="fileName">Имя файла JSON без расширения</param>
+        /// <returns>Полный путь к файлу JSON</returns>
         private string GetFilePath(string fileName)
         {
             if (!Directory.Exists(FolderPath))
@@ -31,8 +36,11 @@ namespace ApiEasier.Dal.Helpers
             return Path.Combine(FolderPath, fileName + ".json");
         }
 
-
-        public async Task<List<string>> GetAllFilesAsync()
+        /// <summary>
+        /// Получает список названий файлов JSON без расширения из папки для конфигураций
+        /// </summary>
+        /// <inheritdoc/>
+        public async Task<List<string>> GetAllFileNamesAsync()
         {
             try
             {
@@ -46,10 +54,16 @@ namespace ApiEasier.Dal.Helpers
             {
                 Directory.CreateDirectory(FolderPath);
 
-                return await GetAllFilesAsync();
+                return await GetAllFileNamesAsync();
             }
         }
 
+        /// <summary>
+        /// Читает и сериализует содержимое файла JSON
+        /// </summary>
+        /// <typeparam name="T">Тип объекта получаемого из содержимого файла JSON</typeparam>
+        /// <returns>Объект из JSON</returns>
+        /// <inheritdoc/>
         public async Task<T?> ReadAsync<T>(string fileName)
         {
             if (_cache.TryGetValue(fileName, out T? value))

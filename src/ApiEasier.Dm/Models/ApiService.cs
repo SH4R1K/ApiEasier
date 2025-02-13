@@ -24,13 +24,5 @@ namespace ApiEasier.Dm.Models
         /// Список сущностей, связанных с API-сервисом.
         /// </summary>
         public List<ApiEntity> Entities { get; set; } = new List<ApiEntity>();
-
-        [JsonConstructor]
-        public ApiService() { }
-
-        public ApiService(string name)
-        {
-            Name = name;
-        }
     }
 }

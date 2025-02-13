@@ -18,6 +18,7 @@ using ApiEasier.Dal.Repositories.Db;
 using ApiEasier.Dal.Repositories.FileStorage;
 using ApiEasier.Dm.Models;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.OpenApi.Models;
 
 namespace ApiEasier.Api
 {
@@ -32,7 +33,13 @@ namespace ApiEasier.Api
             builder.Services.AddMemoryCache();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                var basePath = AppContext.BaseDirectory;
+
+                var xmlPath = Path.Combine(basePath, "ApiEasier.Api.xml");
+                options.IncludeXmlComments(xmlPath);
+            });
 
             // DB
             var mongoSettings = builder.Configuration.GetSection("DatabaseSettings");
@@ -96,7 +103,7 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
 
             // Repositories
-            builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
+            builder.Services.AddScoped<IApiServiceRepository, FileApiServiceRepository>();
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
