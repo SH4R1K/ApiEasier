@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.Converter;
 using ApiEasier.Bll.Interfaces.Validators;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 using NJsonSchema;
 using System.Text.Json;

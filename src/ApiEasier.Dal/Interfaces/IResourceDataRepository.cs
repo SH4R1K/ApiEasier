@@ -1,8 +1,8 @@
 ﻿using ApiEasier.Dm.Models;
 
-namespace ApiEasier.Dal.Interfaces.Db
+namespace ApiEasier.Dal.Interfaces
 {
-    public interface IDbResourceDataRepository
+    public interface IResourceDataRepository
     {
         Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName);
         Task<DynamicResourceData> CreateDataAsync(string resourceName, object data);

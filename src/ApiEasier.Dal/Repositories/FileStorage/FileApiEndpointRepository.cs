@@ -1,23 +1,23 @@
-﻿using ApiEasier.Dal.Interfaces.FileStorage;
+﻿using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
-    public class FileApiEndpointRepository : IFileApiEndpointRepository
+    public class FileApiEndpointRepository : IApiEndpointRepository
     {
-        private readonly IFileHelper _jsonFileHelper;
+        private readonly IFileHelper _fileHelper;
 
         public FileApiEndpointRepository(IFileHelper jsonFileHelper)
         {
-            _jsonFileHelper = jsonFileHelper;
+            _fileHelper = jsonFileHelper;
         }
 
         public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string apiEntityName, string id, bool status)
         {
             try
             {
-                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(id);
                 if (apiService == null || apiService.Entities == null)
                     return false;
 
@@ -31,7 +31,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 endpoint.IsActive = status;
 
-                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                await _fileHelper.WriteAsync(apiServiceName, apiService);
 
                 return true;
             }
@@ -45,7 +45,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 // проверка существования api-сервиса
                 if (apiService == null)
                     return null;
@@ -56,7 +56,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 apiEntity.Endpoints.Add(apiEndpoint);
 
-                var result = await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                var result = await _fileHelper.WriteAsync(apiServiceName, apiService);
                 if (result == null) 
                     return null;
 
@@ -73,7 +73,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 // проверка существования api-сервиса
                 if (apiService == null)
                     return false;
@@ -98,7 +98,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<List<ApiEndpoint>> GetAllAsync(string apiServiceName, string apiEntityName)
         {
-            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
                 return [];
 
@@ -111,7 +111,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<ApiEndpoint?> GetByIdAsync(string apiServiceName, string apiEntityName, string id)
         {
-            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
                 return null;
 
@@ -127,7 +127,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(id);
                 if (apiService == null || apiService.Entities == null)
                     return false;
 
@@ -143,7 +143,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 endpoint.IsActive = apiEndpoint.IsActive;
                 endpoint.Type = apiEndpoint.Type;
 
-                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                await _fileHelper.WriteAsync(apiServiceName, apiService);
 
                 return true;
             }

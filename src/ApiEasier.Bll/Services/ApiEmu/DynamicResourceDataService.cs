@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Bll.Validators;
-using ApiEasier.Dal.Interfaces.Db;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiEmu
@@ -9,9 +9,9 @@ namespace ApiEasier.Bll.Services.ApiEmu
     public class DynamicResourceDataService : IDynamicResourceDataService
     {
         private readonly IDynamicResourceValidator _validator;
-        private readonly IDbResourceDataRepository _dbResourceDataRepository;
+        private readonly IResourceDataRepository _dbResourceDataRepository;
 
-        public DynamicResourceDataService(IDynamicResourceValidator validator, IDbResourceDataRepository dbResourceDataRepository)
+        public DynamicResourceDataService(IDynamicResourceValidator validator, IResourceDataRepository dbResourceDataRepository)
         {
             _validator = validator;
             _dbResourceDataRepository = dbResourceDataRepository;

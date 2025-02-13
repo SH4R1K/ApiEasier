@@ -1,19 +1,19 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.Converter;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
     public class DynamicEndpointConfigurationService : IDynamicEndpointConfigurationService
     {
-        private readonly IFileApiEndpointRepository _fileApiEndpointRepository;
+        private readonly IApiEndpointRepository _fileApiEndpointRepository;
         private readonly IConverter<ApiEndpointDto, ApiEndpoint> _dtoToApiEndpointConverter;
         private readonly IConverter<ApiEndpoint, ApiEndpointDto> _apiEndpointToDtoConverter;
 
         public DynamicEndpointConfigurationService(
-            IFileApiEndpointRepository fileApiEndpointRepository,
+            IApiEndpointRepository fileApiEndpointRepository,
             IConverter<ApiEndpointDto, ApiEndpoint> dtoToApiEndpointConverter,
             IConverter<ApiEndpoint, ApiEndpointDto> apiEndpointToDtoConverter)
         {

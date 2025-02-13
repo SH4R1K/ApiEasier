@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Dm.Models;
 
-namespace ApiEasier.Dal.Interfaces.FileStorage
+namespace ApiEasier.Dal.Interfaces
 {
     /// <summary>
     /// Обеспечивает работу с API-сервисами
