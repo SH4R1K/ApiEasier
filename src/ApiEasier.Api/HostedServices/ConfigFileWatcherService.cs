@@ -1,8 +1,6 @@
-﻿using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Bll.Interfaces.FileWatcher;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 
-namespace ApiEasier.Bll.Services.FileWatcher
+namespace ApiEasier.Api.HostedServices
 {
     /// <summary>
     /// Сервис для отслеживания изменений в конфигурационных файлах.
@@ -35,7 +33,7 @@ namespace ApiEasier.Bll.Services.FileWatcher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-             _fileSystemWatcher.EnableRaisingEvents = true;
+            _fileSystemWatcher.EnableRaisingEvents = true;
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)

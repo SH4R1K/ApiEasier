@@ -1,14 +1,15 @@
+using ApiEasier.Api.HostedServices;
 using ApiEasier.Bll.Converters;
 using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Converter;
 using ApiEasier.Bll.Interfaces.Logger;
-using ApiEasier.Bll.Interfaces.FileWatcher;
+using ApiEasier.Bll.Interfaces.DbDataCleanup;
 using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Bll.Services.ApiConfigure;
 using ApiEasier.Bll.Services.ApiEmu;
-using ApiEasier.Bll.Services.FileWatcher;
+using ApiEasier.Bll.Services.DbDataCleanup;
 using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Helpers;
@@ -70,6 +71,9 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IDynamicEntityConfigurationService, DynamicEntityConfigurationService>();
             builder.Services.AddScoped<IDynamicEndpointConfigurationService, DynamicEndpointConfigurationService>();
             builder.Services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
+
+            //DbDataCleanupService
+            builder.Services.AddScoped<IDbDataCleanupService, DbDataCleanupService>();
             // ------------------------------------------
 
 
@@ -102,8 +106,10 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
- 
-            //FileSystemWatcherService
+
+            builder.Services.AddSingleton<ILoggerService, NLogService>();
+
+            //IHostedServices
             builder.Services.AddHostedService(sp =>
             {
                 using (var scope = sp.CreateScope())
@@ -114,7 +120,18 @@ namespace ApiEasier.Api
                 }
             });
 
-            builder.Services.AddSingleton<ILoggerService, NLogService>();
+            
+            builder.Services.AddHostedService(sp =>
+            {
+                using (var scope = sp.CreateScope())
+                {
+                    var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
+
+                    return new DataCleanupService(dbDataCleanupService);
+                }
+            });
+
+
             // Логгирование http в MongoDB
             //builder.Logging.ClearProviders();
             //builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();

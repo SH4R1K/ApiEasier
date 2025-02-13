@@ -12,5 +12,6 @@ namespace ApiEasier.Dal.Interfaces.Db
         public Task<bool> DeleteByApiEntityNameAsync(string id);
         public Task<bool> UpdateByApiNameAsync(string id, string newId);
         public Task<bool> UpdateByApiEntityNameAsync(string apiServiceNmae, string id, string newId);
+        public Task DeleteUnusedResources(List<string> apiServiceNames);
     }
 }
