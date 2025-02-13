@@ -87,10 +87,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 Console.WriteLine("Ошибка при изменении сущности");
-                return false;
+                throw new Exception($"Ошибка при изменении сущности {ex}");
             }
         }
 

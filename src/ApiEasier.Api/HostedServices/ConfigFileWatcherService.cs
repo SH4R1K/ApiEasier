@@ -1,8 +1,6 @@
-﻿using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Bll.Interfaces.FileWatcher;
-using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.Extensions.Caching.Memory;
 
-namespace ApiEasier.Bll.Services.FileWatcher
+namespace ApiEasier.Api.HostedServices
 {
     /// <summary>
     /// Сервис для отслеживания изменений в конфигурационных файлах.
@@ -10,13 +8,11 @@ namespace ApiEasier.Bll.Services.FileWatcher
     public class ConfigFileWatcherService : IHostedService
     {
         private FileSystemWatcher _fileSystemWatcher;
-        private readonly IApiConfigChangeHandler _apiConfigChangeHandler;
         private readonly IMemoryCache _cache;
 
         public ConfigFileWatcherService(
             IMemoryCache cache,
-            string directoryPath,
-            IApiConfigChangeHandler apiConfigChangeHandler)
+            string directoryPath)
         {
             _cache = cache;
 
@@ -27,7 +23,6 @@ namespace ApiEasier.Bll.Services.FileWatcher
                 EnableRaisingEvents = false
             };
 
-            _apiConfigChangeHandler = apiConfigChangeHandler;
 
             _fileSystemWatcher.Changed += OnChanged;
 
@@ -38,7 +33,7 @@ namespace ApiEasier.Bll.Services.FileWatcher
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-             _fileSystemWatcher.EnableRaisingEvents = true;
+            _fileSystemWatcher.EnableRaisingEvents = true;
         }
 
         public async Task StopAsync(CancellationToken cancellationToken)
@@ -54,8 +49,6 @@ namespace ApiEasier.Bll.Services.FileWatcher
         private async void OnDeleted(object sender, FileSystemEventArgs e)
         {
             _cache.Remove(Path.GetFileNameWithoutExtension(e.Name));
-
-            await _apiConfigChangeHandler.OnConfigDeletedAsync(Path.GetFileNameWithoutExtension(e.Name));
         }
 
         private async void OnRenamed(object sender, RenamedEventArgs e)
