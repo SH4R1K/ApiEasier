@@ -30,18 +30,22 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 Entities = apiService.Entities
             };
         }
-
-        public async Task<bool> CreateAsync(ApiService apiService)
+        
+        public async Task<ApiService?> CreateAsync(ApiService apiService)
         {
             try
             {
-                await _jsonFileHelper.WriteAsync(apiService.Name, apiService);
-                return true;
+                var apiServiceExist = GetByIdAsync(apiService.Name);
+                if (apiServiceExist != null)
+                    return default;
+
+                var result = await _jsonFileHelper.WriteAsync(apiService.Name, apiService);
+                return result;
             }
             catch
             {
                 Console.WriteLine($"Ошибка при записи файла");
-                return false;
+                return null;
             }
 
         }
@@ -61,7 +65,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<List<ApiService>> GetAllAsync()
         {
-            var filesNames = await _jsonFileHelper.GetAllFiles();
+            var filesNames = await _jsonFileHelper.GetAllFilesAsync();
 
             List<ApiService> apiServices = new List<ApiService>();
             

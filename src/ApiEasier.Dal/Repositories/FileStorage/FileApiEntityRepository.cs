@@ -13,7 +13,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             _jsonFileHelper = jsonFileHelper;
         }
 
-        public async Task<bool> CreateAsync(string apiServiceName, ApiEntity apiEntity)
+        public async Task<ApiEntity?> CreateAsync(string apiServiceName, ApiEntity apiEntity)
         {
             try
             {
@@ -21,22 +21,24 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 // проверка существования api-сервиса
                 if (apiService == null)
-                    return false;
+                    return null;
 
                 // проверка уникальности
                 if (apiService.Entities.Any(e => e.Name == apiEntity.Name))
-                    return false;
+                    return null ;
 
                 apiService.Entities.Add(apiEntity);
 
-                await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                var result = await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
+                if (result == null)
+                    return null;
 
-                return true;
+                return apiEntity;
             }
             catch
             {
                 Console.WriteLine("Ошибка при добавлении сущности");
-                return false;
+                return null;
             }
         }
 
@@ -85,10 +87,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 await _jsonFileHelper.WriteAsync(apiServiceName, apiService);
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
                 Console.WriteLine("Ошибка при изменении сущности");
-                return false;
+                throw new Exception($"Ошибка при изменении сущности {ex}");
             }
         }
 
@@ -96,7 +98,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(apiServiceName);
                 if (apiService == null || apiService.Entities == null)
                     return false;
 

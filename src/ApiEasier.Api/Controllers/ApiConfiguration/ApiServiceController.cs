@@ -24,7 +24,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         // GET api/ApiService
         [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] int? page, [FromQuery] string? searchTerm, [FromQuery] int? pageSize)
+        public async Task<IActionResult> GetAll()
         {
             try
             {
@@ -70,7 +70,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
 
-                if (!result)
+                if (result == null)
                     return NotFound("Не удалось создать api-сервис");
                 
                 return Ok(result);
@@ -107,7 +107,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = _dynamicApiConfigurationService.Delete(apiServiceName);
+                var result = await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
                 if (!result)
                     return NotFound($"Не удалось найти api-сервис {apiServiceName}");
 

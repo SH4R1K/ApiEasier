@@ -15,10 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="ApiConfigurations\test.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
     <PackageReference Include="NJsonSchema" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
@@ -28,10 +24,6 @@
     <ProjectReference Include="..\ApiEasier.Bll\ApiEasier.Bll.csproj" />
     <ProjectReference Include="..\ApiEasier.Dal\ApiEasier.Dal.csproj" />
     <ProjectReference Include="..\ApiEasier.Dm\ApiEasier.Dm.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ApiConfigurations\" />
   </ItemGroup>
 
 </Project>

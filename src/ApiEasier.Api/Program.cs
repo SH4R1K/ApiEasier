@@ -78,11 +78,19 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
 
             //Helpers
+            var jsonDirectoryPath = "ApiConfigurations";
+
+            // Убедимся, что папка существует
+            if (!Directory.Exists(jsonDirectoryPath))
+            {
+                Directory.CreateDirectory(jsonDirectoryPath);
+            }
+
+
             builder.Services.AddSingleton(sp => new JsonSerializerHelper());
 
             builder.Services.AddSingleton<IJsonFileHelper, JsonFileHelper>(provider =>
             {
-                var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"] ?? "configuration";
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
 
                 return new JsonFileHelper(jsonDirectoryPath, memoryCache);
@@ -94,20 +102,15 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
-
+ 
             //FileSystemWatcherService
-            builder.Services.AddScoped<IApiConfigChangeHandler, ApiConfigChangeHandler>();
             builder.Services.AddHostedService(sp =>
             {
                 using (var scope = sp.CreateScope())
                 {
                     var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
-                    var apiConfigChangeHandler = scope.ServiceProvider.GetRequiredService<IApiConfigChangeHandler>();
-                    var jsonDirectoryPath = builder.Configuration["JsonDirectoryPath"];
-                    if (jsonDirectoryPath == null)
-                        throw new ArgumentNullException(nameof(jsonDirectoryPath));
 
-                    return new ConfigFileWatcherService(cache, jsonDirectoryPath, apiConfigChangeHandler);
+                    return new ConfigFileWatcherService(cache, jsonDirectoryPath);
                 }
             });
 

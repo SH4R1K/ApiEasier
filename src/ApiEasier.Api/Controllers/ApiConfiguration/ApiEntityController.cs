@@ -70,10 +70,10 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = await _dynamicEntityConfigurationService.CreateAsync(apiServiceName, apiEntityDto);
 
-                if (!result)
+                if (result == null)
                     return BadRequest($"Не удалось создать сущность у api-сервиса {apiServiceName}.");
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -123,14 +123,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         //PATCH api/ApiService/{apiServiceName}/{apiEntityName}/{isActive}
         [HttpPatch("{apiServiceName}/{apiEntityName}/{isActive}")]
-        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string entityName)
+        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName)
         {
             try
             {
-                var result = await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, entityName, isActive);
+                var result = await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, apiEntityName, isActive);
 
                 if (!result)
-                    return NotFound($"статус у сущности {entityName} у api-сервиса {apiServiceName} не был изменен");
+                    return NotFound($"статус у сущности {apiEntityName} у api-сервиса {apiServiceName} не был изменен");
 
                 return NoContent();
             }

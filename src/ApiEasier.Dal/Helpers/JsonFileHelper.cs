@@ -14,24 +14,45 @@ namespace ApiEasier.Dal.Helpers
 
         public JsonFileHelper(string folderPath, IMemoryCache cache)
         {
-            FolderPath = folderPath ?? throw new ArgumentException(nameof(folderPath));
+            if (string.IsNullOrWhiteSpace(folderPath))
+                throw new ArgumentException("Путь к папке не может быть пустым.", nameof(folderPath));
+
+            FolderPath = folderPath;
             _cache = cache;
         }
 
-        private string GetFilePath(string fileName) => Path.Combine(FolderPath, fileName + ".json");
-
-        public async Task<List<string>> GetAllFiles()
+        private string GetFilePath(string fileName)
         {
-            return await Task.Run(() =>
+            if (!Directory.Exists(FolderPath))
+            {
+                Directory.CreateDirectory(FolderPath);
+            }
+
+            return Path.Combine(FolderPath, fileName + ".json");
+        }
+
+
+        public async Task<List<string>> GetAllFilesAsync()
+        {
+            try
+            {
+                return await Task.Run(() =>
                 Directory.GetFiles(FolderPath, "*.json")
                 .Select(f => Path.GetFileNameWithoutExtension(f)!)
                 .Where(x => !string.IsNullOrEmpty(x))
                 .ToList());
+            }
+            catch (DirectoryNotFoundException)
+            {
+                Directory.CreateDirectory(FolderPath);
+
+                return await GetAllFilesAsync();
+            }
         }
 
         public async Task<T?> ReadAsync<T>(string fileName)
         {
-            if(_cache.TryGetValue(fileName, out T? value))
+            if (_cache.TryGetValue(fileName, out T? value))
             {
                 return value;
             }
@@ -49,14 +70,17 @@ namespace ApiEasier.Dal.Helpers
             return data;
         }
 
-        public async Task WriteAsync<T>(string fileName, T data)
+        public async Task<T?> WriteAsync<T>(string fileName, T data)
         {
             //на случай отказа от FileSystemWatcherService
             //_cache.Remove(fileName);
 
             var filePath = GetFilePath(fileName);
+
             var json = JsonSerializerHelper.Serialize(data);
             await File.WriteAllTextAsync(filePath, json);
+
+            return data;
         }
 
         public bool Delete(string fileName)
@@ -65,7 +89,7 @@ namespace ApiEasier.Dal.Helpers
             {
                 var filePath = GetFilePath(fileName);
                 if (!File.Exists(filePath))
-                    return false;
+                    Directory.CreateDirectory(FolderPath);
 
                 File.Delete(filePath);
                 return true;

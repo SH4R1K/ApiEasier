@@ -2,9 +2,9 @@
 {
     public interface IFileHelper
     {
-        public Task<List<string>> GetAllFiles();
+        public Task<List<string>> GetAllFilesAsync();
         public Task<T?> ReadAsync<T>(string fileName);
-        public Task WriteAsync<T>(string fileName, T data);
+        public Task<T?> WriteAsync<T>(string fileName, T data);
         public bool Delete(string fileName);
     }
 }
