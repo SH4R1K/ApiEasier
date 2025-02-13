@@ -1,6 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace ApiEasier.Bll.Dto.JsonShemaDto
+namespace ApiEasier.Dm.Models.JsonShema
 {
     public class OneOfSchema
     {
