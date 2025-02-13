@@ -102,15 +102,13 @@ namespace ApiEasier.Api
             // ------------------------------------------
  
             //FileSystemWatcherService
-            builder.Services.AddScoped<IApiConfigChangeHandler, ApiConfigChangeHandler>();
             builder.Services.AddHostedService(sp =>
             {
                 using (var scope = sp.CreateScope())
                 {
                     var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
-                    var apiConfigChangeHandler = scope.ServiceProvider.GetRequiredService<IApiConfigChangeHandler>();
 
-                    return new ConfigFileWatcherService(cache, jsonDirectoryPath, apiConfigChangeHandler);
+                    return new ConfigFileWatcherService(cache, jsonDirectoryPath);
                 }
             });
 

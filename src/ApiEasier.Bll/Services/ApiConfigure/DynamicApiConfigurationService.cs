@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Dal.Interfaces.Db;
 using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dm.Models;
 
@@ -9,17 +10,23 @@ namespace ApiEasier.Bll.Services.ApiConfigure
     public class DynamicApiConfigurationService : IDynamicApiConfigurationService
     {
         private readonly IFileApiServiceRepository _fileApiServiceRepository;
+        private readonly IDbResourceRepository _dbResourceRepository;
+
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;
         private readonly IConverter<ApiServiceDto, ApiService> _dtoToApiServiceConverter;
         private readonly IConverter<ApiService, ApiServiceSummaryDto> _apiServiceToDtoSummaryConverter;
 
         public DynamicApiConfigurationService(
             IFileApiServiceRepository fileApiServiceRepository,
+            IDbResourceRepository dbResourceRepository,
+
             IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
             IConverter<ApiServiceDto, ApiService> dtoToApiServiceConverter,
             IConverter<ApiService, ApiServiceSummaryDto> apiServiceToDtoSummaryConverter)
         {
             _fileApiServiceRepository = fileApiServiceRepository;
+            _dbResourceRepository = dbResourceRepository;
+
             _apiServiceToDtoConverter = apiServiceToDtoConverter;
             _dtoToApiServiceConverter = dtoToApiServiceConverter;
             _apiServiceToDtoSummaryConverter = apiServiceToDtoSummaryConverter;
@@ -53,15 +60,17 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         }
 
         /// <summary>
-        /// Удаление файла конфигурации api-сервиса
+        /// Удаление файла конфигурации api-сервиса и ресурсов в бд с ним связанных
         /// </summary>
         /// <param name="id">название api-сервиса</param>
         /// <returns></returns>
-        public bool Delete(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var result = _fileApiServiceRepository.Delete(id);
             if (!result)
                 return false;
+
+            await _dbResourceRepository.DeleteByApiNameAsync(id);
 
             return result;
         }
@@ -92,19 +101,24 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         }
 
         /// <summary>
-        /// Обновление данных у api-сервиса в файле конфигурации
+        /// Обновление данных у api-сервиса в файле конфигурации и ресурсов в бд с ним связанных
         /// </summary>
         /// <param name="id">название файла</param>
-        /// <param name="dto">данные</param>
+        /// <param name="apiServiceDto">данные</param>
         /// <returns></returns>
-        public async Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto dto)
+        public async Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto apiServiceDto)
         {
-            var apiService = _dtoToApiServiceConverter.Convert(dto);
+            var apiService = _dtoToApiServiceConverter.Convert(apiServiceDto);
 
             var result = await _fileApiServiceRepository.UpdateAsync(id, apiService);
 
             if (result == null)
                 return default;
+
+            if (id != apiServiceDto.Name)
+            {
+                await _dbResourceRepository.UpdateByApiNameAsync(id, apiServiceDto.Name);
+            }
 
             return _apiServiceToDtoConverter.Convert(result);
         }
