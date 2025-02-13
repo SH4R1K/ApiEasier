@@ -17,9 +17,13 @@ namespace ApiEasier.Bll.Services.Logger
         public async Task Invoke(HttpContext context)
         {
             string requestBody, responseBody;
-            using (StreamReader stream = new StreamReader(context.Request.Body))
+            context.Request.EnableBuffering();
+
+            using (var reader = new StreamReader(
+                context.Request.Body, leaveOpen: true))
             {
-                requestBody = await stream.ReadToEndAsync();
+                requestBody = await reader.ReadToEndAsync();
+                context.Request.Body.Position = 0;
             }
 
             using (var buffer = new MemoryStream())
@@ -30,15 +34,14 @@ namespace ApiEasier.Bll.Services.Logger
                 await _next(context);
 
                 buffer.Seek(0, SeekOrigin.Begin);
-                var reader = new StreamReader(buffer);
                 using (var bufferReader = new StreamReader(buffer))
                 {
-                    string body = await bufferReader.ReadToEndAsync();
+                    responseBody = await bufferReader.ReadToEndAsync();
                     buffer.Seek(0, SeekOrigin.Begin);
                     await buffer.CopyToAsync(stream);
                     context.Response.Body = stream;
-                    _logger.LogHttp(context, requestBody, body);
                 }
+                _logger.LogHttp(context, requestBody, responseBody);
             }
         }
     }
