@@ -70,7 +70,6 @@ namespace ApiEasier.Api.DependensyInjections
             services.AddScoped<IResourceDataRepository, DbResourceDataRepository>();
             services.AddScoped<IResourceRepository, DbResourceRepository>();
 
-
             services.AddScoped<IFileHelper, JsonFileHelper>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
