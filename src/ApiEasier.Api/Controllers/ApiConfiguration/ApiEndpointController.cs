@@ -34,11 +34,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                _logger.LogDebug(apiServiceName);
                 return Ok(await _dynamicEndpointConfigurationService.GetAsync(apiServiceName, apiEntityName));
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -57,6 +57,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -75,6 +76,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -93,6 +95,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -112,6 +115,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -131,7 +135,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }

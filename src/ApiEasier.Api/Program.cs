@@ -127,6 +127,7 @@ namespace ApiEasier.Api
 
             //app.UseHttpLogging();
             app.UseMiddleware<HttpLoggingMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

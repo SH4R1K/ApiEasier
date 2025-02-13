@@ -65,5 +65,9 @@ namespace ApiEasier.Bll.Services.Logger
         {
             _logger.Warn(message);
         }
+        public void LogFatal(Exception ex, string message)
+        {
+            _logger.Fatal(ex, message);
+        }
     }
 }

@@ -9,5 +9,6 @@ namespace ApiEasier.Bll.Interfaces.Logger
         public void LogWarn(string message);
         public void LogError(Exception ex, string message);
         public void LogDebug(string message);
+        public void LogFatal(Exception ex, string message);
     }
 }
