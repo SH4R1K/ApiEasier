@@ -17,7 +17,7 @@ namespace ApiEasier.Bll.Converters
         public ApiEntityDto Convert(ApiEntity apiEntity) => new()
         {
             Name = apiEntity.Name,
-            Structure = (Dto.JsonShemaDto.JsonSchema)apiEntity.Structure,
+            Structure = apiEntity.Structure,
             IsActive = apiEntity.IsActive,
             Endpoints = apiEntity.Endpoints.Select(_apiEndpointToDtoConverter.Convert).ToList(),
         };

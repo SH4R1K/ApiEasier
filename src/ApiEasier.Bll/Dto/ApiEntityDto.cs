@@ -1,4 +1,4 @@
-﻿using ApiEasier.Bll.Dto.JsonShemaDto;
+﻿using ApiEasier.Dm.Models.JsonShema;
 
 namespace ApiEasier.Bll.Dto
 {
