@@ -4,9 +4,11 @@ using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Bll.Interfaces.DbDataCleanup;
 using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Bll.Services.ApiConfigure;
 using ApiEasier.Bll.Services.ApiEmu;
+using ApiEasier.Bll.Services.DbDataCleanup;
 using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Helpers;
@@ -67,6 +69,9 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IDynamicEntityConfigurationService, DynamicEntityConfigurationService>();
             builder.Services.AddScoped<IDynamicEndpointConfigurationService, DynamicEndpointConfigurationService>();
             builder.Services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
+
+            //DbDataCleanupService
+            builder.Services.AddScoped<IDbDataCleanupService, DbDataCleanupService>();
             // ------------------------------------------
 
 
@@ -100,7 +105,7 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
  
-            //FileSystemWatcherService
+            //IHostedServices
             builder.Services.AddHostedService(sp =>
             {
                 using (var scope = sp.CreateScope())
@@ -108,6 +113,16 @@ namespace ApiEasier.Api
                     var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
 
                     return new ConfigFileWatcherService(cache, jsonDirectoryPath);
+                }
+            });
+
+            builder.Services.AddHostedService(sp =>
+            {
+                using (var scope = sp.CreateScope())
+                {
+                    var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
+
+                    return new DataCleanupService(dbDataCleanupService);
                 }
             });
 

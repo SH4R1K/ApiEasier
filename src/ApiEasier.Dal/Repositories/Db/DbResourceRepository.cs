@@ -4,6 +4,10 @@ using ApiEasier.Dal.Interfaces.Db;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
+
+    /// <summary>
+    /// Используется для удаления и изменения коллекций в бд если связанные с ними файлы были изменены/удалены
+    /// </summary>
     public class DbResourceRepository : IDbResourceRepository
     {
         private readonly MongoDbContext _dbContext;
@@ -76,10 +80,20 @@ namespace ApiEasier.Dal.Repositories.Db
             return true;
         }
 
-        public async Task DeleteUnusedResources()
+        public async Task DeleteUnusedResources(List<string> validApiServiceNames)
         {
+            // коллекции хранятся в виде: ApiServiceName_ApiEntityName
             var collectionsNames = await _dbContext.GetListCollectionNamesAsync();
 
+            var collectionToDelete = collectionsNames.Where(name =>
+            {
+                var apiName = name.Split("_")[0];
+
+                return !validApiServiceNames.Contains(apiName);
+            }).ToList();
+
+            var deleteTasks = collectionToDelete.Select(_dbContext.DropCollectionAsync);
+            await Task.WhenAll(deleteTasks);
         }
     }
 }
