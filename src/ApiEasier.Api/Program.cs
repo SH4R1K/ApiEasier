@@ -4,6 +4,7 @@ using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Converter;
+using ApiEasier.Bll.Interfaces.Logger;
 using ApiEasier.Bll.Interfaces.DbDataCleanup;
 using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Bll.Services.ApiConfigure;
@@ -19,6 +20,7 @@ using ApiEasier.Dal.Repositories.Db;
 using ApiEasier.Dal.Repositories.FileStorage;
 using ApiEasier.Dm.Models;
 using Microsoft.Extensions.Caching.Memory;
+using ApiEasier.Bll.Services.Logger;
 
 namespace ApiEasier.Api
 {
@@ -104,7 +106,9 @@ namespace ApiEasier.Api
             builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
- 
+
+            builder.Services.AddSingleton<ILoggerService, NLogService>();
+
             //IHostedServices
             builder.Services.AddHostedService(sp =>
             {
@@ -116,6 +120,7 @@ namespace ApiEasier.Api
                 }
             });
 
+            
             builder.Services.AddHostedService(sp =>
             {
                 using (var scope = sp.CreateScope())
@@ -141,6 +146,8 @@ namespace ApiEasier.Api
             var app = builder.Build();
 
             //app.UseHttpLogging();
+            app.UseMiddleware<HttpLoggingMiddleware>();
+            app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
