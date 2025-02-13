@@ -12,7 +12,6 @@ namespace ApiEasier.Api
             // Add services to the container.
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -29,20 +28,10 @@ namespace ApiEasier.Api
                             .AddDalServices(apiConfigurationsPath)
                             .AddHostedServices(apiConfigurationsPath);
 
-            // Логгирование http в MongoDB
-            //builder.Logging.ClearProviders();
-            //builder.Services.AddSingleton<ILoggerProvider, MongoLoggerProvider>();
-            //builder.Services.AddHttpLogging(o =>
-            //{
-            //    o.CombineLogs = true;
-            //    o.LoggingFields = HttpLoggingFields.All | HttpLoggingFields.RequestQuery;
-            //});
-
             builder.Configuration.AddEnvironmentVariables();
 
             var app = builder.Build();
 
-            //app.UseHttpLogging();
             app.UseMiddleware<HttpLoggingMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 

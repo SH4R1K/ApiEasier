@@ -1,19 +1,24 @@
 ﻿using ApiEasier.Bll.Interfaces.DbDataCleanup;
+using ApiEasier.Bll.Interfaces.Logger;
+using System.Runtime.InteropServices;
 
 namespace ApiEasier.Api.HostedServices
 {
     public class DataCleanupService : IHostedService
     {
+        private readonly ILoggerService _loggerService;
+
         private readonly IDbDataCleanupService _dbDataCleanupService;
 
-        public DataCleanupService(IDbDataCleanupService dbDataCleanupService)
+        public DataCleanupService(IDbDataCleanupService dbDataCleanupService, ILoggerService loggerService)
         {
             _dbDataCleanupService = dbDataCleanupService;
+            _loggerService = loggerService;
         }
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            Console.WriteLine("Чистка БД от неиспользуемых хранилищ");
+            _loggerService.LogDebug("Чистка БД от неиспользуемых хранилищ");
             await _dbDataCleanupService.CleanupAsync();
         }
 
