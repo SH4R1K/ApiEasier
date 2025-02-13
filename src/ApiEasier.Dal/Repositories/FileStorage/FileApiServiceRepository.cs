@@ -39,11 +39,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiServiceExist = GetByIdAsync(apiService.Name);
+                var apiServiceExist = await GetByIdAsync(apiService.Name);
                 if (apiServiceExist != null)
                     return default;
 
-                var result = await _jsonFileHelper.WriteAsync(apiService.Name, apiService);
+                var result = await _fileHelper.WriteAsync(apiService.Name, apiService);
                 return result;
             }
             catch

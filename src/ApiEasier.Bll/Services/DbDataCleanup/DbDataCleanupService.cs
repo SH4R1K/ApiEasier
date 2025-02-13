@@ -12,12 +12,12 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
     public class DbDataCleanupService : IDbDataCleanupService
     {
         private readonly IDbResourceRepository _dbResourceRepository;
-        private readonly IFileApiServiceRepository _fileApiServiceRepository;
+        private readonly IApiServiceRepository _fileApiServiceRepository;
         
 
         public DbDataCleanupService(
             IDbResourceRepository dbResourceRepository,
-            IFileApiServiceRepository fileApiServiceRepository)
+            IApiServiceRepository fileApiServiceRepository)
         {
             _fileApiServiceRepository = fileApiServiceRepository;
             _dbResourceRepository = dbResourceRepository;

@@ -82,7 +82,7 @@ namespace ApiEasier.Api.DependensyInjections
             services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
 
             // Repositories
-            services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
+            services.AddScoped<IApiServiceRepository, FileApiServiceRepository>();
             services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
             services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
