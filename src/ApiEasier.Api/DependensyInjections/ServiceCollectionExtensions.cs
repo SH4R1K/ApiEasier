@@ -69,9 +69,8 @@ namespace ApiEasier.Api.DependensyInjections
         {
             services.AddScoped<IResourceDataRepository, DbResourceDataRepository>();
             services.AddScoped<IResourceRepository, DbResourceRepository>();
-            services.AddSingleton(sp => new JsonSerializerHelper());
 
-            services.AddSingleton<IFileHelper, JsonFileHelper>(provider =>
+            services.AddScoped<IFileHelper, JsonFileHelper>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
 
