@@ -1,8 +1,8 @@
 ﻿using ApiEasier.Dm.Models;
 
-namespace ApiEasier.Dal.Interfaces.FileStorage
+namespace ApiEasier.Dal.Interfaces
 {
-    public interface IFileApiEndpointRepository
+    public interface IApiEndpointRepository
     {
         Task<List<ApiEndpoint>> GetAllAsync(string apiServiceName, string apiEntityName);
         Task<ApiEndpoint?> GetByIdAsync(string apiServiceName, string apiEntityName, string id);

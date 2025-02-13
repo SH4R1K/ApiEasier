@@ -1,8 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.Converter;
-using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
@@ -14,7 +13,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
     {
 
         private readonly IApiServiceRepository _apiServiceRepository;
-        private readonly IDbResourceRepository _dbResourceRepository;
+        private readonly IResourceRepository _dbResourceRepository;
         
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;
         private readonly IConverter<ApiServiceDto, ApiService> _dtoToApiServiceConverter;
@@ -22,7 +21,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 
         public DynamicApiConfigurationService(
             IApiServiceRepository apiServiceRepository,
-            IDbResourceRepository dbResourceRepository,
+            IResourceRepository dbResourceRepository,
             IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
             IConverter<ApiServiceDto, ApiService> dtoToApiServiceConverter,
             IConverter<ApiService, ApiServiceSummaryDto> apiServiceToDtoSummaryConverter)

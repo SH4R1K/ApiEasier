@@ -6,7 +6,7 @@ namespace ApiEasier.Dal.Helpers
     /// <summary>
     /// Обеспечивает работу с файлами JSON
     /// </summary>
-    public class JsonFileHelper : IJsonFileHelper
+    public class JsonFileHelper : IFileHelper
     {
         private readonly IMemoryCache _cache;
 

@@ -1,5 +1,5 @@
 ﻿using ApiEasier.Dal.Data;
-using ApiEasier.Dal.Interfaces.Db;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -7,7 +7,7 @@ using System.Text.Json.Nodes;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
-    public class DbResourceDataRepository : IDbResourceDataRepository
+    public class DbResourceDataRepository : IResourceDataRepository
     {
         private readonly MongoDbContext _dbContext;
 

@@ -1,53 +1,35 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.Converter;
-using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
     public class DynamicEntityConfigurationService : IDynamicEntityConfigurationService
     {
-        private readonly IFileApiEntityRepository _fileApiEntityRepository;
-        private readonly IDbResourceRepository _dbResourceRepository;
-
+        private readonly IApiEntityRepository _fileApiEntityRepository;
         private readonly IConverter<ApiEntityDto, ApiEntity> _dtoToApiEntityConverter;
         private readonly IConverter<ApiEntity, ApiEntitySummaryDto> _apiEntityToDtoSummaryConverter;
         private readonly IConverter<ApiEntity, ApiEntityDto> _apiEntityToDtoConverter;
 
         public DynamicEntityConfigurationService(
-            IFileApiEntityRepository fileApiEntityRepository,
-            IDbResourceRepository dbResourceRepository,
+            IApiEntityRepository fileApiEntityRepository,
             IConverter<ApiEntityDto, ApiEntity> dtoToApiEntityConverter,
             IConverter<ApiEntity, ApiEntitySummaryDto> apiEntityToDtoSummaryConverter,
             IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter)
         {
             _fileApiEntityRepository = fileApiEntityRepository;
-            _dbResourceRepository = dbResourceRepository;
-
             _dtoToApiEntityConverter = dtoToApiEntityConverter;
             _apiEntityToDtoSummaryConverter = apiEntityToDtoSummaryConverter;
             _apiEntityToDtoConverter = apiEntityToDtoConverter;
         }
 
         public async Task<bool> DeleteAsync(string apiServiceName, string id)
-        {
-            await _fileApiEntityRepository.DeleteAsync(apiServiceName, id);
-            await _dbResourceRepository.DeleteByApiEntityNameAsync(id);
+            => await _fileApiEntityRepository.DeleteAsync(apiServiceName, id);
 
-            return true;
-        }
-
-        public async Task<bool> UpdateAsync(string apiServiceName, string entityName, ApiEntityDto apiEntity)
-        {
-            if (entityName != apiEntity.Name)
-            {
-                await _dbResourceRepository.UpdateByApiEntityNameAsync(apiServiceName, entityName, apiEntity.Name);
-            }
-
-            return await _fileApiEntityRepository.UpdateAsync(apiServiceName, entityName, _dtoToApiEntityConverter.Convert(apiEntity));
-        }
+        public async Task<bool> UpdateAsync(string apiServiceName, string entityName, ApiEntityDto entity)
+            => await _fileApiEntityRepository.UpdateAsync(apiServiceName, entityName, _dtoToApiEntityConverter.Convert(entity));
 
         public async Task<ApiEntityDto?> CreateAsync(string apiServiceName, ApiEntityDto entity)
         {

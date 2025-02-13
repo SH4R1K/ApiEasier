@@ -1,14 +1,9 @@
 ﻿using ApiEasier.Dal.Data;
-using ApiEasier.Dal.Interfaces.Db;
-
+using ApiEasier.Dal.Interfaces;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
-
-    /// <summary>
-    /// Используется для удаления и изменения коллекций в бд если связанные с ними файлы были изменены/удалены
-    /// </summary>
-    public class DbResourceRepository : IDbResourceRepository
+    public class DbResourceRepository : IResourceRepository
     {
         private readonly MongoDbContext _dbContext;
 

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEasier.Dal.Interfaces.Db
+namespace ApiEasier.Dal.Interfaces
 {
-    public interface IDbResourceRepository
+    public interface IResourceRepository
     {
         public Task<bool> DeleteByApiNameAsync(string id);
         public Task<bool> DeleteByApiEntityNameAsync(string id);

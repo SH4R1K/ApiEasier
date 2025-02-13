@@ -14,8 +14,7 @@ using ApiEasier.Bll.Services.Logger;
 using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Data;
 using ApiEasier.Dal.Helpers;
-using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dal.Repositories.Db;
 using ApiEasier.Dal.Repositories.FileStorage;
@@ -68,23 +67,21 @@ namespace ApiEasier.Api.DependensyInjections
 
         public static IServiceCollection AddDalServices(this IServiceCollection services, string apiConfigurationsPath)
         {
-            services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
-            services.AddScoped<IDbResourceRepository, DbResourceRepository>();
+            services.AddScoped<IResourceDataRepository, DbResourceDataRepository>();
+            services.AddScoped<IResourceRepository, DbResourceRepository>();
             services.AddSingleton(sp => new JsonSerializerHelper());
 
-            services.AddSingleton<IJsonFileHelper, JsonFileHelper>(provider =>
+            services.AddSingleton<IFileHelper, JsonFileHelper>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
 
                 return new JsonFileHelper(apiConfigurationsPath, memoryCache);
             });
 
-            services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
-
             // Repositories
             services.AddScoped<IApiServiceRepository, FileApiServiceRepository>();
-            services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
-            services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
+            services.AddScoped<IApiEntityRepository, FileApiEntityRepository>();
+            services.AddScoped<IApiEndpointRepository, FileApiEndpointRepository>();
             // ------------------------------------------
 
             services.AddSingleton<ILoggerService, NLogService>();

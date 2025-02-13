@@ -1,6 +1,5 @@
 ﻿using ApiEasier.Bll.Interfaces.DbDataCleanup;
-using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Interfaces.FileStorage;
+using ApiEasier.Dal.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +10,12 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
 {
     public class DbDataCleanupService : IDbDataCleanupService
     {
-        private readonly IDbResourceRepository _dbResourceRepository;
+        private readonly IResourceRepository _dbResourceRepository;
         private readonly IApiServiceRepository _fileApiServiceRepository;
         
 
         public DbDataCleanupService(
-            IDbResourceRepository dbResourceRepository,
+            IResourceRepository dbResourceRepository,
             IApiServiceRepository fileApiServiceRepository)
         {
             _fileApiServiceRepository = fileApiServiceRepository;
