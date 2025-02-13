@@ -1,27 +1,5 @@
-using ApiEasier.Api.HostedServices;
-using ApiEasier.Bll.Converters;
-using ApiEasier.Bll.Dto;
-using ApiEasier.Bll.Interfaces.ApiConfigure;
-using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Bll.Interfaces.Converter;
-using ApiEasier.Bll.Interfaces.Logger;
-using ApiEasier.Bll.Interfaces.DbDataCleanup;
-using ApiEasier.Bll.Interfaces.Validators;
-using ApiEasier.Bll.Services.ApiConfigure;
-using ApiEasier.Bll.Services.ApiEmu;
-using ApiEasier.Bll.Services.DbDataCleanup;
-using ApiEasier.Bll.Validators;
-using ApiEasier.Dal.Data;
-using ApiEasier.Dal.Helpers;
-using ApiEasier.Dal.Interfaces.Db;
-using ApiEasier.Dal.Interfaces.FileStorage;
-using ApiEasier.Dal.Interfaces.Helpers;
-using ApiEasier.Dal.Repositories.Db;
-using ApiEasier.Dal.Repositories.FileStorage;
-using ApiEasier.Dm.Models;
-using Microsoft.Extensions.Caching.Memory;
-using ApiEasier.Bll.Services.Logger;
 using ApiEasier.Api.DependensyInjections;
+using ApiEasier.Bll.Services.Logger;
 
 namespace ApiEasier.Api
 {
