@@ -75,5 +75,11 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return true;
         }
+
+        public async Task DeleteUnusedResources()
+        {
+            var collectionsNames = await _dbContext.GetListCollectionNamesAsync();
+
+        }
     }
 }
