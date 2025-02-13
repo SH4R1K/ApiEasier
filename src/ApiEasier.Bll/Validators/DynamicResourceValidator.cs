@@ -10,11 +10,11 @@ namespace ApiEasier.Bll.Validators
 {
 
     public class DynamicResourceValidator(
-        IFileApiServiceRepository fileApiServiceRepository,
+        IApiServiceRepository fileApiServiceRepository,
         IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
         IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter) : IDynamicResourceValidator
     {
-        private readonly IFileApiServiceRepository _fileApiServiceRepository = fileApiServiceRepository;
+        private readonly IApiServiceRepository _fileApiServiceRepository = fileApiServiceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter = apiServiceToDtoConverter;
         private readonly IConverter<ApiEntity, ApiEntityDto> _apiEntityToDtoConverter = apiEntityToDtoConverter;
 

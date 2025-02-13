@@ -3,11 +3,14 @@ using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Logger;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
 
-    // Возможно приедтся изменить тип у создания и изменения чтобы было без entity (добавить dto и converter)
+    /// <summary>
+    /// Контроллер для настройки api-сервисов
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class ApiServiceController : ControllerBase
@@ -22,16 +25,18 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             _logger = logger;
         }
 
-        // GET api/ApiService
+        /// <summary>
+        /// Возвращает список всех API-сервисов без сущностей
+        /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<List<ApiServiceSummaryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetAllAsync()
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.GetAsync();
-
-                if (result == null)
-                    return NotFound();
+                var result = await _dynamicApiConfigurationService.GetAllAsync();
 
                 return Ok(result);
             }
@@ -42,8 +47,15 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        // GET api/ApiService/{apiServiceName}
+        /// <summary>
+        /// Возвращает API-сервис по имени
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
         [HttpGet("{apiServiceName}")]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<List<ApiServiceDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByName(string apiServiceName)
         {
             try
@@ -122,11 +134,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
         //PATCH api/ApiService/{apiServiceName}/{isActive}
         [HttpPatch("{apiServiceName}/{isActive}")]
-        public async Task<IActionResult> ChangeActiveApiService(bool status, string apiServiceName)
+        public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, status);
+                var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, isActive);
 
                 if (!result)
                     return NotFound($"Не удалось сменить статус api-сервиса {apiServiceName}");

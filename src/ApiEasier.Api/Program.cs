@@ -13,7 +13,13 @@ namespace ApiEasier.Api
             builder.Services.AddControllers();
             builder.Services.AddMemoryCache();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(options =>
+            {
+                var basePath = AppContext.BaseDirectory;
+
+                var xmlPath = Path.Combine(basePath, "ApiEasier.Api.xml");
+                options.IncludeXmlComments(xmlPath);
+            });
 
 
             var apiConfigurationsPath = "ApiConfigurations";

@@ -1,45 +1,49 @@
 ﻿using ApiEasier.Dal.Interfaces.FileStorage;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
+using System.Text.Json;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
-    public class FileApiServiceRepository : IFileApiServiceRepository
+    /// <summary>
+    /// Обеспечивает работу с API-сервисами через файлы
+    /// </summary>
+    public class FileApiServiceRepository : IApiServiceRepository
     {
-        private readonly IFileHelper _jsonFileHelper;
+        private readonly IFileHelper _fileHelper;
 
-        public FileApiServiceRepository(IFileHelper jsonFileHelper)
+        public FileApiServiceRepository(IFileHelper fileHelper)
         {
-            _jsonFileHelper = jsonFileHelper;
+            _fileHelper = fileHelper;
         }
 
         /// <summary>
-        /// Требуется метод маппинга который будет заполнять поле имени у apiService
-        /// т.к в json-файле конфигурации имя api-сервсиа не хранится,
-        /// оно содержится в самом названии файла
+        /// Допалняет API-сервис именем, т.к. имя API-сервиса является именем файла конфигурации,
+        /// а сам файл не содержит его
         /// </summary>
-        /// <param name="name">название файла</param>
-        /// <param name="apiService">объект с данными для apiService</param>
-        /// <returns></returns>
+        /// <param name="name">Название файла без расширения и имя API-сервиса</param>
+        /// <param name="apiService">Объект с данными, который нужно дополнить</param>
+        /// <returns>Дополненый именем API-сервиса</returns>
         private ApiService MapApiService(string name, ApiService apiService)
         {
-            return new ApiService(name)
+            return new ApiService
             {
+                Name = name,
                 IsActive = apiService.IsActive,
                 Description = apiService.Description,
                 Entities = apiService.Entities
             };
         }
-        
+
         public async Task<ApiService?> CreateAsync(ApiService apiService)
         {
             try
             {
-                var apiServiceExist = GetByIdAsync(apiService.Name);
+                var apiServiceExist = await GetByIdAsync(apiService.Name);
                 if (apiServiceExist != null)
                     return default;
 
-                var result = await _jsonFileHelper.WriteAsync(apiService.Name, apiService);
+                var result = await _fileHelper.WriteAsync(apiService.Name, apiService);
                 return result;
             }
             catch
@@ -54,7 +58,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var filePath = _jsonFileHelper.Delete(id);
+                var filePath = _fileHelper.Delete(id);
                 return true;
             }
             catch
@@ -65,21 +69,32 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<List<ApiService>> GetAllAsync()
         {
-            var filesNames = await _jsonFileHelper.GetAllFilesAsync();
+            //Именем API-сервиса является название файла его конфигурации
+            var apiServiceNames = await _fileHelper.GetAllFileNamesAsync();
 
             List<ApiService> apiServices = new List<ApiService>();
-            
-            foreach (var fileName in filesNames)
+
+            foreach (var apiServiceName in apiServiceNames)
             {
-                var apiServiceData = await _jsonFileHelper.ReadAsync<ApiService>(fileName); 
+                ApiService apiServiceData;
+                try
+                {
+                    apiServiceData = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
+                }
+                catch(JsonException)
+                {
+                    //Здесь нужно логирование
+                    continue;
+                }
 
                 if (apiServiceData == null)
+                {
                     continue;
+                }
 
-                var apiService = MapApiService(fileName, apiServiceData);
+                var apiService = MapApiService(apiServiceName, apiServiceData);
 
-                if (apiService != null)
-                    apiServices.Add(apiService);
+                apiServices.Add(apiService);
             }
 
             return apiServices;
@@ -87,7 +102,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         public async Task<ApiService?> GetByIdAsync(string id)
         {
-            var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+            var apiService = await _fileHelper.ReadAsync<ApiService>(id);
 
             return apiService == null ? null : MapApiService(id, apiService);
         }
@@ -96,7 +111,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var oldApiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                var oldApiService = await _fileHelper.ReadAsync<ApiService>(id);
 
                 oldApiService.IsActive = apiService.IsActive;
                 oldApiService.Description = apiService.Description;
@@ -104,9 +119,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
 
                 if (id != apiService.Name)
-                    _jsonFileHelper.Delete(id);
+                    _fileHelper.Delete(id);
 
-                await _jsonFileHelper.WriteAsync(apiService.Name, oldApiService);
+                await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
                 return oldApiService == null ? null : MapApiService(apiService.Name, apiService);
             }
@@ -120,11 +135,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _jsonFileHelper.ReadAsync<ApiService>(id);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(id);
 
                 apiService.IsActive = status;
 
-                await _jsonFileHelper.WriteAsync(id, apiService);
+                await _fileHelper.WriteAsync(id, apiService);
 
                 return true;
             }
