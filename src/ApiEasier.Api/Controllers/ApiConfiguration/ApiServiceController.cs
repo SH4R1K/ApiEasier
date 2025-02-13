@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
+using ApiEasier.Bll.Interfaces.Logger;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
@@ -12,11 +13,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     public class ApiServiceController : ControllerBase
     {
         private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
+        private readonly ILoggerService _logger;
 
         public ApiServiceController(
-            IDynamicApiConfigurationService dynamicApiConfigurationService)
+            IDynamicApiConfigurationService dynamicApiConfigurationService, ILoggerService logger)
         {
             _dynamicApiConfigurationService = dynamicApiConfigurationService;
+            _logger = logger;
         }
 
         // GET api/ApiService
@@ -34,12 +37,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
 
-        // GET api/ApiService/{name}
-        [HttpGet("{name}")]
+        // GET api/ApiService/{apiServiceName}
+        [HttpGet("{apiServiceName}")]
         public async Task<IActionResult> GetByName(string apiServiceName)
         {
             try
@@ -53,7 +57,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
@@ -73,7 +77,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
@@ -92,7 +96,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
@@ -111,7 +115,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
@@ -131,7 +135,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (Exception ex)
             {
-                // Логирование исключения (не показано здесь)
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
