@@ -21,6 +21,7 @@ using ApiEasier.Dal.Repositories.FileStorage;
 using ApiEasier.Dm.Models;
 using Microsoft.Extensions.Caching.Memory;
 using ApiEasier.Bll.Services.Logger;
+using ApiEasier.Api.DependensyInjections;
 
 namespace ApiEasier.Api
 {
@@ -37,100 +38,18 @@ namespace ApiEasier.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            // DB
-            var mongoSettings = builder.Configuration.GetSection("DatabaseSettings");
-            string connectionString = mongoSettings["ConnectionString"];
-            string databaseName = mongoSettings["DatabaseName"];
 
-            if (connectionString == null || databaseName == null)
-                throw new InvalidOperationException("MongoDB settings are missing in appsettings.json");
-
-            builder.Services.AddSingleton<MongoDbContext>(serviceProvider =>
-            {
-                return new MongoDbContext(connectionString, databaseName);
-            });
-
-            // BLL ------------------------------------------
-            //Converters
-            builder.Services.AddScoped<IConverter<ApiService, ApiServiceDto>, ApiServiceToDtoConverter>();
-            builder.Services.AddScoped<IConverter<ApiService, ApiServiceSummaryDto>, ApiServiceToDtoSummaryConverter>();
-            builder.Services.AddScoped<IConverter<ApiServiceDto, ApiService>, DtoToApiServiceConverter>();
-
-            builder.Services.AddScoped<IConverter<ApiEntity, ApiEntityDto>, ApiEntityToDtoConverter>();
-            builder.Services.AddScoped<IConverter<ApiEntity, ApiEntitySummaryDto>, ApiEntityToDtoSummaryConverter>();
-            builder.Services.AddScoped<IConverter<ApiEntityDto, ApiEntity>, DtoToApiEntityConverter>();
-
-            builder.Services.AddScoped<IConverter<ApiEndpoint, ApiEndpointDto>, ApiEndpointToDtoConverter>();
-            builder.Services.AddScoped<IConverter<ApiEndpointDto, ApiEndpoint>, DtoToApiEndpointConverter>();
-
-            //Validators
-            builder.Services.AddScoped<IDynamicResourceValidator, DynamicResourceValidator>();
-
-            //Services
-            builder.Services.AddScoped<IDynamicApiConfigurationService, DynamicApiConfigurationService>();
-            builder.Services.AddScoped<IDynamicEntityConfigurationService, DynamicEntityConfigurationService>();
-            builder.Services.AddScoped<IDynamicEndpointConfigurationService, DynamicEndpointConfigurationService>();
-            builder.Services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
-
-            //DbDataCleanupService
-            builder.Services.AddScoped<IDbDataCleanupService, DbDataCleanupService>();
-            // ------------------------------------------
-
-
-            // DAL
-            builder.Services.AddScoped<IDbResourceDataRepository, DbResourceDataRepository>();
-            builder.Services.AddScoped<IDbResourceRepository, DbResourceRepository>();
-
-            //Helpers
-            var jsonDirectoryPath = "ApiConfigurations";
+            var apiConfigurationsPath = "ApiConfigurations";
 
             // Убедимся, что папка существует
-            if (!Directory.Exists(jsonDirectoryPath))
-            {
-                Directory.CreateDirectory(jsonDirectoryPath);
-            }
+            if (!Directory.Exists(apiConfigurationsPath))
+                Directory.CreateDirectory(apiConfigurationsPath);
 
-
-            builder.Services.AddSingleton(sp => new JsonSerializerHelper());
-
-            builder.Services.AddSingleton<IJsonFileHelper, JsonFileHelper>(provider =>
-            {
-                var memoryCache = provider.GetRequiredService<IMemoryCache>();
-
-                return new JsonFileHelper(jsonDirectoryPath, memoryCache);
-            });
-            builder.Services.AddScoped<IFileHelper>(sp => sp.GetRequiredService<IJsonFileHelper>());
-
-            // Repositories
-            builder.Services.AddScoped<IFileApiServiceRepository, FileApiServiceRepository>();
-            builder.Services.AddScoped<IFileApiEntityRepository, FileApiEntityRepository>();
-            builder.Services.AddScoped<IFileApiEndpointRepository, FileApiEndpointRepository>();
-            // ------------------------------------------
-
-            builder.Services.AddSingleton<ILoggerService, NLogService>();
-
-            //IHostedServices
-            builder.Services.AddHostedService(sp =>
-            {
-                using (var scope = sp.CreateScope())
-                {
-                    var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
-
-                    return new ConfigFileWatcherService(cache, jsonDirectoryPath);
-                }
-            });
-
-            
-            builder.Services.AddHostedService(sp =>
-            {
-                using (var scope = sp.CreateScope())
-                {
-                    var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
-
-                    return new DataCleanupService(dbDataCleanupService);
-                }
-            });
-
+            // Регистрация зависимостей через методы расширения
+            builder.Services.AddDatabase(builder.Configuration)
+                            .AddBllServices()
+                            .AddDalServices(apiConfigurationsPath)
+                            .AddHostedServices(apiConfigurationsPath);
 
             // Логгирование http в MongoDB
             //builder.Logging.ClearProviders();
