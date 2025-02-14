@@ -1,6 +1,7 @@
 ﻿using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
+using ApiEasier.Logger.Interfaces;
 using System.Text.Json;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
@@ -11,10 +12,12 @@ namespace ApiEasier.Dal.Repositories.FileStorage
     public class FileApiServiceRepository : IApiServiceRepository
     {
         private readonly IFileHelper _fileHelper;
+        private readonly ILoggerService _loggerService;
 
-        public FileApiServiceRepository(IFileHelper fileHelper)
+        public FileApiServiceRepository(IFileHelper fileHelper, ILoggerService loggerService)
         {
             _fileHelper = fileHelper;
+            _loggerService = loggerService;
         }
 
         /// <summary>
@@ -81,9 +84,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 {
                     apiServiceData = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 }
-                catch(JsonException)
+                catch(JsonException ex)
                 {
-                    //Здесь нужно логирование
+                    _loggerService.LogError(ex, ex.Message);
                     continue;
                 }
 
