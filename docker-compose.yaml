@@ -10,7 +10,7 @@ services:
       context: ./src 
       dockerfile: ApiEasier.Api/Dockerfile
     volumes:
-      - ./configs:/app/configuration
+      - ./configs:/app/ApiConfiguration
     env_file:
       - path: ./environment/default.env
         required: true
