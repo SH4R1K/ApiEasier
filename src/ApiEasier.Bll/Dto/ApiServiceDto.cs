@@ -11,6 +11,7 @@ namespace ApiEasier.Bll.Dto
         /// Имя API-сервиса.
         /// </summary>
         [Required]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
         public required string Name { get; set; }
 
         /// <summary>
