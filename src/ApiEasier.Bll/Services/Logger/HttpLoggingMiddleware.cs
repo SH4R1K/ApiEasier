@@ -1,4 +1,4 @@
-﻿using ApiEasier.Bll.Interfaces.Logger;
+﻿using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Http;
 
 namespace ApiEasier.Bll.Services.Logger

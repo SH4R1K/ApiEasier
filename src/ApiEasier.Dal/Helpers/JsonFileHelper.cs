@@ -9,6 +9,7 @@ namespace ApiEasier.Dal.Helpers
     public class JsonFileHelper : IFileHelper
     {
         private readonly IMemoryCache _cache;
+        private static readonly SemaphoreSlim _lock = new(1, 1);
 
         public string FolderPath { get; init; }
 
@@ -19,6 +20,11 @@ namespace ApiEasier.Dal.Helpers
 
             FolderPath = folderPath;
             _cache = cache;
+
+            if (!Directory.Exists(FolderPath))
+            {
+                Directory.CreateDirectory(FolderPath);
+            }
         }
 
         /// <summary>
@@ -26,15 +32,7 @@ namespace ApiEasier.Dal.Helpers
         /// </summary>
         /// <param name="fileName">Имя файла JSON без расширения</param>
         /// <returns>Полный путь к файлу JSON</returns>
-        private string GetFilePath(string fileName)
-        {
-            if (!Directory.Exists(FolderPath))
-            {
-                Directory.CreateDirectory(FolderPath);
-            }
-
-            return Path.Combine(FolderPath, fileName + ".json");
-        }
+        private string GetFilePath(string fileName) => Path.Combine(FolderPath, fileName + ".json");
 
         /// <summary>
         /// Получает список названий файлов JSON без расширения из папки для конфигураций
@@ -76,12 +74,20 @@ namespace ApiEasier.Dal.Helpers
             if (!File.Exists(filePath))
                 return default;
 
-            var json = await File.ReadAllTextAsync(filePath);
-            var data = JsonSerializerHelper.Deserialize<T>(json);
+            await _lock.WaitAsync();
+            try
+            {
+                var json = await File.ReadAllTextAsync(filePath);
+                var data = JsonSerializerHelper.Deserialize<T>(json);
 
-            _cache.Set(fileName, data, TimeSpan.FromHours(1));
+                _cache.Set(fileName, data, TimeSpan.FromHours(1));
 
-            return data;
+                return data;
+            }
+            finally
+            {
+                _lock.Release();
+            }
         }
 
         public async Task<T?> WriteAsync<T>(string fileName, T data)
@@ -91,16 +97,25 @@ namespace ApiEasier.Dal.Helpers
 
             var filePath = GetFilePath(fileName);
 
-            var json = JsonSerializerHelper.Serialize(data);
-            await File.WriteAllTextAsync(filePath, json);
+            await _lock.WaitAsync();
+            try
+            {
+                var json = JsonSerializerHelper.Serialize(data);
+                await File.WriteAllTextAsync(filePath, json);
 
-            return data;
+                return data;
+            }
+            finally
+            {
+                _lock?.Release();
+            }
         }
 
         public bool Delete(string fileName)
         {
             try
             {
+                _lock.Wait();
                 var filePath = GetFilePath(fileName);
                 if (!File.Exists(filePath))
                     Directory.CreateDirectory(FolderPath);
@@ -112,6 +127,10 @@ namespace ApiEasier.Dal.Helpers
             {
                 Console.WriteLine($"Ошибка при удалении файла {fileName}");
                 return false;
+            }
+            finally
+            {
+                _lock.Release();
             }
         }
     }

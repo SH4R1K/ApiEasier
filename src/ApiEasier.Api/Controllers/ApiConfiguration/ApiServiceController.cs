@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Bll.Interfaces.ApiEmu;
-using ApiEasier.Bll.Interfaces.Logger;
+using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 

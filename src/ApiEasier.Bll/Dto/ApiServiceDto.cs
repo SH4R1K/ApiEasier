@@ -1,4 +1,6 @@
-﻿namespace ApiEasier.Bll.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ApiEasier.Bll.Dto
 {
     /// <summary>
     /// DTO для представления API-сервиса с именем.
@@ -8,11 +10,14 @@
         /// <summary>
         /// Имя API-сервиса.
         /// </summary>
-        public string Name { get; set; }
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+        public required string Name { get; set; }
 
         /// <summary>
         /// Указывает, активен ли API-сервис.
         /// </summary>
+        [Required]
         public bool IsActive { get; set; }
 
         /// <summary>
