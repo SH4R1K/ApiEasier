@@ -17,11 +17,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(id);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 if (apiService == null || apiService.Entities == null)
                     return false;
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
                 if (entity == null)
                     return false;
 
@@ -127,11 +127,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             try
             {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(id);
+                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 if (apiService == null || apiService.Entities == null)
                     return false;
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+                var entity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
                 if (entity == null)
                     return false;
 
