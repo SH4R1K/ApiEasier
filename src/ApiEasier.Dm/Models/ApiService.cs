@@ -6,7 +6,10 @@ namespace ApiEasier.Dm.Models
     /// Модель для представления API-сервиса.
     /// </summary>
     public class ApiService
-    {
+    {   
+        /// <summary>
+        /// Имя API-сервиса.
+        /// </summary>
         [JsonIgnore]
         public string Name { get; set; } = string.Empty;
 

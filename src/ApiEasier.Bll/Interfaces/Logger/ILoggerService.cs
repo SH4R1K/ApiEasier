@@ -2,6 +2,9 @@
 
 namespace ApiEasier.Bll.Interfaces.Logger
 {
+    /// <summary>
+    /// Позволяет создавать различные записи в логах
+    /// </summary>
     public interface ILoggerService
     {
         public void LogHttp(HttpContext context, string requestBody, string responseBody);

@@ -24,9 +24,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <param name="name">Название файла без расширения и имя API-сервиса</param>
         /// <param name="apiService">Объект с данными, который нужно дополнить</param>
         /// <returns>Дополненый именем API-сервиса</returns>
-        private ApiService MapApiService(string name, ApiService apiService)
+        private ApiService? MapApiService(string name, ApiService? apiService)
         {
-            return new ApiService
+            return apiService == null ? null : new ApiService
             {
                 Name = name,
                 IsActive = apiService.IsActive,
@@ -76,7 +76,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             foreach (var apiServiceName in apiServiceNames)
             {
-                ApiService apiServiceData;
+                ApiService? apiServiceData;
                 try
                 {
                     apiServiceData = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
@@ -94,7 +94,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 var apiService = MapApiService(apiServiceName, apiServiceData);
 
-                apiServices.Add(apiService);
+                apiServices.Add(apiService!);
             }
 
             return apiServices;
@@ -104,7 +104,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(id);
 
-            return apiService == null ? null : MapApiService(id, apiService);
+            return MapApiService(id, apiService);
         }
 
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
@@ -123,7 +123,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
-                return oldApiService == null ? null : MapApiService(apiService.Name, apiService);
+                return MapApiService(apiService.Name, apiService);
             }
             catch
             {
