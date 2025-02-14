@@ -2,6 +2,9 @@
 
 namespace ApiEasier.Logger.Interfaces
 {
+    /// <summary>
+    /// Позволяет логгировать сообщения от приложении, изменяя поведение логов от их вида 
+    /// </summary>
     public interface ILoggerService
     {
         public void LogHttp(HttpContext context, string requestBody, string responseBody);

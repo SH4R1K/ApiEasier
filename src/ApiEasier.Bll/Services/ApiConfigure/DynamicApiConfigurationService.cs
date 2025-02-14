@@ -6,9 +6,7 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
-    /// <summary>
-    /// Обеспечивает настройку API-сервисов
-    /// </summary>
+    /// <inheritdoc cref="IDynamicApiConfigurationService"/>
     public class DynamicApiConfigurationService : IDynamicApiConfigurationService
     {
 
@@ -82,11 +80,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return result.Select(_apiServiceToDtoSummaryConverter.Convert).ToList();
         }
 
-        /// <summary>
-        /// Вывод api-сервиса по названию
-        /// </summary>
-        /// <param name="id">название файла конфигурации</param>
-        /// <returns></returns>
         public async Task<ApiServiceDto?> GetByIdAsync(string id)
         {
             var result = await _apiServiceRepository.GetByIdAsync(id);
