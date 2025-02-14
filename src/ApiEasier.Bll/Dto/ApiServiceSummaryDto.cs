@@ -1,5 +1,8 @@
 ﻿namespace ApiEasier.Bll.Dto
 {
+    /// <summary>
+    /// DTO для API-сервиса без сущностей
+    /// </summary>
     public class ApiServiceSummaryDto
     {
         /// <summary>
