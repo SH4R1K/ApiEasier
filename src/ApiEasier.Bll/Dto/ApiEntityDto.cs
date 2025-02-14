@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Dm.Models.JsonShema;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Bll.Dto
 {
@@ -7,11 +8,13 @@ namespace ApiEasier.Bll.Dto
         // <summary>
         /// Имя сущности API.
         /// </summary>
-        public string? Name { get; set; }
+        [Required]
+        public required string Name { get; set; }
 
         /// <summary>
         /// Указывает, активна ли сущность API.
         /// </summary>
+        [Required]
         public bool IsActive { get; set; }
 
         /// <summary>
