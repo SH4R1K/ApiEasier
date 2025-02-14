@@ -3,11 +3,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /source
 
 # Копируем все .csproj файлы сразу, чтобы ускорить кеширование
-COPY ApiEasier.Api/ApiEasier.Api.csproj ApiEasier.Api/
-COPY ApiEasier.Bll/ApiEasier.Bll.csproj ApiEasier.Bll/
-COPY ApiEasier.Dal/ApiEasier.Dal.csproj ApiEasier.Dal/
-COPY ApiEasier.Dm/ApiEasier.Dm.csproj ApiEasier.Dm/
-COPY ApiEasier.Logger/ApiEasier.Logger.csproj ApiEasier.Logger/
+COPY ApiEasier.Api.csproj ApiEasier.Api/
+COPY ../ApiEasier.Bll/ApiEasier.Bll.csproj ApiEasier.Bll/
+COPY ../ApiEasier.Dal/ApiEasier.Dal.csproj ApiEasier.Dal/
+COPY ../ApiEasier.Dm/ApiEasier.Dm.csproj ApiEasier.Dm/
+COPY ../ApiEasier.Logger/ApiEasier.Logger.csproj ApiEasier.Logger/
 
 # Восстанавливаем зависимости
 WORKDIR /source/ApiEasier.Api
