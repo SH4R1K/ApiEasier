@@ -7,15 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
-    <PackageReference Include="NJsonSchema" Version="11.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.3.0" />
     <PackageReference Include="NLog" Version="5.4.0" />
     <PackageReference Include="NLog.Mongo" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ApiEasier.Dal\ApiEasier.Dal.csproj" />
-    <ProjectReference Include="..\ApiEasier.Logger\ApiEasier.Logger.csproj" />
   </ItemGroup>
 
 </Project>

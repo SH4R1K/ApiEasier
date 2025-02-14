@@ -1,4 +1,4 @@
-﻿using ApiEasier.Bll.Interfaces.Logger;
+﻿using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System;

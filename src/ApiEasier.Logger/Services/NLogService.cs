@@ -1,22 +1,14 @@
-﻿using ApiEasier.Bll.Interfaces.Logger;
+﻿using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using NLog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NLog;
 
-namespace ApiEasier.Bll.Services.Logger
+namespace ApiEasier.Logger.Services
 {
-
     public class NLogService : ILoggerService
     {
         private readonly NLog.Logger _logger;
-        public NLogService() 
-        { 
+        public NLogService()
+        {
             _logger = LogManager.GetCurrentClassLogger();
         }
         public void LogHttp(HttpContext context, string requestBody, string responseBody)

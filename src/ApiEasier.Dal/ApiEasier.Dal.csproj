@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ApiEasier.Dm\ApiEasier.Dm.csproj" />
+    <ProjectReference Include="..\ApiEasier.Logger\ApiEasier.Logger.csproj" />
   </ItemGroup>
 
 </Project>
