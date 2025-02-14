@@ -1,4 +1,4 @@
-using ApiEasier.Api.DependensyInjections;
+using ApiEasier.Api.DependencyInjections;
 using ApiEasier.Bll.Services.Logger;
 
 namespace ApiEasier.Api

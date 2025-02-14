@@ -21,7 +21,7 @@ using ApiEasier.Dal.Repositories.FileStorage;
 using ApiEasier.Dm.Models;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace ApiEasier.Api.DependensyInjections
+namespace ApiEasier.Api.DependencyInjections
 {
     public static class ServiceCollectionExtensions
     {
