@@ -7,7 +7,7 @@ services:
       - "5240:8080"
     image: apieasier_api
     build:
-      context: ./ApiEasier.Server/.
+      context: ./src/ApiEasier.Api/.
       dockerfile: Dockerfile
     volumes:
       - ./configs:/app/configuration
