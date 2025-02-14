@@ -18,7 +18,7 @@ WORKDIR /source
 COPY ../ ./
 
 # Сборка и публикация
-RUN dotnet publish -c Release -o /app --no-restore
+RUN dotnet publish ApiEasier.Api/ApiEasier.Api.csproj -c Release -o /app --no-restore
 
 # Базовый образ для запуска
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
