@@ -118,7 +118,6 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
                 oldApiService.IsActive = apiService.IsActive;
                 oldApiService.Description = apiService.Description;
-                oldApiService.Entities = apiService.Entities;
 
 
                 if (id != apiService.Name)
