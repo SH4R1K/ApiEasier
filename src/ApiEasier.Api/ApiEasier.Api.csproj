@@ -25,6 +25,7 @@
     <ProjectReference Include="..\ApiEasier.Bll\ApiEasier.Bll.csproj" />
     <ProjectReference Include="..\ApiEasier.Dal\ApiEasier.Dal.csproj" />
     <ProjectReference Include="..\ApiEasier.Dm\ApiEasier.Dm.csproj" />
+    <ProjectReference Include="..\ApiEasier.Logger\ApiEasier.Logger.csproj" />
   </ItemGroup>
 
 </Project>

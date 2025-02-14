@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiEasier.Tests", "tests\Ap
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{86BA2BB1-BBFA-42DA-AA14-48691E098ED9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiEasier.Logger", "src\ApiEasier.Logger\ApiEasier.Logger.csproj", "{4B77D320-D0FF-4A4F-8EEB-9ADAB01EABDF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{8A166C9C-1E6F-4986-A694-74292D6B21A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A166C9C-1E6F-4986-A694-74292D6B21A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A166C9C-1E6F-4986-A694-74292D6B21A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B77D320-D0FF-4A4F-8EEB-9ADAB01EABDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B77D320-D0FF-4A4F-8EEB-9ADAB01EABDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B77D320-D0FF-4A4F-8EEB-9ADAB01EABDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B77D320-D0FF-4A4F-8EEB-9ADAB01EABDF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{8314C6A4-0B90-471E-91CC-B916632AC849} = {3417A55D-429E-4719-A3C8-27922D3FCC90}
 		{DF34A70B-07E9-44DD-B9E5-41C967EBB597} = {3417A55D-429E-4719-A3C8-27922D3FCC90}
 		{8A166C9C-1E6F-4986-A694-74292D6B21A8} = {86BA2BB1-BBFA-42DA-AA14-48691E098ED9}
+		{4B77D320-D0FF-4A4F-8EEB-9ADAB01EABDF} = {3417A55D-429E-4719-A3C8-27922D3FCC90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8791CEEC-B371-49C4-AC07-687CF5477504}

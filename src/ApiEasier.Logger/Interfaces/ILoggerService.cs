@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace ApiEasier.Bll.Interfaces.Logger
+namespace ApiEasier.Logger.Interfaces
 {
     public interface ILoggerService
     {
