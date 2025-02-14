@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Dm.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Bll.Dto
 {
@@ -7,16 +8,19 @@ namespace ApiEasier.Bll.Dto
         /// <summary>
         /// Маршрут для действия API.
         /// </summary>
-        public string Route { get; set; }
+        [Required]
+        public required string Route { get; set; }
 
         /// <summary>
         /// Тип ответа, ожидаемого от действия API.
         /// </summary>
+        [Required]
         public TypeResponse Type { get; set; }
 
         /// <summary>
         /// Указывает, активно ли действие API.
         /// </summary>
+        [Required]
         public bool IsActive { get; set; }
     }
 }
