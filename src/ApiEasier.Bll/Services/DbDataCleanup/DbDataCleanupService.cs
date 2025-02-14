@@ -31,9 +31,9 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
 
                 await _dbResourceRepository.DeleteUnusedResources(apiServiceNames);
             }
-            catch
+            catch (Exception ex)
             {
-                _loggerService.LogDebug("Чистка БД от неиспользуемых хранилищ вызвала исключение");
+                _loggerService.LogError(ex, $"Чистка БД от неиспользуемых хранилищ вызвала исключение");
             }
 
         }
