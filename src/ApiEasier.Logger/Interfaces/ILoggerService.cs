@@ -3,7 +3,7 @@
 namespace ApiEasier.Logger.Interfaces
 {
     /// <summary>
-    /// Позволяет создавать различные записи в логах
+    /// Позволяет логгировать сообщения от приложении, изменяя поведение логов от их вида 
     /// </summary>
     public interface ILoggerService
     {

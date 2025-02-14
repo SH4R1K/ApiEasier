@@ -9,7 +9,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
 
     /// <summary>
-    /// Позволяет настраивать API-сервисы через API
+    /// Позволяет настраивать API-сервисы 
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]

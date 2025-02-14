@@ -6,9 +6,7 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiConfigure
 {
-    /// <summary>
-    /// Обеспечивает настройку API-сервисов
-    /// </summary>
+    /// <inheritdoc cref="IDynamicApiConfigurationService"/>
     public class DynamicApiConfigurationService : IDynamicApiConfigurationService
     {
 
