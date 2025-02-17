@@ -101,9 +101,6 @@ namespace ApiEasier.Dal.Helpers
 
             var filePath = GetFilePath(fileName);
 
-            if (File.Exists(filePath))
-                return default;
-
             await _lock.WaitAsync();
             try
             {
