@@ -6,7 +6,7 @@ COPY . .
 RUN npm run build --prod
 
 FROM nginx:stable-perl
-COPY --from=build /front/dist/apieasier.frontend/browser /usr/share/nginx/html
+COPY --from=build /front/dist/ApiEasier.Frontend/browser /usr/share/nginx/html
 COPY /nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
