@@ -1,0 +1,15 @@
+{
+    "/api": {
+      "target": "http://sh4r1k.ru:52240",
+      "secure": false
+    },
+    "/apiold": {
+      "target": "http://sh4r1k.ru:52240",
+      "secure": false
+    },
+    "/hubs": {
+      "target": "http://sh4r1k.ru:52240",
+      "secure": false,
+      "ws": true
+    }
+  }

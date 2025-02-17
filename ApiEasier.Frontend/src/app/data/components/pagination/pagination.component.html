@@ -1,0 +1,9 @@
+<ng-template #inputCustomContent>Page {{ currentPage }}</ng-template>
+
+<tui-pagination
+  [index]="currentPage - 1"
+  [length]="totalPages"
+  (indexChange)="goToPage($event + 1)"
+  [activePadding] = '1'
+  [sidePadding] ='1'
+/>

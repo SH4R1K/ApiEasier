@@ -1,0 +1,18 @@
+<div class="top-right">
+    <i (click)="openEditDialog()" class="fas fa-edit"></i>
+    <app-icon-trash [item]="entityInfo" (responseAlert)="onDeleteConfirmed()"></app-icon-trash>
+    <app-switch [value]="entityInfo.isActive" (toggle)="onToggleChange($event)"></app-switch>
+  </div>
+  <h3>{{ entityInfo.name }}</h3>
+  <p>Структура 
+    @if(entityInfo.structure == null){
+      отсутствует
+    }
+    @else{
+      есть
+    }
+  </p>
+  <div class="actions">
+    <button class="primary-button" tuiButton [routerLink]="['/ApiEntity', apiName, entityInfo.name]">Детали</button>
+  </div>
+  
