@@ -12,13 +12,10 @@ ApiEasier — это инструмент, который позволяет р�
 ## Стек технологий
 
 ### Бэкэнд
-![C#](https://img.shields.io/badge/C%23-purple?style=for-the-badge&logo=dotnet&logoColor=white) ![ASP.NET](https://img.shields.io/badge/ASPNET-blueviolet?style=for-the-badge&logo=dotnet&logoColor=white) 
-![NLog](https://img.shields.io/badge/NLog-DA6821?style=for-the-badge&logo=dotnet&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-brightgreen?style=for-the-badge&logo=mongodb&logoColor=white)
+![C#](https://img.shields.io/badge/C%23-purple?style=for-the-badge&logo=dotnet&logoColor=white) ![ASP.NET](https://img.shields.io/badge/ASPNET-blueviolet?style=for-the-badge&logo=dotnet&logoColor=white) ![NLog](https://img.shields.io/badge/NLog-DA6821?style=for-the-badge&logo=dotnet&logoColor=white) ![MongoDB](https://img.shields.io/badge/MongoDB-brightgreen?style=for-the-badge&logo=mongodb&logoColor=white)
 
 ### Фронтэнд
-![Angular](https://img.shields.io/badge/Angular-red?style=for-the-badge&logo=angular&logoColor=white) ![TaigaUI](https://img.shields.io/badge/TaigaUI-green?style=for-the-badge&logo=angular&logoColor=white)
-![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=black)
+![Angular](https://img.shields.io/badge/Angular-red?style=for-the-badge&logo=angular&logoColor=white) ![TaigaUI](https://img.shields.io/badge/TaigaUI-green?style=for-the-badge&logo=angular&logoColor=white) ![HTML](https://img.shields.io/badge/HTML-E34F26?style=for-the-badge&logo=html5&logoColor=white) ![CSS](https://img.shields.io/badge/CSS-1572B6?style=for-the-badge&logo=css3&logoColor=white) ![TypeScript](https://img.shields.io/badge/TypeScript-blue?style=for-the-badge&logo=typescript&logoColor=black)
 
 ### Другое
 
@@ -64,4 +61,11 @@ ApiEasier — это инструмент, который позволяет р�
 ```bash
 docker compose down
 ```
-   
+
+## Список контроллеров
+| Название контроллера      | Назначение                                                                              |
+| ------------------------- | --------------------------------------------------------------------------------------- |
+| **ApiServiceController**  | Конфигурирование эмулируемых API сервисов                                               |
+| **ApiEntityController**   | Конфигурирование сущностей эмулируемых API сервисов                                     |
+| **ApiEndpointController** | Конфигурирование эндпоинтов внутри сущностей                                            |
+| **ApiEmuController**      | Предоставляет возможность работы с эмулируемыми сервисами. Используется при интеграциях |
