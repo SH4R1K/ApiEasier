@@ -38,9 +38,6 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    env_file:
-      - path: ./environment/nginx.env
-        required: true
 
 
 networks:
