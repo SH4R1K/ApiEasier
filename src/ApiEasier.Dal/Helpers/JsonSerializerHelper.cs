@@ -25,7 +25,7 @@ namespace ApiEasier.Dal.Helpers
             return JsonSerializer.Deserialize<T>(json, Options);
         }
 
-        /// <inheritdoc cref="JsonSerializer.Deserialize"/>
+        /// <inheritdoc cref="JsonSerializer.Serialize"/>
         public static string Serialize<T>(T? obj)
         {
             return JsonSerializer.Serialize(obj, Options);
