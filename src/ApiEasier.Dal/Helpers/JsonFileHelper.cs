@@ -63,7 +63,7 @@ namespace ApiEasier.Dal.Helpers
         }
 
         /// <summary>
-        /// Читает и сериализует содержимое файла JSON
+        /// Читает и сериализует содержимое файла JSON (для ускорения данные кэшируется и, если кэш есть, то файл не читается, а данные берутся из кэша)
         /// </summary>
         /// <typeparam name="T">Тип объекта получаемого из содержимого файла JSON</typeparam>
         /// <returns>Объект из JSON</returns>
@@ -87,6 +87,10 @@ namespace ApiEasier.Dal.Helpers
             }
         }
 
+        /// <summary>
+        /// Сериализует данные в JSON и записывает их в файл
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<T?> WriteAsync<T>(string fileName, T data)
         {
             //на случай отказа от FileSystemWatcherService
