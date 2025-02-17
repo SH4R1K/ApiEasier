@@ -42,9 +42,9 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return await _apiServiceRepository.ChangeActiveStatusAsync(id, status);
         }
 
-        public async Task<ApiServiceDto?> CreateAsync(ApiServiceDto dto)
+        public async Task<ApiServiceDto?> CreateAsync(ApiServiceDto apiServiceDto)
         {
-            var apiService = _dtoToApiServiceConverter.Convert(dto);
+            var apiService = _dtoToApiServiceConverter.Convert(apiServiceDto);
 
             var result = await _apiServiceRepository.CreateAsync(apiService);
             if (result == null)
@@ -85,12 +85,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return _apiServiceToDtoConverter.Convert(result);
         }
 
-        /// <summary>
-        /// Обновление данных у api-сервиса в файле конфигурации и ресурсов в бд с ним связанных
-        /// </summary>
-        /// <param name="id">название файла</param>
-        /// <param name="apiServiceDto">данные</param>
-        /// <returns></returns>
         public async Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto apiServiceDto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(apiServiceDto);
@@ -98,7 +92,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             var result = await _apiServiceRepository.UpdateAsync(id, apiService);
 
             if (result == null)
-                return default;
+                return null;
 
             if (id != apiServiceDto.Name)
             {

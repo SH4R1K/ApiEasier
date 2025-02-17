@@ -12,7 +12,7 @@
         public Task<List<string>> GetAllFileNamesAsync();
 
         /// <summary>
-        /// Читает содержимое файла
+        /// Читает содержимое файла по имени
         /// </summary>
         /// <typeparam name="T">Тип получаемого содержимого файла</typeparam>
         /// <param name="fileName">Имя файла без расширения</param>
@@ -27,6 +27,12 @@
         /// <param name="data">Записываемые данные</param>
         /// <returns>Данные записавшиеся в файл</returns>
         public Task<T?> WriteAsync<T>(string fileName, T data);
+
+        /// <summary>
+        /// Удаляет файл по имени
+        /// </summary>
+        /// <param name="fileName">Имя удаляемого файла</param>
+        /// <returns></returns>
         public bool Delete(string fileName);
     }
 }

@@ -10,10 +10,17 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
         /// <summary>
         /// Добавляет новый API-сервис
         /// </summary>
-        /// <param name="dto">Создаваемый API-сервис</param>
+        /// <param name="apiServiceDto">Создаваемый API-сервис</param>
         /// <returns>Созданный API-сервис</returns>
-        Task<ApiServiceDto?> CreateAsync(ApiServiceDto dto);
-        Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto dto);
+        Task<ApiServiceDto?> CreateAsync(ApiServiceDto apiServiceDto);
+
+        /// <summary>
+        /// Изменяет данные API-сервиса
+        /// </summary>
+        /// <param name="id">Идентификатор API-сервиса</param>
+        /// <param name="apiServiceDto">Новые данные для API-сервиса</param>
+        /// <returns>Изменненый API-сервис</returns>
+        Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto apiServiceDto);
       
         /// <summary>
         /// Возвращает перечень всех API-сервисов без сущностей
@@ -25,7 +32,7 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
         /// <summary>
         /// Возвращает API-сервиса по имени
         /// </summary>
-        /// <param name="id">Имя API-сервиса</param>
+        /// <param name="id">Идентификатор API-сервиса</param>
         /// <returns>Требуемый API-сервис</returns>
         Task<ApiServiceDto?> GetByIdAsync(string id);
         Task<bool> ChangeActiveStatusAsync(string id, bool status);

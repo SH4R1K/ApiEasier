@@ -65,6 +65,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             }
         }
 
+        /// <summary>
+        /// Считывает папку с файлами конфигурации и считывает их все данные
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<List<ApiService>> GetAllAsync()
         {
             //Именем API-сервиса является название файла его конфигурации
@@ -79,7 +83,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 {
                     apiServiceData = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 }
-                catch(JsonException ex)
+                catch (JsonException ex)
                 {
                     _loggerService.LogError(ex, ex.Message);
                     continue;
@@ -110,27 +114,29 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             return MapApiService(id, apiService);
         }
 
+        /// <summary>
+        /// Считывает файл и заменяет данные на новые, а если изменено имя, удаляет старый файл
+        /// и создает новый с изменеными данными из старого файла
+        /// </summary>
+        /// <param name="id">Имя файла без расширения</param>
+        /// <inheritdoc/>
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
         {
-            try
-            {
-                var oldApiService = await _fileHelper.ReadAsync<ApiService>(id);
+            var oldApiService = await _fileHelper.ReadAsync<ApiService>(id);
 
-                oldApiService.IsActive = apiService.IsActive;
-                oldApiService.Description = apiService.Description;
+            if (oldApiService == null)
+                return null;
+
+            oldApiService.IsActive = apiService.IsActive;
+            oldApiService.Description = apiService.Description;
 
 
-                if (id != apiService.Name)
-                    _fileHelper.Delete(id);
+            if (id != apiService.Name)
+                _fileHelper.Delete(id);
 
-                await _fileHelper.WriteAsync(apiService.Name, oldApiService);
+            await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
-                return MapApiService(apiService.Name, apiService);
-            }
-            catch
-            {
-                return default;
-            }
+            return MapApiService(apiService.Name, apiService);
         }
 
         public async Task<bool> ChangeActiveStatusAsync(string id, bool status)

@@ -81,6 +81,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [HttpPost]
         [DisableRequestSizeLimit]
         [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] ApiServiceDto apiServiceDto)
         {
@@ -100,15 +101,23 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        // PUT api/ApiService/{oldName}
+        /// <summary>
+        /// Изменяет API-сервис
+        /// </summary>
+        /// <param name="apiServiceName">Имя изменяемого API-сервиса</param>
+        /// <param name="apiServiceDto">Новые данные для API-сервиса</param>
         [HttpPut("{apiServiceName}")]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Put(string apiServiceName, [FromBody] ApiServiceDto apiServiceDto)
         {
             try
             {
-                var fileResult = await _dynamicApiConfigurationService.UpdateAsync(apiServiceName, apiServiceDto);
-                if (fileResult == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
+                var result = await _dynamicApiConfigurationService.UpdateAsync(apiServiceName, apiServiceDto);
+                if (result == null)
+                    return NotFound($"API-сервис {apiServiceName} не найден");
 
                 return NoContent();
             }
