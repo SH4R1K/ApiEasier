@@ -19,6 +19,6 @@
         /// <returns>Содержимое файла</returns>
         public Task<T?> ReadAsync<T>(string fileName);
         public Task<T?> WriteAsync<T>(string fileName, T data);
-        public bool Delete(string fileName);
+        public Task<bool> DeleteAsync(string fileName);
     }
 }

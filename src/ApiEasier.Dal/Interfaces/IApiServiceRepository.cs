@@ -9,7 +9,7 @@ namespace ApiEasier.Dal.Interfaces
     {
         Task<ApiService?> CreateAsync(ApiService apiService);
         Task<ApiService?> UpdateAsync(string id, ApiService apiService);
-        bool Delete(string id);
+        Task<bool> DeleteAsync(string id);
 
         /// <summary>
         /// Возвращает перечень всех API-сервисов

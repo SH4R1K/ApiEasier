@@ -65,9 +65,10 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         /// <returns></returns>
         public async Task<bool> DeleteAsync(string id)
         {
-            var result = _apiServiceRepository.Delete(id);
-            if (!result)
-                return false;
+            var result = await _apiServiceRepository.DeleteAsync(id);
+            
+            if (await _apiServiceRepository.GetByIdAsync(id) == null)
+                result = false;
 
             await _dbResourceRepository.DeleteByApiNameAsync(id);
 

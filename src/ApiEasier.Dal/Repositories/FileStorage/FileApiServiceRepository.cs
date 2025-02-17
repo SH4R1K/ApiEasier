@@ -27,7 +27,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <param name="name">Название файла без расширения и имя API-сервиса</param>
         /// <param name="apiService">Объект с данными, который нужно дополнить</param>
         /// <returns>Дополненый именем API-сервиса</returns>
-        private ApiService? MapApiService(string name, ApiService? apiService)
+        private static ApiService? MapApiService(string name, ApiService? apiService)
         {
             return apiService == null ? null : new ApiService
             {
@@ -57,17 +57,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
         }
 
-        public bool Delete(string id)
+        public async Task<bool> DeleteAsync(string id)
         {
-            try
-            {
-                var filePath = _fileHelper.Delete(id);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return await _fileHelper.DeleteAsync(id);
         }
 
         public async Task<List<ApiService>> GetAllAsync()
@@ -84,7 +76,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 {
                     apiServiceData = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
                 }
-                catch(JsonException ex)
+                catch (JsonException ex)
                 {
                     _loggerService.LogError(ex, ex.Message);
                     continue;
@@ -121,7 +113,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
 
                 if (id != apiService.Name)
-                    _fileHelper.Delete(id);
+                    await _fileHelper.DeleteAsync(id);
 
                 await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 

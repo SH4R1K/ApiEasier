@@ -1,9 +1,7 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
-using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
@@ -84,7 +82,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 if (result == null)
                     return NotFound("Не удалось создать api-сервис");
-                
+
                 return Ok(result);
             }
             catch (Exception ex)
