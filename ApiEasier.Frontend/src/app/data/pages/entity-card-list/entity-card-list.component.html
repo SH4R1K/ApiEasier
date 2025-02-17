@@ -1,0 +1,91 @@
+<app-header
+  [buttonText]="'Добавить сущность'"
+  (buttonClick)="openCreateDialog()"
+></app-header>
+
+<div *ngIf="loading; else content">
+  <app-loading></app-loading>
+</div>
+
+<ng-template #content>
+  <div class="container">
+    <div class="mb-40">
+      <!-- Заголовок и описание -->
+      <div class="header-section">
+        <div class="top-right">
+          <app-switch
+            [value]="apiInfo.isActive"
+            (toggle)="onToggleChange($event)"
+          ></app-switch>
+        </div>
+        <h1>{{ apiInfo.name }}</h1>
+        <p>{{ apiInfo.description }}</p>
+        <h3 *ngIf="filteredEntities.length == 0">Сущностей нет</h3>
+      </div>
+    </div>
+
+    <div *ngIf="filteredEntities.length > 0">
+      <!-- Сепаратор и заголовок "Сущности" -->
+      <div class="separator-section">
+        <h2>Сущности</h2>
+        <hr class="separator" />
+      </div>
+
+      <!-- Фильтрация, сортировка и пагинация -->
+      <div class="filter-section">
+        <app-filter-by-input
+          [label]="'Search Entity'"
+          [controlName]="'search'"
+          [items]="entityNames"
+          (searchQuery)="onSearchQuery($event)"
+        ></app-filter-by-input>
+        <app-pagination
+          class="custom-pagination"
+          [totalItems]="filteredEntities.length"
+          [itemsPerPage]="itemsPerPage"
+          [currentPage]="currentPage"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
+        <i
+          *ngIf="!isSortedAscending"
+          class="fas fa-sort-alpha-up"
+          (click)="sortCardsOnClick()"
+        ></i>
+        <i
+          *ngIf="isSortedAscending"
+          class="fas fa-sort-alpha-down"
+          (click)="sortCardsOnClick()"
+        ></i>
+      </div>
+
+      <!-- Список сущностей -->
+      <div class="grid">
+        <div
+          *ngFor="let item of paginatedEntities"
+          tuiAppearance="floating"
+          tuiCardLarge
+          class="card"
+        >
+          <app-card-entity
+            [entityInfo]="item"
+            [apiName]="apiInfo.name"
+            (entityDeleted)="onEntityDeleted(item.name)"
+          ></app-card-entity>
+        </div>
+      </div>
+
+      <div class="mt-20">
+        <!-- Пагинация -->
+        <app-pagination
+          class="custom-pagination"
+          *ngIf="paginatedEntities.length >= itemsPerPage && !searchQueryActive"
+          [totalItems]="filteredEntities.length"
+          [itemsPerPage]="itemsPerPage"
+          [currentPage]="currentPage"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

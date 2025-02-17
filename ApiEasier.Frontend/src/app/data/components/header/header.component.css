@@ -1,0 +1,58 @@
+.header {
+    background-color: #0056a6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header a{
+    height: 4rem;
+}
+
+.header a {
+    outline: none; /* Убирает стандартное выделение */
+}
+
+.header a img{
+    height: 4rem;
+}
+
+.header button {
+    background-color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    /* Относительные отступы */
+    margin: 0.625rem 0.5rem;
+    /* Относительные отступы */
+    border-radius: 0.3125rem;
+    /* Относительный радиус скругления */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    /* Относительный размер шрифта */
+}
+
+.header button:hover {
+    background-color: #e6e6e6;
+}
+
+@media only screen and (max-width: 768px) {
+    .header {
+        display: flex;  
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .header a{
+        width: -webkit-fill-available;
+        height: auto;
+    }
+
+    .header a img{
+        width: -webkit-fill-available;
+        height: auto;
+    }
+}

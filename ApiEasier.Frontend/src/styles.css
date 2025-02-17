@@ -1,0 +1,12 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+  }
+
+  :root{
+    --tui-background-accent-1: #0056a6;
+    --tui-background-accent-1-hover: #004080;
+    --tui-text-action: #0056a6;
+}

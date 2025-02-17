@@ -1,0 +1,58 @@
+
+h3 {
+    margin: 0;
+    font-size: 24px;
+    color: #0056a6;
+    width: 65%; /* Ширина элемента */
+    text-overflow: ellipsis; /* Добавляем троеточие */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+    overflow: hidden; /* Скрываем текст, который не помещается */
+    height: 2rem;
+}
+  
+  p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5; /* Установите желаемую высоту строки */
+    height: calc(1.5em * 2); /* Высота равна трём строкам */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку при необходимости */
+    overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
+    box-sizing: border-box; /* Включаем отступы и границы в размер элемента */
+    word-wrap: break-word; /* Перенос слов на новую строку, если они не помещаются */
+    white-space: normal; /* Разрешаем перенос текста на новую строку */
+}
+
+  /* Стилизация полосы прокрутки для WebKit-браузеров (Chrome, Safari, Edge) */
+  p::-webkit-scrollbar {
+    width: 8px; /* Ширина полосы прокрутки */
+  }
+
+  p::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Цвет фона полосы прокрутки */
+    border-radius: 10px; /* Закругление углов */
+  }
+
+  p::-webkit-scrollbar-thumb {
+    background: #888; /* Цвет полосы прокрутки */
+    border-radius: 10px; /* Закругление углов */
+  }
+
+  p::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Цвет полосы прокрутки при наведении */
+  }
+  
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+.top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+  }

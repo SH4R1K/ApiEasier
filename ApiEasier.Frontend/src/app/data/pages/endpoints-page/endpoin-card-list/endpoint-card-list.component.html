@@ -1,0 +1,41 @@
+<app-header [buttonText]="'Добавить эндпоинт'" (buttonClick)="openCreateDialog()" />
+@if (loading)
+{
+  <app-loading></app-loading>
+}
+@else 
+{
+<div class="container">
+    <div class="header-section">
+        <div class="top-right">
+            <app-switch [value]="entityInfo.isActive" (toggle)="onToggleChange($event)"></app-switch>
+        </div>
+        <h1 class="entity-title">{{ entityInfo.name }}</h1>
+        <div class="entity-structure">
+            @if(entityInfo.structure != null){
+                 <h3>Структура сущности</h3>
+                <textarea readonly class="structure-content">{{ entityInfo.structure | json }}</textarea>
+            }
+            @else{
+                <h3>Структура сущности отсутствует</h3>
+            }
+        </div>
+    </div>
+
+    <div class="separator-section">
+        <h2>Эндпоинты</h2>
+        <hr class="separator" />
+    </div>
+
+    <div class="grid">
+        <div *ngFor="let endpoint of endpoints" tuiAppearance="floating" tuiCardLarge class="card">
+            <app-card-endpoint 
+                [entityInfo]="entityInfo" 
+                [endpointInfo]="endpoint" 
+                [apiName]="apiName"
+                (endpointDeleted)="onEndpointDeleted(endpoint.route)">
+            </app-card-endpoint>
+        </div>
+    </div>
+</div>
+}

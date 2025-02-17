@@ -1,0 +1,14 @@
+<div class="header">
+  <a href="/">
+    <img [alt]="'Company Logo'" [src]="logoUrl" />
+  </a>
+  <div>
+    @if(isApiPage){
+      <button (click)="Import()">Импортировать</button>
+    }
+    @if(buttonText != ''){
+      <button (click)="Click()">{{ buttonText }}</button>
+    }
+    <app-back-button></app-back-button>
+  </div>
+</div>

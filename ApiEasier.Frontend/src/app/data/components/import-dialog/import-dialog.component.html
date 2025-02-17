@@ -1,0 +1,53 @@
+<label tuiInputFiles >
+    <input
+        tuiInputFiles
+        [formControl]="control"
+        multiple
+        accept=".json, application/json"
+    />
+    <ng-template let-dragged>
+        <div *ngIf="dragged; else base" class="content">
+            <tui-avatar appearance="secondary" src="@tui.droplet" />
+            <div>
+                Файлы готовы к загрузке!
+                <br />
+                <br />
+            </div>
+        </div>
+        <ng-template #base>
+            <div class="content">
+                <tui-avatar appearance="secondary" src="@tui.cloud-upload" />
+                <div>
+                    Перетащите файлы сюда или
+                    <a tuiLink>кликните для загрузки</a>
+                </div>
+            </div>
+        </ng-template>
+    </ng-template>
+</label>
+
+<tui-files class="tui-space_top-4">
+    <tui-file
+        *ngFor="let file of files"
+        [state]="getFileStatus(file)"
+        [file]="file.file"
+    >
+        <span class="tui-text_body-s-2">{{ getFileStatusText(file) }}</span>
+        <span class="tui-text_body-s-2">{{ file.errorMessage }}</span>
+        <button
+            appearance="secondary-destructive"
+            iconStart="@tui.x"
+            size="xs"
+            tuiIconButton
+            type="button"
+            [style.border-radius.%]="100"
+            (click)="removeFile(file)"
+        ></button>
+    </tui-file>
+</tui-files>
+
+<p>
+    <button size="m" tuiButton type="button" [disabled]="!hasFiles" (click)="submit()">
+        Отправить
+    </button>
+</p>

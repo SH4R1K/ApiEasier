@@ -1,0 +1,36 @@
+<tui-input
+  #nameInput
+  tuiAutoFocus
+  tuiTextfieldSize="m"
+  [(ngModel)]="data.name"
+  (input)="onInput($event)"
+  (keydown.enter)="submit()"
+  (keydown.arrowDown)="moveFocus(descriptionInputRef)"
+  (keydown.arrowUp)="moveFocus(descriptionInputRef)"
+>
+  Имя API
+</tui-input>
+<br />
+<tui-input
+  #descriptionInput
+  tuiAutoFocus
+  tuiTextfieldSize="m"
+  [(ngModel)]="data.description"
+  (keydown.enter)="submit()"
+  (keydown.arrowUp)="moveFocus(nameInputRef)"
+  (keydown.arrowDown)="moveFocus(nameInputRef)"
+>
+  Описание
+</tui-input>
+
+<p>
+  <button
+    size="m"
+    tuiButton
+    type="button"
+    [disabled]="!hasValue"
+    (click)="submit()"
+  >
+    Отправить
+  </button>
+</p>
