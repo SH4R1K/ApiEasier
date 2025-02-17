@@ -33,6 +33,6 @@
         /// </summary>
         /// <param name="fileName">Имя удаляемого файла</param>
         /// <returns></returns>
-        public bool Delete(string fileName);
+        public Task<bool> DeleteAsync(string fileName);
     }
 }

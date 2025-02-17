@@ -67,10 +67,7 @@ namespace ApiEasier.Api.DependencyInjections
 
         public static IServiceCollection AddDalServices(this IServiceCollection services, string apiConfigurationsPath)
         {
-            services.AddScoped<IResourceDataRepository, DbResourceDataRepository>();
-            services.AddScoped<IResourceRepository, DbResourceRepository>();
-
-            services.AddScoped<IFileHelper, JsonFileHelper>(provider =>
+            services.AddSingleton<IFileHelper, JsonFileHelper>(provider =>
             {
                 var memoryCache = provider.GetRequiredService<IMemoryCache>();
 
@@ -78,10 +75,11 @@ namespace ApiEasier.Api.DependencyInjections
             });
 
             // Repositories
+            services.AddScoped<IResourceDataRepository, DbResourceDataRepository>();
+            services.AddScoped<IResourceRepository, DbResourceRepository>();
             services.AddScoped<IApiServiceRepository, FileApiServiceRepository>();
             services.AddScoped<IApiEntityRepository, FileApiEntityRepository>();
             services.AddScoped<IApiEndpointRepository, FileApiEndpointRepository>();
-            // ------------------------------------------
 
             services.AddSingleton<ILoggerService, NLogService>();
 
@@ -92,24 +90,20 @@ namespace ApiEasier.Api.DependencyInjections
         {
             services.AddHostedService(sp =>
             {
-                using (var scope = sp.CreateScope())
-                {
-                    var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
+                using var scope = sp.CreateScope();
+                var cache = scope.ServiceProvider.GetRequiredService<IMemoryCache>();
 
-                    return new ConfigFileWatcherService(cache, apiConfigurationsPath);
-                }
+                return new ConfigFileWatcherService(cache, apiConfigurationsPath);
             });
 
 
             services.AddHostedService(sp =>
             {
-                using (var scope = sp.CreateScope())
-                {
-                    var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
-                    var logger = scope.ServiceProvider.GetRequiredService<ILoggerService>();
+                using var scope = sp.CreateScope();
+                var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
+                var logger = scope.ServiceProvider.GetRequiredService<ILoggerService>();
 
-                    return new DataCleanupService(dbDataCleanupService, logger);
-                }
+                return new DataCleanupService(dbDataCleanupService, logger);
             });
 
             return services;
