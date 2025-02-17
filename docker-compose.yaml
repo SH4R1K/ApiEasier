@@ -26,6 +26,16 @@ services:
       - ./scripts:/docker-entrypoint-initdb.d
     networks:
       - backend
+  frontend:
+    container_name: apieasier_frontend
+    hostname: apieasier_frontend
+    restart: always
+    ports:
+      - "5280:80"
+    image: apieasier_frontend
+    build:
+      context: ./ApiEasier.Frontend/
+      dockerfile: Dockerfile
 
 
 networks:
