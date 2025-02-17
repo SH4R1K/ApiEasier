@@ -1,0 +1,63 @@
+<div>
+  <app-header
+    [isApiPage]="true"
+    [buttonText]="'Добавить API'"
+    (buttonClick)="openCreateDialog()"
+  ></app-header>
+  <div class="container">
+    <div class="header-section">
+      <app-filter-by-input
+        [label]="'Search API'"
+        [controlName]="'search'"
+        [items]="apiNames"
+        (searchQuery)="onSearchQuery($event)"
+      ></app-filter-by-input>
+      <app-pagination
+        class="custom-pagination"
+        [totalItems]="filteredCards.length"
+        [itemsPerPage]="itemsPerPage"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+      <i
+        *ngIf="!isSortedAscending"
+        class="fas fa-sort-alpha-up"
+        (click)="sortCardsOnClick()"
+      ></i>
+      <i
+        *ngIf="isSortedAscending"
+        class="fas fa-sort-alpha-down"
+        (click)="sortCardsOnClick()"
+      ></i>
+    </div>
+    <div *ngIf="loading; else cardList">
+      <app-loading></app-loading>
+    </div>
+  </div>
+</div>
+
+<ng-template #cardList>
+  <div *ngIf="cards.length == 0">
+    <h1>Api-сервисов не найдено.</h1>
+  </div>
+  <div class="container">
+    <div class="grid">
+      <div *ngFor="let item of paginatedCards" class="card">
+        <app-card-api
+          [apiInfo]="item"
+          (apiDeleted)="onApiDeleted(item.name)"
+        ></app-card-api>
+      </div>
+    </div>
+  </div>
+  <app-pagination
+    class="pagination"
+    *ngIf="paginatedCards.length >= itemsPerPage && !searchQueryActive"
+    [totalItems]="filteredCards.length"
+    [itemsPerPage]="itemsPerPage"
+    [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)"
+  ></app-pagination>
+</ng-template>
+
+

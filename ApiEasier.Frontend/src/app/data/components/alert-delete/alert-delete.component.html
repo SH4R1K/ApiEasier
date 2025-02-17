@@ -1,0 +1,11 @@
+<button
+    *ngFor="let response of [true, false]"
+    appearance="outline-grayscale"
+    size="s"
+    tuiButton
+    type="button"
+    class="tui-space_right-1"
+    (click)="context.completeWith(response)"
+>
+    {{ response ? 'Да' : 'Нет' }}
+</button>

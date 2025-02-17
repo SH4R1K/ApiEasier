@@ -1,0 +1,23 @@
+.filter-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* Три колонки: фильтр, пагинация, иконки */
+    align-items: center;
+    gap: 10px; /* Отступы между элементами */
+    padding: 0px;
+    margin-bottom: 20px;
+  }
+  
+  .custom-pagination {
+    grid-column: 2; /* Пагинация в средней колонке */
+    justify-self: center; /* Выравнивание по центру */
+  }
+  
+  .filter-section i {
+    grid-column: 3; /* Иконки в третьей колонке */
+    justify-self: end; /* Выравнивание по правому краю */
+    font-size: 27px !important;
+  }
+  
+  .mt-20{
+    margin-top: 20px;
+  }

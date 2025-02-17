@@ -1,0 +1,14 @@
+<tui-input tuiAutoFocus tuiTextfieldSize="m" [(ngModel)]="data.name" (input)="onInput($event)">
+    Имя сущности
+</tui-input>
+<br>
+
+<tui-textarea tuiAutoFocus tuiTextfieldSize="m" [(ngModel)]="structure">
+    Структура
+</tui-textarea>
+
+<p>
+    <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="submit()">
+        Отправить
+    </button>
+</p>

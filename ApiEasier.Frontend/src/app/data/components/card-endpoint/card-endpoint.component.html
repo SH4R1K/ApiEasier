@@ -1,0 +1,10 @@
+<div class="card-content">
+    <div class="top-right">
+      <i class="fa fa-edit" (click)="openEditDialog()"></i>
+      <app-icon-trash [item]="endpointInfo" (responseAlert)="onDeleteConfirmed()"></app-icon-trash>
+      <app-switch [value]="endpointInfo.isActive" (toggle)="onToggleChange($event)"></app-switch>
+    </div>
+    <h3>{{ endpointInfo.route }}</h3>
+    <p>Тип: {{ endpointInfo.type }}</p>
+  </div>
+  

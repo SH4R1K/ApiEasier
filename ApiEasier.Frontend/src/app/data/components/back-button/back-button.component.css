@@ -1,0 +1,19 @@
+button {
+    background-color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    /* Относительные отступы */
+    margin: 0.625rem 0.625rem;
+    /* Относительные отступы */
+    border-radius: 0.3125rem;
+    /* Относительный радиус скругления */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    /* Относительный размер шрифта */
+}
+
+button:hover {
+    background-color: #e6e6e6;
+}

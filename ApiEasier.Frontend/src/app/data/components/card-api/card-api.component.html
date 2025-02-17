@@ -1,0 +1,12 @@
+<div class="top-right">
+    <i class="fas fa-edit" (click)="openEditDialog()"></i>
+    <app-icon-trash [item]="apiInfo" (responseAlert)="onDeleteConfirmed()"></app-icon-trash>
+    <app-switch [value]="apiInfo.isActive" (toggle)="onToggleChange($event)"></app-switch>
+</div>
+<h3>{{ apiInfo.name }}</h3>
+<p>{{ apiInfo.description }}</p>
+<div class="actions">
+    <button tuiButton class="primary-button" routerLink="/ApiEndpoint/{{apiInfo.name}}" >К тестам</button>
+    <button tuiButton class="primary-button" routerLink="/ApiService/{{apiInfo.name}}" >Детали</button>
+    <app-export-api-button [apiInfo]="apiInfo"/>
+</div>
