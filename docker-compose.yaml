@@ -3,8 +3,8 @@ services:
     container_name: apieasier_api
     hostname: apieasier_api
     restart: always
-    ports:
-      - "5240:8080"
+    # ports:
+    #   - "5240:8080"
     image: apieasier_api
     build:
       context: ./src 
