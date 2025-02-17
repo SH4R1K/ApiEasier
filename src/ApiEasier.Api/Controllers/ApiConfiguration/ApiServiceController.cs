@@ -53,7 +53,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiServiceName">Имя API-сервиса</param>
         [HttpGet("{apiServiceName}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<List<ApiServiceDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetByName(string apiServiceName)
@@ -63,7 +63,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 var result = await _dynamicApiConfigurationService.GetByIdAsync(apiServiceName);
 
                 if (result == null)
-                    return NotFound($"api-сервис: {apiServiceName} не найден");
+                    return NotFound($"API-сервис {apiServiceName} не найден");
 
                 return Ok(result);
             }
@@ -74,16 +74,22 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        // POST api/ApiService
+        /// <summary>
+        /// Добавляет новый API-сервис
+        /// </summary>
+        /// <param name="apiServiceDto">Имя API-сервиса</param>
         [HttpPost]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> Post([FromBody] ApiServiceDto apiServiceDto)
         {
             try
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
-
+                
                 if (result == null)
-                    return NotFound("Не удалось создать api-сервис");
+                    return Conflict($"API-сервис {apiServiceDto.Name} уже существует");
                 
                 return Ok(result);
             }

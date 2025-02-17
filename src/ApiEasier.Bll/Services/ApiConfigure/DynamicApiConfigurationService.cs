@@ -42,11 +42,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return await _apiServiceRepository.ChangeActiveStatusAsync(id, status);
         }
 
-        /// <summary>
-        /// Создание файла конфигурации api-сервиса 
-        /// </summary>
-        /// <param name="dto">данные для создания</param>
-        /// <returns></returns>
         public async Task<ApiServiceDto?> CreateAsync(ApiServiceDto dto)
         {
             var apiService = _dtoToApiServiceConverter.Convert(dto);
@@ -55,7 +50,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             if (result == null)
                 return null;
 
-            return _apiServiceToDtoConverter.Convert(result);
+            return _apiServiceToDtoConverter.Convert(result!);
         }
 
         /// <summary>

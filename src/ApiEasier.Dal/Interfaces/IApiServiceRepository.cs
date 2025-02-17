@@ -7,6 +7,11 @@ namespace ApiEasier.Dal.Interfaces
     /// </summary>
     public interface IApiServiceRepository
     {
+        /// <summary>
+        /// Добавляет новый API-сервис
+        /// </summary>
+        /// <param name="dto">Создаваемый API-сервис</param>
+        /// <returns>Созданный API-сервис</returns>
         Task<ApiService?> CreateAsync(ApiService apiService);
         Task<ApiService?> UpdateAsync(string id, ApiService apiService);
         bool Delete(string id);

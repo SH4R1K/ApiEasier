@@ -90,12 +90,19 @@ namespace ApiEasier.Dal.Helpers
             }
         }
 
+        /// <summary>
+        /// Сериализует данные в JSON и записывает их в файл
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<T?> WriteAsync<T>(string fileName, T data)
         {
             //на случай отказа от FileSystemWatcherService
             //_cache.Remove(fileName);
 
             var filePath = GetFilePath(fileName);
+
+            if (File.Exists(filePath))
+                return default;
 
             await _lock.WaitAsync();
             try

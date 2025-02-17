@@ -7,6 +7,11 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
     /// </summary>
     public interface IDynamicApiConfigurationService
     {
+        /// <summary>
+        /// Добавляет новый API-сервис
+        /// </summary>
+        /// <param name="dto">Создаваемый API-сервис</param>
+        /// <returns>Созданный API-сервис</returns>
         Task<ApiServiceDto?> CreateAsync(ApiServiceDto dto);
         Task<ApiServiceDto?> UpdateAsync(string id, ApiServiceDto dto);
       

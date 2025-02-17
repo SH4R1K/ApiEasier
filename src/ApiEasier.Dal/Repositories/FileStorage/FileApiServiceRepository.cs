@@ -38,23 +38,18 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             };
         }
 
+        /// <summary>
+        /// Записывает новый API-сервис в файл
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<ApiService?> CreateAsync(ApiService apiService)
         {
-            try
-            {
-                var apiServiceExist = await GetByIdAsync(apiService.Name);
-                if (apiServiceExist != null)
-                    return default;
-
-                var result = await _fileHelper.WriteAsync(apiService.Name, apiService);
-                return result;
-            }
-            catch
-            {
-                Console.WriteLine($"Ошибка при записи файла");
+            var apiServiceExist = await GetByIdAsync(apiService.Name);
+            if (apiServiceExist != null)
                 return null;
-            }
 
+            var result = await _fileHelper.WriteAsync(apiService.Name, apiService);
+            return result;
         }
 
         public bool Delete(string id)
@@ -103,6 +98,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             return apiServices;
         }
 
+        /// <summary>
+        /// Считывает файл с конфигурацией API-сервиса
+        /// </summary>
+        /// <param name="id">Имя файла без расширения</param>
+        /// <inheritdoc/>
         public async Task<ApiService?> GetByIdAsync(string id)
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(id);
