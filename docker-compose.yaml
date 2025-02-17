@@ -36,6 +36,8 @@ services:
     build:
       context: ./ApiEasier.Frontend/
       dockerfile: Dockerfile
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
 
 
 networks:
