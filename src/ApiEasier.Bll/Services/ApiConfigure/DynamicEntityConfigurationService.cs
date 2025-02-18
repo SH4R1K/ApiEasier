@@ -15,12 +15,12 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         private readonly IConverter<ApiEntity, ApiEntityDto> _apiEntityToDtoConverter;
 
         public DynamicEntityConfigurationService(
-            IApiEntityRepository fileApiEntityRepository,
+            IApiEntityRepository apiEntityRepository,
             IConverter<ApiEntityDto, ApiEntity> dtoToApiEntityConverter,
             IConverter<ApiEntity, ApiEntitySummaryDto> apiEntityToDtoSummaryConverter,
             IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter)
         {
-            _apiEntityRepository = fileApiEntityRepository;
+            _apiEntityRepository = apiEntityRepository;
             _dtoToApiEntityConverter = dtoToApiEntityConverter;
             _apiEntityToDtoSummaryConverter = apiEntityToDtoSummaryConverter;
             _apiEntityToDtoConverter = apiEntityToDtoConverter;
