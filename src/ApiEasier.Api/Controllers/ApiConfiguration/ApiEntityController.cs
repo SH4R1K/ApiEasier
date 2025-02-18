@@ -21,11 +21,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// Получить все сущности API-сервиса
         /// </summary>
         /// <param name="apiServiceName">Имя API-сервиса</param>
-        [HttpGet("{apiServiceName}")]
-        [DisableRequestSizeLimit]
+        /// [DisableRequestSizeLimit]
         [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("{apiServiceName}")]
         public async Task<IActionResult> GetEntitiesByApiName(string apiServiceName)
         {
             try
@@ -44,16 +44,8 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        /// <summary>
-        /// Возвращает сущность по имени
-        /// </summary>
-        /// <param name="apiServiceName">Имя API-сервиса, которому пренадлежит сущность</param>
-        /// <param name="entityName">Имя искаемой сущности</param>
+        // GET api/ApiEntity/{apiServiceName}/{entityName}
         [HttpGet("{apiServiceName}/{entityName}")]
-        [DisableRequestSizeLimit]
-        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetEntityByName(string apiServiceName, string entityName)
         {
             try
@@ -65,10 +57,6 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return Ok(apiEntity);
             }
-            catch (NullReferenceException)
-            {
-                return NotFound($"API-сервис {apiServiceName} не найден");
-            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
@@ -76,30 +64,18 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        /// <summary>
-        /// Добавляет новую сущность API-сервису
-        /// </summary>
-        /// <param name="apiServiceName">API-сервис, которому надо добавить сущность</param>
-        /// <param name="apiEntityDto">Добавляемая сущность</param>
+        // POST api/ApiEntity/{apiServiceName}
         [HttpPost("{apiServiceName}")]
-        [DisableRequestSizeLimit]
-        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddEntity(string apiServiceName, [FromBody] ApiEntityDto apiEntityDto)
+        public async Task<IActionResult> CreateEntity(string apiServiceName, [FromBody] ApiEntityDto apiEntityDto)
         {
             try
             {
                 var result = await _dynamicEntityConfigurationService.CreateAsync(apiServiceName, apiEntityDto);
 
                 if (result == null)
-                    return Conflict($"Сущность с именем {apiEntityDto.Name} уже существует.");
+                    return BadRequest($"Не удалось создать сущность у api-сервиса {apiServiceName}.");
 
                 return Ok(result);
-            }
-            catch (NullReferenceException)
-            {
-                return NotFound($"API-сервис {apiServiceName} не найден");
             }
             catch (Exception ex)
             {

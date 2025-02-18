@@ -13,13 +13,6 @@ namespace ApiEasier.Dal.Interfaces
         /// <param name="apiServiceName">Имя API-сервиса</param>
         /// <returns>Список всех сущностей API-сервиса</returns>
         Task<List<ApiEntity>?> GetAllAsync(string apiServiceName);
-
-        /// <summary>
-        /// Возвращает сущность по идентификатору
-        /// </summary>
-        /// <param name="apiServiceName">Имя API-сервиса, которому пренадлежит сущность</param>
-        /// <param name="id">Идентификатор требуемой сущности</param>
-        /// <returns>Требуемой сущности</returns>
         Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id);
         Task<ApiEntity?> CreateAsync(string apiServiceName, ApiEntity apiEntity);
         Task<bool> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity);

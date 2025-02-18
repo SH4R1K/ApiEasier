@@ -15,12 +15,12 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         private readonly IConverter<ApiEntity, ApiEntityDto> _apiEntityToDtoConverter;
 
         public DynamicEntityConfigurationService(
-            IApiEntityRepository apiEntityRepository,
+            IApiEntityRepository fileApiEntityRepository,
             IConverter<ApiEntityDto, ApiEntity> dtoToApiEntityConverter,
             IConverter<ApiEntity, ApiEntitySummaryDto> apiEntityToDtoSummaryConverter,
             IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter)
         {
-            _apiEntityRepository = apiEntityRepository;
+            _apiEntityRepository = fileApiEntityRepository;
             _dtoToApiEntityConverter = dtoToApiEntityConverter;
             _apiEntityToDtoSummaryConverter = apiEntityToDtoSummaryConverter;
             _apiEntityToDtoConverter = apiEntityToDtoConverter;
@@ -53,7 +53,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return result.Select(_apiEntityToDtoSummaryConverter.Convert).ToList();
         }
 
-        /// <inheritdoc/>
         public async Task<ApiEntityDto?> GetByIdAsync(string apiServiceName, string id)
         {
             var result = await _apiEntityRepository.GetByIdAsync(apiServiceName, id);

@@ -134,19 +134,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             return apiService.Entities;
         }
 
-        /// <summary>
-        /// Получает из файла API-сервис, а из него уже требуемую сущность по имени
-        /// </summary>
-        /// <param name="id">Имя требуемой сущности</param>
-        /// <exception cref="NullReferenceException">
-        /// Возникает если изменяемого API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
-        /// </exception>
-        /// <inheritdoc/>
         public async Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id)
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException();
+                return null;
 
             return apiService.Entities.FirstOrDefault(e => e.Name == id);
         }

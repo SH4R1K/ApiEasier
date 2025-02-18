@@ -125,14 +125,13 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             oldApiService.IsActive = apiService.IsActive;
             oldApiService.Description = apiService.Description;
 
+            var apiServiceExist = await GetByIdAsync(apiService.Name);
+            if (apiServiceExist != null)
+                return null;
+
             if (id != apiService.Name)
-            {
-                var apiServiceExist = await GetByIdAsync(apiService.Name);
-                if (apiServiceExist != null)
-                    return null;
                 await _fileHelper.DeleteAsync(id);
-            }
-                
+
             await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
             return MapApiService(apiService.Name, apiService);
