@@ -30,7 +30,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [DisableRequestSizeLimit]
         [ProducesResponseType<List<ApiServiceSummaryDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAllApiServices()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByName(string apiServiceName)
+        public async Task<IActionResult> GetByNameApiService(string apiServiceName)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Post([FromBody] ApiServiceDto apiServiceDto)
+        public async Task<IActionResult> AddApiService([FromBody] ApiServiceDto apiServiceDto)
         {
             try
             {
@@ -109,12 +109,45 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Put(string apiServiceName, [FromBody] ApiServiceDto apiServiceDto)
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task<IActionResult> UpdateApiService(string apiServiceName, [FromBody] ApiServiceDto apiServiceDto)
         {
             try
             {
                 var result = await _dynamicApiConfigurationService.UpdateAsync(apiServiceName, apiServiceDto);
                 if (result == null)
+                    return Conflict($"API-сервис с именем {apiServiceDto.Name} уже существует");
+
+                return Ok(result);
+            }
+            catch (NullReferenceException ex)
+            {
+                _logger.LogInfo($"Возникла ошибка при поиски API-сервиса для изменения: {ex.Message}");
+                return NotFound($"API-сервис {apiServiceName} не найден");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
+            }
+        }
+
+        /// <summary>
+        /// Удаляет API-сервис
+        /// </summary>
+        /// <param name="apiServiceName"></param>
+        /// <returns></returns>
+        [HttpDelete("{apiServiceName}")]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteApiService(string apiServiceName)
+        {
+            try
+            {
+                var result = await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
+                if (!result)
                     return NotFound($"API-сервис {apiServiceName} не найден");
 
                 return NoContent();
@@ -126,35 +159,24 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        // DELETE api/ApiService/{apiServiceName}
-        [HttpDelete("{apiServiceName}")]
-        public async Task<IActionResult> Delete(string apiServiceName)
-        {
-            try
-            {
-                var result = await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
-                if (!result)
-                    return NotFound($"Не удалось найти api-сервис {apiServiceName}");
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, ex.Message);
-                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
-            }
-        }
-
-        //PATCH api/ApiService/{apiServiceName}/{isActive}
+        /// <summary>
+        /// Меняет активность API-сервисов
+        /// </summary>
+        /// <param name="isActive">Активный ли API-сервис</param>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
         [HttpPatch("{apiServiceName}/{isActive}")]
-        public async Task<IActionResult> ChangeActiveApiService(bool isActive, string apiServiceName)
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> ChangeActiveStatusApiService(bool isActive, string apiServiceName)
         {
             try
             {
                 var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, isActive);
 
                 if (!result)
-                    return NotFound($"Не удалось сменить статус api-сервиса {apiServiceName}");
+                    return NotFound($"API-сервис {apiServiceName} не найден");
 
                 return NoContent();
             }
