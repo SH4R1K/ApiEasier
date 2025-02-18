@@ -11,17 +11,12 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiServiceController : ControllerBase
+    public class ApiServiceController(
+        IDynamicApiConfigurationService dynamicApiConfigurationService,
+        ILoggerService logger) : ControllerBase
     {
-        private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService;
-        private readonly ILoggerService _logger;
-
-        public ApiServiceController(
-            IDynamicApiConfigurationService dynamicApiConfigurationService, ILoggerService logger)
-        {
-            _dynamicApiConfigurationService = dynamicApiConfigurationService;
-            _logger = logger;
-        }
+        private readonly IDynamicApiConfigurationService _dynamicApiConfigurationService = dynamicApiConfigurationService;
+        private readonly ILoggerService _logger = logger;
 
         /// <summary>
         /// Возвращает список всех API-сервисов без сущностей
@@ -106,7 +101,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiServiceDto">Новые данные для API-сервиса</param>
         [HttpPut("{apiServiceName}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]

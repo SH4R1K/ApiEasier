@@ -2,9 +2,17 @@
 
 namespace ApiEasier.Bll.Interfaces.ApiConfigure
 {
+    /// <summary>
+    /// Позволяет управлять сущностями API-сервиса
+    /// </summary>
     public interface IDynamicEntityConfigurationService
     {
-        Task<List<ApiEntitySummaryDto>> GetAsync(string apiServiceName);
+        /// <summary>
+        /// Возвращает все сущности API-сервиса
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
+        /// <returns>Список всех сущностей API-сервиса</returns>
+        Task<List<ApiEntitySummaryDto>?> GetAllAsync(string apiServiceName);
         Task<ApiEntityDto?> GetByIdAsync(string apiServiceName, string id);
         Task<ApiEntityDto?> CreateAsync(string apiServiceName, ApiEntityDto entity);
         Task<bool> UpdateAsync(string apiServiceName,string entityName, ApiEntityDto entity);
