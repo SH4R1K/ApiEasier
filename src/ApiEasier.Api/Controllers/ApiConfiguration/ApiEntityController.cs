@@ -6,32 +6,34 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
     /// <summary>
-    /// Контроллер для управления сущностями api-сервиса.
+    /// Позволяет управлять сущностями API-сервиса.
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiEntityController : ControllerBase
+    public class ApiEntityController(
+        IDynamicEntityConfigurationService dynamicEntityConfigurationService,
+        ILoggerService logger) : ControllerBase
     {
-        private readonly IDynamicEntityConfigurationService _dynamicEntityConfigurationService;
-        private readonly ILoggerService _logger;
+        private readonly IDynamicEntityConfigurationService _dynamicEntityConfigurationService = dynamicEntityConfigurationService;
+        private readonly ILoggerService _logger = logger;
 
-        public ApiEntityController(
-            IDynamicEntityConfigurationService dynamicEntityConfigurationService, ILoggerService logger)
-        {
-            _dynamicEntityConfigurationService = dynamicEntityConfigurationService;
-            _logger = logger;
-        }
-
-        // GET api/ApiEntity/{apiServiceName}
+        /// <summary>
+        /// Получить все сущности API-сервиса
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса</param>
+        /// [DisableRequestSizeLimit]
+        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpGet("{apiServiceName}")]
         public async Task<IActionResult> GetEntitiesByApiName(string apiServiceName)
         {
             try
             {
-                var apiEntities = await _dynamicEntityConfigurationService.GetAsync(apiServiceName);
+                var apiEntities = await _dynamicEntityConfigurationService.GetAllAsync(apiServiceName);
 
                 if (apiEntities == null)
-                    return NotFound();
+                    return NotFound($"API-сервис {apiServiceName} не найден");
 
                 return Ok(apiEntities);
             }

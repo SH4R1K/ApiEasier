@@ -24,7 +24,7 @@ namespace ApiEasier.Dal.Helpers
         }
 
         /// <summary>
-        /// Возвращает полный путь к файлу JSON по его имени без расширения
+        /// Возвращает полный путь к файлу JSON по его имени без расширения, если папки под конфигурации нет, то создается
         /// </summary>
         /// <param name="fileName">Имя файла JSON без расширения</param>
         /// <returns>Полный путь к файлу JSON</returns>
@@ -106,18 +106,15 @@ namespace ApiEasier.Dal.Helpers
             }
         }
 
-        public async Task<bool> DeleteAsync(string fileName)
+        public async Task DeleteAsync(string fileName)
         {
             try
             {
                 using (await _lock.WriterLockAsync())
                 {
                     var filePath = GetFilePath(fileName);
-                    if (!File.Exists(filePath))
-                        Directory.CreateDirectory(FolderPath);
 
                     File.Delete(filePath);
-                    return true;
                 }
             }
             catch (Exception ex)
