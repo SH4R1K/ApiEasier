@@ -74,7 +74,7 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private readonly alerts: TuiAlertService,
-    private apiServiceHub: ApiHubServiceService
+    // private apiServiceHub: ApiHubServiceService
   ) {}
 
   ngOnDestroy(): void {
@@ -83,16 +83,16 @@ export class CardApiListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadApiList();
-    this.subscribeToApiUpdates();
+    // this.subscribeToApiUpdates();
   }
 
   private loadApiList(): void {
     this.sub = this.apiServiceRepository.getApiList().subscribe(this.handleApiResponse());
   }
 
-  private subscribeToApiUpdates(): void {
-    this.apiServiceHub.ordersUpdated$.subscribe(this.handleApiResponse());
-  }
+  // private subscribeToApiUpdates(): void {
+  //   this.apiServiceHub.ordersUpdated$.subscribe(this.handleApiResponse());
+  // }
 
   private handleApiResponse() {
     return {
