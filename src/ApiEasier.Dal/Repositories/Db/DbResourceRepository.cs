@@ -27,6 +27,11 @@ namespace ApiEasier.Dal.Repositories.Db
             return true;
         }
 
+        /// <summary>
+        /// Находит коллекции, привязанные к API-сервису, и удаляет их
+        /// </summary>
+        /// <param name="id">Имя API-сервиса</param>
+        /// <inheritdoc/>
         public async Task<bool> DeleteByApiNameAsync(string id)
         {
             var collectionsNames = await _dbContext.GetListCollectionNamesAsync();
@@ -55,10 +60,18 @@ namespace ApiEasier.Dal.Repositories.Db
             }      
         }
 
+        /// <summary>
+        /// Находит коллекции, привязанные к API-сервису, и переименовывает их, чтобы она 
+        /// ссылалась на переименованный API-сервис
+        /// </summary>
+        /// <param name="id">Текущее имя API-сервиса</param>
+        /// <param name="newId">Новое имя API-сервиса</param>
+        /// <inheritdoc/>
         public async Task<bool> UpdateByApiNameAsync(string id, string newId)
         {
             var collectionsNames = await _dbContext.GetListCollectionNamesAsync();
 
+            // Имя коллекции ИмяApiСервиса_ИмяСущности
             var collectionsToUpdate = collectionsNames.Where(name => name.StartsWith(id + "_")).ToList();
 
             if (collectionsToUpdate.Count == 0)

@@ -8,26 +8,26 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 {
     public class DynamicEndpointConfigurationService : IDynamicEndpointConfigurationService
     {
-        private readonly IApiEndpointRepository _fileApiEndpointRepository;
+        private readonly IApiEndpointRepository _apiEndpointRepository;
         private readonly IConverter<ApiEndpointDto, ApiEndpoint> _dtoToApiEndpointConverter;
         private readonly IConverter<ApiEndpoint, ApiEndpointDto> _apiEndpointToDtoConverter;
 
         public DynamicEndpointConfigurationService(
-            IApiEndpointRepository fileApiEndpointRepository,
+            IApiEndpointRepository apiEndpointRepository,
             IConverter<ApiEndpointDto, ApiEndpoint> dtoToApiEndpointConverter,
             IConverter<ApiEndpoint, ApiEndpointDto> apiEndpointToDtoConverter)
         {
-            _fileApiEndpointRepository = fileApiEndpointRepository;
+            _apiEndpointRepository = apiEndpointRepository;
             _dtoToApiEndpointConverter = dtoToApiEndpointConverter;
             _apiEndpointToDtoConverter = apiEndpointToDtoConverter;
         }
 
         public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string entityName, string endpointName, bool status)
-            => await _fileApiEndpointRepository.ChangeActiveStatusAsync(apiServiceName, entityName, endpointName, status);
+            => await _apiEndpointRepository.ChangeActiveStatusAsync(apiServiceName, entityName, endpointName, status);
 
         public async Task<ApiEndpointDto?> CreateAsync(string apiServiceName, string apiEntityName, ApiEndpointDto apiEndpointDto)
         {
-            var result = await _fileApiEndpointRepository.CreateAsync(
+            var result = await _apiEndpointRepository.CreateAsync(
                 apiServiceName,
                 apiEntityName,
                 _dtoToApiEndpointConverter.Convert(apiEndpointDto)
@@ -40,10 +40,10 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         }
         
         public async Task<bool> DeleteAsync(string apiServiceName, string apiEntityName, string id)
-            => await _fileApiEndpointRepository.DeleteAsync(apiServiceName, apiEntityName, id);
+            => await _apiEndpointRepository.DeleteAsync(apiServiceName, apiEntityName, id);
 
         public async Task<bool> UpdateAsync(string apiServiceName, string apiEntityName, string apiEndpointName, ApiEndpointDto apiEndpointDto)
-            => await _fileApiEndpointRepository.UpdateAsync(
+            => await _apiEndpointRepository.UpdateAsync(
                 apiServiceName,
                 apiEntityName,
                 apiEndpointName,
@@ -52,14 +52,14 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 
         public async Task<List<ApiEndpointDto>> GetAsync(string apiServiceName, string apiEntityName)
         {
-            var result = await _fileApiEndpointRepository.GetAllAsync(apiServiceName, apiEntityName);
+            var result = await _apiEndpointRepository.GetAllAsync(apiServiceName, apiEntityName);
 
             return result.Select(_apiEndpointToDtoConverter.Convert).ToList();
         }
 
         public async Task<ApiEndpointDto?> GetByIdAsync(string apiServiceName, string apiEntityName, string id)
         {
-            var result = await _fileApiEndpointRepository.GetByIdAsync(apiServiceName, apiEntityName, id);
+            var result = await _apiEndpointRepository.GetByIdAsync(apiServiceName, apiEntityName, id);
             if (result == null)
                 return null;
 

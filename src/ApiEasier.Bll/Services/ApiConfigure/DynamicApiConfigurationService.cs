@@ -31,12 +31,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             _apiServiceToDtoSummaryConverter = apiServiceToDtoSummaryConverter;
         }
 
-        /// <summary>
-        /// Изменение статуса активности api-сервиса в его файле конфигурации
-        /// </summary>
-        /// <param name="id">название api-сервиса</param>
-        /// <param name="status">новый статус активности</param>
-        /// <returns></returns>
+        /// <inheritdoc/>
         public async Task<bool> ChangeActiveStatusAsync(string id, bool status)
         {
             return await _apiServiceRepository.ChangeActiveStatusAsync(id, status);
@@ -53,21 +48,16 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return _apiServiceToDtoConverter.Convert(result!);
         }
 
-        /// <summary>
-        /// Удаление файла конфигурации api-сервиса и ресурсов в бд с ним связанных
-        /// </summary>
-        /// <param name="id">название api-сервиса</param>
-        /// <returns></returns>
         public async Task<bool> DeleteAsync(string id)
         {
             if (await _apiServiceRepository.GetByIdAsync(id) == null)
                 return false;
 
-            var result = await _apiServiceRepository.DeleteAsync(id);
+            await _apiServiceRepository.DeleteAsync(id);
 
             await _dbResourceRepository.DeleteByApiNameAsync(id);
 
-            return result;
+            return true;
         }
 
         public async Task<List<ApiServiceSummaryDto>> GetAllAsync()

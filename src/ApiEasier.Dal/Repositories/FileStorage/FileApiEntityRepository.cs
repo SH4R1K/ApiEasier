@@ -4,6 +4,9 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
+    /// <summary>
+    /// Позволяет работать с сущностями через файлы конфигурации
+    /// </summary>
     public class FileApiEntityRepository : IApiEntityRepository
     {
         private readonly IFileHelper _fileHelper;
@@ -118,20 +121,32 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             }
         }
 
-        public async Task<List<ApiEntity>> GetAllAsync(string apiServiceName)
-        {
-            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
-            if (apiService == null)
-                return [];
-
-            return apiService.Entities;
-        }
-
-        public async Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id)
+        /// <summary>
+        /// Получает из файла API-сервис, а из него уже сущности
+        /// </summary>
+        /// <inheritdoc/>
+        public async Task<List<ApiEntity>?> GetAllAsync(string apiServiceName)
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
                 return null;
+
+            return apiService.Entities;
+        }
+
+        /// <summary>
+        /// Получает из файла API-сервис, а из него уже требуемую сущность по имени
+        /// </summary>
+        /// <param name="id">Имя требуемой сущности</param>
+        /// <exception cref="NullReferenceException">
+        /// Возникает если изменяемого API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
+        /// </exception>
+        /// <inheritdoc/>
+        public async Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id)
+        {
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                throw new NullReferenceException();
 
             return apiService.Entities.FirstOrDefault(e => e.Name == id);
         }

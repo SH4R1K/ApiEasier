@@ -58,15 +58,14 @@ export class CardApiComponent {
     private apiServiceRepository: ApiServiceRepositoryService,
     private cd: ChangeDetectorRef,
     private alerts: TuiAlertService,
-    location: Location // Injecting Location correctly
+    location: Location 
   ) {
-    this.location = location; // Assigning the injected instance
+    this.location = location;
   }
   onToggleChange(newState: boolean) {
-    this.apiInfo.isActive = newState; // Обновляем состояние в родительском компоненте
+    this.apiInfo.isActive = newState; 
     console.log('Состояние переключателя изменилось на:', newState);
 
-    // Вызов метода для обновления состояния сервиса
     this.apiServiceRepository
       .updateApiServiceStatus(this.apiInfo.name, newState)
       .subscribe({

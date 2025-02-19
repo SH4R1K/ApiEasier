@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { TuiDataListWrapper, TuiFilterByInputPipe } from '@taiga-ui/kit';
+import { TuiDataListWrapper } from '@taiga-ui/kit';
 import { TuiInputModule } from '@taiga-ui/legacy';
 
 @Component({
@@ -9,9 +9,8 @@ import { TuiInputModule } from '@taiga-ui/legacy';
   imports: [
     ReactiveFormsModule,
     TuiDataListWrapper,
-    TuiFilterByInputPipe,
-    TuiInputModule,
-  ],
+    TuiInputModule
+],
   templateUrl: './filter-by-input.component.html',
   styleUrls: ['./filter-by-input.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

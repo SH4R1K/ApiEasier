@@ -21,7 +21,12 @@ namespace ApiEasier.Dal.Interfaces
         /// <param name="apiService">Новые данные для API-сервиса</param>
         /// <returns>Изменненый API-сервис</returns>
         Task<ApiService?> UpdateAsync(string id, ApiService apiService);
-        Task<bool> DeleteAsync(string id);
+
+        /// <summary>
+        /// Удаляет API-сервис
+        /// </summary>
+        /// <param name="id">Идентификатор API-сервиса</param>
+        Task DeleteAsync(string id);
 
         /// <summary>
         /// Возвращает перечень всех API-сервисов
@@ -35,6 +40,13 @@ namespace ApiEasier.Dal.Interfaces
         /// <param name="id">Идентификатор API-сервиса</param>
         /// <returns>Требуемый API-сервис</returns>
         Task<ApiService?> GetByIdAsync(string id);
+
+        /// <summary>
+        /// Меняет активность API-сервисов
+        /// </summary>
+        /// <param name="status">Активный ли API-сервис</param>
+        /// <param name="id">Имя API-сервиса</param>
+        /// <returns>True, если удалось сменить, false, если API-сервис не был найден</returns>
         Task<bool> ChangeActiveStatusAsync(string id, bool status);
     }
 }

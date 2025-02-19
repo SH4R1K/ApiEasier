@@ -11,8 +11,8 @@ import { ImportDialogComponent } from '../import-dialog/import-dialog.component'
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  @Input() logoUrl: string = "https://www.titan2.ru/images/temp/logo__ru.jpg"; // URL логотипа
-  @Input() buttonText: string = ''; // Текст кнопки
+  @Input() logoUrl: string = "https://www.titan2.ru/images/temp/logo__ru.jpg"; 
+  @Input() buttonText: string = ''; 
   @Output() buttonClick: EventEmitter<void> = new EventEmitter<void>(); 
   @Input() isApiPage: boolean = false;
 
@@ -23,7 +23,7 @@ export class HeaderComponent {
     });
 
   Click(): void {
-    this.buttonClick.emit(); // Emit the toggle event
+    this.buttonClick.emit(); 
   }
   
   Import(): void {

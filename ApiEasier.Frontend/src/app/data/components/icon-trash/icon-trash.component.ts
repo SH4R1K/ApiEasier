@@ -34,8 +34,7 @@ export class IconTrashComponent {
         switchMap((response) => {
           if (response) {
             this.responseAlert.emit(true);
-            // If response is true, item is deleted
-            console.log(`Удаление карточки: ${this.item.name}`); // Log the deletion
+            console.log(`Удаление карточки: ${this.item.name}`);
             return this.alerts.open(`Карточка "${this.item.name}" удалена.`, { label: 'Успех' });
           } else {
             return this.alerts.open(`Удаление карточки "${this.item.name}" отменено.`, { label: 'Информация' });

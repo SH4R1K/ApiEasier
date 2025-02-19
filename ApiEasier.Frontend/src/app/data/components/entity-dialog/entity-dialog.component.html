@@ -1,14 +1,34 @@
-<tui-input tuiAutoFocus tuiTextfieldSize="m" [(ngModel)]="data.name" (input)="onInput($event)">
-    Имя сущности
-</tui-input>
-<br>
-
-<tui-textarea tuiAutoFocus tuiTextfieldSize="m" [(ngModel)]="structure">
-    Структура
-</tui-textarea>
-
-<p>
-    <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="submit()">
+<div (keydown.enter)="handleSubmit()">
+    <tui-input
+      #nameInput
+      tuiAutoFocus
+      tuiTextfieldSize="m"
+      [(ngModel)]="data.name"
+      (input)="onInput($event)"
+      (keydown.enter)="handleSubmit()"
+      (keydown.arrowDown)="moveFocus(structureInputRef)"
+      (keydown.arrowUp)="moveFocus(structureInputRef)"
+    >
+      Имя сущности
+    </tui-input>
+    <br />
+  
+    <tui-textarea
+      #descriptionInput
+      tuiAutoFocus
+      tuiTextfieldSize="m"
+      [(ngModel)]="structure"
+      (keydown.enter)="$event.stopPropagation()"
+      (keydown.arrowUp)="moveFocus(nameInputRef)"
+      (keydown.arrowDown)="moveFocus(nameInputRef)"
+    >
+      Структура
+    </tui-textarea>
+  
+    <p>
+      <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="handleSubmit()">
         Отправить
-    </button>
-</p>
+      </button>
+    </p>
+  </div>
+  

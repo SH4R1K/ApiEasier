@@ -32,7 +32,6 @@
         /// Удаляет файл по имени
         /// </summary>
         /// <param name="fileName">Имя удаляемого файла</param>
-        /// <returns></returns>
-        public Task<bool> DeleteAsync(string fileName);
+        public Task DeleteAsync(string fileName);
     }
 }

@@ -39,11 +39,11 @@ namespace ApiEasier.Api.Controllers.ApiEmu
 
         // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}/{id}
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id, [FromQuery] string? filters)
+        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id)
         {
             try
             {
-                var result = await _dynamicResourceDataService.GetByIdAsync(apiName, entityName, endpoint, id, filters);
+                var result = await _dynamicResourceDataService.GetByIdAsync(apiName, entityName, endpoint, id);
 
                 if (result == null)
                     return NotFound("Не найдены данные");

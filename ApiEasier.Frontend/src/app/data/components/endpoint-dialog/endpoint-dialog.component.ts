@@ -27,7 +27,7 @@ import { Endpoint } from '../../../services/service-structure-api';
     TuiTextfieldControllerModule,
   ],
   templateUrl: './endpoint-dialog.component.html',
-  styleUrl: './endpoint-dialog.component.css',
+  styleUrls: ['./endpoint-dialog.component.css'],
 })
 export class EndpointDialogComponent {
   private readonly dialogs = inject(TuiDialogService);
@@ -45,6 +45,9 @@ export class EndpointDialogComponent {
   }
 
   protected submit(): void {
+    if (event) {
+      event.preventDefault();
+    }
     if (this.hasValue) {
       this.context.completeWith(this.data);
     }
@@ -57,12 +60,8 @@ export class EndpointDialogComponent {
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-
-    // Очищаем значение поля ввода от недопустимых символов
     const cleanedValue = value.replace(/[^a-zA-Z0-9]/g, '');
     input.value = cleanedValue;
-
-    // Обновляем значение в data
     this.data.route = cleanedValue;
   }
 }

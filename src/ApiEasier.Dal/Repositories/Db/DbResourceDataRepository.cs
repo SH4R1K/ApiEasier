@@ -2,6 +2,7 @@
 using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
 using System.Text.Json.Nodes;
 
@@ -50,11 +51,16 @@ namespace ApiEasier.Dal.Repositories.Db
             };
         }
 
-        public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName)
+        public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName, string? filter)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
-            var documents = await collection.Find(FilterDefinition<BsonDocument>.Empty).ToListAsync();
+            var filterDb = FilterDefinition<BsonDocument>.Empty;
+
+            if (filter != null)
+                filterDb = BsonSerializer.Deserialize<BsonDocument>(filter);
+
+            var documents = await collection.Find(filterDb).ToListAsync();
 
             return documents.Select(doc =>
             {

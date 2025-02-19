@@ -30,7 +30,7 @@ export class ImportDialogComponent {
   protected hasFiles = false;
   protected processedData: ApiServiceStructure[] = []; // Массив для хранения обработанных данных
   private readonly context = injectContext<TuiDialogContext<boolean>>();
-  
+
 
   constructor(private cdr: ChangeDetectorRef, private apiService: ApiServiceRepositoryService, private readonly alerts: TuiAlertService) {
     this.control.valueChanges.subscribe((files) => {
@@ -116,7 +116,7 @@ export class ImportDialogComponent {
 
   protected submit(): void {
     if (this.processedData.length > 0) {
-      this.files.forEach(file => file.status = 'loading');
+      this.files.filter(f => f.status == 'normal').forEach(file => file.status = 'loading');
       this.cdr.markForCheck();
 
       // Отправляем каждый объект на сервер
@@ -125,6 +125,10 @@ export class ImportDialogComponent {
           next: (response) => {
             console.log('Сервис успешно создан:', response);
             // Обновляем статус файла на "success" (успешно загружен)
+            const index = this.processedData.findIndex(d => d.name === service.name);
+            if (index !== -1) {
+              this.processedData.splice(index, 1);
+            }
             const file = this.files.find(f => f.file.name === service.name + '.json');
             if (file) {
               file.status = 'success'; // Используем 'success' для обозначения успеха
@@ -132,12 +136,12 @@ export class ImportDialogComponent {
               this.cdr.markForCheck(); // Обновляем представление
             }
             this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;
-            if(this.files.every(file => file.status == 'success')){
+            if (this.files.every(file => file.status == 'success')) {
               this.alerts
-              .open('Файлы успешно загружены', {
-                appearance: 'success',
-              })
-              .subscribe();
+                .open('Файлы успешно загружены', {
+                  appearance: 'success',
+                })
+                .subscribe();
               this.context.completeWith(false);
             }
           },
@@ -147,6 +151,10 @@ export class ImportDialogComponent {
             if (file) {
               file.status = 'error';
               file.errorMessage = `Ошибка при создании сервиса: ${response.error}`;
+              const index = this.processedData.findIndex(d => d.name === service.name);
+              if (index !== -1) {
+                this.processedData.splice(index, 1);
+              }
               this.cdr.markForCheck(); // Обновляем представление
             }
             this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;

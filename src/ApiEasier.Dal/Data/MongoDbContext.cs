@@ -13,7 +13,8 @@ namespace ApiEasier.Dal.Data
         /// <summary>
         /// Инициализирует новый экземпляр класса <see cref="MongoDbContext"/>.
         /// </summary>
-        /// <param name="settings">Настройки базы данных, содержащие строку подключения и имя базы данных.</param>
+        /// <param name="connectionString">Строка подключения к MongoDB</param>
+        /// <param name="databaseName">Имя базы данных</param>
         public MongoDbContext(string connectionString, string databaseName)
         {
             var client = new MongoClient(connectionString);
@@ -21,7 +22,7 @@ namespace ApiEasier.Dal.Data
         }
 
         /// <summary>
-        /// Получает коллекцию по указанному имени.
+        /// Возвращает коллекцию по указанному имени.
         /// </summary>
         /// <typeparam name="T">Тип документов в коллекции.</typeparam>
         /// <param name="name">Имя коллекции.</param>
@@ -30,7 +31,7 @@ namespace ApiEasier.Dal.Data
             _database.GetCollection<T>(name);
 
         /// <summary>
-        /// Асинхронно получает список имен коллекций в базе данных.
+        /// Возвращает список имен коллекций в базе данных.
         /// </summary>
         /// <returns>Список имен коллекций.</returns>
         public async Task<List<string>> GetListCollectionNamesAsync()
@@ -40,7 +41,7 @@ namespace ApiEasier.Dal.Data
         }
 
         /// <summary>
-        /// Асинхронно удаляет коллекцию по указанному имени.
+        /// Удаляет коллекцию по указанному имени.
         /// </summary>
         /// <param name="name">Имя коллекции для удаления.</param>
         /// <returns>Задача, представляющая асинхронную операцию.</returns>
@@ -55,7 +56,7 @@ namespace ApiEasier.Dal.Data
         }
 
         /// <summary>
-        /// Асинхронно создаёт коллекцию, если её нет.
+        /// Создаёт коллекцию, если её нет.
         /// </summary>
         /// <param name="name">Имя коллекции.</param>
         /// <returns>True, если коллекция была создана, false, если уже существовала.</returns>
@@ -73,12 +74,11 @@ namespace ApiEasier.Dal.Data
             return true; // Коллекция была создана
         }
 
-        /// <summary>f
-        /// Асинхронно переименовывает коллекцию.
+        /// <summary>
+        /// Переименовывает коллекцию.
         /// </summary>
         /// <param name="oldName">Старое имя коллекции.</param>
         /// <param name="newName">Новое имя коллекции.</param>
-        /// <returns>Задача, представляющая асинхронную операцию.</returns>
         public async Task RenameCollectionAsync(string oldName, string newName)
         {
             await _database.RenameCollectionAsync(oldName, newName);

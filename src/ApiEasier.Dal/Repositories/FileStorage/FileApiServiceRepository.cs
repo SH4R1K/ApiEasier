@@ -52,9 +52,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             return result;
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            return await _fileHelper.DeleteAsync(id);
+            await _fileHelper.DeleteAsync(id);
         }
 
         /// <summary>
@@ -111,41 +111,48 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// и создает новый с изменеными данными из старого файла
         /// </summary>
         /// <param name="id">Имя файла без расширения</param>
+        /// <exception cref="NullReferenceException">
+        /// Возникает если изменяемого API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
+        /// </exception>
         /// <inheritdoc/>
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
         {
             var oldApiService = await _fileHelper.ReadAsync<ApiService>(id);
 
             if (oldApiService == null)
-                return null;
+                throw new NullReferenceException();
 
             oldApiService.IsActive = apiService.IsActive;
             oldApiService.Description = apiService.Description;
 
-                if (id != apiService.Name)
-                    await _fileHelper.DeleteAsync(id);
-
+            if (id != apiService.Name)
+            {
+                var apiServiceExist = await GetByIdAsync(apiService.Name);
+                if (apiServiceExist != null)
+                    return null;
+                await _fileHelper.DeleteAsync(id);
+            }
+                
             await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
             return MapApiService(apiService.Name, apiService);
         }
 
+        /// <summary>
+        /// Считывает файл с API-сервисом и изменяет значение isActive и записывает обратно
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<bool> ChangeActiveStatusAsync(string id, bool status)
         {
-            try
-            {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(id);
+            var apiService = await _fileHelper.ReadAsync<ApiService>(id);
 
-                apiService.IsActive = status;
-
-                await _fileHelper.WriteAsync(id, apiService);
-
-                return true;
-            }
-            catch
-            {
+            if (apiService == null)
                 return false;
-            }
+
+            apiService.IsActive = status;
+
+            await _fileHelper.WriteAsync(id, apiService);
+            return true;
         }
     }
 }
