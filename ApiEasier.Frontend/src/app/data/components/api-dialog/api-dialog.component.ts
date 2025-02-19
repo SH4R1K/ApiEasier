@@ -31,7 +31,8 @@ import { apiServiceShortStructure } from '../../../services/service-structure-ap
 })
 export class ApiDialogComponent {
   @ViewChild('nameInput', { read: ElementRef }) nameInputRef!: ElementRef;
-  @ViewChild('descriptionInput', { read: ElementRef }) descriptionInputRef!: ElementRef;
+  @ViewChild('descriptionInput', { read: ElementRef })
+  descriptionInputRef!: ElementRef;
 
   private readonly dialogs = inject(TuiDialogService);
 
@@ -48,7 +49,10 @@ export class ApiDialogComponent {
     return this.context.data;
   }
 
-  protected submit(): void {
+  protected submit(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
     if (this.hasValue) {
       this.context.completeWith(this.data);
     }
@@ -61,17 +65,12 @@ export class ApiDialogComponent {
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = input.value;
-    // Очищаем значение поля ввода от недопустимых символов
     const cleanedValue = value.replace(/[^a-zA-Z0-9]/g, '');
     input.value = cleanedValue;
-    // Обновляем значение в data
     this.data.name = cleanedValue;
   }
 
   protected moveFocus(targetInput: ElementRef): void {
-    const inputElement = targetInput.nativeElement.querySelector('input');
-    if (inputElement) {
-      inputElement.focus();
-    }
+    targetInput.nativeElement.querySelector('input').focus();
   }
 }
