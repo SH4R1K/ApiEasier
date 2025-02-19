@@ -60,7 +60,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         public async Task DeleteAsync(string id)
         {
             var apiServiceExist = await GetByIdAsync(id);
-            if (apiServiceExist != null)
+            if (apiServiceExist == null)
                 throw new NullReferenceException($"API-сервис {id} не найден");
 
             await _fileHelper.DeleteAsync(id);
