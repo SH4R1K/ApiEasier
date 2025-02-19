@@ -119,6 +119,10 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 return NotFound(ex.Message);
             }
+            catch (ArgumentException ex)
+            {
+                return Conflict(ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);

@@ -26,7 +26,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             _apiEntityToDtoConverter = apiEntityToDtoConverter;
         }
 
-        public async Task<bool> DeleteAsync(string apiServiceName, string id)
+        public async Task DeleteAsync(string apiServiceName, string id)
             => await _apiEntityRepository.DeleteAsync(apiServiceName, id);
 
         public async Task<ApiEntityDto> UpdateAsync(string apiServiceName, string id, ApiEntityDto entity)
@@ -45,8 +45,8 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return _apiEntityToDtoConverter.Convert(result);
         }
             
-        public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string entityName, bool status)
-            => await _apiEntityRepository.ChangeActiveStatusAsync(apiServiceName, entityName, status);
+        public async Task ChangeActiveStatusAsync(string apiServiceName, string id, bool status)
+            => await _apiEntityRepository.ChangeActiveStatusAsync(apiServiceName, id, status);
 
         public async Task<List<ApiEntitySummaryDto>?> GetAllAsync(string apiServiceName)
         {

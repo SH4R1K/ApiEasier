@@ -34,11 +34,25 @@ namespace ApiEasier.Dal.Interfaces
         /// Изменяет сущность у API-сервиса
         /// </summary>
         /// <param name="apiServiceName">Имя API-сервиса с изменяемой сущностью</param>
-        /// <param name="id">Имя изменяемой сущности</param>
-        /// <param name="entity">Новые данные сущности</param>
+        /// <param name="id">Идентификатор изменяемой сущности</param>
+        /// <param name="apiEntity">Новые данные сущности</param>
         /// <returns>True, если обновление прошло, false, если новое имя сущности уже существует</returns>
         Task<ApiEntity> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity);
-        Task<bool> DeleteAsync(string apiServiceName, string id);
-        Task<bool> ChangeActiveStatusAsync(string apiServiceName, string id, bool status);
+
+        /// <summary>
+        /// Удаляет сущность внутри API-сервиса
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса с удаляемой сущностью</param>
+        /// <param name="id">Идентификатор удаляемой сущности</param>
+        /// <returns>True, если сущность удалена успешно, false, если сущность не была найдена</returns>
+        Task DeleteAsync(string apiServiceName, string id);
+
+        /// <summary>
+        /// Изменяет активность сущности у API-сервиса 
+        /// </summary>
+        /// <param name="status">True, если надо сделать сущность активной, false - неактивной</param>
+        /// <param name="apiServiceName">Имя API-сервиса с изменяеммой сущностью</param>
+        /// <param name="id">Идентификатор изменяемой сущности</param>
+        Task ChangeActiveStatusAsync(string apiServiceName, string id, bool status);
     }
 }

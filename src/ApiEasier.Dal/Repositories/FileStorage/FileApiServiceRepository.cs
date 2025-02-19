@@ -56,7 +56,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <summary>
         /// Удаляет файл
         /// </summary>
-        /// <param name="id">Имя API-сервис</param>
+        /// <param name="id">Имя API-сервиса</param>
         public async Task DeleteAsync(string id)
         {
             var apiServiceExist = await GetByIdAsync(id);
@@ -69,6 +69,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <summary>
         /// Считывает папку с файлами конфигурации и считывает их все данные
         /// </summary>
+        /// <param name="id">Имя API-сервиса</param>
         /// <inheritdoc/>
         public async Task<List<ApiService>> GetAllAsync()
         {
@@ -106,7 +107,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <summary>
         /// Считывает файл с конфигурацией API-сервиса
         /// </summary>
-        /// <param name="id">Имя API-сервис</param>
+        /// <param name="id">Имя API-сервиса</param>
         /// <inheritdoc/>
         public async Task<ApiService?> GetByIdAsync(string id)
         {
@@ -119,7 +120,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// Считывает файл и заменяет данные на новые, а если изменено имя, удаляет старый файл
         /// и создает новый с изменеными данными из старого файла
         /// </summary>
-        /// <param name="id">Имя API-сервис</param>
+        /// <param name="id">Имя API-сервиса</param>
         /// <exception cref="NullReferenceException">
         /// Возникает если изменяемого API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
@@ -138,7 +139,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             {
                 var apiServiceExist = await GetByIdAsync(apiService.Name);
                 if (apiServiceExist != null)
-                    return null;
+                    throw new ArgumentException($"API-сервис с именем {apiService.Name} уже существует");
                 await _fileHelper.DeleteAsync(id);
             }
                 
@@ -150,6 +151,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <summary>
         /// Считывает файл с API-сервисом и изменяет значение isActive и записывает обратно
         /// </summary>
+        /// <param name="id">Имя API-сервиса</param>
         /// <inheritdoc/>
         public async Task ChangeActiveStatusAsync(string id, bool status)
         {

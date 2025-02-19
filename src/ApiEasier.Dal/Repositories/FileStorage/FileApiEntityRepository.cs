@@ -45,11 +45,12 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <summary>
         /// Считывет файл API-сервиса, удаляет сущность из API-сервиса и перезаписывает файл
         /// </summary>
+        /// <param name="id">Имя удаляемой сущности</param>
         /// <exception cref="NullReferenceException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
-        public async Task<bool> DeleteAsync(string apiServiceName, string id)
+        public async Task DeleteAsync(string apiServiceName, string id)
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
@@ -57,17 +58,18 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entityToRemove == null)
-                return false;
+                throw new NullReferenceException($"Сущность {id} у API-сервиса {apiServiceName} не была удалена");
 
             apiService.Entities.Remove(entityToRemove);
 
             await _fileHelper.WriteAsync(apiServiceName, apiService);
-            return true;
         }
 
         /// <summary>
-        /// Считывает файл с API-сервисом, у требуемой сущности меняет свойства, и перезаписывает файл с новыми данными
+        /// Считывает файл с API-сервисом, у найденной по имени сущности меняет свойства,
+        /// и перезаписывает файл с новыми данными
         /// </summary>
+        /// <param name="id">Имя изменяемой сущности</param>
         /// <exception cref="NullReferenceException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
@@ -81,7 +83,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} у api-сервиса {apiServiceName} не была удалена");
+                throw new NullReferenceException($"Сущность {id} у API-сервиса {apiServiceName} не была удалена");
 
             if (id != apiEntity.Name && apiService.Entities.Any(e => e.Name == apiEntity.Name))
                 throw new ArgumentException($"Сущность с именем {apiEntity.Name} уже существует.");
@@ -94,28 +96,25 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             return entity;
         }
 
-        public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string id, bool status)
+        /// <summary>
+        /// Считывает файл с API-сервисом, у найденной по имени сущности меняет свойство isActive,
+        /// и перезаписывает файл с новыми данными
+        /// </summary>
+        /// <param name="id">Имя изменяемой сущности</param>
+        /// <inheritdoc/>
+        public async Task ChangeActiveStatusAsync(string apiServiceName, string id, bool status)
         {
-            try
-            {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
-                if (apiService == null || apiService.Entities == null)
-                    return false;
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
-                if (entity == null)
-                    return false;
+            var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+            if (entity == null)
+                throw new NullReferenceException($"Сущность {id} у API-сервиса {apiServiceName} не была удалена");
 
-                entity.IsActive = status;
+            entity.IsActive = status;
 
-                await _fileHelper.WriteAsync(id, apiService);
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            await _fileHelper.WriteAsync(id, apiService);
         }
 
         /// <summary>

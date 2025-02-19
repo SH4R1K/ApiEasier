@@ -158,10 +158,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicEntityConfigurationService.DeleteAsync(apiServiceName, entityName);
-
-                if (!result)
-                    return NotFound($"Сущность {entityName} в API-сервисе {apiServiceName} не найдена.");
+                await _dynamicEntityConfigurationService.DeleteAsync(apiServiceName, entityName);
 
                 return NoContent();
             }
@@ -178,10 +175,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <summary>
         /// Изменяет активность сущности у API-сервиса 
         /// </summary>
-        /// <param name="isActive">True - активная сущность, false - неактивная сущность</param>
-        /// <param name="apiServiceName"></param>
-        /// <param name="apiEntityName"></param>
-        /// <returns></returns>
+        /// <param name="isActive">True, если надо сделать сущность активной, false - неактивной</param>
+        /// <param name="apiServiceName">Имя API-сервиса с изменяеммой сущностью</param>
+        /// <param name="apiEntityName">Имя изменяемой сущности</param>
         [HttpPatch("{apiServiceName}/{apiEntityName}/{isActive}")]
         [DisableRequestSizeLimit]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -191,12 +187,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, apiEntityName, isActive);
-
-                if (!result)
-                    return NotFound($"статус у сущности {apiEntityName} у api-сервиса {apiServiceName} не был изменен");
+                await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, apiEntityName, isActive);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
