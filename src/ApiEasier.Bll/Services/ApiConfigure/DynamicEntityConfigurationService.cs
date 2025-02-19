@@ -29,8 +29,12 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         public async Task<bool> DeleteAsync(string apiServiceName, string id)
             => await _apiEntityRepository.DeleteAsync(apiServiceName, id);
 
-        public async Task<bool> UpdateAsync(string apiServiceName, string entityName, ApiEntityDto entity)
-            => await _apiEntityRepository.UpdateAsync(apiServiceName, entityName, _dtoToApiEntityConverter.Convert(entity));
+        public async Task<ApiEntityDto> UpdateAsync(string apiServiceName, string id, ApiEntityDto entity)
+        {
+            var result = await _apiEntityRepository.UpdateAsync(apiServiceName, id, _dtoToApiEntityConverter.Convert(entity));
+
+            return _apiEntityToDtoConverter.Convert(result);
+        }
 
         public async Task<ApiEntityDto?> CreateAsync(string apiServiceName, ApiEntityDto entity)
         {

@@ -16,85 +16,82 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             _fileHelper = jsonFileHelper;
         }
 
+        /// <summary>
+        /// Считывет файл API-сервиса, добавляет сущность в API-сервис и перезаписывает файл
+        /// </summary>
+        /// <exception cref="NullReferenceException">
+        /// Возникает если API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
+        /// </exception>
+        /// <inheritdoc/>
         public async Task<ApiEntity?> CreateAsync(string apiServiceName, ApiEntity apiEntity)
         {
-            try
-            {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
 
-                // проверка существования api-сервиса
-                if (apiService == null)
-                    return null;
+            // Проверка существования API-сервиса
+            if (apiService == null)
+                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
 
-                // проверка уникальности
-                if (apiService.Entities.Any(e => e.Name == apiEntity.Name))
-                    return null ;
-
-                apiService.Entities.Add(apiEntity);
-
-                var result = await _fileHelper.WriteAsync(apiServiceName, apiService);
-                if (result == null)
-                    return null;
-
-                return apiEntity;
-            }
-            catch
-            {
-                Console.WriteLine("Ошибка при добавлении сущности");
+            // Проверка уникальности
+            if (apiService.Entities.Any(e => e.Name == apiEntity.Name))
                 return null;
-            }
+
+            apiService.Entities.Add(apiEntity);
+
+            await _fileHelper.WriteAsync(apiServiceName, apiService);
+
+            return apiEntity;
         }
 
+        /// <summary>
+        /// Считывет файл API-сервиса, удаляет сущность из API-сервиса и перезаписывает файл
+        /// </summary>
+        /// <exception cref="NullReferenceException">
+        /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
+        /// </exception>
+        /// <inheritdoc/>
         public async Task<bool> DeleteAsync(string apiServiceName, string id)
         {
-            try
-            {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
-                if (apiService == null)
-                    return false;
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
+            if (apiService == null)
+                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
 
-                var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == id);
-                if (entityToRemove == null)
-                    return false;
-
-                apiService.Entities.Remove(entityToRemove);
-
-                await _fileHelper.WriteAsync(apiServiceName, apiService);
-                return true;
-            }
-            catch
-            {
-                Console.WriteLine("Не удалось удалить сущность");
+            var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == id);
+            if (entityToRemove == null)
                 return false;
-            }
+
+            apiService.Entities.Remove(entityToRemove);
+
+            await _fileHelper.WriteAsync(apiServiceName, apiService);
+            return true;
         }
 
-        public async Task<bool> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity)
+        /// <summary>
+        /// Считывает файл с API-сервисом, у требуемой сущности меняет свойства, и перезаписывает файл с новыми данными
+        /// </summary>
+        /// <exception cref="NullReferenceException">
+        /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
+        /// </exception>
+        /// <inheritdoc/>
+        public async Task<ApiEntity> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity)
         {
-            try
-            {
-                var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
+            var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
 
-                if (apiService == null || apiService.Entities == null)
-                    return false;
+            if (apiService == null)
+                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
 
-                var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
-                if (entity == null)
-                    return false;
+            var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+            if (entity == null)
+                throw new NullReferenceException($"Сущность {id} у api-сервиса {apiServiceName} не была удалена");
 
-                entity.Name = apiEntity.Name;
-                entity.Structure = apiEntity.Structure;
-                entity.IsActive = apiEntity.IsActive;
-                entity.Endpoints = apiEntity.Endpoints;
+            if (id != apiEntity.Name && apiService.Entities.Any(e => e.Name == apiEntity.Name))
+                throw new ArgumentException($"Сущность с именем {apiEntity.Name} уже существует.");
 
-                await _fileHelper.WriteAsync(apiServiceName, apiService);
-                return true;
-            }
-            catch
-            {
-                Console.WriteLine("Ошибка при изменении сущности");
-                return false;
-            }
+            entity.Name = apiEntity.Name;
+            entity.Structure = apiEntity.Structure;
+            entity.IsActive = apiEntity.IsActive;
+
+            await _fileHelper.WriteAsync(apiServiceName, apiService);
+            return entity;
         }
 
         public async Task<bool> ChangeActiveStatusAsync(string apiServiceName, string id, bool status)
@@ -139,16 +136,19 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// </summary>
         /// <param name="id">Имя требуемой сущности</param>
         /// <exception cref="NullReferenceException">
-        /// Возникает если изменяемого API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
+        /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
         public async Task<ApiEntity?> GetByIdAsync(string apiServiceName, string id)
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException();
+                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
 
-            return apiService.Entities.FirstOrDefault(e => e.Name == id);
+            var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
+            if (entity == null)
+                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не найден");
+            return entity;
         }
     }
 }

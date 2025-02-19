@@ -32,8 +32,7 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
         /// Удаляет API-сервис по индентификатору
         /// </summary>
         /// <param name="id">Индентификатор API-сервиса</param>
-        /// <returns>True, если удаление прошло удачно, false - если API-сервис не был найден</returns>
-        Task<bool> DeleteAsync(string id);
+        Task DeleteAsync(string id);
 
         /// <summary>
         /// Возвращает API-сервиса по имени
@@ -45,9 +44,9 @@ namespace ApiEasier.Bll.Interfaces.ApiConfigure
         /// <summary>
         /// Меняет активность API-сервисов
         /// </summary>
-        /// <param name="status">Активный ли API-сервис</param>
+        /// <param name="status">True если надо сделать активным API-сервис, false - неактивным</param>
         /// <param name="id">Имя API-сервиса</param>
         /// <returns>True, если удалось сменить, false, если API-сервис не был найден</returns>
-        Task<bool> ChangeActiveStatusAsync(string id, bool status);
+        Task ChangeActiveStatusAsync(string id, bool status);
     }
 }
