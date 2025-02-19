@@ -134,7 +134,7 @@ export class CardEndpointComponent {
       .subscribe({
         next: () => {
           console.log(`Действие "${this.endpointInfo.route}" удалено.`);
-          this.endpointDeleted.emit(this.endpointInfo.route); // Emit the event to notify the parent component
+          this.endpointDeleted.emit(this.endpointInfo.route); 
         },
         error: (error) => {
           console.error('Ошибка при удалении действия:', error);
