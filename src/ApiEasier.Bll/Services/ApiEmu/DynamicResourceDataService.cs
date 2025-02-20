@@ -26,12 +26,12 @@ namespace ApiEasier.Bll.Services.ApiEmu
             if (!isValid)
                 return null;
 
-            var result = await _dbResourceDataRepository.GetAllDataAsync(GetResourceName(apiName, apiEntityName));
+            var result = await _dbResourceDataRepository.GetAllDataAsync(GetResourceName(apiName, apiEntityName), filters);
 
             return result;
         }
 
-        public async Task<DynamicResourceData?> GetByIdAsync(string apiName, string apiEntityName, string endpoint, string id, string? filters)
+        public async Task<DynamicResourceData?> GetByIdAsync(string apiName, string apiEntityName, string endpoint, string id)
         {
 
             var (isValid, _, _) = await _validator.ValidateApiAsync(apiName, apiEntityName, endpoint, "getByIndex");

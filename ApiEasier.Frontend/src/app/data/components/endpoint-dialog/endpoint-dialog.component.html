@@ -1,15 +1,25 @@
-<tui-input tuiAutoFocus tuiTextfieldSize="m" [(ngModel)]="data.route" (input)="onInput($event)">
-    Имя эндпоинта
+<tui-input
+  tuiAutoFocus
+  tuiTextfieldSize="m"
+  [(ngModel)]="data.route"
+  (input)="onInput($event)"
+  (keydown.enter)="submit()"
+>
+  Имя эндпоинта
 </tui-input>
 <br>
-<tui-select tuiAutoFocus tuiTextfieldSize="m" [(ngModel)]="data.type">
-    Тип
-    <select tuiSelect [items]="types" ></select>
+<tui-select
+  tuiAutoFocus
+  tuiTextfieldSize="m"
+  [(ngModel)]="data.type"
+  (keydown.enter)="submit()"
+>
+  Тип
+  <select tuiSelect [items]="types"></select>
 </tui-select>
 
-
 <p>
-    <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="submit()">
-        Отправить
-    </button>
+  <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="submit()">
+    Отправить
+  </button>
 </p>

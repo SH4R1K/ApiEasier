@@ -4,7 +4,7 @@
   tuiTextfieldSize="m"
   [(ngModel)]="data.name"
   (input)="onInput($event)"
-  (keydown.enter)="submit()"
+  (keydown.enter)="submit($event)"
   (keydown.arrowDown)="moveFocus(descriptionInputRef)"
   (keydown.arrowUp)="moveFocus(descriptionInputRef)"
 >
@@ -16,7 +16,7 @@
   tuiAutoFocus
   tuiTextfieldSize="m"
   [(ngModel)]="data.description"
-  (keydown.enter)="submit()"
+  (keydown.enter)="submit($event)"
   (keydown.arrowUp)="moveFocus(nameInputRef)"
   (keydown.arrowDown)="moveFocus(nameInputRef)"
 >
@@ -29,7 +29,7 @@
     tuiButton
     type="button"
     [disabled]="!hasValue"
-    (click)="submit()"
+    (click)="submit($event)"
   >
     Отправить
   </button>
