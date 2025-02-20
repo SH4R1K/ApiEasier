@@ -1,4 +1,5 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiEmu;
+using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers.ApiEmu
@@ -11,10 +12,12 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     public class ApiEmuController : ControllerBase 
     {
         private readonly IDynamicResourceDataService _dynamicResourceDataService;
+        private readonly ILoggerService _logger;
 
-        public ApiEmuController(IDynamicResourceDataService dynamicResourceDataService)
+        public ApiEmuController(IDynamicResourceDataService dynamicResourceDataService, ILoggerService logger)
         {
-            _dynamicResourceDataService = dynamicResourceDataService;   
+            _dynamicResourceDataService = dynamicResourceDataService;
+            _logger = logger;
         }
 
         // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}
@@ -32,7 +35,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
             catch (Exception ex)
             {
-                // Логирование исключения
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -52,7 +55,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
             catch (Exception ex)
             {
-                // Логирование исключения
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -71,7 +74,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
             catch (Exception ex)
             {
-                // Логирование исключения
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -92,7 +95,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
             catch (Exception ex)
             {
-                // Логирование исключения
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
@@ -112,7 +115,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
             catch (Exception ex)
             {
-                // Логирование исключения
+                _logger.LogError(ex, ex.Message);
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
             }
         }
