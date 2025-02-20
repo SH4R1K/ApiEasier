@@ -1,4 +1,5 @@
-﻿using ApiEasier.Bll.Interfaces.ApiEmu;
+﻿using ApiEasier.Bll.Dto;
+using ApiEasier.Bll.Interfaces.ApiEmu;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiEasier.Api.Controllers.ApiEmu
@@ -8,18 +9,23 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiEmuController : ControllerBase 
+    public class ApiEmuController(IDynamicResourceDataService dynamicResourceDataService) : ControllerBase 
     {
-        private readonly IDynamicResourceDataService _dynamicResourceDataService;
+        private readonly IDynamicResourceDataService _dynamicResourceDataService = dynamicResourceDataService;
 
-        public ApiEmuController(IDynamicResourceDataService dynamicResourceDataService)
-        {
-            _dynamicResourceDataService = dynamicResourceDataService;   
-        }
-
-        // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}
+        /// <summary>
+        /// Возвращает все данные, принадлежащие указанной сущности
+        /// </summary>
+        /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
+        /// <param name="entityName">Имя сущности, имеющей эти данные</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Get</param>
+        /// <param name="filters">Фильтры для получения данных</param>
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
-        public async Task<IActionResult> Get(string apiName, string entityName, string endpoint, [FromQuery] string? filters)
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<List<object>>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetAllData(string apiName, string entityName, string endpoint, [FromQuery] string? filters)
         {
             try
             {

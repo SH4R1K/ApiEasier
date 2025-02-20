@@ -157,7 +157,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiEndpointName">Имя изменяемого эндпоинта</param>
         [HttpDelete("{apiServiceName}/{apiEntityName}/{apiEndpointName}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<ApiEndpointDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteEndpoint(string apiServiceName, string apiEntityName, string apiEndpointName)
@@ -188,7 +188,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiEndpointName">Имя изменяемого эндпоинта</param>
         [HttpPatch("{apiServiceName}/{apiEntityName}/{apiEndpointName}/{isActive}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<ApiEndpointDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ChangeActiveApiEndpoint(bool isActive, string apiServiceName, string apiEntityName, string apiEndpointName)
