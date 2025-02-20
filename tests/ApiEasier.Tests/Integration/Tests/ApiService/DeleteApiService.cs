@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEasier.Tests.Integration.Tests
+namespace ApiEasier.Tests.Integration.Tests.ApiService
 {
-    public class ApiEntityTest
+    internal class DeleteApiService
     {
     }
 }

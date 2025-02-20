@@ -114,7 +114,12 @@ namespace ApiEasier.Dal.Helpers
                 {
                     var filePath = GetFilePath(fileName);
 
-                    File.Delete(filePath);
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
+                    // Удаляем запись из кэша, чтобы последующие запросы не использовали устаревшие данные
+                    _cache.Remove(fileName);
                 }
             }
             catch (Exception ex)

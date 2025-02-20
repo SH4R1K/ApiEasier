@@ -28,6 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Integration\Tests\ApiEntity\" />
+    <Folder Include="Integration\Tests\ApiEndpoint\" />
+    <Folder Include="Integration\Tests\ApiEmu\" />
     <Folder Include="Unit\" />
   </ItemGroup>
 
