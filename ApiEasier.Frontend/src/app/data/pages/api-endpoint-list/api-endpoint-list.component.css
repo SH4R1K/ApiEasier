@@ -16,45 +16,56 @@ h1 {
   text-align: center;
 }
 
-/* Аккордеон */
-.api-header,
+/* Ensure the accordion button is positioned relatively */
 .accordion {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  background: transparent; /* Убираем серый фон */
-  border-radius: 0px;
-  transition: box-shadow 0.3s ease;
-}
-
-.api-header h1,
-.accordion {
-  margin: 0;
-  flex-grow: 1;
-}
-
-/* Switch in API Header */
-.api-header app-switch {
-  margin-left: 10px;
-}
-
-/* Switch in Accordion */
-.accordion app-switch {
-  margin-left: auto; /* Push the switch to the far right */
-  margin-right: 5px; /* Adjust space between switch and chevron */
-  order: 2; /* Ensure the switch is positioned after the chevron */
-}
-
-.accordion::after {
-  content: var(--t-icon-end);
-  display: inline-block;
-  width: 16px; /* Adjust width as needed */
-  height: 16px; /* Adjust height as needed */
-  margin-left: 5px; /* Space between switch and chevron */
-  order: 3; /* Ensure the chevron is positioned after the switch */
-}
-
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: transparent;
+    border-radius: 0px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  /* Position the switch absolutely within the accordion button */
+  .accordion app-switch {
+    position: absolute;
+    right: 45px; /* Increase this value to position the switch further from the default icon */
+    margin-left: auto;
+    margin-right: 0;
+  }
+  
+  /* Ensure the chevron icon is still visible and positioned correctly */
+  .accordion::after {
+    content: var(--t-icon-end);
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    order: 3;
+  }
+  
+  /* Ensure the switch in the API header stays in line */
+  .api-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: transparent;
+    border-radius: 0px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .api-header h1 {
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .api-header app-switch {
+    margin-left: 10px;
+  }
+  
 .tui-expand {
   padding: 15px;
   background: #f9f9f9;

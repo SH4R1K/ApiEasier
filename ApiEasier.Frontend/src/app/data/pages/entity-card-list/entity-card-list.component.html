@@ -34,28 +34,33 @@
       <!-- Фильтрация, сортировка и пагинация -->
       <div class="filter-section">
         <app-filter-by-input
+          class="filter-input"
           [label]="'Search Entity'"
           [controlName]="'search'"
           [items]="entityNames"
           (searchQuery)="onSearchQuery($event)"
         ></app-filter-by-input>
-        <app-pagination
-          class="custom-pagination"
-          [totalItems]="filteredEntities.length"
-          [itemsPerPage]="itemsPerPage"
-          [currentPage]="currentPage"
-          (pageChange)="onPageChange($event)"
-        ></app-pagination>
-        <i
-          *ngIf="!isSortedAscending"
-          class="fas fa-sort-alpha-up"
-          (click)="sortCardsOnClick()"
-        ></i>
-        <i
-          *ngIf="isSortedAscending"
-          class="fas fa-sort-alpha-down"
-          (click)="sortCardsOnClick()"
-        ></i>
+        <div class="pagination-sort-container">
+          <app-pagination
+            class="custom-pagination"
+            [totalItems]="filteredEntities.length"
+            [itemsPerPage]="itemsPerPage"
+            [currentPage]="currentPage"
+            (pageChange)="onPageChange($event)"
+          ></app-pagination>
+          <div class="icons-container">
+            <i
+              *ngIf="!isSortedAscending"
+              class="fas fa-sort-alpha-up"
+              (click)="sortCardsOnClick()"
+            ></i>
+            <i
+              *ngIf="isSortedAscending"
+              class="fas fa-sort-alpha-down"
+              (click)="sortCardsOnClick()"
+            ></i>
+          </div>
+        </div>
       </div>
 
       <!-- Список сущностей -->
@@ -88,4 +93,3 @@
     </div>
   </div>
 </ng-template>
-
