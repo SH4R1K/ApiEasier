@@ -11,22 +11,12 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiEndpointController : ControllerBase
+    public class ApiEndpointController(
+        IDynamicEndpointConfigurationService dynamicEndpointConfigurationService,
+        ILoggerService logger) : ControllerBase
     {
-        private readonly IDynamicEndpointConfigurationService _dynamicEndpointConfigurationService;
-        private readonly ILoggerService _logger;
-
-        /// <summary>
-        /// Инициализирует новый экземпляр класса <see cref="ApiEndpointController"/>.
-        /// </summary>
-        /// <param name="configFileApiService">Сервис для работы с конфигурационными файлами API.</param>
-        public ApiEndpointController(
-            IDynamicEndpointConfigurationService dynamicEndpointConfigurationService,
-            ILoggerService logger)
-        {
-            _dynamicEndpointConfigurationService = dynamicEndpointConfigurationService;
-            _logger = logger;
-        }
+        private readonly IDynamicEndpointConfigurationService _dynamicEndpointConfigurationService = dynamicEndpointConfigurationService;
+        private readonly ILoggerService _logger = logger;
 
         // GET api/ApiAction/{apiServiceName}/{entityName}
         [HttpGet("{apiServiceName}/{apiEntityName}")]

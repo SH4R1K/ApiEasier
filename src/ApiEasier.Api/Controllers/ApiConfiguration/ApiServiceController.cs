@@ -117,8 +117,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (NullReferenceException ex)
             {
-                _logger.LogInfo($"Возникла ошибка при поиски API-сервиса для изменения: {ex.Message}");
-                return NotFound($"API-сервис {apiServiceName} не найден");
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return Conflict(ex.Message);
             }
             catch (Exception ex)
             {
@@ -130,8 +133,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <summary>
         /// Удаляет API-сервис
         /// </summary>
-        /// <param name="apiServiceName"></param>
-        /// <returns></returns>
+        /// <param name="apiServiceName">Имя изменяемого API-сервиса</param>
         [HttpDelete("{apiServiceName}")]
         [DisableRequestSizeLimit]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
@@ -141,11 +143,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
-                if (!result)
-                    return NotFound($"API-сервис {apiServiceName} не найден");
+                await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -157,7 +161,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <summary>
         /// Меняет активность API-сервисов
         /// </summary>
-        /// <param name="isActive">Активный ли API-сервис</param>
+        /// <param name="isActive">True если надо сделать активным API-сервис, false - неактивным</param>
         /// <param name="apiServiceName">Имя API-сервиса</param>
         [HttpPatch("{apiServiceName}/{isActive}")]
         [DisableRequestSizeLimit]
@@ -168,12 +172,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, isActive);
-
-                if (!result)
-                    return NotFound($"API-сервис {apiServiceName} не найден");
+                await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, isActive);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

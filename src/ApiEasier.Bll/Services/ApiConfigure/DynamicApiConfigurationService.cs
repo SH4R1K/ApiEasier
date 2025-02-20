@@ -32,9 +32,9 @@ namespace ApiEasier.Bll.Services.ApiConfigure
         }
 
         /// <inheritdoc/>
-        public async Task<bool> ChangeActiveStatusAsync(string id, bool status)
+        public async Task ChangeActiveStatusAsync(string id, bool status)
         {
-            return await _apiServiceRepository.ChangeActiveStatusAsync(id, status);
+            await _apiServiceRepository.ChangeActiveStatusAsync(id, status);
         }
 
         public async Task<ApiServiceDto?> CreateAsync(ApiServiceDto apiServiceDto)
@@ -48,16 +48,11 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return _apiServiceToDtoConverter.Convert(result!);
         }
 
-        public async Task<bool> DeleteAsync(string id)
+        public async Task DeleteAsync(string id)
         {
-            if (await _apiServiceRepository.GetByIdAsync(id) == null)
-                return false;
-
             await _apiServiceRepository.DeleteAsync(id);
 
             await _dbResourceRepository.DeleteByApiNameAsync(id);
-
-            return true;
         }
 
         public async Task<List<ApiServiceSummaryDto>> GetAllAsync()
