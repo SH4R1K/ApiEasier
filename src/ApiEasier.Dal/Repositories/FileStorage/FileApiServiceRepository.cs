@@ -87,7 +87,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                 }
                 catch (JsonException ex)
                 {
-                    _loggerService.LogError(ex, ex.Message);
+                    _loggerService.LogError(ex, $"FileName: '{apiServiceName}' Exception: {ex.Message}");
                     continue;
                 }
 
