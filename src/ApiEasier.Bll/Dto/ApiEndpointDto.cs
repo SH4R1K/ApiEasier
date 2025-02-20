@@ -9,6 +9,7 @@ namespace ApiEasier.Bll.Dto
         /// Маршрут для действия API.
         /// </summary>
         [Required]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
         public required string Route { get; set; }
 
         /// <summary>

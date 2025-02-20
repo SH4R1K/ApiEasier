@@ -57,7 +57,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             return result.Select(_apiEntityToDtoSummaryConverter.Convert).ToList();
         }
 
-        /// <inheritdoc/>
         public async Task<ApiEntityDto?> GetByIdAsync(string apiServiceName, string id)
         {
             var result = await _apiEntityRepository.GetByIdAsync(apiServiceName, id);

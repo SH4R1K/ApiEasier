@@ -73,6 +73,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <exception cref="NullReferenceException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Возникает если новое имя сущности уже существует
+        /// </exception>
         /// <inheritdoc/>
         public async Task<ApiEntity> UpdateAsync(string apiServiceName, string id, ApiEntity apiEntity)
         {
