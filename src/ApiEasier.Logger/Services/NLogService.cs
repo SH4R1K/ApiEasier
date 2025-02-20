@@ -13,7 +13,7 @@ namespace ApiEasier.Logger.Services
         }
         public void LogHttp(HttpContext context, string requestBody, string responseBody)
         {
-            var logEventInfo = new LogEventInfo(NLog.LogLevel.Info, _logger.Name, "HTTP Request")
+            var logEventInfo = new LogEventInfo(NLog.LogLevel.Info, _logger.Name, $"{context.Request.Path} | {context.Request.Method} | {context.Response.StatusCode} | ${context.Connection.RemoteIpAddress}")
             {
                 Properties =
             {
