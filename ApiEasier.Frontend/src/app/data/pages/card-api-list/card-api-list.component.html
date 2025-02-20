@@ -7,28 +7,33 @@
   <div class="container">
     <div class="header-section">
       <app-filter-by-input
+        class="filter-input"
         [label]="'Search API'"
         [controlName]="'search'"
         [items]="apiNames"
         (searchQuery)="onSearchQuery($event)"
       ></app-filter-by-input>
-      <app-pagination
-        class="custom-pagination"
-        [totalItems]="filteredCards.length"
-        [itemsPerPage]="itemsPerPage"
-        [currentPage]="currentPage"
-        (pageChange)="onPageChange($event)"
-      ></app-pagination>
-      <i
-        *ngIf="!isSortedAscending"
-        class="fas fa-sort-alpha-up"
-        (click)="sortCardsOnClick()"
-      ></i>
-      <i
-        *ngIf="isSortedAscending"
-        class="fas fa-sort-alpha-down"
-        (click)="sortCardsOnClick()"
-      ></i>
+      <div class="pagination-sort-container">
+        <app-pagination
+          class="custom-pagination"
+          [totalItems]="filteredCards.length"
+          [itemsPerPage]="itemsPerPage"
+          [currentPage]="currentPage"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
+        <div class="icons-container">
+          <i
+            *ngIf="!isSortedAscending"
+            class="fas fa-sort-alpha-up"
+            (click)="sortCardsOnClick()"
+          ></i>
+          <i
+            *ngIf="isSortedAscending"
+            class="fas fa-sort-alpha-down"
+            (click)="sortCardsOnClick()"
+          ></i>
+        </div>
+      </div>
     </div>
     <div *ngIf="loading; else cardList">
       <app-loading></app-loading>
@@ -59,5 +64,3 @@
     (pageChange)="onPageChange($event)"
   ></app-pagination>
 </ng-template>
-
-
