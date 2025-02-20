@@ -22,7 +22,7 @@ namespace ApiEasier.Tests.Integration.Base
             _runner = MongoDbRunner.Start();
             _mongoConnectionString = _runner.ConnectionString;
 
-            _testApiConfigurationsPath = Path.Combine("TestApiConfigurations_" + DateTime.Now.ToString("yyyy.MM.dd_HH-mm"));
+            _testApiConfigurationsPath = Path.Combine("TestApiConfigurations_" + DateTime.Now.ToString("yyyy.MM.dd_HH-mm-ss"));
             if (!Directory.Exists(_testApiConfigurationsPath))
                 Directory.CreateDirectory(_testApiConfigurationsPath);
 
