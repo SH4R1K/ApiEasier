@@ -49,10 +49,6 @@ export class CardEndpointComponent {
   onToggleChange(newState: boolean): void {
     this.endpointInfo.isActive = newState; // Update the state in the parent component
     console.log('Состояние переключателя изменилось на:', newState);
-    this.updateEndpointStatus(newState);
-  }
-
-  private updateEndpointStatus(newState: boolean): void {
     this.endpointRepositoryService
       .updateEndpointStatus(
         this.apiName,

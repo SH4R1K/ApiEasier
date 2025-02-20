@@ -1,148 +1,180 @@
 /* Общие стили */
 .container {
-    padding: 20px;
-    gap: 20px;
+  padding: 20px;
+  gap: 20px;
 }
 
 .endpoint-list {
-    padding: 20px;
+  padding: 20px;
 }
 
 h1 {
-    font-size: 2.5rem;
-    color: #333;
-    margin-bottom: 3rem;
-    font-weight: 600;
-    text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 /* Аккордеон */
+.api-header,
 .accordion {
-    margin-bottom: 20px;
-    background: #f9f9f9; /* Изменено на сероватый цвет */
-    border-radius: 0px;
-    transition: box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  background: transparent; /* Убираем серый фон */
+  border-radius: 0px;
+  transition: box-shadow 0.3s ease;
+}
+
+.api-header h1,
+.accordion {
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Switch in API Header */
+.api-header app-switch {
+  margin-left: 10px;
+}
+
+/* Switch in Accordion */
+.accordion app-switch {
+  margin-left: auto; /* Push the switch to the far right */
+  margin-right: 5px; /* Adjust space between switch and chevron */
+  order: 2; /* Ensure the switch is positioned after the chevron */
+}
+
+.accordion::after {
+  content: var(--t-icon-end);
+  display: inline-block;
+  width: 16px; /* Adjust width as needed */
+  height: 16px; /* Adjust height as needed */
+  margin-left: 5px; /* Space between switch and chevron */
+  order: 3; /* Ensure the chevron is positioned after the switch */
 }
 
 .tui-expand {
-    padding: 15px;
-    background: #f9f9f9;
-    border-radius: 0 0 8px 8px;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 0 0 8px 8px;
 }
+
 
 /* Список эндпоинтов */
 ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .endpoint-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px 5px;
-    border-bottom: 1px solid #eee;
-    transition: background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 5px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
 }
 
 .endpoint-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 /* Заголовок эндпоинта */
 .endpoint-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
 }
 .endpoint-route {
-    font-weight: bold;
-    color: #0056a6; /* Установлено на черный цвет */
-    word-wrap: break-word;
-    font-size: 1rem;
+  font-weight: bold;
+  color: #0056a6; /* Установлено на черный цвет */
+  word-wrap: break-word;
+  font-size: 1rem;
 }
 .endpoint-type {
-    color: #000; /* Установлено на черный цвет */
-    word-wrap: break-word;
-    font-size: 1rem;
+  color: #000; /* Установлено на черный цвет */
+  word-wrap: break-word;
+  font-size: 1rem;
 }
 
 /* Блок URL */
 .url-container {
-    width: 100%;
+  width: 100%;
 }
 
 .copy-url-field {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
 }
 
 .url-input {
-    flex: 1;
-    padding: 8px 12px; /* Отступы внутри текстового поля */
-    border: 1px solid #ddd; /* Граница текстового поля */
-    outline: none;
-    background: #ffffff;
-    font-size: 0.9rem;
-    color: #333;
-    border-radius: 4px 0 0 4px; /* Закругление левой стороны */
-    height: 40px; /* Высота текстового поля */
-    box-sizing: border-box; /* Учитываем padding и border в общей высоте */
+  flex: 1;
+  padding: 8px 12px; /* Отступы внутри текстового поля */
+  border: 1px solid #ddd; /* Граница текстового поля */
+  outline: none;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #333;
+  border-radius: 4px 0 0 4px; /* Закругление левой стороны */
+  height: 40px; /* Высота текстового поля */
+  box-sizing: border-box; /* Учитываем padding и border в общей высоте */
 }
 
 .copy-button {
-    background: #f0f0f0;
-    border: 1px solid #ddd; /* Граница кнопки */
-    color: #555;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px 12px; /* Отступы внутри кнопки */
-    border-radius: 0 4px 4px 0; /* Закругление правой стороны */
-    height: 40px; /* Высота кнопки */
-    font-size: 1rem;
-    box-sizing: border-box; /* Учитываем padding и border в общей высоте */
+  background: #f0f0f0;
+  border: 1px solid #ddd; /* Граница кнопки */
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px; /* Отступы внутри кнопки */
+  border-radius: 0 4px 4px 0; /* Закругление правой стороны */
+  height: 40px; /* Высота кнопки */
+  font-size: 1rem;
+  box-sizing: border-box; /* Учитываем padding и border в общей высоте */
 }
 
 .copy-button:hover {
-    background: #e0e0e0;
-    color: #333;
+  background: #e0e0e0;
+  color: #333;
 }
 
 .copy-button.copied {
-    background: #d1e7dd;
-    color: #0f5132;
+  background: #d1e7dd;
+  color: #0f5132;
 }
 
 .copy-button.copied i {
-    transform: rotate(360deg);
-    margin-right: 0; /* Убираем отступ для галочки */
+  transform: rotate(360deg);
+  margin-right: 0; /* Убираем отступ для галочки */
 }
 
 /* Медиа-запросы */
 @media (max-width: 768px) {
-    h1 {
-        font-size: 2rem;
-    }
+  h1 {
+    font-size: 2rem;
+  }
 
-    .endpoint-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+  .endpoint-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .endpoint-type,
-    .endpoint-route {
-        margin-bottom: 5px;
-    }
+  .endpoint-type,
+  .endpoint-route {
+    margin-bottom: 5px;
+  }
 }
 
-.primary-button{
-    margin: 0px !important;
+.primary-button {
+  margin: 0px !important;
 }

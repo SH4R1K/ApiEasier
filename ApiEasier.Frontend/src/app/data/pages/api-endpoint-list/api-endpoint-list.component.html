@@ -3,18 +3,42 @@
 <app-loading></app-loading>
 } @else {
 <div class="endpoint-list">
-  <h1>{{ apiName }}</h1>
+  <div class="api-header">
+    <h1>{{ apiName }}</h1>
+    <app-switch
+      [value]="apiInfo.isActive"
+      (toggle)="onApiToggleChange($event)"
+    ></app-switch>
+  </div>
   <ng-container *ngIf="entities.length > 0; else noEntities">
     <tui-accordion tuiAppearance="floating" [closeOthers]="false">
       <ng-container *ngFor="let entity of entities">
-        <button tuiAccordion class="accordion">{{ entity.name }}</button>
+        <button tuiAccordion class="accordion">
+          {{ entity.name }}
+          <app-switch
+            [value]="entity.isActive"
+            (toggle)="onEntityToggleChange(entity, $event)"
+          ></app-switch>
+        </button>
         <tui-expand>
-          <ng-container *ngIf="entity?.endpoints && entity.endpoints.length > 0; else emptyEntityOrApi">
+          <ng-container
+            *ngIf="
+              entity?.endpoints && entity.endpoints.length > 0;
+              else emptyEntityOrApi
+            "
+          >
             <ul>
-              <li *ngFor="let endpoint of entity.endpoints" class="endpoint-item">
+              <li
+                *ngFor="let endpoint of entity.endpoints"
+                class="endpoint-item"
+              >
                 <div class="endpoint-header">
                   <div class="endpoint-route">{{ endpoint.route }}</div>
                   <div class="endpoint-type">{{ endpoint.type }}</div>
+                  <app-switch
+                    [value]="endpoint.isActive"
+                    (toggle)="onEndpointToggleChange(entity, endpoint, $event)"
+                  ></app-switch>
                 </div>
                 <div class="url-container">
                   <div class="copy-url-field">
@@ -30,12 +54,15 @@
                       tuiAppearance="flat"
                       (click)="copyToClipboard(entity.name, endpoint)"
                       class="copy-button"
-                      [class.copied]="isCopied === getUrl(entity.name, endpoint)"
+                      [class.copied]="
+                        isCopied === getUrl(entity.name, endpoint)
+                      "
                     >
                       <i
                         class="fas"
                         [ngClass]="{
-                          'fa-clone': isCopied !== getUrl(entity.name, endpoint),
+                          'fa-clone':
+                            isCopied !== getUrl(entity.name, endpoint),
                           'fa-check': isCopied === getUrl(entity.name, endpoint)
                         }"
                       ></i>
@@ -46,14 +73,28 @@
             </ul>
           </ng-container>
           <ng-template #emptyEntityOrApi>
-            <ng-container *ngIf="entity?.endpoints?.length === 0; else noendpoints">
+            <ng-container
+              *ngIf="entity?.endpoints?.length === 0; else noendpoints"
+            >
               <p>Нет доступных эндпоинтов.</p>
-              <button class="primary-button" tuiButton tuiAppearance="floating"
-                routerLink="/ApiEntity/{{apiName}}/{{entity.name}}">Перейти к деталям сущности</button>
+              <button
+                class="primary-button"
+                tuiButton
+                tuiAppearance="floating"
+                routerLink="/ApiEntity/{{ apiName }}/{{ entity.name }}"
+              >
+                Перейти к деталям сущности
+              </button>
             </ng-container>
             <ng-template #noendpoints>
-              <button class="primary-button" tuiButton tuiAppearance="floating"
-                routerLink="/ApiDetails/{{apiName}}">Перейти к деталям API</button>
+              <button
+                class="primary-button"
+                tuiButton
+                tuiAppearance="floating"
+                routerLink="/ApiDetails/{{ apiName }}"
+              >
+                Перейти к деталям API
+              </button>
             </ng-template>
           </ng-template>
         </tui-expand>
