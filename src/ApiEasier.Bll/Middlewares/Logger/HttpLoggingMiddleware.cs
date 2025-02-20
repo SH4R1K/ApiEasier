@@ -1,7 +1,7 @@
 ﻿using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Http;
 
-namespace ApiEasier.Bll.Services.Logger
+namespace ApiEasier.Bll.Middleware.Logger
 {
     public class HttpLoggingMiddleware
     {

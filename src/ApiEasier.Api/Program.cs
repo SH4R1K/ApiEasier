@@ -1,5 +1,5 @@
 using ApiEasier.Api.DependencyInjections;
-using ApiEasier.Bll.Services.Logger;
+using ApiEasier.Bll.Middleware.Logger;
 
 namespace ApiEasier.Api
 {

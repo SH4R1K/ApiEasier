@@ -73,7 +73,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiServiceDto">Имя API-сервиса</param>
         [HttpPost]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddApiService([FromBody] ApiServiceDto apiServiceDto)
@@ -84,8 +84,8 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 
                 if (result == null)
                     return Conflict($"API-сервис {apiServiceDto.Name} уже существует");
-             
-                return Ok(result);
+
+                return CreatedAtAction(nameof(GetByNameApiService), new { apiServiceName = result.Name }, result);
             }
             catch (Exception ex)
             {

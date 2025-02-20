@@ -1,5 +1,15 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { ApiServiceStructure, Endpoint, Entity } from '../../../services/service-structure-api';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  ApiServiceStructure,
+  Endpoint,
+  Entity,
+} from '../../../services/service-structure-api';
 import { TuiAccordion } from '@taiga-ui/experimental';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
@@ -9,10 +19,22 @@ import { CommonModule } from '@angular/common';
 import { TuiButton } from '@taiga-ui/core';
 import { HeaderComponent } from '../../components/header/header.component';
 import { TuiAlertService } from '@taiga-ui/core';
+import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
+import { EndpointRepositoryService } from '../../../repositories/endpoint-repository.service';
+import { EntityRepositoryService } from '../../../repositories/entity-repository.service';
+import { SwitchComponent } from '../../components/switch/switch.component';
 
 @Component({
   selector: 'app-api-endpoint-list',
-  imports: [TuiAccordion, LoadingComponent, CommonModule, RouterModule, TuiButton, HeaderComponent],
+  imports: [
+    TuiAccordion,
+    LoadingComponent,
+    CommonModule,
+    RouterModule,
+    TuiButton,
+    HeaderComponent,
+    SwitchComponent,
+  ],
   templateUrl: './api-endpoint-list.component.html',
   styleUrls: ['./api-endpoint-list.component.css', '../../styles/button.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,12 +44,16 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
   private sub: Subscription | null = null;
   loading: boolean = true;
   apiName!: string;
+  apiInfo: { isActive: boolean } = { isActive: false };
   isCopied: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
+    private apiServiceRepository: ApiServiceRepositoryService,
+    private entityRepositoryService: EntityRepositoryService,
+    private endpointRepositoryService: EndpointRepositoryService,
     private cd: ChangeDetectorRef,
     private alerts: TuiAlertService
   ) {}
@@ -58,6 +84,7 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
   private handleApiStructureResponse(apiStructure: ApiServiceStructure): void {
     if (apiStructure) {
       this.entities = apiStructure.entities;
+      this.apiInfo.isActive = apiStructure.isActive; // Set the API state here
       this.loading = false;
       this.cd.markForCheck();
     }
@@ -94,5 +121,51 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
 
   getUrl(entityName: string, endpoint: Endpoint): string {
     return `${window.location.origin}/api/ApiEmu/${this.apiName}/${entityName}/${endpoint.route}`;
+  }
+
+  onApiToggleChange(newState: boolean): void {
+    this.apiInfo.isActive = newState;
+    this.apiServiceRepository
+      .updateApiServiceStatus(this.apiName, newState)
+      .subscribe({
+        next: (response) => {
+          console.log('Состояние API обновлено:', response);
+        },
+        error: (error) => {
+          console.error('Ошибка при обновлении состояния API:', error);
+        },
+      });
+  }
+
+  onEntityToggleChange(entity: Entity, newState: boolean): void {
+    entity.isActive = newState;
+    this.entityRepositoryService
+      .updateEntityStatus(this.apiName, entity.name, newState)
+      .subscribe({
+        next: (response) => {
+          console.log('Состояние сущности обновлено:', response);
+        },
+        error: (error) => {
+          console.error('Ошибка при обновлении состояния сущности:', error);
+        },
+      });
+  }
+
+  onEndpointToggleChange(
+    entity: Entity,
+    endpoint: Endpoint,
+    newState: boolean
+  ): void {
+    endpoint.isActive = newState;
+    this.endpointRepositoryService
+      .updateEndpointStatus(this.apiName, entity.name, endpoint.route, newState)
+      .subscribe({
+        next: (response) => {
+          console.log('Состояние эндпоинта обновлено:', response);
+        },
+        error: (error) => {
+          console.error('Ошибка при обновлении состояния эндпоинта:', error);
+        },
+      });
   }
 }
