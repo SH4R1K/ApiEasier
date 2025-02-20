@@ -83,7 +83,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiEntityDto">Добавляемая сущность</param>
         [HttpPost("{apiServiceName}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
@@ -96,7 +96,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 if (result == null)
                     return Conflict($"Сущность с именем {apiEntityDto.Name} уже существует.");
 
-                return Ok(result);
+                return CreatedAtAction(nameof(GetEntityByName), new { apiServiceName, apiEntityName = apiEntityDto.Name }, result);
             }
             catch (NullReferenceException ex)
             {
