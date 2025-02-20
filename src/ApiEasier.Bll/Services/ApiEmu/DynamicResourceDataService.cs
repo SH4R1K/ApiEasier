@@ -1,22 +1,28 @@
 ﻿using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Bll.Interfaces.Validators;
-using ApiEasier.Bll.Validators;
 using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Bll.Services.ApiEmu
 {
+    /// <inheritdoc cref="IDynamicResourceDataService"/>
     public class DynamicResourceDataService : IDynamicResourceDataService
     {
         private readonly IDynamicResourceValidator _validator;
-        private readonly IResourceDataRepository _dbResourceDataRepository;
+        private readonly IResourceDataRepository _resourceDataRepository;
 
-        public DynamicResourceDataService(IDynamicResourceValidator validator, IResourceDataRepository dbResourceDataRepository)
+        public DynamicResourceDataService(IDynamicResourceValidator validator, IResourceDataRepository resourceDataRepository)
         {
             _validator = validator;
-            _dbResourceDataRepository = dbResourceDataRepository;
+            _resourceDataRepository = resourceDataRepository;
         }
 
+        /// <summary>
+        /// Возвращает имя ресурса, где будут хранится данные сущности, в виде имяApiСервиса_имяСущности
+        /// </summary>
+        /// <param name="apiName">Имя API-сервиса</param>
+        /// <param name="apiEntityName">Имя сущности</param>
+        /// <returns>Имя ресурса хранения данных сущности</returns>
         private string GetResourceName(string apiName, string apiEntityName) 
             => apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
@@ -26,7 +32,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             if (!isValid)
                 return null;
 
-            var result = await _dbResourceDataRepository.GetAllDataAsync(GetResourceName(apiName, apiEntityName), filters);
+            var result = await _resourceDataRepository.GetAllDataAsync(GetResourceName(apiName, apiEntityName), filters);
 
             return result;
         }
@@ -38,7 +44,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             if (!isValid)
                 return null;
 
-            var result = await _dbResourceDataRepository.GetDataByIdAsync(GetResourceName(apiName, apiEntityName), id);
+            var result = await _resourceDataRepository.GetDataByIdAsync(GetResourceName(apiName, apiEntityName), id);
 
             return result;
         }
@@ -54,7 +60,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             if (!isValid)
                 return null;
 
-            return await _dbResourceDataRepository.CreateDataAsync(GetResourceName(apiName, apiEntityName), json);
+            return await _resourceDataRepository.CreateDataAsync(GetResourceName(apiName, apiEntityName), json);
         }
 
         public async Task<bool> Delete(string apiName, string apiEntityName, string endpoint, string id)
@@ -64,7 +70,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             if (!isValid)
                 return false;
 
-            var result = await _dbResourceDataRepository.DeleteDataAsync(GetResourceName(apiName, apiEntityName), id);
+            var result = await _resourceDataRepository.DeleteDataAsync(GetResourceName(apiName, apiEntityName), id);
 
             return result;
         }
@@ -80,7 +86,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
             if (!isValid)
                 return null;
 
-            var result = await _dbResourceDataRepository.UpdateDataAsync(GetResourceName(apiName, apiEntityName), id, json);
+            var result = await _resourceDataRepository.UpdateDataAsync(GetResourceName(apiName, apiEntityName), id, json);
 
             return result;
         }

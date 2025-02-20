@@ -96,7 +96,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 if (result == null)
                     return Conflict($"Сущность с именем {apiEntityDto.Name} уже существует.");
 
-                return CreatedAtAction(nameof(GetEntityByName), new { apiServiceName, apiEntityName = apiEntityDto.Name }, result);
+                return CreatedAtAction(nameof(GetEntityByName), new { apiServiceName, entityName = apiEntityDto.Name }, result);
             }
             catch (NullReferenceException ex)
             {

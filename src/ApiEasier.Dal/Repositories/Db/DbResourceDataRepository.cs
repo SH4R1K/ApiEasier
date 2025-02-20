@@ -8,6 +8,9 @@ using System.Text.Json.Nodes;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
+    /// <summary>
+    /// Позволяет управлять данными сущности через MongoDB
+    /// </summary>
     public class DbResourceDataRepository : IResourceDataRepository
     {
         private readonly MongoDbContext _dbContext;
@@ -28,10 +31,14 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDoc.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())!
             };
         }
 
+        /// <summary>
+        /// Возвращает данные объекта по идентификатору из коллекции с названием имени ресурса
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<DynamicResourceData?> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
@@ -47,10 +54,14 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDoc.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())!
             };
         }
 
+        /// <summary>
+        /// Возвращает все или отфильтрованные данные из коллекции по имени ресурса
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName, string? filter)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
@@ -69,7 +80,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
                 return new DynamicResourceData
                 {
-                    Data = JsonNode.Parse(bsonDoc.ToJson())
+                    Data = JsonNode.Parse(bsonDoc.ToJson())!
                 };
 
             }).ToList();
@@ -119,7 +130,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDoc.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())!
             };
         }
     }

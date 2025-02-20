@@ -2,6 +2,7 @@ using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Nodes;
 
 namespace ApiEasier.Api.Controllers.ApiEmu
 {
@@ -14,17 +15,17 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     {
         private readonly IDynamicResourceDataService _dynamicResourceDataService = dynamicResourceDataService;
         private readonly ILoggerService _logger = logger;
-        
+
         /// <summary>
-        /// Возвращает все данные, принадлежащие указанной сущности
+        /// Возвращает все или отфильтрованные данные, принадлежащие указанной сущности
         /// </summary>
         /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
         /// <param name="entityName">Имя сущности, имеющей эти данные</param>
         /// <param name="endpoint">Эндпоинт сущности с типом Get</param>
-        /// <param name="filters">Фильтры для получения данных</param>
+        /// <param name="filters">Фильтры для фильтрации данных</param>
         [HttpGet("{apiName}/{entityName}/{endpoint}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<List<object>>(StatusCodes.Status200OK)]
+        [ProducesResponseType<List<JsonNode>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetAllData(string apiName, string entityName, string endpoint, [FromQuery] string? filters)
@@ -34,44 +35,64 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                 var data = await _dynamicResourceDataService.GetAsync(apiName, entityName, endpoint, filters);
                 
                 if (data == null)
-                    return NotFound("Не найдены данные");
+                    return NotFound("По этом адресу эндпоинт не найден");
 
                 return Ok(data.Select(d => d.Data));
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
 
-        // GET api/ApiEmu/{apiName}/{entityName}/{endpoint}/{id}
+        /// <summary>
+        /// Возвращает данные объекта указанной сущности по идентификатору
+        /// </summary>
+        /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
+        /// <param name="entityName">Имя сущности, имеющей эти данные</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Get</param>
+        /// <param name="id">Идентификатор данных</param>
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> GetById(string apiName, string entityName, string endpoint, string id)
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<JsonNode>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetDataById(string apiName, string entityName, string endpoint, string id)
         {
             try
             {
                 var result = await _dynamicResourceDataService.GetByIdAsync(apiName, entityName, endpoint, id);
 
                 if (result == null)
-                    return NotFound("Не найдены данные");
+                    return NotFound("По этом адресу эндпоинт не найден");
 
                 return Ok(result.Data);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
 
-        // POST api/ApiEmu/{apiName}/{entityName}/{endpoint}
+        /// <summary>
+        /// Создает объект указаной сущности 
+        /// </summary>
+        /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
+        /// <param name="entityName">Имя сущности, имеющей эти данные</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Get</param>
+        /// <param name="data">Данные нового объекта</param>
         [HttpPost("{apiName}/{entityName}/{endpoint}")]
-        public async Task<IActionResult> Post(string apiName, string entityName, string endpoint, object json)
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<JsonNode>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AddData(string apiName, string entityName, string endpoint, object data)
         {
             try
             {
-                var result = await _dynamicResourceDataService.AddAsync(apiName, entityName, endpoint, json);
+                var result = await _dynamicResourceDataService.AddAsync(apiName, entityName, endpoint, data);
                 if (result == null)
                     return NotFound("Данные не были добавлены");
 
@@ -80,7 +101,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
 
@@ -101,7 +122,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
 
@@ -121,7 +142,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Ошибка: {ex.Message}");
+                return StatusCode(500, "Внутренняя ошибка сервера: " + ex.Message);
             }
         }
     }
