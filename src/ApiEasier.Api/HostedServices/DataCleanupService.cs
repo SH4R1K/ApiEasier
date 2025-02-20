@@ -1,6 +1,5 @@
 ﻿using ApiEasier.Bll.Interfaces.DbDataCleanup;
 using ApiEasier.Logger.Interfaces;
-using System.Runtime.InteropServices;
 
 namespace ApiEasier.Api.HostedServices
 {
