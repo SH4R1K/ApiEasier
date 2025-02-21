@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Bll.Dto
 {
+    /// <summary>
+    /// DTO для представления эндпоинта
+    /// </summary>
     public class ApiEndpointDto
     {
         /// <summary>

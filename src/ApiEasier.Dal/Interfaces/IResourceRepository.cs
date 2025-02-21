@@ -14,10 +14,9 @@ namespace ApiEasier.Dal.Interfaces
         /// <summary>
         /// Удаляет источники данных по имени API-сервиса
         /// </summary>
-        /// <param name="id">Идентиффикатор API-сервис</param>
+        /// <param name="id">Идентиффикатор API-сервиса</param>
         /// <returns>Прошло ли удаление</returns>
         public Task<bool> DeleteByApiNameAsync(string id);
-        public Task<bool> DeleteByApiEntityNameAsync(string id);
 
         /// <summary>
         /// Обновляет источники данных по имени API-сервиса
@@ -26,7 +25,11 @@ namespace ApiEasier.Dal.Interfaces
         /// <param name="newId">Новый идентификатор API-сервиса</param>
         /// <returns>Прошло ли обновление</returns>
         public Task<bool> UpdateByApiNameAsync(string id, string newId);
-        public Task<bool> UpdateByApiEntityNameAsync(string apiServiceNmae, string id, string newId);
+
+        /// <summary>
+        /// Удаляет неиспользуемые ресурсы хранения данных, на которых не ссылается ни одна сущность
+        /// </summary>
+        /// <param name="apiServiceNames">Список всех существующих API-сервисов</param>
         public Task DeleteUnusedResources(List<string> apiServiceNames);
     }
 }
