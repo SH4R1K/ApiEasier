@@ -32,8 +32,8 @@ namespace ApiEasier.Bll.Interfaces.Validators
         /// Валидирует структуру объекта на основе предоставленного структуры данных сущности.
         /// </summary>
         /// <param name="apiEntity">Данные сущности со структурой данных.</param>
-        /// <param name="document">Объект сущности, структура которого будет проверяться.</param>
+        /// <param name="data">Объект сущности, структура которого будет проверяться.</param>
         /// <returns>Возвращает <c>true</c>, если структура документа соответствует сущности, иначе <c>false</c>.</returns>
-        Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object document);
+        Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object data);
     }
 }

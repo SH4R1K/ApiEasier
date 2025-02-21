@@ -51,7 +51,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         /// </summary>
         /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
         /// <param name="entityName">Имя сущности, имеющей эти данные</param>
-        /// <param name="endpoint">Эндпоинт сущности с типом Get</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом GetByIndex</param>
         /// <param name="id">Идентификатор данных</param>
         [HttpGet("{apiName}/{entityName}/{endpoint}/{id}")]
         [DisableRequestSizeLimit]
@@ -81,22 +81,27 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         /// </summary>
         /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
         /// <param name="entityName">Имя сущности, имеющей эти данные</param>
-        /// <param name="endpoint">Эндпоинт сущности с типом Get</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Post</param>
         /// <param name="data">Данные нового объекта</param>
         [HttpPost("{apiName}/{entityName}/{endpoint}")]
         [DisableRequestSizeLimit]
         [ProducesResponseType<JsonNode>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddData(string apiName, string entityName, string endpoint, object data)
         {
             try
             {
                 var result = await _dynamicResourceDataService.AddAsync(apiName, entityName, endpoint, data);
                 if (result == null)
-                    return NotFound("Данные не были добавлены");
+                    return NotFound("По этом адресу эндпоинт не найден");
 
                 return Ok(result.Data);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
             }
             catch (Exception ex)
             {
@@ -105,19 +110,39 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
         }
 
-        // PUT api/ApiEmu/{apiName}/{entityName}/{endpoint}/{id}
+        /// <summary>
+        /// Изменяет объект указанной сущности по идентификатору
+        /// </summary>
+        /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
+        /// <param name="entityName">Имя сущности, имеющей эти данные</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Put</param>
+        /// <param name="id">Идентификатор объекта сущности</param>
+        /// <param name="data">Данные нового объекта</param>
         [HttpPut("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> Put(string apiName, string entityName, string endpoint, string id, object json)
+        [DisableRequestSizeLimit]
+        [ProducesResponseType<JsonNode>(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> UpdateData(string apiName, string entityName, string endpoint, string id, object data)
         {
             try
             {
-                var result = await _dynamicResourceDataService.UpdateAsync(apiName, entityName, endpoint, id, json);
+                var result = await _dynamicResourceDataService.UpdateAsync(apiName, entityName, endpoint, id, data);
 
                 if (result == null)
-                    return NotFound($"Не найдены данные");
+                    return NotFound($"По этом адресу эндпоинт не найден");
 
                 return Ok(result.Data);
 
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -126,18 +151,37 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             }
         }
 
-        // DELETE api/ApiEmu/{apiName}/{entityName}/{endpoint}/{id}
+        /// <summary>
+        /// Удаляет объект указанной сущности по идентификатору
+        /// </summary>
+        /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
+        /// <param name="entityName">Имя сущности, имеющей эти данные</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Delete</param>
+        /// <param name="id">Идентификатор объекта сущности</param>
         [HttpDelete("{apiName}/{entityName}/{endpoint}/{id}")]
-        public async Task<IActionResult> Delete(string apiName, string entityName, string endpoint, string id)
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteData(string apiName, string entityName, string endpoint, string id)
         {
             try
             {
                 var result = await _dynamicResourceDataService.Delete(apiName, entityName, endpoint, id);
 
                 if (!result)
-                    return NotFound();
+                    return NotFound($"По этом адресу эндпоинт не найден");
 
                 return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

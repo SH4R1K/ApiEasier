@@ -12,21 +12,6 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<bool> DeleteByApiEntityNameAsync(string id)
-        {
-            var collectionsNames = await _dbContext.GetListCollectionNamesAsync();
-
-            var collectionsToDelete = collectionsNames.Where(name => name.EndsWith("_" + id)).ToList();
-
-            if (collectionsToDelete.Count == 0)
-                return false;
-
-            var deleteTasks = collectionsToDelete.Select(_dbContext.DropCollectionAsync);
-
-            await Task.WhenAll(deleteTasks);
-            return true;
-        }
-
         /// <summary>
         /// Находит коллекции, привязанные к API-сервису, и удаляет их
         /// </summary>
@@ -45,19 +30,6 @@ namespace ApiEasier.Dal.Repositories.Db
 
             await Task.WhenAll(deleteTasks);
             return true;
-        }
-
-        public async Task<bool> UpdateByApiEntityNameAsync(string apiServiceName, string id, string newId)
-        {
-            try
-            {
-                await _dbContext.RenameCollectionAsync(apiServiceName + "_" + id, apiServiceName + "_" + newId);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }      
         }
 
         /// <summary>
@@ -88,7 +60,11 @@ namespace ApiEasier.Dal.Repositories.Db
             return true;
         }
 
-        public async Task DeleteUnusedResources(List<string> validApiServiceNames)
+        /// <summary>
+        /// Удаляет все коллекции, которые не начинаются с имени API-сервиса
+        /// </summary>
+        /// <inheritdoc/>
+        public async Task DeleteUnusedResources(List<string> apiServiceNames)
         {
             // коллекции хранятся в виде: ApiServiceName_ApiEntityName
             var collectionsNames = await _dbContext.GetListCollectionNamesAsync();
@@ -97,7 +73,7 @@ namespace ApiEasier.Dal.Repositories.Db
             {
                 var apiName = name.Split("_")[0];
 
-                return !validApiServiceNames.Contains(apiName);
+                return !apiServiceNames.Contains(apiName);
             }).ToList();
 
             var deleteTasks = collectionToDelete.Select(_dbContext.DropCollectionAsync);

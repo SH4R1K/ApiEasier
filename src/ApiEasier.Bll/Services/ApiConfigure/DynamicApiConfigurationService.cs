@@ -31,7 +31,6 @@ namespace ApiEasier.Bll.Services.ApiConfigure
             _apiServiceToDtoSummaryConverter = apiServiceToDtoSummaryConverter;
         }
 
-        /// <inheritdoc/>
         public async Task ChangeActiveStatusAsync(string id, bool status)
         {
             await _apiServiceRepository.ChangeActiveStatusAsync(id, status);
