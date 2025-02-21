@@ -118,8 +118,9 @@ namespace ApiEasier.Dal.Helpers
                     {
                         File.Delete(filePath);
                     }
-                    // Удаляем запись из кэша, чтобы последующие запросы не использовали устаревшие данные
-                    _cache.Remove(fileName);
+
+                    //на случай отказа от FileSystemWatcherService
+                    //_cache.Remove(fileName);
                 }
             }
             catch (Exception ex)

@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace ApiEasier.Tests.Integration.Tests.ApiService
 {
-    public class GetApiService(CustomWebApplicationFactory<Program> factory, ITestOutputHelper output) : TestBase(factory, output)
+    public class GetApiService(ITestOutputHelper output) : TestBase(output)
     {
         [Fact]
         public async Task GetApiServiceList_WhenNoDataExists_ReturnsOk()

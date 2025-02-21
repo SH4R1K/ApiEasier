@@ -8,7 +8,7 @@ using Xunit.Abstractions;
 
 namespace ApiEasier.Tests.Integration.Tests.ApiService
 {
-    public class CreateApiService(CustomWebApplicationFactory<Program> factory, ITestOutputHelper output) : TestBase(factory, output)
+    public class CreateApiService(ITestOutputHelper output) : TestBase(output)
     {
         [Fact]
         public async Task CreateApiService_WithValidData_ReturnsCreated()
