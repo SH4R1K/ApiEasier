@@ -3,6 +3,7 @@ using ApiEasier.Bll.Interfaces.Converter;
 using ApiEasier.Bll.Interfaces.Validators;
 using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dm.Models;
+using ApiEasier.Logger.Interfaces;
 using NJsonSchema;
 using System.Text.Json;
 
@@ -12,11 +13,13 @@ namespace ApiEasier.Bll.Validators
     public class DynamicResourceValidator(
         IApiServiceRepository fileApiServiceRepository,
         IConverter<ApiService, ApiServiceDto> apiServiceToDtoConverter,
-        IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter) : IDynamicResourceValidator
+        IConverter<ApiEntity, ApiEntityDto> apiEntityToDtoConverter,
+        ILoggerService loggerService) : IDynamicResourceValidator
     {
         private readonly IApiServiceRepository _fileApiServiceRepository = fileApiServiceRepository;
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter = apiServiceToDtoConverter;
         private readonly IConverter<ApiEntity, ApiEntityDto> _apiEntityToDtoConverter = apiEntityToDtoConverter;
+        private readonly ILoggerService _loggerService = loggerService;
 
         public async Task<(bool isValid, ApiServiceDto? apiService, ApiEntityDto? apiEntity)> ValidateApiAsync(
             string apiName,
@@ -42,14 +45,18 @@ namespace ApiEasier.Bll.Validators
             return (true, _apiServiceToDtoConverter.Convert(api), _apiEntityToDtoConverter.Convert(entity));
         }
 
-        public async Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object document)
+        public async Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object data)
         {
             if (apiEntity.Structure == null)
                 return true;
-
-            var json = JsonSerializer.Serialize(document);
+            // Не используем JsonSerializerHelper, т.к. не нужны опции
+            var json = JsonSerializer.Serialize(data);
             var jsonSchema = await JsonSchema.FromJsonAsync(JsonSerializer.Serialize(apiEntity.Structure));
-            return jsonSchema.Validate(json).Count == 0;
+            var errors = jsonSchema.Validate(json);
+
+            _loggerService.LogDebug($"Произошла ошибка при валидации структуры {apiEntity.Name}: {String.Join(", ", errors)}");
+
+            return errors.Count == 0;
         }
     }
 }

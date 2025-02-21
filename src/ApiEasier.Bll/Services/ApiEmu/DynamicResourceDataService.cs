@@ -49,18 +49,22 @@ namespace ApiEasier.Bll.Services.ApiEmu
             return result;
         }
 
-        public async Task<DynamicResourceData?> AddAsync(string apiName, string apiEntityName, string endpoint, object json)
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentException">
+        /// Возникает, если структура объекта не соответствует структуре сущности
+        /// </exception>
+        public async Task<DynamicResourceData?> AddAsync(string apiName, string apiEntityName, string endpoint, object data)
         {
             var (isValid, _, entity) = await _validator.ValidateApiAsync(apiName, apiEntityName, endpoint, "post");
             if (!isValid)
                 return null;
 
-            // Валидация структуры для сущности
-            isValid = await _validator.ValidateEntityStructureAsync(entity!, json);
+            // Валидация структуры для объекта сущности
+            isValid = await _validator.ValidateEntityStructureAsync(entity!, data);
             if (!isValid)
-                return null;
+                throw new ArgumentException($"Объект {apiEntityName} не соответствует структуре данных");
 
-            return await _resourceDataRepository.CreateDataAsync(GetResourceName(apiName, apiEntityName), json);
+            return await _resourceDataRepository.CreateDataAsync(GetResourceName(apiName, apiEntityName), data);
         }
 
         public async Task<bool> Delete(string apiName, string apiEntityName, string endpoint, string id)
@@ -75,18 +79,22 @@ namespace ApiEasier.Bll.Services.ApiEmu
             return result;
         }
 
-        public async Task<DynamicResourceData?> UpdateAsync(string apiName, string apiEntityName, string endpoint, string id, object json)
+        /// <inheritdoc/>
+        /// <exception cref="ArgumentException">
+        /// Возникает, если структура объекта не соответствует структуре сущности
+        /// </exception>
+        public async Task<DynamicResourceData?> UpdateAsync(string apiName, string apiEntityName, string endpoint, string id, object data)
         {
             var (isValid, _, entity) = await _validator.ValidateApiAsync(apiName, apiEntityName, endpoint, "put");
             if (!isValid)
                 return null;
 
             // Валидация структуры для сущности
-            isValid = await _validator.ValidateEntityStructureAsync(entity!, json);
+            isValid = await _validator.ValidateEntityStructureAsync(entity!, data);
             if (!isValid)
-                return null;
+                throw new ArgumentException($"Объект {apiEntityName} не соответствует структуре данных");
 
-            var result = await _resourceDataRepository.UpdateDataAsync(GetResourceName(apiName, apiEntityName), id, json);
+            var result = await _resourceDataRepository.UpdateDataAsync(GetResourceName(apiName, apiEntityName), id, data);
 
             return result;
         }

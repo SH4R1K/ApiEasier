@@ -58,7 +58,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entityToRemove == null)
-                throw new NullReferenceException($"Сущность {id} у API-сервиса {apiServiceName} не была удалена");
+                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
 
             apiService.Entities.Remove(entityToRemove);
 
@@ -86,7 +86,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} у API-сервиса {apiServiceName} не была удалена");
+                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
 
             if (id != apiEntity.Name && apiService.Entities.Any(e => e.Name == apiEntity.Name))
                 throw new ArgumentException($"Сущность с именем {apiEntity.Name} уже существует.");
@@ -113,7 +113,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} у API-сервиса {apiServiceName} не была удалена");
+                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
 
             entity.IsActive = status;
 
@@ -149,7 +149,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не найден");
+                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
             return entity;
         }
     }
