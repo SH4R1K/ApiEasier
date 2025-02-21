@@ -5,15 +5,26 @@ using Xunit.Abstractions;
 
 namespace ApiEasier.Tests.Integration.Base
 {
-    public class TestBase : IClassFixture<CustomWebApplicationFactory<Program>>
+    public class TestBase : IAsyncLifetime
     {
-        protected readonly HttpClient _client;
-        protected readonly ITestOutputHelper _output;
+        protected HttpClient _client;
+        protected ITestOutputHelper _output;
+        private CustomWebApplicationFactory<Program> _factory;
 
-        public TestBase(CustomWebApplicationFactory<Program> factory, ITestOutputHelper output)
+        public TestBase(ITestOutputHelper output)
         {
-            _client = factory.CreateClient();
             _output = output;
+        }
+
+        public async Task InitializeAsync()
+        {
+            _factory = new CustomWebApplicationFactory<Program>();
+            _client = _factory.CreateClient();
+        }
+
+        public async Task DisposeAsync()
+        {
+            _factory.Dispose();
         }
     }
 }

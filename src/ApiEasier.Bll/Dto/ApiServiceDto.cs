@@ -20,10 +20,17 @@ namespace ApiEasier.Bll.Dto
         [Required]
         public bool IsActive { get; set; }
 
+
+        private string? _description;
         /// <summary>
         /// Описание API-сервиса.
         /// </summary>
-        public string? Description { get; set; }
+        [StringLength(255)]
+        public string? Description
+        {
+            get => _description;
+            set => _description = value?.Trim();
+        }
 
         /// <summary>
         /// Список сущностей, связанных с API-сервисом.
