@@ -1,0 +1,927 @@
+{
+	"info": {
+		"_postman_id": "183cbfef-6e38-4a9a-8aad-1b6d6dc593c2",
+		"name": "ApiEasier",
+		"description": "Набор для тестирования",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33508438",
+		"_collection_link": "https://bold-moon-415428.postman.co/workspace/1a8d7b67-8170-41c9-884b-ef82d0a7ce19/collection/33508438-183cbfef-6e38-4a9a-8aad-1b6d6dc593c2?action=share&source=collection_link&creator=33508438"
+	},
+	"item": [
+		{
+			"name": "ApiEasier.ApiService",
+			"item": [
+				{
+					"name": "GetAllServices",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiService}}",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiService}}"
+							]
+						},
+						"description": "Возвращает все созданные сервисы"
+					},
+					"response": []
+				},
+				{
+					"name": "GetServiceByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiService}}/::apiName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiService}}",
+								"::apiName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								}
+							]
+						},
+						"description": "Возвращает подробности сервиса по имени"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateService",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ApiName\",\r\n    \"isActive\": true,\r\n    \"description\": \"Something here or null\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiService}}/",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiService}}",
+								""
+							]
+						},
+						"description": "Создаёт новый сервис"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteService",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiService}}/::apiName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiService}}",
+								"::apiName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								}
+							]
+						},
+						"description": "Удаляет сервис по имени"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateService",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ApiName\",\r\n    \"isActive\": true,\r\n    \"description\": \"Something here or null\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiService}}/::apiName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiService}}",
+								"::apiName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								}
+							]
+						},
+						"description": "Обновляет существующий сервис по имени"
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeStateService",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiService}}/::apiName/::isActive",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiService}}",
+								"::apiName",
+								"::isActive"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":isActive",
+									"value": "",
+									"description": "bool"
+								}
+							]
+						},
+						"description": "Переключает состояние сервиса"
+					},
+					"response": []
+				}
+			],
+			"description": "Набор для работы с сервисами"
+		},
+		{
+			"name": "ApiEasier.ApiEntity",
+			"item": [
+				{
+					"name": "GetAllEntities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEntity}}/::apiName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEntity}}",
+								"::apiName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								}
+							]
+						},
+						"description": "Возвращает все сущности сервиса"
+					},
+					"response": []
+				},
+				{
+					"name": "GetEntityByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEntity}}/::apiName/::entityName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEntity}}",
+								"::apiName",
+								"::entityName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								}
+							]
+						},
+						"description": "Возвращает подробности об определенной сущности сервиса"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEntity",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"example6\",\r\n    \"isActive\": true,\r\n    \"structure\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiEntity}}/::apiName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEntity}}",
+								"::apiName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								}
+							]
+						},
+						"description": "Создает сущность в сервисе"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEntity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEntity}}/::apiName/::entityName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEntity}}",
+								"::apiName",
+								"::entityName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								}
+							]
+						},
+						"description": "Удаляет сущность у сервиса"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateEntity",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"example6\",\r\n    \"isActive\": true,\r\n    \"structure\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiEntity}}/::apiName/::entityName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEntity}}",
+								"::apiName",
+								"::entityName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								}
+							]
+						},
+						"description": "Обновляет существующую сущность у сервиса"
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeStateEntity",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEntity}}/::apiName/::entityName/::isActive",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEntity}}",
+								"::apiName",
+								"::entityName",
+								"::isActive"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":isActive",
+									"value": "",
+									"description": "bool"
+								}
+							]
+						},
+						"description": "Переключает состояние сущности"
+					},
+					"response": []
+				}
+			],
+			"description": "Набор для работы с сущностями сервиса"
+		},
+		{
+			"name": "ApiEasier.ApiEndpoint",
+			"item": [
+				{
+					"name": "GetAllEndpoints",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEndpoint}}/::apiName/::entityName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEndpoint}}",
+								"::apiName",
+								"::entityName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								}
+							]
+						},
+						"description": "Возвращает все эндпоинты сущности"
+					},
+					"response": []
+				},
+				{
+					"name": "GetEndpointByName",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEndpoint}}/::apiName/::entityName/::endpointName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEndpoint}}",
+								"::apiName",
+								"::entityName",
+								"::endpointName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointName",
+									"value": "",
+									"description": "Название эндпоинта"
+								}
+							]
+						},
+						"description": "Возвращает информацию об определенном эндпоинте сущности"
+					},
+					"response": []
+				},
+				{
+					"name": "CreateEndpoint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"route\": \"example5\",\r\n    \"type\": \"get\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiEndpoint}}/::apiName/::entityName",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEndpoint}}",
+								"::apiName",
+								"::entityName"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								}
+							]
+						},
+						"description": "Создает эндпоинт в сущности"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteEndpoint",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEndpoint}}/::apiName/::entityName/::endpointname",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEndpoint}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								}
+							]
+						},
+						"description": "Удаляет эндпоинт у сущности"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateEndpoint",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"route\": \"example5\",\r\n    \"type\": \"get\",\r\n    \"isActive\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiEndpoint}}/::apiName/::entityName/::endpointname",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEndpoint}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								}
+							]
+						},
+						"description": "Обновляет эндпоинт у сущности"
+					},
+					"response": []
+				},
+				{
+					"name": "ChangeStateEndpoint",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEndpoint}}/::apiName/::entityName/::endpointName/::isActive",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEndpoint}}",
+								"::apiName",
+								"::entityName",
+								"::endpointName",
+								"::isActive"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointName",
+									"value": "",
+									"description": "Название эндпоинта"
+								},
+								{
+									"key": ":isActive",
+									"value": "",
+									"description": "bool"
+								}
+							]
+						},
+						"description": "Переключает состояние эндпоинта"
+					},
+					"response": []
+				}
+			],
+			"description": "Набор для работы с эндпоинтами сущности"
+		},
+		{
+			"name": "ApiEasier.ApiEmu",
+			"item": [
+				{
+					"name": "Get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEmu}}/::apiName/::entityName/::endpointname",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEmu}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname"
+							],
+							"query": [
+								{
+									"key": "filters",
+									"value": "{\"example2\": false}",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								}
+							]
+						},
+						"description": "Возвращает все хранимые данные сущности с возможностью фильтрации"
+					},
+					"response": []
+				},
+				{
+					"name": "GetById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEmu}}/::apiName/::entityName/::endpointname/::id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEmu}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname",
+								"::id"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								},
+								{
+									"key": ":id",
+									"value": "",
+									"description": "Id объекта"
+								}
+							]
+						},
+						"description": "Возвращает данные в сущности по id"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/{{ApiEmu}}/::apiName/::entityName/::endpointname/::id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEmu}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname",
+								"::id"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								},
+								{
+									"key": ":id",
+									"value": "",
+									"description": "Id объекта"
+								}
+							]
+						},
+						"description": "Удаляет данные в сущности по id"
+					},
+					"response": []
+				},
+				{
+					"name": "Post",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"example\": \"true\",\r\n    \"example2\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiEmu}}/::apiName/::entityName/::endpointname",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEmu}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								}
+							]
+						},
+						"description": "Добавляет новые данные в сущность"
+					},
+					"response": []
+				},
+				{
+					"name": "Put",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"example\": \"ImTrue\",\r\n    \"example2\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{URL}}/{{ApiEmu}}/::apiName/::entityName/::endpointname/::id",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"{{ApiEmu}}",
+								"::apiName",
+								"::entityName",
+								"::endpointname",
+								"::id"
+							],
+							"variable": [
+								{
+									"key": ":apiName",
+									"value": "",
+									"description": "Название api сервиса"
+								},
+								{
+									"key": ":entityName",
+									"value": "",
+									"description": "Название сущности"
+								},
+								{
+									"key": ":endpointname",
+									"value": "",
+									"description": "Название эндпоинта"
+								},
+								{
+									"key": ":id",
+									"value": "",
+									"description": "Id объекта"
+								}
+							]
+						},
+						"description": "Обновляет существующие данные в сущности по id"
+					},
+					"response": []
+				}
+			],
+			"description": "Набор для тестирования эмулируемых сервисов"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URL",
+			"value": "http://localhost:7283/api",
+			"type": "string"
+		},
+		{
+			"key": "ApiService",
+			"value": "ApiService",
+			"type": "string"
+		},
+		{
+			"key": "ApiEntity",
+			"value": "ApiEntity",
+			"type": "string"
+		},
+		{
+			"key": "ApiEndpoint",
+			"value": "ApiEndpoint",
+			"type": "string"
+		},
+		{
+			"key": "ApiEmu",
+			"value": "ApiEmu",
+			"type": "string"
+		}
+	]
+}
