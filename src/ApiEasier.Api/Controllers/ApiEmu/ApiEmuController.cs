@@ -156,7 +156,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
         /// </summary>
         /// <param name="apiName">Имя API-сервиса с указанной сущностью</param>
         /// <param name="entityName">Имя сущности, имеющей эти данные</param>
-        /// <param name="endpoint">Эндпоинт сущности с типом Put</param>
+        /// <param name="endpoint">Эндпоинт сущности с типом Delete</param>
         /// <param name="id">Идентификатор объекта сущности</param>
         [HttpDelete("{apiName}/{entityName}/{endpoint}/{id}")]
         [DisableRequestSizeLimit]
@@ -174,6 +174,14 @@ namespace ApiEasier.Api.Controllers.ApiEmu
                     return NotFound($"По этом адресу эндпоинт не найден");
 
                 return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

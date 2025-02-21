@@ -90,19 +90,30 @@ namespace ApiEasier.Dal.Repositories.Db
             }).ToList();
         }
 
+        /// <summary>
+        /// Удаляет документ в коллекции по идентификатору
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        /// Возникает, если идентфикатор имеет неверный формат
+        /// </exception>
+        /// <exception cref="KeyNotFoundException">
+        /// Возникает, если такой объект был не найден для изменения
+        /// </exception>
+        /// <inheritdoc/>
         public async Task<bool> DeleteDataAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             if (!ObjectId.TryParse(id, out var objectId))
-                return false;
+                throw new ArgumentException("Неверный формат идентификатора");
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
 
             var result = await collection.DeleteOneAsync(filter);
 
+            // Документ не найден
             if (result.DeletedCount == 0)
-                return false;
+                throw new KeyNotFoundException($"Документ с id={id} не найден");
 
             return true;
         }
