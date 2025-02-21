@@ -3,9 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Bll.Dto
 {
+    /// <summary>
+    /// DTO для представления сущности
+    /// </summary>
     public class ApiEntityDto
     {
-        // <summary>
+        /// <summary>
         /// Имя сущности API.
         /// </summary>
         [Required]

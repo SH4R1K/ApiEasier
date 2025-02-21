@@ -2,6 +2,7 @@
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
@@ -49,7 +50,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByNameApiService(string apiServiceName)
+        public async Task<IActionResult> GetByNameApiService(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName)
         {
             try
             {
@@ -73,7 +76,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <param name="apiServiceDto">Имя API-сервиса</param>
         [HttpPost]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
+        [ProducesResponseType<ApiServiceDto>(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> AddApiService([FromBody] ApiServiceDto apiServiceDto)
@@ -84,8 +87,8 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 
                 if (result == null)
                     return Conflict($"API-сервис {apiServiceDto.Name} уже существует");
-             
-                return Ok(result);
+
+                return CreatedAtAction(nameof(GetByNameApiService), new { apiServiceName = result.Name }, result);
             }
             catch (Exception ex)
             {
@@ -117,8 +120,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
             catch (NullReferenceException ex)
             {
-                _logger.LogInfo($"Возникла ошибка при поиски API-сервиса для изменения: {ex.Message}");
-                return NotFound($"API-сервис {apiServiceName} не найден");
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return Conflict(ex.Message);
             }
             catch (Exception ex)
             {
@@ -130,22 +136,25 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <summary>
         /// Удаляет API-сервис
         /// </summary>
-        /// <param name="apiServiceName"></param>
-        /// <returns></returns>
+        /// <param name="apiServiceName">Имя изменяемого API-сервиса</param>
         [HttpDelete("{apiServiceName}")]
         [DisableRequestSizeLimit]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteApiService(string apiServiceName)
+        public async Task<IActionResult> DeleteApiService(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName)
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
-                if (!result)
-                    return NotFound($"API-сервис {apiServiceName} не найден");
+                await _dynamicApiConfigurationService.DeleteAsync(apiServiceName);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -157,7 +166,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <summary>
         /// Меняет активность API-сервисов
         /// </summary>
-        /// <param name="isActive">Активный ли API-сервис</param>
+        /// <param name="isActive">True если надо сделать активным API-сервис, false - неактивным</param>
         /// <param name="apiServiceName">Имя API-сервиса</param>
         [HttpPatch("{apiServiceName}/{isActive}")]
         [DisableRequestSizeLimit]
@@ -168,12 +177,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, isActive);
-
-                if (!result)
-                    return NotFound($"API-сервис {apiServiceName} не найден");
+                await _dynamicApiConfigurationService.ChangeActiveStatusAsync(apiServiceName, isActive);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

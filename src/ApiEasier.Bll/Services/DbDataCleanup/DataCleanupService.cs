@@ -4,20 +4,21 @@ using ApiEasier.Dal.Interfaces;
 
 namespace ApiEasier.Bll.Services.DbDataCleanup
 {
-    public class DbDataCleanupService : IDbDataCleanupService
+    /// <inheritdoc cref="IResourcesCleanupService"/>
+    public class DataCleanupService : IResourcesCleanupService
     {
         private readonly ILoggerService _loggerService;
-        private readonly IResourceRepository _dbResourceRepository;
-        private readonly IApiServiceRepository _fileApiServiceRepository;
+        private readonly IResourceRepository _resourceRepository;
+        private readonly IApiServiceRepository _apiServiceRepository;
 
 
-        public DbDataCleanupService(
-            IResourceRepository dbResourceRepository,
-            IApiServiceRepository fileApiServiceRepository,
+        public DataCleanupService(
+            IResourceRepository resourceRepository,
+            IApiServiceRepository apiServiceRepository,
             ILoggerService loggerService)
         {
-            _fileApiServiceRepository = fileApiServiceRepository;
-            _dbResourceRepository = dbResourceRepository;
+            _apiServiceRepository = apiServiceRepository;
+            _resourceRepository = resourceRepository;
             _loggerService = loggerService;
         }
 
@@ -25,11 +26,11 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
         {
             try
             {
-                var apiServices = await _fileApiServiceRepository.GetAllAsync();
+                var apiServices = await _apiServiceRepository.GetAllAsync();
 
                 List<string> apiServiceNames = apiServices.Select(a => a.Name).ToList();
 
-                await _dbResourceRepository.DeleteUnusedResources(apiServiceNames);
+                await _resourceRepository.DeleteUnusedResources(apiServiceNames);
             }
             catch (Exception ex)
             {

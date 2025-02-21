@@ -8,12 +8,12 @@ namespace ApiEasier.Bll.Interfaces.Validators
     public interface IDynamicResourceValidator
     {
         /// <summary>
-        /// Асинхронно валидирует API-сервис по заданным параметрам.
+        /// Проверяет существование эндпоинта по адресу API-сервис/сущность/эндпоинт.
         /// </summary>
         /// <param name="apiName">Имя API-сервиса.</param>
-        /// <param name="entity">Имя сущности, связанной с API.</param>
-        /// <param name="endPoint">Конечная точка API для валидации.</param>
-        /// <param name="typeResponse">Тип ожидаемого ответа от API.</param>
+        /// <param name="entity">Имя сущности, связанной с API-сервисом.</param>
+        /// <param name="endpoint">Эндпоинт, связанный с сущностью.</param>
+        /// <param name="typeResponse">Ожидаемый тип эндпоинта.</param>
         /// <returns>
         /// Кортеж, содержащий:
         /// <list type="bullet">
@@ -25,15 +25,15 @@ namespace ApiEasier.Bll.Interfaces.Validators
         Task<(bool isValid, ApiServiceDto? apiService, ApiEntityDto? apiEntity)> ValidateApiAsync(
             string apiName,
             string entity,
-            string endPoint,
+            string endpoint,
             string typeResponse);
 
         /// <summary>
-        /// Асинхронно валидирует структуру сущности на основе предоставленного объекта сущности.
+        /// Валидирует структуру объекта на основе предоставленного структуры данных сущности.
         /// </summary>
-        /// <param name="apiEntity">Сущность API для валидации.</param>
-        /// <param name="document">Объект сущности, структура которого будет проверяться.</param>
+        /// <param name="apiEntity">Данные сущности со структурой данных.</param>
+        /// <param name="data">Объект сущности, структура которого будет проверяться.</param>
         /// <returns>Возвращает <c>true</c>, если структура документа соответствует сущности, иначе <c>false</c>.</returns>
-        Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object document);
+        Task<bool> ValidateEntityStructureAsync(ApiEntityDto apiEntity, object data);
     }
 }

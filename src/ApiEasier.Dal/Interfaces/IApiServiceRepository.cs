@@ -44,9 +44,8 @@ namespace ApiEasier.Dal.Interfaces
         /// <summary>
         /// Меняет активность API-сервисов
         /// </summary>
-        /// <param name="status">Активный ли API-сервис</param>
+        /// <param name="status">True если надо сделать активным API-сервис, false - неактивным</param>
         /// <param name="id">Имя API-сервиса</param>
-        /// <returns>True, если удалось сменить, false, если API-сервис не был найден</returns>
-        Task<bool> ChangeActiveStatusAsync(string id, bool status);
+        Task ChangeActiveStatusAsync(string id, bool status);
     }
 }

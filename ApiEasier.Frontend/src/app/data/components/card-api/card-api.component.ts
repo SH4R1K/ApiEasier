@@ -65,7 +65,6 @@ export class CardApiComponent {
   onToggleChange(newState: boolean) {
     this.apiInfo.isActive = newState; 
     console.log('Состояние переключателя изменилось на:', newState);
-
     this.apiServiceRepository
       .updateApiServiceStatus(this.apiInfo.name, newState)
       .subscribe({
