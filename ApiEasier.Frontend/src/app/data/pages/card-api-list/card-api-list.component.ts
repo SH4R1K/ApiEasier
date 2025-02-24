@@ -74,7 +74,6 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private readonly alerts: TuiAlertService,
-    // private apiServiceHub: ApiHubServiceService
   ) {}
 
   ngOnDestroy(): void {
@@ -83,16 +82,11 @@ export class CardApiListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadApiList();
-    // this.subscribeToApiUpdates();
   }
 
   private loadApiList(): void {
     this.sub = this.apiServiceRepository.getApiList().subscribe(this.handleApiResponse());
   }
-
-  // private subscribeToApiUpdates(): void {
-  //   this.apiServiceHub.ordersUpdated$.subscribe(this.handleApiResponse());
-  // }
 
   private handleApiResponse() {
     return {
@@ -109,7 +103,7 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.cards = apiList;
     this.filteredCards = apiList;
     this.apiNames = apiList.map(api => api.name);
-    this.sortCardsOnClick();
+    this.sortCards();
     this.updatePagination();
     this.changeDetector.detectChanges();
     this.loading = false;
@@ -170,7 +164,7 @@ export class CardApiListComponent implements OnInit, OnDestroy {
 
   private onApiServiceCreated(response: any, data: apiServiceShortStructure): void {
     this.cards.push(data);
-    this.sortCardsOnClick();
+    this.sortCards();
     this.changeDetector.markForCheck();
     this.alerts.open('API успешно создано', {
       appearance: 'success',
@@ -192,7 +186,7 @@ export class CardApiListComponent implements OnInit, OnDestroy {
   onSearchQuery(query: string): void {
     this.searchQueryActive = !!query;
     this.filteredCards = this.cards.filter(card => card.name.includes(query));
-    this.sortCardsOnClick();
+    this.sortCards();
     this.updatePagination();
   }
 
@@ -213,15 +207,23 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.currentPage = Math.max(1, Math.min(this.currentPage, this.totalPages));
   }
 
+  sortCards(): void {
+    if (this.isSortedAscending) {
+      this.filteredCards.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      this.filteredCards.sort((a, b) => b.name.localeCompare(a.name));
+    }
+  }
+
   sortCardsOnClick(): void {
-    this.filteredCards.sort((a, b) =>
-      this.isSortedAscending ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name)
-    );
+    this.isSortedAscending = !this.isSortedAscending;
+    this.sortCards();
+    this.changeDetector.markForCheck();
   }
 
   toggleSort(): void {
     this.isSortedAscending = !this.isSortedAscending;
-    this.sortCardsOnClick();
+    this.sortCards();
     this.changeDetector.markForCheck();
   }
 
