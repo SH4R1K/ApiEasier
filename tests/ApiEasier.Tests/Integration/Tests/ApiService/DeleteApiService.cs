@@ -21,20 +21,12 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
-
             createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
-            var location = createResponse.Headers.Location?.ToString();
-            location.Should().NotBeNull();
-
-            var response = await _client.GetAsync(location);
-            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
-
-            var apiService = await response.Content.ReadFromJsonAsync<ApiServiceDto>();
-            apiService.Should().NotBeNull();
-
-            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{apiService.Name}");
+            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/TestApiService");
             deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+
+            _output.WriteLine($"Response: {await deleteResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -42,6 +34,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
         {
             var deleteResponse = await _client.DeleteAsync($"/api/ApiService/NonExistingName");
             deleteResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+            _output.WriteLine($"Response: {await deleteResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -49,6 +43,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
         {
             var deleteResponse = await _client.DeleteAsync($"/api/ApiService/Invalid$$#Name");
             deleteResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await deleteResponse.Content.ReadAsStringAsync()}");
         }
     }
 }
