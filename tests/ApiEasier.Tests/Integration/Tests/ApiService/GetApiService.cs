@@ -14,11 +14,10 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
         public async Task GetApiServiceList_WhenNoDataExists_ReturnsOk()
         {
             var response = await _client.GetAsync("/api/ApiService");
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            _output.WriteLine($"Response: {responseBody}");
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -37,9 +36,6 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             }
 
             var response = await _client.GetAsync("/api/ApiService");
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            _output.WriteLine($"Response: {responseBody}");
 
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
@@ -51,11 +47,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             apiServices.Should().Contain(s => s.Name == "TestApiService1" && s.IsActive);
             apiServices.Should().Contain(s => s.Name == "TestApiService2" && !s.IsActive);
 
-            foreach (var service in services)
-            {
-                var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{service.Name}");
-                deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
-            }
+            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -74,15 +66,11 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
-
-            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{newApiService.Name}");
-            deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
         }
 
         [Fact]
         public async Task GetApiService_WithNonExistingName_ReturnsNotFound()
         {
-
             var response = await _client.GetAsync("/api/ApiService/NotExistApiService");
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
 
@@ -92,7 +80,6 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
         [Fact]
         public async Task GetApiService_WithInvalidNameFormat_ReturnsBadRequest()
         {
-
             var response = await _client.GetAsync("/api/ApiService/Invalid_$#@!?._format");
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 

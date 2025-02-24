@@ -35,10 +35,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             updatedApiService.Name.Should().Be(newApiService.Name);
             updatedApiService.Description.Should().NotBe("TestDescription");
             updatedApiService.IsActive.Should().BeFalse();
-      
 
-            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{newApiService.Name}");
-            deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -54,6 +52,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
 
             var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/{nonExistingApiService.Name}", nonExistingApiService);
             updateResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -74,6 +74,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
 
             var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/TestApiService", newApiService);
             updateResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -100,6 +102,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
 
             var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/TestApiService", MissingRequiredFiledsApiService);
             updateResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
     }
 }
