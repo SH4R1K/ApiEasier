@@ -17,7 +17,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -44,7 +44,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -73,7 +73,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
             {
                 Name = "TestApiEntity",
                 IsActive = true,
-                Structure = null
+                Structure = null,
             };
 
             var response = await _client.PostAsJsonAsync($"/api/ApiEntity/NonExistingApiService", newApiEntity);
@@ -90,7 +90,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -117,7 +117,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);

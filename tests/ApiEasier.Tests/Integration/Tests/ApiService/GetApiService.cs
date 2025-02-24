@@ -14,7 +14,6 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
         public async Task GetApiServiceList_WhenNoDataExists_ReturnsOk()
         {
             var response = await _client.GetAsync("/api/ApiService");
-
             response.StatusCode.Should().Be(HttpStatusCode.OK);
 
             _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
@@ -65,6 +64,13 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
 
             var response = await _client.GetAsync("/api/ApiService/TestApiService");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var apiService = await response.Content.ReadFromJsonAsync<ApiServiceDto>();
+
+            apiService.Should().NotBeNull();
+            apiService.Name.Should().Be(newApiService.Name);
+            apiService.IsActive.Should().BeTrue();
+            apiService.Description.Should().Be(newApiService.Description);
 
             _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
         }
