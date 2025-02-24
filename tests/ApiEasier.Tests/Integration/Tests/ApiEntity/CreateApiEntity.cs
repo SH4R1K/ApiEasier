@@ -67,6 +67,22 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
         }
 
         [Fact]
+        public async Task CreateApiEntity_WithNonExistingApiServiceName_ReturnsConflict()
+        {
+            var newApiEntity = new ApiEntityDto
+            {
+                Name = "TestApiEntity",
+                IsActive = true,
+                Structure = null
+            };
+
+            var response = await _client.PostAsJsonAsync($"/api/ApiEntity/NonExistingApiService", newApiEntity);
+            response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
+        }
+
+        [Fact]
         public async Task CreateApiEntity_WithInvalidNameFormat_ReturnsBadRequest()
         {
             var newApiService = new ApiServiceDto
