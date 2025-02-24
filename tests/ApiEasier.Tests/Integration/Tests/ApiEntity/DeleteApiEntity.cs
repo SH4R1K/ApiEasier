@@ -46,7 +46,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
         }
 
         [Fact]
-        public async Task DeleteApiEntity_WithNonExistingApiEntityName_ReturnsNotFound()
+        public async Task DeleteApiEntity_WithNonExistingName_ReturnsNotFound()
         {
             var newApiService = new ApiServiceDto
             {

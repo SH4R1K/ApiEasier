@@ -17,44 +17,6 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
-            };
-
-            var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
-            createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
-
-            var newApiEntity = new ApiEntityDto
-            {
-                Name = "TestApiEntity",
-                IsActive = true,
-                Structure = null
-            };
-
-            var response = await _client.PostAsJsonAsync($"/api/ApiEntity/{newApiService.Name}", newApiEntity);
-            response.StatusCode.Should().Be(HttpStatusCode.Created);
-
-            newApiEntity.IsActive = false;
-
-            var updateResponse = await _client.PutAsJsonAsync($"/api/ApiEntity/{newApiService.Name}/{newApiEntity.Name}", newApiEntity);
-            updateResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-
-            var updatedApiEntity = await updateResponse.Content.ReadFromJsonAsync<ApiEntityDto>();
-
-            updatedApiEntity.Should().NotBeNull();
-            updatedApiEntity.Name.Should().Be(newApiEntity.Name);
-            updatedApiEntity.IsActive.Should().BeFalse();
-
-            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
-        }
-
-        [Fact]
-        public async Task UpdateApiEntity_WithExistingName_ReturnsOk()
-        {
-            var newApiService = new ApiServiceDto
-            {
-                Name = "TestApiService",
-                IsActive = true,
-                Description = "TestDescription",
                 Entities = new List<ApiEntityDto>
                 {
                     new ApiEntityDto
@@ -84,6 +46,33 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
             updatedApiEntity.Should().NotBeNull();
             updatedApiEntity.Name.Should().Be(newApiEntity.Name);
             updatedApiEntity.IsActive.Should().BeFalse();
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
+        }
+
+        [Fact]
+        public async Task UpdateApiEntity_WithNonExistingName_ReturnsNotFound()
+        {
+            var newApiService = new ApiServiceDto
+            {
+                Name = "TestApiService",
+                IsActive = true,
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
+            };
+
+            var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
+            createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
+
+            var newApiEntity = new ApiEntityDto
+            {
+                Name = "TestApiEntity",
+                IsActive = false,
+                Structure = null
+            };
+
+            var updateResponse = await _client.PutAsJsonAsync($"/api/ApiEntity/{newApiService.Name}/NotExistEntityName", newApiEntity);
+            updateResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
 
             _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
