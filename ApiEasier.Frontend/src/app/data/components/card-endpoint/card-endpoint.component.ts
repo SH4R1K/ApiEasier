@@ -49,10 +49,6 @@ export class CardEndpointComponent {
   onToggleChange(newState: boolean): void {
     this.endpointInfo.isActive = newState; // Update the state in the parent component
     console.log('Состояние переключателя изменилось на:', newState);
-    this.updateEndpointStatus(newState);
-  }
-
-  private updateEndpointStatus(newState: boolean): void {
     this.endpointRepositoryService
       .updateEndpointStatus(
         this.apiName,
@@ -134,7 +130,7 @@ export class CardEndpointComponent {
       .subscribe({
         next: () => {
           console.log(`Действие "${this.endpointInfo.route}" удалено.`);
-          this.endpointDeleted.emit(this.endpointInfo.route); // Emit the event to notify the parent component
+          this.endpointDeleted.emit(this.endpointInfo.route); 
         },
         error: (error) => {
           console.error('Ошибка при удалении действия:', error);

@@ -60,7 +60,7 @@ namespace ApiEasier.Api.DependencyInjections
             services.AddScoped<IDynamicResourceDataService, DynamicResourceDataService>();
 
             //DbDataCleanupService
-            services.AddScoped<IDbDataCleanupService, DbDataCleanupService>();
+            services.AddScoped<IResourcesCleanupService, DataCleanupService>();
 
             return services;
         }
@@ -100,10 +100,10 @@ namespace ApiEasier.Api.DependencyInjections
             services.AddHostedService(sp =>
             {
                 using var scope = sp.CreateScope();
-                var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IDbDataCleanupService>();
+                var dbDataCleanupService = scope.ServiceProvider.GetRequiredService<IResourcesCleanupService>();
                 var logger = scope.ServiceProvider.GetRequiredService<ILoggerService>();
 
-                return new DataCleanupService(dbDataCleanupService, logger);
+                return new ResourcesCleanupService(dbDataCleanupService, logger);
             });
 
             return services;

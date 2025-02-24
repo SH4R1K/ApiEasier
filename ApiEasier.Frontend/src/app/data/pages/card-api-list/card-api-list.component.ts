@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { ApiHubServiceService } from '../../../services/api-hub-service.service';
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 import { Router } from '@angular/router';
-import { TuiAlertService } from '@taiga-ui/core';
+import { TuiAlertService, tuiDialog } from '@taiga-ui/core';
 import { apiServiceShortStructure } from '../../../services/service-structure-api';
 import { CommonModule } from '@angular/common';
 import { CardApiComponent } from '../../components/card-api/card-api.component';
@@ -21,7 +21,6 @@ import {
   TuiInputSliderModule,
   TuiTextfieldControllerModule,
 } from '@taiga-ui/legacy';
-import { tuiDialog } from '@taiga-ui/core';
 import { ApiDialogComponent } from '../../components/api-dialog/api-dialog.component';
 import { FilterByInputComponent } from '../../components/filter-by-input/filter-by-input.component';
 
@@ -55,9 +54,9 @@ export class CardApiListComponent implements OnInit, OnDestroy {
   itemsPerPage = 16;
   currentPage = 1;
   searchQueryActive = false;
-  isSortedAscending: boolean = true;
-  errorMessage: string = '';
-  errorCode: string = '';
+  isSortedAscending = true;
+  errorMessage = '';
+  errorCode = '';
 
   api: apiServiceShortStructure = {
     name: '',
@@ -75,7 +74,6 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private readonly alerts: TuiAlertService,
-    private apiServiceHub: ApiHubServiceService
   ) {}
 
   ngOnDestroy(): void {
@@ -84,37 +82,37 @@ export class CardApiListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadApiList();
-    this.subscribeToApiUpdates();
   }
 
   private loadApiList(): void {
-    this.sub = this.apiServiceRepository.getApiList().subscribe({
-      next: (apiList) => {
-        this.handleApiListResponse(apiList);
-        this.apiServiceHub.initializeData(apiList);
-        this.sortCards();
-      },
-      error: (error) => {
-        this.errorMessage = error.message;
-        this.errorCode = error.status;
-      },
-    });
+    this.sub = this.apiServiceRepository.getApiList().subscribe(this.handleApiResponse());
   }
 
-  subscribeToApiUpdates(): void {
-    this.apiServiceHub.ordersUpdated$.subscribe({
-      next: (updatedApiList) => {
-        this.cards = updatedApiList;
-        this.sortCards();
-        this.filteredCards = updatedApiList;
-        this.apiNames = updatedApiList.map((api) => api.name);
-        this.updatePagination();
-        this.changeDetector.markForCheck();
+  private handleApiResponse() {
+    return {
+      next: (apiList: apiServiceShortStructure[]) => {
+        this.updateApiList(apiList);
       },
-      error: (error) => {
-        this.navigateToErrorPage(error.status, error.message);
+      error: (error: any) => {
+        this.handleError(error);
       },
-    });
+    };
+  }
+
+  private updateApiList(apiList: apiServiceShortStructure[]): void {
+    this.cards = apiList;
+    this.filteredCards = apiList;
+    this.apiNames = apiList.map(api => api.name);
+    this.sortCards();
+    this.updatePagination();
+    this.changeDetector.detectChanges();
+    this.loading = false;
+  }
+
+  private handleError(error: any): void {
+    this.errorMessage = error.message;
+    this.errorCode = error.status;
+    this.navigateToErrorPage(this.errorCode, this.errorMessage);
   }
 
   private navigateToErrorPage(errorCode: string, errorMessage: string): void {
@@ -123,85 +121,72 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     });
   }
 
-  private handleApiListResponse(apiList: apiServiceShortStructure[]): void {
-    this.cards = apiList;
-    this.filteredCards = apiList;
-    this.apiNames = apiList.map((api) => api.name);
-    this.updatePagination();
-    this.changeDetector.detectChanges();
-    this.loading = false;
-  }
-
-  openCreateDialog(): void {
-    this.dialog({ ...this.api }).subscribe({
-      next: (data) => this.processCreateDialogData(data),
-      complete: () => this.onDialogClose(),
-    });
-  }
-
-  private processCreateDialogData(data: apiServiceShortStructure): void {
-    if (this.isApiNameExists(data.name)) {
-      this.showApiNameExistsError();
-      return;
+  openCreateDialog(event?: Event): void {
+    if (event) {
+      event.preventDefault();
     }
-    this.createApiService(data);
+    this.dialog({ ...this.api }).subscribe(this.processDialogData());
+  }
+
+  private processDialogData() {
+    return {
+      next: (data: apiServiceShortStructure) => {
+        if (this.isApiNameExists(data.name)) {
+          this.showApiNameExistsError();
+        } else {
+          this.createApiService(data);
+        }
+      },
+      complete: () => this.onDialogClose(),
+    };
   }
 
   private isApiNameExists(name: string): boolean {
-    return this.cards.some((card) => card.name === name);
+    return this.cards.some(card => card.name === name);
   }
 
   private onDialogClose(): void {
-    console.info('Диалог закрыт');
+    console.info('Dialog closed');
   }
 
   private showApiNameExistsError(): void {
-    this.alerts
-      .open('Ошибка: API с таким именем уже существует', {
-        appearance: 'negative',
-      })
-      .subscribe();
+    this.alerts.open('Ошибка: API с таким именем уже существует', {
+      appearance: 'negative',
+    }).subscribe();
   }
 
   private createApiService(data: apiServiceShortStructure): void {
     this.apiServiceRepository.createApiService(data).subscribe({
       next: (response) => this.onApiServiceCreated(response, data),
-      error: (error) => {
-        this.errorMessage = error.message;
-        this.errorCode = error.status;
-      },
+      error: (error) => this.handleError(error),
     });
   }
 
-  private onApiServiceCreated(
-    response: any,
-    data: apiServiceShortStructure
-  ): void {
-    console.log('API добавлено:', response);
+  private onApiServiceCreated(response: any, data: apiServiceShortStructure): void {
     this.cards.push(data);
     this.sortCards();
     this.changeDetector.markForCheck();
-    this.alerts
-      .open('API успешно создано', {
-        appearance: 'success',
-      })
-      .subscribe();
+    this.alerts.open('API успешно создано', {
+      appearance: 'success',
+    }).subscribe();
   }
 
   onApiDeleted(apiName: string): void {
-    this.cards = this.cards.filter((card) => card.name !== apiName);
-    this.filteredCards = this.filteredCards.filter(
-      (card) => card.name !== apiName
-    );
-    this.apiNames = this.apiNames.filter((name) => name !== apiName);
+    this.removeApiByName(apiName);
     this.updatePagination();
     this.changeDetector.markForCheck();
   }
 
+  private removeApiByName(apiName: string): void {
+    this.cards = this.cards.filter(card => card.name !== apiName);
+    this.filteredCards = this.filteredCards.filter(card => card.name !== apiName);
+    this.apiNames = this.apiNames.filter(name => name !== apiName);
+  }
+
   onSearchQuery(query: string): void {
     this.searchQueryActive = !!query;
-    this.filteredCards = this.cards.filter((card) => card.name.includes(query));
-    this.sortCards(); // Применяем сортировку после фильтрации
+    this.filteredCards = this.cards.filter(card => card.name.includes(query));
+    this.sortCards();
     this.updatePagination();
   }
 
@@ -219,26 +204,27 @@ export class CardApiListComponent implements OnInit, OnDestroy {
   }
 
   private updatePagination(): void {
-    if (this.currentPage > this.totalPages) {
-      this.currentPage = this.totalPages;
-    }
-    if (this.currentPage < 1) {
-      this.currentPage = 1;
-    }
+    this.currentPage = Math.max(1, Math.min(this.currentPage, this.totalPages));
   }
 
   sortCards(): void {
-    this.filteredCards.sort((a, b) =>
-      this.isSortedAscending
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name)
-    );
+    if (this.isSortedAscending) {
+      this.filteredCards.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      this.filteredCards.sort((a, b) => b.name.localeCompare(a.name));
+    }
   }
 
   sortCardsOnClick(): void {
-    this.isSortedAscending = !this.isSortedAscending; // Инвертируем флаг
-    this.sortCards(); // Применяем сортировку
-    this.changeDetector.markForCheck(); // Уведомляем Angular о изменениях
+    this.isSortedAscending = !this.isSortedAscending;
+    this.sortCards();
+    this.changeDetector.markForCheck();
+  }
+
+  toggleSort(): void {
+    this.isSortedAscending = !this.isSortedAscending;
+    this.sortCards();
+    this.changeDetector.markForCheck();
   }
 
   goBack(): void {

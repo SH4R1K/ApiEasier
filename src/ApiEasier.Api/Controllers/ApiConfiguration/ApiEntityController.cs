@@ -68,13 +68,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 var apiEntity = await _dynamicEntityConfigurationService.GetByIdAsync(apiServiceName, entityName);
 
                 if (apiEntity == null)
-                    return NotFound($"Сущность {entityName} в api-сервисе {apiServiceName} не найдена.");
+                    return NotFound($"Сущность {entityName} в API-сервисе {apiServiceName} не найдена.");
 
                 return Ok(apiEntity);
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException ex)
             {
-                return NotFound($"API-сервис {apiServiceName} не найден");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -86,13 +86,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         /// <summary>
         /// Добавляет новую сущность API-сервису
         /// </summary>
-        /// <param name="apiServiceName">API-сервис, которому надо добавить сущность</param>
+        /// <param name="apiServiceName">Имя API-сервиса, к которому надо добавить сущность</param>
         /// <param name="apiEntityDto">Добавляемая сущность</param>
         [HttpPost("{apiServiceName}")]
         [DisableRequestSizeLimit]
-        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
+        [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> AddEntity(
             [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
             string apiServiceName, [FromBody] ApiEntityDto apiEntityDto)
@@ -104,11 +105,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 if (result == null)
                     return Conflict($"Сущность с именем {apiEntityDto.Name} уже существует.");
 
-                return Ok(result);
+                return CreatedAtAction(nameof(GetEntityByName), new { apiServiceName, entityName = apiEntityDto.Name }, result);
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException ex)
             {
-                return NotFound($"API-сервис {apiServiceName} не найден");
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -117,8 +118,18 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        // PUT api/ApiEntity/{apiServiceName}/{entityName}
+        /// <summary>
+        /// Изменяет существующую сущность у API-сервиса
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса с изменяемой сущностью</param>
+        /// <param name="entityName">Имя изменяемой сущности</param>
+        /// <param name="apiEntityDto">Новые данные сущности</param>
         [HttpPut("{apiServiceName}/{entityName}")]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public async Task<IActionResult> UpdateEntity(
             [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
             string apiServiceName,
@@ -129,10 +140,15 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             {
                 var result = await _dynamicEntityConfigurationService.UpdateAsync(apiServiceName, entityName, apiEntityDto);
 
-                if (!result)
-                    return NotFound($"Сущность {entityName} у api-сервиса {apiServiceName} не удалось обновить");
-
-                return NoContent();
+                return Ok(result);
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                return Conflict(ex.Message);
             }
             catch (Exception ex)
             {
@@ -141,8 +157,16 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        // DELETE api/ApiEntity/{apiServiceName}/{entityName}
+        /// <summary>
+        /// Удаляет сущность внутри API-сервиса
+        /// </summary>
+        /// <param name="apiServiceName">Имя API-сервиса с удаляемой сущностью</param>
+        /// <param name="entityName">Имя удаляемой сущности</param>
         [HttpDelete("{apiServiceName}/{entityName}")]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(
             [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
             string apiServiceName,
@@ -151,12 +175,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicEntityConfigurationService.DeleteAsync(apiServiceName, entityName);
-
-                if (!result)
-                    return NotFound($"Сущность {entityName} у api-сервиса {apiServiceName} не была удалена");
+                await _dynamicEntityConfigurationService.DeleteAsync(apiServiceName, entityName);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {
@@ -164,8 +189,17 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             }
         }
 
-        //PATCH api/ApiService/{apiServiceName}/{apiEntityName}/{isActive}
+        /// <summary>
+        /// Изменяет активность сущности у API-сервиса 
+        /// </summary>
+        /// <param name="isActive">True, если надо сделать сущность активной, false - неактивной</param>
+        /// <param name="apiServiceName">Имя API-сервиса с изменяеммой сущностью</param>
+        /// <param name="apiEntityName">Имя изменяемой сущности</param>
         [HttpPatch("{apiServiceName}/{apiEntityName}/{isActive}")]
+        [DisableRequestSizeLimit]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ChangeActiveApiEntity(
             bool isActive,
             [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
@@ -175,12 +209,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         {
             try
             {
-                var result = await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, apiEntityName, isActive);
-
-                if (!result)
-                    return NotFound($"статус у сущности {apiEntityName} у api-сервиса {apiServiceName} не был изменен");
+                await _dynamicEntityConfigurationService.ChangeActiveStatusAsync(apiServiceName, apiEntityName, isActive);
 
                 return NoContent();
+            }
+            catch (NullReferenceException ex)
+            {
+                return NotFound(ex.Message);
             }
             catch (Exception ex)
             {

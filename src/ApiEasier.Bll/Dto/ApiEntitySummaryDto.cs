@@ -1,8 +1,11 @@
 ﻿namespace ApiEasier.Bll.Dto
 {
+    /// <summary>
+    /// DTO для представления сущности без эндпоинтов
+    /// </summary>
     public class ApiEntitySummaryDto
     {
-        // <summary>
+        /// <summary>
         /// Имя сущности API.
         /// </summary>
         public string? Name { get; set; }

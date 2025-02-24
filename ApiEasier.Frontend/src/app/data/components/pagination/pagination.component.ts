@@ -17,7 +17,7 @@ import { TuiInputSliderModule, TuiTextfieldControllerModule } from '@taiga-ui/le
 })
 export class PaginationComponent {
   @Input() totalItems: number = 0;
-  @Input() itemsPerPage: number = 12;
+  @Input() itemsPerPage: number = 16;
   @Input() currentPage: number = 1;
   @Output() pageChange = new EventEmitter<number>();
 

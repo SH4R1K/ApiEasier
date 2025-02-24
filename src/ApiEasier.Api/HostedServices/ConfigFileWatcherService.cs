@@ -3,7 +3,7 @@
 namespace ApiEasier.Api.HostedServices
 {
     /// <summary>
-    /// Сервис для отслеживания изменений в конфигурационных файлах.
+    /// Отслеживает изменения в конфигурационных файлах, чтобы при изменении удалять кэш
     /// </summary>
     public class ConfigFileWatcherService : IHostedService
     {

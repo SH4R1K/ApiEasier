@@ -8,6 +8,9 @@ using System.Text.Json.Nodes;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
+    /// <summary>
+    /// Позволяет управлять данными сущности через MongoDB
+    /// </summary>
     public class DbResourceDataRepository : IResourceDataRepository
     {
         private readonly MongoDbContext _dbContext;
@@ -17,10 +20,14 @@ namespace ApiEasier.Dal.Repositories.Db
             _dbContext = context;
         }
 
-        public async Task<DynamicResourceData> CreateDataAsync(string resourceName, object jsonData)
+        /// <summary>
+        /// Добавляет новый документ в коллекцию по имени ресурса
+        /// </summary>
+        /// <inheritdoc/>
+        public async Task<DynamicResourceData> CreateDataAsync(string resourceName, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
-            var bsonDocument = BsonDocument.Parse(jsonData.ToString());
+            var bsonDocument = BsonDocument.Parse(data.ToString());
             await collection.InsertOneAsync(bsonDocument);
 
             var bsonDoc = bsonDocument.ToDictionary();
@@ -28,10 +35,14 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDoc.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())!
             };
         }
 
+        /// <summary>
+        /// Возвращает данные объекта по идентификатору из коллекции с названием имени ресурса
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<DynamicResourceData?> GetDataByIdAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
@@ -47,10 +58,14 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDoc.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())!
             };
         }
 
+        /// <summary>
+        /// Возвращает все или отфильтрованные данные из коллекции по имени ресурса
+        /// </summary>
+        /// <inheritdoc/>
         public async Task<List<DynamicResourceData>?> GetAllDataAsync(string resourceName, string? filter)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
@@ -69,49 +84,70 @@ namespace ApiEasier.Dal.Repositories.Db
 
                 return new DynamicResourceData
                 {
-                    Data = JsonNode.Parse(bsonDoc.ToJson())
+                    Data = JsonNode.Parse(bsonDoc.ToJson())!
                 };
 
             }).ToList();
         }
 
+        /// <summary>
+        /// Удаляет документ в коллекции по идентификатору
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        /// Возникает, если идентфикатор имеет неверный формат
+        /// </exception>
+        /// <exception cref="KeyNotFoundException">
+        /// Возникает, если такой объект был не найден для изменения
+        /// </exception>
+        /// <inheritdoc/>
         public async Task<bool> DeleteDataAsync(string resourceName, string id)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             if (!ObjectId.TryParse(id, out var objectId))
-                return false;
+                throw new ArgumentException("Неверный формат идентификатора");
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
 
             var result = await collection.DeleteOneAsync(filter);
 
+            // Документ не найден
             if (result.DeletedCount == 0)
-                return false;
+                throw new KeyNotFoundException($"Документ с id={id} не найден");
 
             return true;
         }
 
+        /// <summary>
+        /// Изменяет документ в коллекции по идентификатору
+        /// </summary>
+        /// <exception cref="ArgumentException">
+        /// Возникает, если идентфикатор имеет неверный формат
+        /// </exception>
+        /// <exception cref="KeyNotFoundException">
+        /// Возникает, если такой объект был не найден для изменения
+        /// </exception>
+        /// <inheritdoc/>
         public async Task<DynamicResourceData?> UpdateDataAsync(string resourceName, string id, object data)
         {
             var collection = _dbContext.GetCollection<BsonDocument>(resourceName);
 
             if (!ObjectId.TryParse(id, out var objectId))
-                return null;
+                throw new ArgumentException("Неверный формат идентификатора");
 
             var filter = Builders<BsonDocument>.Filter.Eq("_id", objectId);
 
             var dataStr = data.ToString();
             var newDocument = BsonDocument.Parse(dataStr);
-
-            // Сохраняем _id в новом документе, чтобы оно не изменилось
-            newDocument["_id"] = objectId;
+            newDocument["_id"] = objectId; // Сохраняем исходный _id
 
             var result = await collection.ReplaceOneAsync(filter, newDocument);
 
-            if (result.ModifiedCount == 0)
-                return null;
+            // Документ не найден
+            if (result.MatchedCount == 0)
+                throw new KeyNotFoundException($"Документ с id={id} не найден");
 
+            // Данные не изменились, но это не ошибка
             var updatedDocument = await collection.Find(filter).FirstOrDefaultAsync();
 
             var bsonDoc = updatedDocument.ToDictionary();
@@ -119,7 +155,7 @@ namespace ApiEasier.Dal.Repositories.Db
 
             return new DynamicResourceData
             {
-                Data = JsonNode.Parse(bsonDoc.ToJson())
+                Data = JsonNode.Parse(bsonDoc.ToJson())!
             };
         }
     }

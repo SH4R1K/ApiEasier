@@ -47,9 +47,16 @@ export class CardEntityComponent {
   ) {}
 
   onToggleChange(newState: boolean): void {
-    this.updateEntityStatus(newState);
+    this.entityInfo.isActive = newState;
+    this.entityRepositoryService
+      .updateEntityStatus(this.apiName, this.entityInfo.name, newState)
+      .subscribe({
+        next: (response) =>
+          console.log('Состояние сервиса обновлено:', response),
+        error: (error) =>
+          this.handleError('Ошибка при обновлении состояния сервиса', error),
+      });
   }
-
   openEditDialog(): void {
     this.oldName = this.entityInfo.name;
     this.dialog({ ...this.entityInfo }).subscribe({
@@ -68,17 +75,7 @@ export class CardEntityComponent {
       });
   }
 
-  private updateEntityStatus(newState: boolean): void {
-    this.entityInfo.isActive = newState;
-    this.entityRepositoryService
-      .updateEntityStatus(this.apiName, this.entityInfo.name, newState)
-      .subscribe({
-        next: (response) =>
-          console.log('Состояние сервиса обновлено:', response),
-        error: (error) =>
-          this.handleError('Ошибка при обновлении состояния сервиса', error),
-      });
-  }
+ 
 
   private handleEditDialogData(data: Entity): void {
     this.entityRepositoryService

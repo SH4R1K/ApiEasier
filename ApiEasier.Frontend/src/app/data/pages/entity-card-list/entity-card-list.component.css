@@ -1,23 +1,61 @@
 .filter-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr; /* Три колонки: фильтр, пагинация, иконки */
-    align-items: center;
-    gap: 10px; /* Отступы между элементами */
-    padding: 0px;
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Two columns for larger screens */
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+  padding: 0px;
+  margin-bottom: 20px;
+}
+
+.filter-input {
+  grid-column: 1; /* Search input in the first column */
+}
+
+.pagination-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 2; /* Pagination and sort container in the second column */
+}
+
+.custom-pagination {
+  flex: 1; /* Pagination takes available space */
+  justify-self: center; /* Center alignment */
+}
+
+.icons-container {
+  flex: 1; /* Icons container takes available space */
+  display: flex;
+  justify-content: flex-end; /* Right alignment */
+}
+
+/* Adjust styles for mobile devices */
+@media (max-width: 600px) {
+  .filter-section {
+    grid-template-columns: 1fr; /* Single column for mobile */
+    text-align: center; /* Center align text */
   }
-  
+
+  .filter-input {
+    grid-column: 1; /* Search input in the single column */
+    justify-self: center; /* Center alignment */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit the maximum width */
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+
+  .pagination-sort-container {
+    grid-column: 1; /* Pagination and sort container in the single column */
+    justify-content: center; /* Center alignment */
+    width: 100%; /* Full width */
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+
   .custom-pagination {
-    grid-column: 2; /* Пагинация в средней колонке */
-    justify-self: center; /* Выравнивание по центру */
+    justify-self: center; /* Center alignment */
   }
-  
-  .filter-section i {
-    grid-column: 3; /* Иконки в третьей колонке */
-    justify-self: end; /* Выравнивание по правому краю */
-    font-size: 27px !important;
+
+  .icons-container {
+    justify-content: flex-end; /* Right alignment */
   }
-  
-  .mt-20{
-    margin-top: 20px;
-  }
+}

@@ -5,7 +5,7 @@ namespace ApiEasier.Dm.Models.JsonShema
     public class JsonSchema
     {
         [JsonPropertyName("$schema")]
-        public string Schema { get; set; }
+        public string? Schema { get; set; }
 
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("title")]

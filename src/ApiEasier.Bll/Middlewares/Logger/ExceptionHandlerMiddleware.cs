@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiEasier.Bll.Services.Logger
+namespace ApiEasier.Bll.Middleware.Logger
 {
     public sealed class ExceptionHandlerMiddleware
     {
@@ -37,7 +37,7 @@ namespace ApiEasier.Bll.Services.Logger
         private static Task HandleExceptionAsync(HttpContext context, Exception exp)
         {
             var code = HttpStatusCode.InternalServerError;
-            var result = JsonConvert.SerializeObject(new { Code = code, Message = exp.Message });
+            var result = JsonConvert.SerializeObject(new { Code = code, exp.Message });
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;

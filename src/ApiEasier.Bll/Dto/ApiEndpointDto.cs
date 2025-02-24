@@ -3,12 +3,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Bll.Dto
 {
+    /// <summary>
+    /// DTO для представления эндпоинта
+    /// </summary>
     public class ApiEndpointDto
     {
         /// <summary>
         /// Маршрут для действия API.
         /// </summary>
         [Required]
+        [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
         public required string Route { get; set; }
 
         /// <summary>
