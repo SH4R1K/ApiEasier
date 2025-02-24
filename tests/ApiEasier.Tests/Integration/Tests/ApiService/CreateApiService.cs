@@ -17,7 +17,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -47,7 +47,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             {
                 Name = "TestApiService",
                 IsActive = true,
-                Description = "TestDescription"
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -67,7 +68,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             {
                 Name = "Invalid_$#@!?._format",
                 IsActive = true,
-                Description = "TestDescription"
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -83,7 +85,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             var newApiService = new
             {
                 IsActive = true,
-                Description = "TestDescription"
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);

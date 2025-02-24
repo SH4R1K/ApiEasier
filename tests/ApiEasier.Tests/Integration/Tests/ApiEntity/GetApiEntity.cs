@@ -14,11 +14,9 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
         public async Task GetApiEntityList_WhenApiServiceNotExists_ReturnsNotFound()
         {
             var response = await _client.GetAsync("/api/ApiEntity/NotExistsApiService");
-            var responseBody = await response.Content.ReadAsStringAsync();
-
-            _output.WriteLine($"Response: {responseBody}");
-
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -80,9 +78,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
             createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
-            var response = await _client.GetAsync("/api/ApiEntity/TestApiService");
-            var responseBody = await response.Content.ReadAsStringAsync();
-            _output.WriteLine($"Response: {responseBody}");
+            var response = await _client.GetAsync($"/api/ApiEntity/{newApiService.Name}");
 
             var apiEntities = await response.Content.ReadFromJsonAsync<List<ApiEntitySummaryDto>>();
             apiEntities.Should().NotBeNull();
@@ -117,7 +113,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
             createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
-            var response = await _client.GetAsync("/api/ApiEntity/TestApiService/NotExistApiService");
+            var response = await _client.GetAsync($"/api/ApiEntity/{newApiService.Name}/NotExistApiService");
             response.StatusCode.Should().Be(HttpStatusCode.NotFound);
 
             _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
@@ -144,8 +140,14 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
             createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
-            var response = await _client.GetAsync("/api/ApiEntity/TestApiService/TestApiEntity");
+            var response = await _client.GetAsync($"/api/ApiEntity/{newApiService.Name}/{newApiService.Entities[0].Name}");
             response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+            var apiEntitie = await response.Content.ReadFromJsonAsync<ApiEntityDto>();
+
+            apiEntitie.Should().NotBeNull();
+            apiEntitie.Name.Should().Be(newApiService.Entities[0].Name);
+            apiEntitie.IsActive.Should().BeTrue();
 
             _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
         }
@@ -154,7 +156,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiEntity
         public async Task GetApiEntity_WithInvalidNameFormat_ReturnsBadRequest()
         {
 
-            var response = await _client.GetAsync("/api/ApiEntity/Invalid_$#@!?._format");
+            var response = await _client.GetAsync("/api/ApiEntity/ApiService/Invalid_$#@!?._format");
             response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
             _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
