@@ -17,7 +17,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -35,10 +35,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             updatedApiService.Name.Should().Be(newApiService.Name);
             updatedApiService.Description.Should().NotBe("TestDescription");
             updatedApiService.IsActive.Should().BeFalse();
-      
 
-            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{newApiService.Name}");
-            deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -49,11 +47,13 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/{nonExistingApiService.Name}", nonExistingApiService);
             updateResponse.StatusCode.Should().Be(HttpStatusCode.NotFound);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -64,7 +64,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -74,6 +74,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
 
             var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/TestApiService", newApiService);
             updateResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -84,22 +86,54 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
             createResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
-
-            // Entities not required, just cant use
             var MissingRequiredFiledsApiService = new 
             {
                 IsActive = true,
                 Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/TestApiService", MissingRequiredFiledsApiService);
             updateResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
+        }
+
+        [Fact]
+        public async Task UpdateApiService_WithDuplicateName_ReturnsConflict()
+        {
+            var apiService1 = new ApiServiceDto
+            {
+                Name = "TestApiService1",
+                IsActive = true,
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
+            };
+            var createResponse1 = await _client.PostAsJsonAsync("/api/ApiService", apiService1);
+            createResponse1.StatusCode.Should().Be(HttpStatusCode.Created);
+
+            var apiService2 = new ApiServiceDto
+            {
+                Name = "TestApiService2",
+                IsActive = true,
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
+            };
+            var createResponse2 = await _client.PostAsJsonAsync("/api/ApiService", apiService2);
+            createResponse2.StatusCode.Should().Be(HttpStatusCode.Created);
+
+            apiService1.Name = "TestApiService2";
+            var updateResponse = await _client.PutAsJsonAsync($"/api/ApiService/TestApiService1", apiService1);
+
+            updateResponse.StatusCode.Should().Be(HttpStatusCode.Conflict);
+
+            _output.WriteLine($"Response: {await updateResponse.Content.ReadAsStringAsync()}");
         }
     }
 }

@@ -2,6 +2,7 @@
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
@@ -26,7 +27,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetEntitiesByApiName(string apiServiceName)
+        public async Task<IActionResult> GetEntitiesByApiName(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName)
         {
             try
             {
@@ -54,7 +57,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<List<ApiEntitySummaryDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetEntityByName(string apiServiceName, string entityName)
+        public async Task<IActionResult> GetEntityByName(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string entityName)
         {
             try
             {
@@ -87,7 +94,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> AddEntity(string apiServiceName, [FromBody] ApiEntityDto apiEntityDto)
+        public async Task<IActionResult> AddEntity(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName, [FromBody] ApiEntityDto apiEntityDto)
         {
             try
             {
@@ -121,7 +130,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> UpdateEntity(string apiServiceName, string entityName, [FromBody] ApiEntityDto apiEntityDto)
+        public async Task<IActionResult> UpdateEntity(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string entityName, [FromBody] ApiEntityDto apiEntityDto)
         {
             try
             {
@@ -154,7 +167,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteEntity(string apiServiceName, string entityName)
+        public async Task<IActionResult> Delete(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string entityName)
         {
             try
             {
@@ -183,7 +200,12 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> ChangeActiveApiEntity(bool isActive, string apiServiceName, string apiEntityName)
+        public async Task<IActionResult> ChangeActiveApiEntity(
+            bool isActive,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEntityName)
         {
             try
             {

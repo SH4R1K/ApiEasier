@@ -1,5 +1,4 @@
-﻿using ApiEasier.Api;
-using ApiEasier.Bll.Dto;
+﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Tests.Integration.Base;
 using FluentAssertions;
 using System.Net;
@@ -18,7 +17,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -29,7 +28,6 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             location.Should().NotBeNull();
 
             var response = await _client.GetAsync(location);
-            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
 
             var apiService = await response.Content.ReadFromJsonAsync<ApiServiceDto>();
 
@@ -39,8 +37,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             apiService.Description.Should().Be("TestDescription");
             apiService.Entities.Should().BeEmpty();
 
-            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{apiService.Name}");
-            deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+            _output.WriteLine($"Response: {await response.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -50,7 +47,8 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             {
                 Name = "TestApiService",
                 IsActive = true,
-                Description = "TestDescription"
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
@@ -60,8 +58,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
 
             createResponse.StatusCode.Should().Be(HttpStatusCode.Conflict);
 
-            var deleteResponse = await _client.DeleteAsync($"/api/ApiService/{newApiService.Name}");
-            deleteResponse.StatusCode.Should().Be(HttpStatusCode.NoContent);
+            _output.WriteLine($"Response: {await createResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -71,12 +68,15 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             {
                 Name = "Invalid_$#@!?._format",
                 IsActive = true,
-                Description = "TestDescription"
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
 
             createResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await createResponse.Content.ReadAsStringAsync()}");
         }
 
         [Fact]
@@ -85,12 +85,15 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
             var newApiService = new
             {
                 IsActive = true,
-                Description = "TestDescription"
+                Description = "TestDescription",
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
 
             createResponse.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+
+            _output.WriteLine($"Response: {await createResponse.Content.ReadAsStringAsync()}");
         }
     }
 }
