@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Dal.Exceptions;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -40,7 +41,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return Ok(result);
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -78,7 +79,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return Ok(result);
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -117,7 +118,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
                 return CreatedAtAction(nameof(GetEndpointByName), 
                     new { apiServiceName, apiEntityName, apiEndpointName = apiEndpoint.Route }, result);
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -157,11 +158,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return Ok(result);
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch (ArgumentException ex)
+            catch (ConflictException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -197,7 +198,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return NoContent();
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -236,7 +237,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return NoContent();
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
