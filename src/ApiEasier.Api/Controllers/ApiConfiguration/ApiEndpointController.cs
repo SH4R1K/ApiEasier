@@ -2,6 +2,7 @@
 using ApiEasier.Bll.Interfaces.ApiConfigure;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
@@ -27,7 +28,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<List<ApiEndpointDto>>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllEndpoints(string apiServiceName, string apiEntityName)
+        public async Task<IActionResult> GetAllEndpoints(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiEntityName)
         {
             try
             {
@@ -57,7 +62,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<ApiEndpointDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetEndpointByName(string apiServiceName, string apiEntityName, string apiEndpointName)
+        public async Task<IActionResult> GetEndpointByName(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEntityName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEndpointName)
         {
             try
             {
@@ -90,7 +101,12 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> CreateEndpoint(string apiServiceName, string apiEntityName, [FromBody] ApiEndpointDto apiEndpoint)
+        public async Task<IActionResult> CreateEndpoint(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEntityName,
+            [FromBody] ApiEndpointDto apiEndpoint)
         {
             try
             {
@@ -125,7 +141,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> UpdateEndpoint(string apiServiceName, string apiEntityName, string apiEndpointName, [FromBody] ApiEndpointDto apiEndpointDto)
+        public async Task<IActionResult> UpdateEndpoint(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEntityName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEndpointName,
+            [FromBody] ApiEndpointDto apiEndpointDto)
         {
             try
             {
@@ -160,7 +183,13 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteEndpoint(string apiServiceName, string apiEntityName, string apiEndpointName)
+        public async Task<IActionResult> DeleteEndpoint(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEntityName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEndpointName)
         {
             try
             {
@@ -191,7 +220,14 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> ChangeActiveApiEndpoint(bool isActive, string apiServiceName, string apiEntityName, string apiEndpointName)
+        public async Task<IActionResult> ChangeActiveApiEndpoint(
+            bool isActive,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiServiceName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEntityName,
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")] 
+            string apiEndpointName)
         {
             try
             {

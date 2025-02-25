@@ -17,7 +17,7 @@ namespace ApiEasier.Tests.Integration.Tests.ApiService
                 Name = "TestApiService",
                 IsActive = true,
                 Description = "TestDescription",
-                Entities = []
+                Entities = new List<ApiEntityDto>()
             };
 
             var createResponse = await _client.PostAsJsonAsync("/api/ApiService", newApiService);
