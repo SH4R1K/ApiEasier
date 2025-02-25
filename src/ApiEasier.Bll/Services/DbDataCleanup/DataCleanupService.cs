@@ -34,7 +34,7 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
             }
             catch (Exception ex)
             {
-                _loggerService.LogError(ex, $"Чистка БД от неиспользуемых хранилищ вызвала исключение");
+                _loggerService.LogError(ex, $"Чистка БД от неиспользуемых хранилищ вызвала исключение {ex}");
             }
 
         }

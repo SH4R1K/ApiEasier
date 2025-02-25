@@ -17,7 +17,11 @@ namespace ApiEasier.Dal.Data
         /// <param name="databaseName">Имя базы данных</param>
         public MongoDbContext(string connectionString, string databaseName)
         {
-            var client = new MongoClient(connectionString);
+            var mongoUrl = new MongoUrl(connectionString);
+            var settings = MongoClientSettings.FromUrl(mongoUrl);
+            settings.ServerSelectionTimeout = TimeSpan.FromSeconds(10);
+
+            var client = new MongoClient(settings);
             _database = client.GetDatabase(databaseName);
         }
 
