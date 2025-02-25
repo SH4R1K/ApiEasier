@@ -10,16 +10,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
     /// <summary>
     /// Обеспечивает работу с API-сервисами через файлы
     /// </summary>
-    public class FileApiServiceRepository : IApiServiceRepository
+    public class FileApiServiceRepository(IFileHelper fileHelper, ILoggerService loggerService) : IApiServiceRepository
     {
-        private readonly IFileHelper _fileHelper;
-        private readonly ILoggerService _loggerService;
-
-        public FileApiServiceRepository(IFileHelper fileHelper, ILoggerService loggerService)
-        {
-            _fileHelper = fileHelper;
-            _loggerService = loggerService;
-        }
+        private readonly IFileHelper _fileHelper = fileHelper;
+        private readonly ILoggerService _loggerService = loggerService;
 
         /// <summary>
         /// Допалняет API-сервис именем, т.к. имя API-сервиса является именем файла конфигурации,
@@ -141,7 +135,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
                     throw new ConflictException($"API-сервис с именем {apiService.Name} уже существует");
                 await _fileHelper.DeleteAsync(id);
             }
-                
+
             await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
             return MapApiService(apiService.Name, apiService);

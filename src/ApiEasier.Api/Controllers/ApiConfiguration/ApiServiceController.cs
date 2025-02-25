@@ -85,7 +85,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
-                
+
                 if (result == null)
                     return Conflict($"API-сервис {apiServiceDto.Name} уже существует");
 

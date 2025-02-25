@@ -11,7 +11,7 @@ namespace ApiEasier.Dm.Models
         /// <summary>
         /// Имя сущности API.
         /// </summary>
-        public string? Name { get; set; }
+        public required string Name { get; set; }
 
         /// <summary>
         /// Указывает, активна ли сущность API.
