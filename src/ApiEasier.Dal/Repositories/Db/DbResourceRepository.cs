@@ -3,14 +3,9 @@ using ApiEasier.Dal.Interfaces;
 
 namespace ApiEasier.Dal.Repositories.Db
 {
-    public class DbResourceRepository : IResourceRepository
+    public class DbResourceRepository(MongoDbContext context) : IResourceRepository
     {
-        private readonly MongoDbContext _dbContext;
-
-        public DbResourceRepository(MongoDbContext context)
-        {
-            _dbContext = context;
-        }
+        private readonly MongoDbContext _dbContext = context;
 
         /// <summary>
         /// Находит коллекции, привязанные к API-сервису, и удаляет их

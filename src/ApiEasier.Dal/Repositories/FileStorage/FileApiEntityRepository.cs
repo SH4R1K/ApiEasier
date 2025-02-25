@@ -8,14 +8,9 @@ namespace ApiEasier.Dal.Repositories.FileStorage
     /// <summary>
     /// Позволяет работать с сущностями через файлы конфигурации
     /// </summary>
-    public class FileApiEntityRepository : IApiEntityRepository
+    public class FileApiEntityRepository(IFileHelper jsonFileHelper) : IApiEntityRepository
     {
-        private readonly IFileHelper _fileHelper;
-
-        public FileApiEntityRepository(IFileHelper jsonFileHelper)
-        {
-            _fileHelper = jsonFileHelper;
-        }
+        private readonly IFileHelper _fileHelper = jsonFileHelper;
 
         /// <summary>
         /// Считывет файл API-сервиса, добавляет сущность в API-сервис и перезаписывает файл

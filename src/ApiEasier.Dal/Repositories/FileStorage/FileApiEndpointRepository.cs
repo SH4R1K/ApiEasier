@@ -5,14 +5,9 @@ using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
-    public class FileApiEndpointRepository : IApiEndpointRepository
+    public class FileApiEndpointRepository(IFileHelper jsonFileHelper) : IApiEndpointRepository
     {
-        private readonly IFileHelper _fileHelper;
-
-        public FileApiEndpointRepository(IFileHelper jsonFileHelper)
-        {
-            _fileHelper = jsonFileHelper;
-        }
+        private readonly IFileHelper _fileHelper = jsonFileHelper;
 
         /// <summary>
         /// Считывает файл с указанным API-сервисом, получает указанную сущность, создает ей эндпоинт 

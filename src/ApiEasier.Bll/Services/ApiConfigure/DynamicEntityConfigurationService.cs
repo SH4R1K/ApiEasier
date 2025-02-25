@@ -44,7 +44,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 
             return _apiEntityToDtoConverter.Convert(result);
         }
-            
+
         public async Task ChangeActiveStatusAsync(string apiServiceName, string id, bool status)
             => await _apiEntityRepository.ChangeActiveStatusAsync(apiServiceName, id, status);
 

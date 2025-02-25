@@ -1,6 +1,6 @@
 ﻿using ApiEasier.Bll.Interfaces.DbDataCleanup;
-using ApiEasier.Logger.Interfaces;
 using ApiEasier.Dal.Interfaces;
+using ApiEasier.Logger.Interfaces;
 
 namespace ApiEasier.Bll.Services.DbDataCleanup
 {
@@ -10,7 +10,6 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
         private readonly ILoggerService _loggerService;
         private readonly IResourceRepository _resourceRepository;
         private readonly IApiServiceRepository _apiServiceRepository;
-
 
         public DataCleanupService(
             IResourceRepository resourceRepository,
@@ -36,7 +35,6 @@ namespace ApiEasier.Bll.Services.DbDataCleanup
             {
                 _loggerService.LogError(ex, $"Чистка БД от неиспользуемых хранилищ вызвала исключение {ex}");
             }
-
         }
     }
 }

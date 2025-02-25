@@ -40,7 +40,6 @@ namespace ApiEasier.Api
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
             app.UseMiddleware<HttpLoggingMiddleware>();
-            
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

@@ -23,7 +23,7 @@ namespace ApiEasier.Bll.Services.ApiEmu
         /// <param name="apiName">Имя API-сервиса</param>
         /// <param name="apiEntityName">Имя сущности</param>
         /// <returns>Имя ресурса хранения данных сущности</returns>
-        private string GetResourceName(string apiName, string apiEntityName) 
+        private string GetResourceName(string apiName, string apiEntityName)
             => apiName.Trim().Replace(" ", "") + "_" + apiEntityName.Trim().Replace(" ", "");
 
         public async Task<List<DynamicResourceData>?> GetAsync(string apiName, string apiEntityName, string endpoint, string? filters)
