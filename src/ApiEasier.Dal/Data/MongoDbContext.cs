@@ -19,7 +19,7 @@ namespace ApiEasier.Dal.Data
         {
             var mongoUrl = new MongoUrl(connectionString);
             var settings = MongoClientSettings.FromUrl(mongoUrl);
-            settings.ServerSelectionTimeout = TimeSpan.FromSeconds(5);
+            settings.ServerSelectionTimeout = TimeSpan.FromSeconds(10);
 
             var client = new MongoClient(settings);
             _database = client.GetDatabase(databaseName);
