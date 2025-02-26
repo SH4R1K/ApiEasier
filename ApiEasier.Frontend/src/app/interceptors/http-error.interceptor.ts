@@ -1,15 +1,11 @@
+import { Injectable } from '@angular/core';
 import {
-  HttpErrorResponse,
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpErrorResponse
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { ErrorHandlerService } from '../services/error-handler.service';
 import { TuiAlertService } from '@taiga-ui/core';
-import { Injectable } from '@angular/core';
+import { ErrorHandlerService } from '../services/error-handler.service';
 
 /**
  * Интерсептор HttpErrorInterceptor перехватывает HTTP-запросы и обрабатывает ошибки,
@@ -25,9 +21,19 @@ import { Injectable } from '@angular/core';
  */
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+  /**
+   * Конструктор интерсептора.
+   * @param {ErrorHandlerService} errorHandler - Сервис для обработки ошибок.
+   */
+  constructor(private errorHandler: ErrorHandlerService) {}
 
-  constructor(private errorHandler: ErrorHandlerService, private alerts: TuiAlertService) {}
-
+  /**
+   * Метод перехвата HTTP-запросов.
+   * @param {HttpRequest<any>} req - HTTP-запрос.
+   * @param {HttpHandler} next - HTTP-обработчик.
+   * @returns {Observable<HttpEvent<any>>} - Наблюдаемый объект с HTTP-событиями.
+   * @memberof HttpErrorInterceptor
+   */
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
