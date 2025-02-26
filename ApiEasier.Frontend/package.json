@@ -34,6 +34,7 @@
     "@taiga-ui/kit": "^4.21.0",
     "@taiga-ui/layout": "^4.21.0",
     "@taiga-ui/legacy": "^4.24.0",
+    "jszip": "^3.10.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
