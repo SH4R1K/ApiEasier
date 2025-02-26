@@ -66,7 +66,16 @@ export class ApiDialogComponent {
    */
   @ViewChild('descriptionInput', { read: ElementRef })
   descriptionInputRef!: ElementRef;
-
+   /**
+   * Сервис для управления алертами.
+   *
+   * @remarks
+   * Внедряется с использованием Angular DI.
+   *
+   * @type {TuiDialogService}
+   * @memberof ApiDialogComponent
+   */
+ private readonly alerts = inject(TuiAlertService);
   /**
    * Сервис для управления диалоговыми окнами.
    *
@@ -77,16 +86,7 @@ export class ApiDialogComponent {
    * @memberof ApiDialogComponent
    */
   private readonly dialogs = inject(TuiDialogService);
-  private readonly alerts = inject(TuiAlertService);
-  /**
-   * Контекст диалогового окна, содержащий данные API.
-   *
-   * @remarks
-   * Внедряется с использованием функции injectContext из Taiga UI.
-   *
-   * @type {TuiDialogContext<apiServiceShortStructure, apiServiceShortStructure>}
-   * @memberof ApiDialogComponent
-   */
+
   public readonly context =
     injectContext<
       TuiDialogContext<apiServiceShortStructure, apiServiceShortStructure>

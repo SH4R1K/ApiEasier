@@ -26,7 +26,7 @@ import { Router } from '@angular/router';
   selector: 'app-header',
   imports: [BackButtonComponent, CommonModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent implements OnInit {
   /**
@@ -77,7 +77,6 @@ export class HeaderComponent implements OnInit {
     dismissible: true,
     label: 'Импортировать',
   });
-
   imageLoaded: boolean = false;
 
   ngOnInit(): void {
@@ -91,15 +90,8 @@ export class HeaderComponent implements OnInit {
   onLogoClick(event: Event): void {
     this.router.navigateByUrl('/');
   }
+  
 
-  /**
-   * Обработчик нажатия на кнопку.
-   *
-   * @remarks
-   * Вызывает событие buttonClick для уведомления родительского компонента о нажатии.
-   *
-   * @memberof HeaderComponent
-   */
   Click(): void {
     this.buttonClick.emit();
   }

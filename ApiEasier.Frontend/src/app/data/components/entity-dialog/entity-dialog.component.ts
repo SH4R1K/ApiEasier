@@ -224,13 +224,6 @@ export class EntityDialogComponent {
       .subscribe();
   }
 
-  /**
-   * Отображает сообщение об ошибке.
-   *
-   * @param message - Сообщение об ошибке.
-   * @private
-   * @memberof EntityDialogComponent
-   */
   private showError(message: string): void {
     this.alerts
       .open(message, {
