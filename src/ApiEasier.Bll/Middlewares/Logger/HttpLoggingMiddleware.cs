@@ -38,7 +38,7 @@ namespace ApiEasier.Bll.Middleware.Logger
                 {
                     responseBody = await bufferReader.ReadToEndAsync(); // Сохраняем тело ответа в строку
                     buffer.Seek(0, SeekOrigin.Begin);
-                    await buffer.CopyToAsync(stream); 
+                    await buffer.CopyToAsync(stream);
                     context.Response.Body = stream; // Возвращаем тело ответа в контекст
                 }
                 _logger.LogHttp(context, requestBody, responseBody);

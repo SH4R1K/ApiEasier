@@ -1,4 +1,3 @@
-using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiEmu;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -11,7 +10,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class ApiEmuController(IDynamicResourceDataService dynamicResourceDataService, ILoggerService logger) : ControllerBase 
+    public class ApiEmuController(IDynamicResourceDataService dynamicResourceDataService, ILoggerService logger) : ControllerBase
     {
         private readonly IDynamicResourceDataService _dynamicResourceDataService = dynamicResourceDataService;
         private readonly ILoggerService _logger = logger;
@@ -33,7 +32,7 @@ namespace ApiEasier.Api.Controllers.ApiEmu
             try
             {
                 var data = await _dynamicResourceDataService.GetAsync(apiName, entityName, endpoint, filters);
-                
+
                 if (data == null)
                     return NotFound("По этом адресу эндпоинт не найден");
 

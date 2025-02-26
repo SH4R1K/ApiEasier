@@ -1,4 +1,5 @@
-﻿using ApiEasier.Dal.Interfaces;
+﻿using ApiEasier.Dal.Exceptions;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
 using ApiEasier.Logger.Interfaces;
@@ -9,16 +10,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
     /// <summary>
     /// Обеспечивает работу с API-сервисами через файлы
     /// </summary>
-    public class FileApiServiceRepository : IApiServiceRepository
+    public class FileApiServiceRepository(IFileHelper fileHelper, ILoggerService loggerService) : IApiServiceRepository
     {
-        private readonly IFileHelper _fileHelper;
-        private readonly ILoggerService _loggerService;
-
-        public FileApiServiceRepository(IFileHelper fileHelper, ILoggerService loggerService)
-        {
-            _fileHelper = fileHelper;
-            _loggerService = loggerService;
-        }
+        private readonly IFileHelper _fileHelper = fileHelper;
+        private readonly ILoggerService _loggerService = loggerService;
 
         /// <summary>
         /// Допалняет API-сервис именем, т.к. имя API-сервиса является именем файла конфигурации,
@@ -61,7 +56,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiServiceExist = await GetByIdAsync(id);
             if (apiServiceExist == null)
-                throw new NullReferenceException($"API-сервис {id} не найден");
+                throw new NotFoundException($"API-сервис {id} не найден");
 
             await _fileHelper.DeleteAsync(id);
         }
@@ -121,16 +116,14 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// и создает новый с изменеными данными из старого файла
         /// </summary>
         /// <param name="id">Имя API-сервиса</param>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если изменяемого API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
         public async Task<ApiService?> UpdateAsync(string id, ApiService apiService)
         {
-            var oldApiService = await _fileHelper.ReadAsync<ApiService>(id);
-
-            if (oldApiService == null)
-                throw new NullReferenceException($"API-сервис {id} не найден");
+            var oldApiService = await _fileHelper.ReadAsync<ApiService>(id)
+                ?? throw new NotFoundException($"API-сервис {id} не найден");
 
             oldApiService.IsActive = apiService.IsActive;
             oldApiService.Description = apiService.Description;
@@ -139,10 +132,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             {
                 var apiServiceExist = await GetByIdAsync(apiService.Name);
                 if (apiServiceExist != null)
-                    throw new ArgumentException($"API-сервис с именем {apiService.Name} уже существует");
+                    throw new ConflictException($"API-сервис с именем {apiService.Name} уже существует");
                 await _fileHelper.DeleteAsync(id);
             }
-                
+
             await _fileHelper.WriteAsync(apiService.Name, oldApiService);
 
             return MapApiService(apiService.Name, apiService);
@@ -155,10 +148,8 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// <inheritdoc/>
         public async Task ChangeActiveStatusAsync(string id, bool status)
         {
-            var apiService = await _fileHelper.ReadAsync<ApiService>(id);
-
-            if (apiService == null)
-                throw new NullReferenceException($"API-сервис {id} не найден");
+            var apiService = await _fileHelper.ReadAsync<ApiService>(id)
+                ?? throw new NotFoundException($"API-сервис {id} не найден");
 
             apiService.IsActive = status;
 

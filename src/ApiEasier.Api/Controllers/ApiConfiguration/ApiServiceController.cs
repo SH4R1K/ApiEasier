@@ -1,5 +1,6 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Dal.Exceptions;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -84,7 +85,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
-                
+
                 if (result == null)
                     return Conflict($"API-сервис {apiServiceDto.Name} уже существует");
 
@@ -118,11 +119,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return Ok(result);
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch (ArgumentException ex)
+            catch (ConflictException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -152,7 +153,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return NoContent();
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -181,7 +182,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return NoContent();
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
