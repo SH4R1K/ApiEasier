@@ -1,4 +1,5 @@
-﻿using ApiEasier.Dal.Interfaces;
+﻿using ApiEasier.Dal.Exceptions;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
 
@@ -7,19 +8,14 @@ namespace ApiEasier.Dal.Repositories.FileStorage
     /// <summary>
     /// Позволяет работать с сущностями через файлы конфигурации
     /// </summary>
-    public class FileApiEntityRepository : IApiEntityRepository
+    public class FileApiEntityRepository(IFileHelper jsonFileHelper) : IApiEntityRepository
     {
-        private readonly IFileHelper _fileHelper;
-
-        public FileApiEntityRepository(IFileHelper jsonFileHelper)
-        {
-            _fileHelper = jsonFileHelper;
-        }
+        private readonly IFileHelper _fileHelper = jsonFileHelper;
 
         /// <summary>
         /// Считывет файл API-сервиса, добавляет сущность в API-сервис и перезаписывает файл
         /// </summary>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
@@ -29,7 +25,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
 
             // Проверка существования API-сервиса
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             // Проверка уникальности
             if (apiService.Entities.Any(e => e.Name == apiEntity.Name))
@@ -46,7 +42,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// Считывет файл API-сервиса, удаляет сущность из API-сервиса и перезаписывает файл
         /// </summary>
         /// <param name="id">Имя удаляемой сущности</param>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
@@ -54,11 +50,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var entityToRemove = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entityToRemove == null)
-                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
 
             apiService.Entities.Remove(entityToRemove);
 
@@ -70,10 +66,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// и перезаписывает файл с новыми данными
         /// </summary>
         /// <param name="id">Имя изменяемой сущности</param>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="ConflictException">
         /// Возникает если новое имя сущности уже существует
         /// </exception>
         /// <inheritdoc/>
@@ -82,14 +78,14 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
 
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
 
             if (id != apiEntity.Name && apiService.Entities.Any(e => e.Name == apiEntity.Name))
-                throw new ArgumentException($"Сущность с именем {apiEntity.Name} уже существует.");
+                throw new ConflictException($"Сущность с именем {apiEntity.Name} уже существует.");
 
             entity.Name = apiEntity.Name;
             entity.Structure = apiEntity.Structure;
@@ -109,11 +105,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
 
             entity.IsActive = status;
 
@@ -145,11 +141,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == id);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {id} в API-сервис {apiServiceName} не была найдена");
             return entity;
         }
     }

@@ -8,7 +8,7 @@
         /// <summary>
         /// Маршрут для действия API.
         /// </summary>
-        public string Route { get; set; }
+        public required string Route { get; set; }
 
         /// <summary>
         /// Тип ответа, ожидаемого от действия API.

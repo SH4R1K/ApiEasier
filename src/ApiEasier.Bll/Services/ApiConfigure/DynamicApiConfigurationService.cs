@@ -12,7 +12,7 @@ namespace ApiEasier.Bll.Services.ApiConfigure
 
         private readonly IApiServiceRepository _apiServiceRepository;
         private readonly IResourceRepository _dbResourceRepository;
-        
+
         private readonly IConverter<ApiService, ApiServiceDto> _apiServiceToDtoConverter;
         private readonly IConverter<ApiServiceDto, ApiService> _dtoToApiServiceConverter;
         private readonly IConverter<ApiService, ApiServiceSummaryDto> _apiServiceToDtoSummaryConverter;

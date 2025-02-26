@@ -1,23 +1,19 @@
-﻿using ApiEasier.Dal.Interfaces;
+﻿using ApiEasier.Dal.Exceptions;
+using ApiEasier.Dal.Interfaces;
 using ApiEasier.Dal.Interfaces.Helpers;
 using ApiEasier.Dm.Models;
 
 namespace ApiEasier.Dal.Repositories.FileStorage
 {
-    public class FileApiEndpointRepository : IApiEndpointRepository
+    public class FileApiEndpointRepository(IFileHelper jsonFileHelper) : IApiEndpointRepository
     {
-        private readonly IFileHelper _fileHelper;
-
-        public FileApiEndpointRepository(IFileHelper jsonFileHelper)
-        {
-            _fileHelper = jsonFileHelper;
-        }
+        private readonly IFileHelper _fileHelper = jsonFileHelper;
 
         /// <summary>
         /// Считывает файл с указанным API-сервисом, получает указанную сущность, создает ей эндпоинт 
         /// и записывает новые данные в файл
         /// </summary>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса, сущности или эндпоинта не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
@@ -25,15 +21,15 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null || apiService.Entities == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
 
             var endpoint = entity.Endpoints.FirstOrDefault(e => e.Route == id);
             if (endpoint == null)
-                throw new NullReferenceException($"Эндпоинт {id} у сущности {apiEntityName} API-сервиса {apiServiceName} не была найден");
+                throw new NotFoundException($"Эндпоинт {id} у сущности {apiEntityName} API-сервиса {apiServiceName} не была найден");
 
             endpoint.IsActive = status;
 
@@ -44,7 +40,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// Считывает файл с указанным API-сервисом, получает указанную сущность, создает ей эндпоинт 
         /// и записывает новые данные в файл
         /// </summary>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
@@ -53,11 +49,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             // Проверка существования API-сервиса
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
             if (apiEntity == null)
-                throw new NullReferenceException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
 
             // Проверка уникальности нового имени
             var apiEntityExist = apiEntity.Endpoints.FirstOrDefault(e => e.Route == apiEndpoint.Route);
@@ -85,15 +81,15 @@ namespace ApiEasier.Dal.Repositories.FileStorage
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             // Проверка существования api-сервиса
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
             if (apiEntity == null)
-                throw new NullReferenceException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
 
             var apiEndpointToRemove = apiEntity.Endpoints.FirstOrDefault(e => e.Route == id);
             if (apiEndpointToRemove == null)
-                throw new NullReferenceException($"Эндпоинт {id} у сущности {apiEntityName} API-сервиса {apiServiceName} не была найден");
+                throw new NotFoundException($"Эндпоинт {id} у сущности {apiEntityName} API-сервиса {apiServiceName} не была найден");
 
             apiEntity.Endpoints.Remove(apiEndpointToRemove);
         }
@@ -109,11 +105,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
             if (apiEntity == null)
-                throw new NullReferenceException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
 
             return apiEntity.Endpoints;
         }
@@ -122,7 +118,7 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// Считывает файл с указанным API-сервисом, получает указанную сущность и возвращает требуемый эндпоинт
         /// </summary>
         /// <param name="id">Имя требуемого эндпоинта</param>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса или сущности не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
         /// <inheritdoc/>
@@ -130,11 +126,11 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var apiEntity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
             if (apiEntity == null)
-                throw new NullReferenceException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
 
             return apiEntity.Endpoints.FirstOrDefault(ep => ep.Route == id);
         }
@@ -143,10 +139,10 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         /// Считывает файл с указанным API-сервисом, получает указанную сущность и изменяет требуемый эндпоинт
         /// </summary>
         /// <param name="id">Имя требуемого эндпоинта</param>
-        /// <exception cref="NullReferenceException">
+        /// <exception cref="NotFoundException">
         /// Возникает если API-сервиса, сущности или эндпоинта не существует, чтобы вернуть ошибку 404 в контроллере
         /// </exception>
-        /// <exception cref="ArgumentException">
+        /// <exception cref="ConflictException">
         /// Возникает если новое имя эндпоинта уже существует
         /// </exception>
         /// <inheritdoc/>
@@ -154,19 +150,19 @@ namespace ApiEasier.Dal.Repositories.FileStorage
         {
             var apiService = await _fileHelper.ReadAsync<ApiService>(apiServiceName);
             if (apiService == null)
-                throw new NullReferenceException($"API-сервис {apiServiceName} не найден");
+                throw new NotFoundException($"API-сервис {apiServiceName} не найден");
 
             var entity = apiService.Entities.FirstOrDefault(e => e.Name == apiEntityName);
             if (entity == null)
-                throw new NullReferenceException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
+                throw new NotFoundException($"Сущность {apiEntityName} у API-сервиса {apiServiceName} не была найдена");
 
             var endpoint = entity.Endpoints.FirstOrDefault(e => e.Route == id);
             if (endpoint == null)
-                throw new NullReferenceException($"Эндпоинт {id} у сущности {apiEntityName} API-сервиса {apiServiceName} не была найден");
+                throw new NotFoundException($"Эндпоинт {id} у сущности {apiEntityName} API-сервиса {apiServiceName} не была найден");
 
             var endpointExist = entity.Endpoints.FirstOrDefault(e => e.Route == apiEndpoint.Route);
             if (id != apiEndpoint.Route && endpointExist != null)
-                throw new ArgumentException($"Имя эндопоинта {apiEndpoint.Route} уже существует");
+                throw new ConflictException($"Имя эндопоинта {apiEndpoint.Route} уже существует");
 
             endpoint.Route = apiEndpoint.Route;
             endpoint.IsActive = apiEndpoint.IsActive;

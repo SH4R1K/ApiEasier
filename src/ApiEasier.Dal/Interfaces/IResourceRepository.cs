@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApiEasier.Dal.Interfaces
+﻿namespace ApiEasier.Dal.Interfaces
 {
     /// <summary>
     /// Позволяет работать с источниками данных для эмуляции

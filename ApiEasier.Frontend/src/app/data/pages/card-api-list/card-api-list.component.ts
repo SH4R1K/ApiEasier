@@ -79,7 +79,6 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     private changeDetector: ChangeDetectorRef,
     private router: Router,
     private readonly alerts: TuiAlertService,
-    // private apiServiceHub: ApiHubServiceService
   ) {}
 
   private handleWindowResize() {
@@ -182,10 +181,6 @@ export class CardApiListComponent implements OnInit, OnDestroy {
   private loadApiList(): void {
     this.sub = this.apiServiceRepository.getApiList().subscribe(this.handleApiResponse());
   }
-
-  // private subscribeToApiUpdates(): void {
-  //   this.apiServiceHub.ordersUpdated$.subscribe(this.handleApiResponse());
-  // }
 
   private handleApiResponse() {
     return {

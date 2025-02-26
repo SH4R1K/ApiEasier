@@ -22,9 +22,11 @@ namespace ApiEasier.Tests.Integration.Base
             _runner = MongoDbRunner.Start();
             _mongoConnectionString = _runner.ConnectionString;
 
-            _testApiConfigurationsPath = Path.Combine("TestApiConfigurations_" + DateTime.Now.ToString("yyyy.MM.dd_HH-mm-ss"));
-            if (!Directory.Exists(_testApiConfigurationsPath))
-                Directory.CreateDirectory(_testApiConfigurationsPath);
+            string testDbName = "test_db_" + Guid.NewGuid();
+
+            _testApiConfigurationsPath = Path.Combine("TestApiConfigurations_" + Guid.NewGuid().ToString());
+
+            Directory.CreateDirectory(_testApiConfigurationsPath);
 
             builder.ConfigureServices(services =>
             {
@@ -55,14 +57,14 @@ namespace ApiEasier.Tests.Integration.Base
             base.Dispose(disposing);
             _runner?.Dispose();
 
-            //if (!string.IsNullOrEmpty(_testApiConfigurationsPath) && Directory.Exists(_testApiConfigurationsPath))
-            //{
-            //    try
-            //    {
-            //        Directory.Delete(_testApiConfigurationsPath, true);
-            //    }
-            //    catch { }
-            //}
+            if (!string.IsNullOrEmpty(_testApiConfigurationsPath) && Directory.Exists(_testApiConfigurationsPath))
+            {
+                try
+                {
+                    Directory.Delete(_testApiConfigurationsPath, true);
+                }
+                catch { }
+            }
         }
     }
 }

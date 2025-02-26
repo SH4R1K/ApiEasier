@@ -1,7 +1,9 @@
 ﻿using ApiEasier.Bll.Dto;
 using ApiEasier.Bll.Interfaces.ApiConfigure;
+using ApiEasier.Dal.Exceptions;
 using ApiEasier.Logger.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace ApiEasier.Api.Controllers.ApiConfiguration
 {
@@ -49,7 +51,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType<ApiServiceDto>(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetByNameApiService(string apiServiceName)
+        public async Task<IActionResult> GetByNameApiService(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName)
         {
             try
             {
@@ -81,7 +85,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             try
             {
                 var result = await _dynamicApiConfigurationService.CreateAsync(apiServiceDto);
-                
+
                 if (result == null)
                     return Conflict($"API-сервис {apiServiceDto.Name} уже существует");
 
@@ -115,11 +119,11 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return Ok(result);
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
-            catch (ArgumentException ex)
+            catch (ConflictException ex)
             {
                 return Conflict(ex.Message);
             }
@@ -139,7 +143,9 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteApiService(string apiServiceName)
+        public async Task<IActionResult> DeleteApiService(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            string apiServiceName)
         {
             try
             {
@@ -147,7 +153,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return NoContent();
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }
@@ -176,7 +182,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
 
                 return NoContent();
             }
-            catch (NullReferenceException ex)
+            catch (NotFoundException ex)
             {
                 return NotFound(ex.Message);
             }

@@ -38,8 +38,8 @@ namespace ApiEasier.Api
 
             var app = builder.Build();
 
-            app.UseMiddleware<HttpLoggingMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseMiddleware<HttpLoggingMiddleware>();
 
             app.UseDefaultFiles();
             app.UseStaticFiles();

@@ -23,7 +23,6 @@ namespace ApiEasier.Api.HostedServices
                 EnableRaisingEvents = false
             };
 
-
             _fileSystemWatcher.Changed += OnChanged;
 
             _fileSystemWatcher.Deleted += OnDeleted;
