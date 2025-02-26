@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Endpoint } from './service-structure-api';
+import { Endpoint } from "../interfaces/Endpoint";
 import { TuiAlertService } from '@taiga-ui/core';
 import { ErrorHandlerService } from './error-handler.service';
 

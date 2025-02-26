@@ -10,7 +10,8 @@ import { ApiHubServiceService } from '../../../services/api-hub-service.service'
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 import { Router } from '@angular/router';
 import { TuiAlertService, tuiDialog } from '@taiga-ui/core';
-import { apiServiceShortStructure, ApiServiceStructure } from '../../../services/service-structure-api';
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { CommonModule } from '@angular/common';
 import { CardApiComponent } from '../../components/card-api/card-api.component';
 import { HeaderComponent } from '../../components/header/header.component';

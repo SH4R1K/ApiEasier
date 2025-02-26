@@ -1,7 +1,7 @@
 import { Injectable, Input, NgZone } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { apiServiceShortStructure } from './service-structure-api';
+import { apiServiceShortStructure } from "../interfaces/apiServiceShortStructure";
 
 @Injectable({
   providedIn: 'root'

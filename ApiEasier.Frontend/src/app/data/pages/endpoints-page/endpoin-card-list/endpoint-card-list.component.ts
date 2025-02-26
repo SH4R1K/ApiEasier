@@ -6,7 +6,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Endpoint, Entity } from '../../../../services/service-structure-api';
+import { Endpoint } from "../../../../interfaces/Endpoint";
+import { Entity } from "../../../../interfaces/Entity";
 import { CommonModule, Location } from '@angular/common';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { tuiDialog, TuiAlertService } from '@taiga-ui/core';

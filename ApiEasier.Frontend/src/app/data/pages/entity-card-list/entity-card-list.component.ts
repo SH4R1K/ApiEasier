@@ -7,10 +7,8 @@ import {
 } from '@angular/core';
 import { Observable, Subscription, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  ApiServiceStructure,
-  Entity,
-} from '../../../services/service-structure-api';
+import { Entity } from "../../../interfaces/Entity";
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
 import { CommonModule } from '@angular/common';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { tuiDialog, TuiAlertService } from '@taiga-ui/core';
