@@ -13,6 +13,20 @@ import {
 import { injectContext } from '@taiga-ui/polymorpheus';
 import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 
+/**
+ * Компонент ApiDialogComponent предназначен для редактирования данных API через диалоговое окно.
+ * Использует компоненты Taiga UI для создания интерактивного интерфейса.
+ *
+ * @remarks
+ * Этот компонент предоставляет пользователю возможность редактировать данные API, такие как имя и описание,
+ * и отправлять изменения через диалоговое окно.
+ * Интегрируется с сервисами Taiga UI для управления диалогами и вводом данных.
+ *
+ * @example
+ * html
+ * <app-api-edit-dialog></app-api-edit-dialog>
+ * 
+ */
 @Component({
   selector: 'app-api-edit-dialog',
   imports: [
@@ -30,25 +44,84 @@ import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStr
   styleUrls: ['./api-dialog.component.css'],
 })
 export class ApiDialogComponent {
+  /**
+   * Ссылка на элемент ввода имени.
+   *
+   * @remarks
+   * Используется для управления фокусом и значением поля ввода имени.
+   *
+   * @type {ElementRef}
+   * @memberof ApiDialogComponent
+   */
   @ViewChild('nameInput', { read: ElementRef }) nameInputRef!: ElementRef;
+
+  /**
+   * Ссылка на элемент ввода описания.
+   *
+   * @remarks
+   * Используется для управления фокусом и значением поля ввода описания.
+   *
+   * @type {ElementRef}
+   * @memberof ApiDialogComponent
+   */
   @ViewChild('descriptionInput', { read: ElementRef })
   descriptionInputRef!: ElementRef;
 
+  /**
+   * Сервис для управления диалоговыми окнами.
+   *
+   * @remarks
+   * Внедряется с использованием Angular DI.
+   *
+   * @type {TuiDialogService}
+   * @memberof ApiDialogComponent
+   */
   private readonly dialogs = inject(TuiDialogService);
 
+  /**
+   * Контекст диалогового окна, содержащий данные API.
+   *
+   * @remarks
+   * Внедряется с использованием функции injectContext из Taiga UI.
+   *
+   * @type {TuiDialogContext<apiServiceShortStructure, apiServiceShortStructure>}
+   * @memberof ApiDialogComponent
+   */
   public readonly context =
     injectContext<
       TuiDialogContext<apiServiceShortStructure, apiServiceShortStructure>
     >();
 
+  /**
+   * Флаг, указывающий, есть ли значение в поле ввода имени.
+   *
+   * @type {boolean}
+   * @returns {boolean} Возвращает true, если имя не пустое.
+   * @memberof ApiDialogComponent
+   */
   protected get hasValue(): boolean {
     return this.data.name.trim() !== '';
   }
 
+  /**
+   * Данные API, которые редактируются в диалоговом окне.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof ApiDialogComponent
+   */
   protected get data(): apiServiceShortStructure {
     return this.context.data;
   }
 
+  /**
+   * Обработчик отправки формы.
+   *
+   * @param event - Событие отправки формы.
+   * @remarks
+   * Предотвращает стандартное поведение отправки формы и завершает диалог, если имя не пустое.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected submit(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -58,10 +131,28 @@ export class ApiDialogComponent {
     }
   }
 
+  /**
+   * Открывает диалоговое окно с заданным содержимым.
+   *
+   * @param content - Шаблон содержимого диалогового окна.
+   * @remarks
+   * Использует сервис TuiDialogService для открытия диалога.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected showDialog(content: TemplateRef<TuiDialogContext>): void {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  /**
+   * Обработчик ввода данных в поле имени.
+   *
+   * @param event - Событие ввода данных.
+   * @remarks
+   * Очищает значение от недопустимых символов и обновляет данные API.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = input.value;
@@ -70,6 +161,15 @@ export class ApiDialogComponent {
     this.data.name = cleanedValue;
   }
 
+  /**
+   * Перемещает фокус на указанное поле ввода.
+   *
+   * @param targetInput - Ссылка на элемент ввода.
+   * @remarks
+   * Используется для управления фокусом между полями ввода.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector('input').focus();
   }

@@ -124,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент CardApiComponent предназначен для отображения и управления информацией о API.
+Позволяет редактировать, удалять и изменять состояние API.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует сервисы для взаимодействия с репозиторием API и управления состоянием.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-card-api [apiInfo]=&quot;apiData&quot; (apiDeleted)=&quot;handleApiDeleted()&quot;&gt;&lt;/app-card-api&gt;</code></pre></div>
+    </p>
 
 
 
@@ -285,12 +296,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:87</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента CardApiComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -299,6 +312,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -313,6 +327,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для взаимодействия с репозиторием API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>cd</td>
@@ -325,6 +345,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для управления изменением состояния.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -337,6 +363,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>location</td>
@@ -349,6 +381,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с историей навигации.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -377,9 +415,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:65</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Входной параметр для получения информации о API.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -401,9 +445,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:73</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое вызывается при удалении API.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -434,14 +484,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="122"
-                                    class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:122</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:191</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик подтверждения удаления API.</p>
+<p>Удаляет API из репозитория и уведомляет родительский компонент об удалении.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -471,14 +524,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:117</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик изменения состояния переключателя.</p>
+<p>Обновляет состояние API и сохраняет изменения в репозитории.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -489,6 +545,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -503,6 +560,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние переключателя.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -538,14 +601,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="141"
+                                    class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:141</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалог для редактирования информации о API.</p>
+<p>Сохраняет старое имя API и открывает диалог для редактирования.
+Обновляет информацию о API после закрытия диалога.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -584,10 +651,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:84</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Диалог для редактирования информации о API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -610,7 +683,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -641,7 +714,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/components/card-api/card-api.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -670,7 +743,7 @@ import {
   TuiAlertService,
 } from &#x27;@taiga-ui/core&#x27;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
-import { apiServiceShortStructure } from &#x27;../../../services/service-structure-api&#x27;;
+import { apiServiceShortStructure } from &quot;../../../interfaces/apiServiceShortStructure&quot;;
 import { SwitchComponent } from &#x27;../switch/switch.component&#x27;;
 import { ApiDialogComponent } from &#x27;../api-dialog/api-dialog.component&#x27;;
 import { Location } from &#x27;@angular/common&#x27;;
@@ -678,6 +751,19 @@ import { IconTrashComponent } from &#x27;../icon-trash/icon-trash.component&#x27
 import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
 import { ExportApiButtonComponent } from &#x27;../export-api-button/export-api-button.component&#x27;;
 
+/**
+ * Компонент CardApiComponent предназначен для отображения и управления информацией о API.
+ * Позволяет редактировать, удалять и изменять состояние API.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для взаимодействия с репозиторием API и управления состоянием.
+ *
+ * @example
+ * html
+ * &lt;app-card-api [apiInfo]&#x3D;&quot;apiData&quot; (apiDeleted)&#x3D;&quot;handleApiDeleted()&quot;&gt;&lt;/app-card-api&gt;
+ *
+ */
 @Component({
   selector: &#x27;app-card-api&#x27;,
   imports: [
@@ -689,7 +775,6 @@ import { ExportApiButtonComponent } from &#x27;../export-api-button/export-api-b
     IconTrashComponent,
     ExportApiButtonComponent,
   ],
-
   templateUrl: &#x27;./card-api.component.html&#x27;,
   styleUrls: [
     &#x27;./card-api.component.css&#x27;,
@@ -700,26 +785,66 @@ import { ExportApiButtonComponent } from &#x27;../export-api-button/export-api-b
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardApiComponent {
+  /**
+   * Входной параметр для получения информации о API.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof CardApiComponent
+   */
   @Input() apiInfo!: apiServiceShortStructure;
+
+  /**
+   * Событие, которое вызывается при удалении API.
+   *
+   * @type {EventEmitter&lt;void&gt;}
+   * @memberof CardApiComponent
+   */
   @Output() apiDeleted &#x3D; new EventEmitter&lt;void&gt;();
+
   oldName: string &#x3D; &#x27;&#x27;;
   location: Location;
 
+  /**
+   * Диалог для редактирования информации о API.
+   *
+   * @type {tuiDialog}
+   * @memberof CardApiComponent
+   */
   private readonly dialog &#x3D; tuiDialog(ApiDialogComponent, {
     dismissible: true,
     label: &#x27;Редактировать&#x27;,
   });
 
+  /**
+   * Конструктор компонента CardApiComponent.
+   *
+   * @param apiServiceRepository - Сервис для взаимодействия с репозиторием API.
+   * @param cd - Сервис для управления изменением состояния.
+   * @param alerts - Сервис для отображения уведомлений.
+   * @param location - Сервис для работы с историей навигации.
+   *
+   * @memberof CardApiComponent
+   */
   constructor(
     private apiServiceRepository: ApiServiceRepositoryService,
     private cd: ChangeDetectorRef,
     private alerts: TuiAlertService,
-    location: Location 
+    location: Location
   ) {
     this.location &#x3D; location;
   }
+
+  /**
+   * Обработчик изменения состояния переключателя.
+   *
+   * @param newState - Новое состояние переключателя.
+   * @remarks
+   * Обновляет состояние API и сохраняет изменения в репозитории.
+   *
+   * @memberof CardApiComponent
+   */
   onToggleChange(newState: boolean) {
-    this.apiInfo.isActive &#x3D; newState; 
+    this.apiInfo.isActive &#x3D; newState;
     console.log(&#x27;Состояние переключателя изменилось на:&#x27;, newState);
     this.apiServiceRepository
       .updateApiServiceStatus(this.apiInfo.name, newState)
@@ -733,6 +858,15 @@ export class CardApiComponent {
       });
   }
 
+  /**
+   * Открывает диалог для редактирования информации о API.
+   *
+   * @remarks
+   * Сохраняет старое имя API и открывает диалог для редактирования.
+   * Обновляет информацию о API после закрытия диалога.
+   *
+   * @memberof CardApiComponent
+   */
   openEditDialog(): void {
     this.oldName &#x3D; this.apiInfo.name;
     this.dialog({ ...this.apiInfo }).subscribe({
@@ -775,11 +909,19 @@ export class CardApiComponent {
     });
   }
 
+  /**
+   * Обработчик подтверждения удаления API.
+   *
+   * @remarks
+   * Удаляет API из репозитория и уведомляет родительский компонент об удалении.
+   *
+   * @memberof CardApiComponent
+   */
   onDeleteConfirmed(): void {
     this.apiServiceRepository.deleteApiService(this.apiInfo.name).subscribe({
       next: () &#x3D;&gt; {
         console.log(&#x60;Сервис &quot;${this.apiInfo.name}&quot; удален.&#x60;);
-        this.apiDeleted.emit(); // Emit the event to notify the parent component
+        this.apiDeleted.emit();
       },
       error: (error) &#x3D;&gt; {
         console.error(&#x27;Ошибка при удалении сервиса:&#x27;, error);

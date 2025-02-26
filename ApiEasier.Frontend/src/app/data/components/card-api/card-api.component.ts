@@ -22,6 +22,19 @@ import { IconTrashComponent } from '../icon-trash/icon-trash.component';
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 import { ExportApiButtonComponent } from '../export-api-button/export-api-button.component';
 
+/**
+ * Компонент CardApiComponent предназначен для отображения и управления информацией о API.
+ * Позволяет редактировать, удалять и изменять состояние API.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для взаимодействия с репозиторием API и управления состоянием.
+ *
+ * @example
+ * html
+ * <app-card-api [apiInfo]="apiData" (apiDeleted)="handleApiDeleted()"></app-card-api>
+ *
+ */
 @Component({
   selector: 'app-card-api',
   imports: [
@@ -33,7 +46,6 @@ import { ExportApiButtonComponent } from '../export-api-button/export-api-button
     IconTrashComponent,
     ExportApiButtonComponent,
   ],
-
   templateUrl: './card-api.component.html',
   styleUrls: [
     './card-api.component.css',
@@ -44,26 +56,66 @@ import { ExportApiButtonComponent } from '../export-api-button/export-api-button
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardApiComponent {
+  /**
+   * Входной параметр для получения информации о API.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof CardApiComponent
+   */
   @Input() apiInfo!: apiServiceShortStructure;
+
+  /**
+   * Событие, которое вызывается при удалении API.
+   *
+   * @type {EventEmitter<void>}
+   * @memberof CardApiComponent
+   */
   @Output() apiDeleted = new EventEmitter<void>();
+
   oldName: string = '';
   location: Location;
 
+  /**
+   * Диалог для редактирования информации о API.
+   *
+   * @type {tuiDialog}
+   * @memberof CardApiComponent
+   */
   private readonly dialog = tuiDialog(ApiDialogComponent, {
     dismissible: true,
     label: 'Редактировать',
   });
 
+  /**
+   * Конструктор компонента CardApiComponent.
+   *
+   * @param apiServiceRepository - Сервис для взаимодействия с репозиторием API.
+   * @param cd - Сервис для управления изменением состояния.
+   * @param alerts - Сервис для отображения уведомлений.
+   * @param location - Сервис для работы с историей навигации.
+   *
+   * @memberof CardApiComponent
+   */
   constructor(
     private apiServiceRepository: ApiServiceRepositoryService,
     private cd: ChangeDetectorRef,
     private alerts: TuiAlertService,
-    location: Location 
+    location: Location
   ) {
     this.location = location;
   }
+
+  /**
+   * Обработчик изменения состояния переключателя.
+   *
+   * @param newState - Новое состояние переключателя.
+   * @remarks
+   * Обновляет состояние API и сохраняет изменения в репозитории.
+   *
+   * @memberof CardApiComponent
+   */
   onToggleChange(newState: boolean) {
-    this.apiInfo.isActive = newState; 
+    this.apiInfo.isActive = newState;
     console.log('Состояние переключателя изменилось на:', newState);
     this.apiServiceRepository
       .updateApiServiceStatus(this.apiInfo.name, newState)
@@ -77,6 +129,15 @@ export class CardApiComponent {
       });
   }
 
+  /**
+   * Открывает диалог для редактирования информации о API.
+   *
+   * @remarks
+   * Сохраняет старое имя API и открывает диалог для редактирования.
+   * Обновляет информацию о API после закрытия диалога.
+   *
+   * @memberof CardApiComponent
+   */
   openEditDialog(): void {
     this.oldName = this.apiInfo.name;
     this.dialog({ ...this.apiInfo }).subscribe({
@@ -119,11 +180,19 @@ export class CardApiComponent {
     });
   }
 
+  /**
+   * Обработчик подтверждения удаления API.
+   *
+   * @remarks
+   * Удаляет API из репозитория и уведомляет родительский компонент об удалении.
+   *
+   * @memberof CardApiComponent
+   */
   onDeleteConfirmed(): void {
     this.apiServiceRepository.deleteApiService(this.apiInfo.name).subscribe({
       next: () => {
         console.log(`Сервис "${this.apiInfo.name}" удален.`);
-        this.apiDeleted.emit(); // Emit the event to notify the parent component
+        this.apiDeleted.emit();
       },
       error: (error) => {
         console.error('Ошибка при удалении сервиса:', error);

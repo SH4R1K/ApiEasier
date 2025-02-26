@@ -116,7 +116,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/services/http-error.interceptor.ts</code>
+            <code>src/app/interceptors/http-error.interceptor.ts</code>
         </p>
 
 
@@ -161,7 +161,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/services/http-error.interceptor.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/interceptors/http-error.interceptor.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -237,7 +237,7 @@
                     <tr>
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/services/http-error.interceptor.ts:16</a></div>
+                                    class="link-to-prism">src/app/interceptors/http-error.interceptor.ts:16</a></div>
                         </td>
                     </tr>
 
@@ -309,7 +309,7 @@ import { Observable, throwError } from &#x27;rxjs&#x27;;
 import { catchError } from &#x27;rxjs/operators&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
-import { ErrorHandlerService } from &#x27;./error-handler.service&#x27;;
+import { ErrorHandlerService } from &#x27;../services/error-handler.service&#x27;;
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

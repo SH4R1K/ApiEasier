@@ -124,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент ExportApiButtonComponent предназначен для экспорта структуры API в формате JSON.
+Позволяет пользователю скачать структуру API в виде файла.</p>
+<p>Этот компонент интегрируется с сервисом репозитория API для получения структуры API.
+Использует Taiga UI для создания интерактивного интерфейса.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-export-api-button [apiInfo]=&quot;apiData&quot;&gt;&lt;/app-export-api-button&gt;</code></pre></div>
+    </p>
 
 
 
@@ -233,12 +244,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/data/components/export-api-button/export-api-button.component.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/components/export-api-button/export-api-button.component.ts:32</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента ExportApiButtonComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -247,6 +260,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -261,6 +275,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для взаимодействия с репозиторием API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -289,9 +309,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/data/components/export-api-button/export-api-button.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/components/export-api-button/export-api-button.component.ts:32</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Входной параметр для получения информации о API.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -323,14 +349,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/data/components/export-api-button/export-api-button.component.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/data/components/export-api-button/export-api-button.component.ts:51</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик нажатия на кнопку экспорта.</p>
+<p>Получает структуру API из репозитория и инициирует скачивание файла JSON.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -348,24 +377,54 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input } from &#x27;@angular/core&#x27;;
 import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
-import { apiServiceShortStructure, ApiServiceStructure } from &#x27;../../../services/service-structure-api&#x27;;
+import { ApiServiceStructure } from &quot;../../../interfaces/ApiServiceStructure&quot;;
+import { apiServiceShortStructure } from &quot;../../../interfaces/apiServiceShortStructure&quot;;
 import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
 
+/**
+ * Компонент ExportApiButtonComponent предназначен для экспорта структуры API в формате JSON.
+ * Позволяет пользователю скачать структуру API в виде файла.
+ *
+ * @remarks
+ * Этот компонент интегрируется с сервисом репозитория API для получения структуры API.
+ * Использует Taiga UI для создания интерактивного интерфейса.
+ *
+ * @example
+ * html
+ * &lt;app-export-api-button [apiInfo]&#x3D;&quot;apiData&quot;&gt;&lt;/app-export-api-button&gt;
+ */
 @Component({
   selector: &#x27;app-export-api-button&#x27;,
-  imports: [
-    TuiButton
-  ],
+  imports: [TuiButton],
   templateUrl: &#x27;./export-api-button.component.html&#x27;,
-  styleUrls: [&#x27;./export-api-button.component.css&#x27;, &#x27;../../styles/button.css&#x27;]
+  styleUrls: [&#x27;./export-api-button.component.css&#x27;, &#x27;../../styles/button.css&#x27;],
 })
 export class ExportApiButtonComponent {
+  /**
+   * Входной параметр для получения информации о API.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof ExportApiButtonComponent
+   */
   @Input() apiInfo!: apiServiceShortStructure;
 
-  constructor(
-    private apiServiceRepository: ApiServiceRepositoryService,
-  ) { }
+  /**
+   * Конструктор компонента ExportApiButtonComponent.
+   *
+   * @param apiServiceRepository - Сервис для взаимодействия с репозиторием API.
+   *
+   * @memberof ExportApiButtonComponent
+   */
+  constructor(private apiServiceRepository: ApiServiceRepositoryService) {}
 
+  /**
+   * Обработчик нажатия на кнопку экспорта.
+   *
+   * @remarks
+   * Получает структуру API из репозитория и инициирует скачивание файла JSON.
+   *
+   * @memberof ExportApiButtonComponent
+   */
   onClick(): void {
     this.apiServiceRepository.getApiStructureList(this.apiInfo.name).subscribe({
       next: (data: ApiServiceStructure) &#x3D;&gt; {
@@ -373,7 +432,6 @@ export class ExportApiButtonComponent {
         const jsonString &#x3D; JSON.stringify(dataWithoutName, null, 2);
 
         const blob &#x3D; new Blob([jsonString], { type: &#x27;application/json&#x27; });
-
         const url &#x3D; window.URL.createObjectURL(blob);
         const a &#x3D; document.createElement(&#x27;a&#x27;);
         a.href &#x3D; url;
@@ -382,8 +440,8 @@ export class ExportApiButtonComponent {
         window.URL.revokeObjectURL(url);
       },
       error: (error) &#x3D;&gt; {
-        console.log(error)
-      }
+        console.log(error);
+      },
     });
   }
 }

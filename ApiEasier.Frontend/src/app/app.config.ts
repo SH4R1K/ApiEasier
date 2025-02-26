@@ -3,7 +3,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { routes } from './app.routes';
+import { APP_ROUTES } from './app.routes';
 import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 
@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(APP_ROUTES),
     NG_EVENT_PLUGINS,
   ],
 };

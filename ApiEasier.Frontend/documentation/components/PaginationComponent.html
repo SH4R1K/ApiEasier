@@ -124,6 +124,27 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент PaginationComponent предназначен для управления пагинацией в Angular-приложениях.
+Он предоставляет удобный интерфейс для навигации по страницам с данными.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует реактивные формы для управления состоянием пагинации.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-pagination
+  [totalItems]=&quot;100&quot;
+  [itemsPerPage]=&quot;10&quot;
+  [currentPage]=&quot;1&quot;
+  (pageChange)=&quot;onPageChange(\$event)&quot;&gt;
+&lt;/app-pagination&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none">TypeScript:
+```typescript
+onPageChange(page: number): void {
+  console.log(&#39;Текущая страница:&#39;, page);
+}</code></pre></div>
+    </p>
 
 
 
@@ -287,9 +308,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:76</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Текущая страница.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -313,9 +340,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:68</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Количество элементов на одной странице.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -339,9 +372,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:60</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Общее количество элементов.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -363,9 +402,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:83</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое срабатывает при изменении страницы.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -396,14 +441,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="28"
-                                    class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:28</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:102</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Переходит на указанную страницу.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">goToPage(2); // Переходит на вторую страницу.</code></pre></div></div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -414,6 +461,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -428,6 +476,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Номер страницы, на которую нужно перейти.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -465,9 +519,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/data/components/pagination/pagination.component.ts:91</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает общее количество страниц.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -476,11 +543,46 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { TuiPagination } from &#x27;@taiga-ui/kit&#x27;;
-import { TuiInputSliderModule, TuiTextfieldControllerModule } from &#x27;@taiga-ui/legacy&#x27;;
+import {
+  TuiInputSliderModule,
+  TuiTextfieldControllerModule,
+} from &#x27;@taiga-ui/legacy&#x27;;
 
+/**
+ * Компонент PaginationComponent предназначен для управления пагинацией в Angular-приложениях.
+ * Он предоставляет удобный интерфейс для навигации по страницам с данными.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует реактивные формы для управления состоянием пагинации.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-pagination
+ *   [totalItems]&#x3D;&quot;100&quot;
+ *   [itemsPerPage]&#x3D;&quot;10&quot;
+ *   [currentPage]&#x3D;&quot;1&quot;
+ *   (pageChange)&#x3D;&quot;onPageChange(\$event)&quot;&gt;
+ * &lt;/app-pagination&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * TypeScript:
+ * &#x60;&#x60;&#x60;typescript
+ * onPageChange(page: number): void {
+ *   console.log(&#x27;Текущая страница:&#x27;, page);
+ * }
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;app-pagination&#x27;,
   imports: [
@@ -494,15 +596,54 @@ import { TuiInputSliderModule, TuiTextfieldControllerModule } from &#x27;@taiga-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginationComponent {
+  /**
+   * Общее количество элементов.
+   * @type {number}
+   * @default 0
+   * @memberof PaginationComponent
+   */
   @Input() totalItems: number &#x3D; 0;
+
+  /**
+   * Количество элементов на одной странице.
+   * @type {number}
+   * @default 16
+   * @memberof PaginationComponent
+   */
   @Input() itemsPerPage: number &#x3D; 16;
+
+  /**
+   * Текущая страница.
+   * @type {number}
+   * @default 1
+   * @memberof PaginationComponent
+   */
   @Input() currentPage: number &#x3D; 1;
+
+  /**
+   * Событие, которое срабатывает при изменении страницы.
+   * @type {EventEmitter&lt;number&gt;}
+   * @memberof PaginationComponent
+   */
   @Output() pageChange &#x3D; new EventEmitter&lt;number&gt;();
 
+  /**
+   * Возвращает общее количество страниц.
+   * @readonly
+   * @type {number}
+   * @memberof PaginationComponent
+   */
   get totalPages(): number {
     return Math.ceil(this.totalItems / this.itemsPerPage);
   }
 
+  /**
+   * Переходит на указанную страницу.
+   * @param {number} page - Номер страницы, на которую нужно перейти.
+   * @memberof PaginationComponent
+   * @example
+   * goToPage(2); // Переходит на вторую страницу.
+   */
   goToPage(page: number): void {
     if (page &gt;&#x3D; 1 &amp;&amp; page &lt;&#x3D; this.totalPages &amp;&amp; page !&#x3D;&#x3D; this.currentPage) {
       this.currentPage &#x3D; page;

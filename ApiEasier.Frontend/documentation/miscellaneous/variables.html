@@ -148,7 +148,7 @@
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     provideAnimations(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(APP_ROUTES),
     NG_EVENT_PLUGINS,
   ],
 }</code>

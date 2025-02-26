@@ -124,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент EndpointDialogComponent предназначен для отображения диалогового окна редактирования эндпоинта.
+Позволяет пользователю вводить и изменять данные эндпоинта, такие как маршрут и тип запроса.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует сервисы для управления диалоговыми окнами и вводом данных.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-endpoint-dialog&gt;&lt;/app-endpoint-dialog&gt;</code></pre></div>
+    </p>
 
 
 
@@ -299,14 +310,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:129</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик ввода данных в поле маршрута.</p>
+<p>Очищает значение от недопустимых символов и обновляет данные эндпоинта.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -317,6 +331,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -331,6 +346,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие ввода данных.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -368,14 +389,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="56"
-                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:56</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="116"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:116</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалоговое окно с заданным содержимым.</p>
+<p>Использует сервис TuiDialogService для открытия диалога.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -386,6 +410,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -400,6 +425,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Шаблон содержимого диалогового окна.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -437,14 +468,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="47"
-                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:47</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:98</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик отправки формы.</p>
+<p>Предотвращает стандартное поведение отправки формы и завершает диалог, если маршрут не пустой.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -480,10 +514,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:67</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контекст диалогового окна, содержащий данные эндпоинта.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -507,10 +547,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:51</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сервис для управления диалоговыми окнами.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -539,10 +585,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:59</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Список доступных типов запросов для эндпоинта.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -568,9 +620,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:76</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Флаг, указывающий, есть ли значение в поле маршрута.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -590,9 +655,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:86</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Данные эндпоинта, которые редактируются в диалоговом окне.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -614,8 +692,20 @@ import {
   TuiTextfieldControllerModule,
 } from &#x27;@taiga-ui/legacy&#x27;;
 import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
-import { Endpoint } from &#x27;../../../services/service-structure-api&#x27;;
+import { Endpoint } from &quot;../../../interfaces/Endpoint&quot;;
 
+/**
+ * Компонент EndpointDialogComponent предназначен для отображения диалогового окна редактирования эндпоинта.
+ * Позволяет пользователю вводить и изменять данные эндпоинта, такие как маршрут и тип запроса.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для управления диалоговыми окнами и вводом данных.
+ *
+ * @example
+ * html
+ * &lt;app-endpoint-dialog&gt;&lt;/app-endpoint-dialog&gt;
+ */
 @Component({
   selector: &#x27;app-endpoint-dialog&#x27;,
   imports: [
@@ -633,20 +723,59 @@ import { Endpoint } from &#x27;../../../services/service-structure-api&#x27;;
   styleUrls: [&#x27;./endpoint-dialog.component.css&#x27;],
 })
 export class EndpointDialogComponent {
+  /**
+   * Сервис для управления диалоговыми окнами.
+   *
+   * @type {TuiDialogService}
+   * @memberof EndpointDialogComponent
+   */
   private readonly dialogs &#x3D; inject(TuiDialogService);
+
+  /**
+   * Список доступных типов запросов для эндпоинта.
+   *
+   * @type {string[]}
+   * @memberof EndpointDialogComponent
+   */
   readonly types: string[] &#x3D; [&#x27;get&#x27;, &#x27;post&#x27;, &#x27;put&#x27;, &#x27;delete&#x27;, &#x27;getbyindex&#x27;];
 
-  public readonly context &#x3D;
-    injectContext&lt;TuiDialogContext&lt;Endpoint, Endpoint&gt;&gt;();
+  /**
+   * Контекст диалогового окна, содержащий данные эндпоинта.
+   *
+   * @type {TuiDialogContext&lt;Endpoint, Endpoint&gt;}
+   * @memberof EndpointDialogComponent
+   */
+  public readonly context &#x3D; injectContext&lt;TuiDialogContext&lt;Endpoint, Endpoint&gt;&gt;();
 
+  /**
+   * Флаг, указывающий, есть ли значение в поле маршрута.
+   *
+   * @type {boolean}
+   * @returns {boolean} Возвращает true, если маршрут не пустой.
+   * @memberof EndpointDialogComponent
+   */
   protected get hasValue(): boolean {
     return this.data.route.trim() !&#x3D;&#x3D; &#x27;&#x27;;
   }
 
+  /**
+   * Данные эндпоинта, которые редактируются в диалоговом окне.
+   *
+   * @type {Endpoint}
+   * @memberof EndpointDialogComponent
+   */
   protected get data(): Endpoint {
     return this.context.data;
   }
 
+  /**
+   * Обработчик отправки формы.
+   *
+   * @remarks
+   * Предотвращает стандартное поведение отправки формы и завершает диалог, если маршрут не пустой.
+   *
+   * @memberof EndpointDialogComponent
+   */
   protected submit(): void {
     if (event) {
       event.preventDefault();
@@ -656,10 +785,28 @@ export class EndpointDialogComponent {
     }
   }
 
+  /**
+   * Открывает диалоговое окно с заданным содержимым.
+   *
+   * @param content - Шаблон содержимого диалогового окна.
+   * @remarks
+   * Использует сервис TuiDialogService для открытия диалога.
+   *
+   * @memberof EndpointDialogComponent
+   */
   protected showDialog(content: TemplateRef&lt;TuiDialogContext&gt;): void {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  /**
+   * Обработчик ввода данных в поле маршрута.
+   *
+   * @param event - Событие ввода данных.
+   * @remarks
+   * Очищает значение от недопустимых символов и обновляет данные эндпоинта.
+   *
+   * @memberof EndpointDialogComponent
+   */
   protected onInput(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     const value &#x3D; input.value;

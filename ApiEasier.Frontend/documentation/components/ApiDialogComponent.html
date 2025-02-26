@@ -124,6 +124,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент ApiDialogComponent предназначен для редактирования данных API через диалоговое окно.
+Использует компоненты Taiga UI для создания интерактивного интерфейса.</p>
+<p>Этот компонент предоставляет пользователю возможность редактировать данные API, такие как имя и описание,
+и отправлять изменения через диалоговое окно.
+Интегрируется с сервисами Taiga UI для управления диалогами и вводом данных.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-api-edit-dialog&gt;&lt;/app-api-edit-dialog&gt;</code></pre></div>
+    </p>
 
 
 
@@ -307,14 +319,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="73"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:73</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:173</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Перемещает фокус на указанное поле ввода.</p>
+<p>Используется для управления фокусом между полями ввода.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -325,6 +340,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -339,6 +355,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Ссылка на элемент ввода.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -376,14 +398,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:156</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик ввода данных в поле имени.</p>
+<p>Очищает значение от недопустимых символов и обновляет данные API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -394,6 +419,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -408,6 +434,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие ввода данных.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -445,14 +477,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="61"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:61</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:143</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалоговое окно с заданным содержимым.</p>
+<p>Использует сервис TuiDialogService для открытия диалога.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -463,6 +498,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -477,6 +513,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Шаблон содержимого диалогового окна.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -514,14 +556,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:125</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик отправки формы.</p>
+<p>Предотвращает стандартное поведение отправки формы и завершает диалог, если имя не пустое.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -532,6 +577,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -546,6 +592,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие отправки формы.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -589,10 +641,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:39</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:90</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контекст диалогового окна, содержащий данные API.</p>
+<p>Внедряется с использованием функции injectContext из Taiga UI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -625,10 +684,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:68</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Ссылка на элемент ввода описания.</p>
+<p>Используется для управления фокусом и значением поля ввода описания.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -652,10 +718,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:79</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сервис для управления диалоговыми окнами.</p>
+<p>Внедряется с использованием Angular DI.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -688,10 +761,17 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:33</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:56</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Ссылка на элемент ввода имени.</p>
+<p>Используется для управления фокусом и значением поля ввода имени.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -717,9 +797,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:102</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Флаг, указывающий, есть ли значение в поле ввода имени.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -739,9 +832,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:112</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Данные API, которые редактируются в диалоговом окне.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -763,8 +869,22 @@ import {
   TuiTextfieldControllerModule,
 } from &#x27;@taiga-ui/legacy&#x27;;
 import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
-import { apiServiceShortStructure } from &#x27;../../../services/service-structure-api&#x27;;
+import { apiServiceShortStructure } from &quot;../../../interfaces/apiServiceShortStructure&quot;;
 
+/**
+ * Компонент ApiDialogComponent предназначен для редактирования данных API через диалоговое окно.
+ * Использует компоненты Taiga UI для создания интерактивного интерфейса.
+ *
+ * @remarks
+ * Этот компонент предоставляет пользователю возможность редактировать данные API, такие как имя и описание,
+ * и отправлять изменения через диалоговое окно.
+ * Интегрируется с сервисами Taiga UI для управления диалогами и вводом данных.
+ *
+ * @example
+ * html
+ * &lt;app-api-edit-dialog&gt;&lt;/app-api-edit-dialog&gt;
+ * 
+ */
 @Component({
   selector: &#x27;app-api-edit-dialog&#x27;,
   imports: [
@@ -782,25 +902,84 @@ import { apiServiceShortStructure } from &#x27;../../../services/service-structu
   styleUrls: [&#x27;./api-dialog.component.css&#x27;],
 })
 export class ApiDialogComponent {
+  /**
+   * Ссылка на элемент ввода имени.
+   *
+   * @remarks
+   * Используется для управления фокусом и значением поля ввода имени.
+   *
+   * @type {ElementRef}
+   * @memberof ApiDialogComponent
+   */
   @ViewChild(&#x27;nameInput&#x27;, { read: ElementRef }) nameInputRef!: ElementRef;
+
+  /**
+   * Ссылка на элемент ввода описания.
+   *
+   * @remarks
+   * Используется для управления фокусом и значением поля ввода описания.
+   *
+   * @type {ElementRef}
+   * @memberof ApiDialogComponent
+   */
   @ViewChild(&#x27;descriptionInput&#x27;, { read: ElementRef })
   descriptionInputRef!: ElementRef;
 
+  /**
+   * Сервис для управления диалоговыми окнами.
+   *
+   * @remarks
+   * Внедряется с использованием Angular DI.
+   *
+   * @type {TuiDialogService}
+   * @memberof ApiDialogComponent
+   */
   private readonly dialogs &#x3D; inject(TuiDialogService);
 
+  /**
+   * Контекст диалогового окна, содержащий данные API.
+   *
+   * @remarks
+   * Внедряется с использованием функции injectContext из Taiga UI.
+   *
+   * @type {TuiDialogContext&lt;apiServiceShortStructure, apiServiceShortStructure&gt;}
+   * @memberof ApiDialogComponent
+   */
   public readonly context &#x3D;
     injectContext&lt;
       TuiDialogContext&lt;apiServiceShortStructure, apiServiceShortStructure&gt;
     &gt;();
 
+  /**
+   * Флаг, указывающий, есть ли значение в поле ввода имени.
+   *
+   * @type {boolean}
+   * @returns {boolean} Возвращает true, если имя не пустое.
+   * @memberof ApiDialogComponent
+   */
   protected get hasValue(): boolean {
     return this.data.name.trim() !&#x3D;&#x3D; &#x27;&#x27;;
   }
 
+  /**
+   * Данные API, которые редактируются в диалоговом окне.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof ApiDialogComponent
+   */
   protected get data(): apiServiceShortStructure {
     return this.context.data;
   }
 
+  /**
+   * Обработчик отправки формы.
+   *
+   * @param event - Событие отправки формы.
+   * @remarks
+   * Предотвращает стандартное поведение отправки формы и завершает диалог, если имя не пустое.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected submit(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -810,10 +989,28 @@ export class ApiDialogComponent {
     }
   }
 
+  /**
+   * Открывает диалоговое окно с заданным содержимым.
+   *
+   * @param content - Шаблон содержимого диалогового окна.
+   * @remarks
+   * Использует сервис TuiDialogService для открытия диалога.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected showDialog(content: TemplateRef&lt;TuiDialogContext&gt;): void {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  /**
+   * Обработчик ввода данных в поле имени.
+   *
+   * @param event - Событие ввода данных.
+   * @remarks
+   * Очищает значение от недопустимых символов и обновляет данные API.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected onInput(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     const value &#x3D; input.value;
@@ -822,6 +1019,15 @@ export class ApiDialogComponent {
     this.data.name &#x3D; cleanedValue;
   }
 
+  /**
+   * Перемещает фокус на указанное поле ввода.
+   *
+   * @param targetInput - Ссылка на элемент ввода.
+   * @remarks
+   * Используется для управления фокусом между полями ввода.
+   *
+   * @memberof ApiDialogComponent
+   */
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector(&#x27;input&#x27;).focus();
   }

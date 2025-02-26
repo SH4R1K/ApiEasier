@@ -26,6 +26,18 @@ import {
 import { injectContext } from '@taiga-ui/polymorpheus';
 import { Entity } from "../../../interfaces/Entity";
 
+/**
+ * Компонент EntityDialogComponent предназначен для отображения диалогового окна редактирования сущности.
+ * Позволяет пользователю вводить и изменять данные сущности, такие как имя и структура.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для управления диалоговыми окнами и вводом данных.
+ *
+ * @example
+ * html
+ * <app-entity-edit-dialog></app-entity-edit-dialog>
+ */
 @Component({
   selector: 'app-entity-edit-dialog',
   imports: [
@@ -45,23 +57,84 @@ import { Entity } from "../../../interfaces/Entity";
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntityDialogComponent {
+  /**
+   * Ссылка на элемент ввода имени.
+   *
+   * @type {ElementRef}
+   * @memberof EntityDialogComponent
+   */
   @ViewChild('nameInput', { read: ElementRef }) nameInputRef!: ElementRef;
+
+  /**
+   * Ссылка на элемент ввода структуры.
+   *
+   * @type {ElementRef}
+   * @memberof EntityDialogComponent
+   */
   @ViewChild('descriptionInput', { read: ElementRef })
   structureInputRef!: ElementRef;
 
+  /**
+   * Сервис для управления диалоговыми окнами.
+   *
+   * @type {TuiDialogService}
+   * @memberof EntityDialogComponent
+   */
   private readonly dialogs = inject(TuiDialogService);
+
+  /**
+   * Сервис для отображения уведомлений.
+   *
+   * @type {TuiAlertService}
+   * @memberof EntityDialogComponent
+   */
   private readonly alerts = inject(TuiAlertService);
+
+  /**
+   * Флаг, указывающий, можно ли отправить данные.
+   *
+   * @type {boolean}
+   * @default true
+   * @memberof EntityDialogComponent
+   */
   private isCanSubmit: boolean = true;
+
+  /**
+   * Контекст диалогового окна, содержащий данные сущности.
+   *
+   * @type {TuiDialogContext<Entity, Entity>}
+   * @memberof EntityDialogComponent
+   */
   public readonly context = injectContext<TuiDialogContext<Entity, Entity>>();
 
+  /**
+   * Флаг, указывающий, есть ли значение в поле имени.
+   *
+   * @type {boolean}
+   * @returns {boolean} Возвращает true, если имя не пустое.
+   * @memberof EntityDialogComponent
+   */
   protected get hasValue(): boolean {
     return this.data.name.trim() !== '';
   }
 
+  /**
+   * Данные сущности, которые редактируются в диалоговом окне.
+   *
+   * @type {Entity}
+   * @memberof EntityDialogComponent
+   */
   protected get data(): Entity {
     return this.context.data;
   }
 
+  /**
+   * Возвращает структуру сущности в формате JSON.
+   *
+   * @type {string}
+   * @returns {string} Структура сущности в формате JSON.
+   * @memberof EntityDialogComponent
+   */
   protected get structure(): string {
     try {
       if (this.data.structure == null) return '';
@@ -72,6 +145,12 @@ export class EntityDialogComponent {
     }
   }
 
+  /**
+   * Устанавливает структуру сущности из строки JSON.
+   *
+   * @param value - Строка JSON для установки структуры.
+   * @memberof EntityDialogComponent
+   */
   protected set structure(value: string) {
     try {
       this.data.structure = JSON.parse(value);
@@ -86,14 +165,33 @@ export class EntityDialogComponent {
     }
   }
 
+  /**
+   * Обработчик событий клавиатуры.
+   *
+   * @param event - Событие клавиатуры.
+   * @remarks
+   * Обрабатывает нажатия клавиш "Enter" и "Escape".
+   *
+   * @memberof EntityDialogComponent
+   */
+  @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (event.key === 'Enter') {
       this.handleSubmit();
     } else if (event.key === 'Escape') {
+      // Обработка нажатия клавиши "Escape"
     }
   }
 
-  handleSubmit(): void {
+  /**
+   * Обработчик отправки формы.
+   *
+   * @remarks
+   * Проверяет корректность данных и завершает диалог, если данные валидны.
+   *
+   * @memberof EntityDialogComponent
+   */
+  protected handleSubmit(): void {
     if (!this.isCanSubmit) {
       this.showError('JSON не правильной структуры');
       return;
@@ -106,10 +204,26 @@ export class EntityDialogComponent {
     }
   }
 
+  /**
+   * Открывает диалоговое окно с заданным содержимым.
+   *
+   * @param content - Шаблон содержимого диалогового окна.
+   * @remarks
+   * Использует сервис TuiDialogService для открытия диалога.
+   *
+   * @memberof EntityDialogComponent
+   */
   protected showDialog(content: TemplateRef<TuiDialogContext>): void {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  /**
+   * Отображает сообщение об ошибке.
+   *
+   * @param message - Сообщение об ошибке.
+   * @private
+   * @memberof EntityDialogComponent
+   */
   private showError(message: string): void {
     this.alerts
       .open(message, {
@@ -120,6 +234,15 @@ export class EntityDialogComponent {
       .subscribe();
   }
 
+  /**
+   * Обработчик ввода данных в поле имени.
+   *
+   * @param event - Событие ввода данных.
+   * @remarks
+   * Очищает значение от недопустимых символов и обновляет данные сущности.
+   *
+   * @memberof EntityDialogComponent
+   */
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
     const value = input.value;
@@ -128,6 +251,15 @@ export class EntityDialogComponent {
     this.data.name = cleanedValue;
   }
 
+  /**
+   * Перемещает фокус на указанное поле ввода.
+   *
+   * @param targetInput - Ссылка на элемент ввода.
+   * @remarks
+   * Используется для управления фокусом между полями ввода.
+   *
+   * @memberof EntityDialogComponent
+   */
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector('input, textarea').focus();
   }

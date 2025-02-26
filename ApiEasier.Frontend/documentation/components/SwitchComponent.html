@@ -124,6 +124,25 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент SwitchComponent представляет собой переключатель, который позволяет пользователю включать или выключать определенную функцию.
+Он интегрируется с Taiga UI для создания стилизованного и интерактивного интерфейса.</p>
+<p>Этот компонент использует реактивные формы для управления состоянием переключателя.
+Поддерживает валидацию и может быть настроен для отображения иконки и изменения внешнего вида.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-switch [value]=&quot;isFeatureEnabled&quot; (toggle)=&quot;onToggle(\$event)&quot;&gt;&lt;/app-switch&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none">TypeScript:
+```typescript
+isFeatureEnabled: boolean = false;
+
+onToggle(value: boolean): void {
+  this.isFeatureEnabled = value;
+  console.log(&#39;Функция переключена:&#39;, value);
+}</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -304,9 +323,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/data/components/switch/switch.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/components/switch/switch.component.ts:54</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Значение переключателя.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -328,9 +353,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/data/components/switch/switch.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/data/components/switch/switch.component.ts:61</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое срабатывает при переключении состояния.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -363,14 +394,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/data/components/switch/switch.component.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/data/components/switch/switch.component.ts:85</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Инициализация компонента.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -400,19 +433,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/data/components/switch/switch.component.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/app/data/components/switch/switch.component.ts:96</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик события переключения.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">onToggle(); // Вызывает событие toggle с текущим значением переключателя.</code></pre></div></div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -445,10 +483,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/components/switch/switch.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/data/components/switch/switch.component.ts:77</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контрол для валидации состояния переключателя (ложь).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -474,10 +518,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/data/components/switch/switch.component.ts:27</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/data/components/switch/switch.component.ts:68</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контроль для валидации состояния переключателя (истина).</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -499,6 +549,30 @@ import {
 import { FormControl, FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
 import { TuiSwitch, tuiSwitchOptionsProvider } from &#x27;@taiga-ui/kit&#x27;;
 
+/**
+ * Компонент SwitchComponent представляет собой переключатель, который позволяет пользователю включать или выключать определенную функцию.
+ * Он интегрируется с Taiga UI для создания стилизованного и интерактивного интерфейса.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы для управления состоянием переключателя.
+ * Поддерживает валидацию и может быть настроен для отображения иконки и изменения внешнего вида.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-switch [value]&#x3D;&quot;isFeatureEnabled&quot; (toggle)&#x3D;&quot;onToggle(\$event)&quot;&gt;&lt;/app-switch&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * TypeScript:
+ * &#x60;&#x60;&#x60;typescript
+ * isFeatureEnabled: boolean &#x3D; false;
+ *
+ * onToggle(value: boolean): void {
+ *   this.isFeatureEnabled &#x3D; value;
+ *   console.log(&#x27;Функция переключена:&#x27;, value);
+ * }
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;app-switch&#x27;,
   imports: [CommonModule, FormsModule, ReactiveFormsModule, TuiSwitch],
@@ -510,21 +584,54 @@ import { TuiSwitch, tuiSwitchOptionsProvider } from &#x27;@taiga-ui/kit&#x27;;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SwitchComponent implements OnInit {
+  /**
+   * Значение переключателя.
+   * @type {boolean}
+   * @default false
+   * @memberof SwitchComponent
+   */
   @Input() value: boolean &#x3D; false;
+
+  /**
+   * Событие, которое срабатывает при переключении состояния.
+   * @type {EventEmitter&lt;boolean&gt;}
+   * @memberof SwitchComponent
+   */
   @Output() toggle: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter&lt;boolean&gt;();
 
+  /**
+   * Контроль для валидации состояния переключателя (истина).
+   * @type {FormControl&lt;boolean&gt;}
+   * @memberof SwitchComponent
+   */
   protected readonly invalidTrue &#x3D; new FormControl(true, () &#x3D;&gt; ({
     invalid: true,
   }));
+
+  /**
+   * Контрол для валидации состояния переключателя (ложь).
+   * @type {FormControl&lt;boolean&gt;}
+   * @memberof SwitchComponent
+   */
   protected readonly invalidFalse &#x3D; new FormControl(false, () &#x3D;&gt; ({
     invalid: true,
   }));
 
+  /**
+   * Инициализация компонента.
+   * @memberof SwitchComponent
+   */
   public ngOnInit(): void {
     this.invalidTrue.markAsTouched();
     this.invalidFalse.markAsTouched();
   }
 
+  /**
+   * Обработчик события переключения.
+   * @memberof SwitchComponent
+   * @example
+   * onToggle(); // Вызывает событие toggle с текущим значением переключателя.
+   */
   onToggle(): void {
     this.toggle.emit(this.value);
   }

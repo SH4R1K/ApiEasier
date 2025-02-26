@@ -124,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент EntityDialogComponent предназначен для отображения диалогового окна редактирования сущности.
+Позволяет пользователю вводить и изменять данные сущности, такие как имя и структура.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует сервисы для управления диалоговыми окнами и вводом данных.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-entity-edit-dialog&gt;&lt;/app-entity-edit-dialog&gt;</code></pre></div>
+    </p>
 
 
 
@@ -245,9 +256,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier"></span>
                                 <a href="#handleKeyboardEvent" >handleKeyboardEvent</a>
                             </li>
                             <li>
+                                    <span class="modifier">Protected</span>
                                 <a href="#handleSubmit" >handleSubmit</a>
                             </li>
                             <li>
@@ -273,6 +286,20 @@
 
 
 
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>HostListeners</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#document:keydown" >document:keydown</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                     <tr>
                         <td class="col-md-4">
@@ -302,7 +329,79 @@
 
 
 
+    <section data-compodoc="block-methods">
+    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="document:keydown"></a>
+                    <span class="name">
+                        <span ><b>document:keydown</b></span>
+                        <a href="#document:keydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <i>Arguments : </i><code>'$event' </code>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>document:keydown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
 
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:178</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик событий клавиатуры.</p>
+<p>Обрабатывает нажатия клавиш &quot;Enter&quot; и &quot;Escape&quot;.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Событие клавиатуры.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
     <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -314,6 +413,7 @@
                 <td class="col-md-4">
                     <a name="handleKeyboardEvent"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                         <span ><b>handleKeyboardEvent</b></span>
                         <a href="#handleKeyboardEvent"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -321,21 +421,32 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>handleKeyboardEvent(event: KeyboardEvent)</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleKeyboardEvent(event: KeyboardEvent)</code>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@HostListener(&#x27;document:keydown&#x27;, [&#x27;$event&#x27;])<br /></code>
+                </td>
+            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="178"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:178</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик событий клавиатуры.</p>
+<p>Обрабатывает нажатия клавиш &quot;Enter&quot; и &quot;Escape&quot;.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -346,6 +457,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -360,6 +472,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие клавиатуры.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -381,6 +499,7 @@
                 <td class="col-md-4">
                     <a name="handleSubmit"></a>
                     <span class="name">
+                            <span class="modifier">Protected</span>
                         <span ><b>handleSubmit</b></span>
                         <a href="#handleSubmit"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -388,21 +507,25 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-<code>handleSubmit()</code>
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleSubmit()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:194</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик отправки формы.</p>
+<p>Проверяет корректность данных и завершает диалог, если данные валидны.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -434,14 +557,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="131"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:131</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="263"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:263</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Перемещает фокус на указанное поле ввода.</p>
+<p>Используется для управления фокусом между полями ввода.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -452,6 +578,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -466,6 +593,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Ссылка на элемент ввода.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -503,14 +636,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:246</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик ввода данных в поле имени.</p>
+<p>Очищает значение от недопустимых символов и обновляет данные сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -521,6 +657,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -535,6 +672,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие ввода данных.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -572,14 +715,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:109</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:216</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалоговое окно с заданным содержимым.</p>
+<p>Использует сервис TuiDialogService для открытия диалога.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -590,6 +736,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -604,6 +751,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Шаблон содержимого диалогового окна.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -641,14 +794,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:227</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Отображает сообщение об ошибке.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -659,6 +814,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -673,6 +829,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Сообщение об ошибке.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -714,10 +876,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:91</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сервис для отображения уведомлений.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -741,10 +909,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:108</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контекст диалогового окна, содержащий данные сущности.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -768,10 +942,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:83</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сервис для управления диалоговыми окнами.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -800,10 +980,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:100</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, можно ли отправить данные.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -836,10 +1022,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:66</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Ссылка на элемент ввода имени.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -872,10 +1064,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:75</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Ссылка на элемент ввода структуры.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -901,9 +1099,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:117</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Флаг, указывающий, есть ли значение в поле имени.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -923,9 +1134,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:127</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Данные сущности, которые редактируются в диалоговом окне.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -945,9 +1169,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:65</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:138</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает структуру сущности в формате JSON.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -956,11 +1193,13 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:154</a></div>
                                 </td>
                             </tr>
                     <tr>
                         <td class="col-md-4">
+                                <div class="io-description"><p>Устанавливает структуру сущности из строки JSON.</p>
+</div>
 
                                 <div class="io-description">
                                         <b>Parameters :</b>
@@ -970,6 +1209,7 @@
                                                     <td>Name</td>
                                                         <td>Type</td>
                                                     <td>Optional</td>
+                                                        <td>Description</td>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -984,6 +1224,12 @@
                                                                 No
                                                         </td>
                                                         
+                                                            <td>
+                                                                    <ul>
+<li>Строка JSON для установки структуры.</li>
+</ul>
+
+                                                            </td>
                                                     </tr>
                                             </tbody>
                                         </table>
@@ -1029,8 +1275,20 @@ import {
   TuiTextfieldControllerModule,
 } from &#x27;@taiga-ui/legacy&#x27;;
 import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
-import { Entity } from &#x27;../../../services/service-structure-api&#x27;;
+import { Entity } from &quot;../../../interfaces/Entity&quot;;
 
+/**
+ * Компонент EntityDialogComponent предназначен для отображения диалогового окна редактирования сущности.
+ * Позволяет пользователю вводить и изменять данные сущности, такие как имя и структура.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для управления диалоговыми окнами и вводом данных.
+ *
+ * @example
+ * html
+ * &lt;app-entity-edit-dialog&gt;&lt;/app-entity-edit-dialog&gt;
+ */
 @Component({
   selector: &#x27;app-entity-edit-dialog&#x27;,
   imports: [
@@ -1050,23 +1308,84 @@ import { Entity } from &#x27;../../../services/service-structure-api&#x27;;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntityDialogComponent {
+  /**
+   * Ссылка на элемент ввода имени.
+   *
+   * @type {ElementRef}
+   * @memberof EntityDialogComponent
+   */
   @ViewChild(&#x27;nameInput&#x27;, { read: ElementRef }) nameInputRef!: ElementRef;
+
+  /**
+   * Ссылка на элемент ввода структуры.
+   *
+   * @type {ElementRef}
+   * @memberof EntityDialogComponent
+   */
   @ViewChild(&#x27;descriptionInput&#x27;, { read: ElementRef })
   structureInputRef!: ElementRef;
 
+  /**
+   * Сервис для управления диалоговыми окнами.
+   *
+   * @type {TuiDialogService}
+   * @memberof EntityDialogComponent
+   */
   private readonly dialogs &#x3D; inject(TuiDialogService);
+
+  /**
+   * Сервис для отображения уведомлений.
+   *
+   * @type {TuiAlertService}
+   * @memberof EntityDialogComponent
+   */
   private readonly alerts &#x3D; inject(TuiAlertService);
+
+  /**
+   * Флаг, указывающий, можно ли отправить данные.
+   *
+   * @type {boolean}
+   * @default true
+   * @memberof EntityDialogComponent
+   */
   private isCanSubmit: boolean &#x3D; true;
+
+  /**
+   * Контекст диалогового окна, содержащий данные сущности.
+   *
+   * @type {TuiDialogContext&lt;Entity, Entity&gt;}
+   * @memberof EntityDialogComponent
+   */
   public readonly context &#x3D; injectContext&lt;TuiDialogContext&lt;Entity, Entity&gt;&gt;();
 
+  /**
+   * Флаг, указывающий, есть ли значение в поле имени.
+   *
+   * @type {boolean}
+   * @returns {boolean} Возвращает true, если имя не пустое.
+   * @memberof EntityDialogComponent
+   */
   protected get hasValue(): boolean {
     return this.data.name.trim() !&#x3D;&#x3D; &#x27;&#x27;;
   }
 
+  /**
+   * Данные сущности, которые редактируются в диалоговом окне.
+   *
+   * @type {Entity}
+   * @memberof EntityDialogComponent
+   */
   protected get data(): Entity {
     return this.context.data;
   }
 
+  /**
+   * Возвращает структуру сущности в формате JSON.
+   *
+   * @type {string}
+   * @returns {string} Структура сущности в формате JSON.
+   * @memberof EntityDialogComponent
+   */
   protected get structure(): string {
     try {
       if (this.data.structure &#x3D;&#x3D; null) return &#x27;&#x27;;
@@ -1077,6 +1396,12 @@ export class EntityDialogComponent {
     }
   }
 
+  /**
+   * Устанавливает структуру сущности из строки JSON.
+   *
+   * @param value - Строка JSON для установки структуры.
+   * @memberof EntityDialogComponent
+   */
   protected set structure(value: string) {
     try {
       this.data.structure &#x3D; JSON.parse(value);
@@ -1091,14 +1416,33 @@ export class EntityDialogComponent {
     }
   }
 
+  /**
+   * Обработчик событий клавиатуры.
+   *
+   * @param event - Событие клавиатуры.
+   * @remarks
+   * Обрабатывает нажатия клавиш &quot;Enter&quot; и &quot;Escape&quot;.
+   *
+   * @memberof EntityDialogComponent
+   */
+  @HostListener(&#x27;document:keydown&#x27;, [&#x27;$event&#x27;])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (event.key &#x3D;&#x3D;&#x3D; &#x27;Enter&#x27;) {
       this.handleSubmit();
     } else if (event.key &#x3D;&#x3D;&#x3D; &#x27;Escape&#x27;) {
+      // Обработка нажатия клавиши &quot;Escape&quot;
     }
   }
 
-  handleSubmit(): void {
+  /**
+   * Обработчик отправки формы.
+   *
+   * @remarks
+   * Проверяет корректность данных и завершает диалог, если данные валидны.
+   *
+   * @memberof EntityDialogComponent
+   */
+  protected handleSubmit(): void {
     if (!this.isCanSubmit) {
       this.showError(&#x27;JSON не правильной структуры&#x27;);
       return;
@@ -1111,10 +1455,26 @@ export class EntityDialogComponent {
     }
   }
 
+  /**
+   * Открывает диалоговое окно с заданным содержимым.
+   *
+   * @param content - Шаблон содержимого диалогового окна.
+   * @remarks
+   * Использует сервис TuiDialogService для открытия диалога.
+   *
+   * @memberof EntityDialogComponent
+   */
   protected showDialog(content: TemplateRef&lt;TuiDialogContext&gt;): void {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  /**
+   * Отображает сообщение об ошибке.
+   *
+   * @param message - Сообщение об ошибке.
+   * @private
+   * @memberof EntityDialogComponent
+   */
   private showError(message: string): void {
     this.alerts
       .open(message, {
@@ -1125,6 +1485,15 @@ export class EntityDialogComponent {
       .subscribe();
   }
 
+  /**
+   * Обработчик ввода данных в поле имени.
+   *
+   * @param event - Событие ввода данных.
+   * @remarks
+   * Очищает значение от недопустимых символов и обновляет данные сущности.
+   *
+   * @memberof EntityDialogComponent
+   */
   protected onInput(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
     const value &#x3D; input.value;
@@ -1133,6 +1502,15 @@ export class EntityDialogComponent {
     this.data.name &#x3D; cleanedValue;
   }
 
+  /**
+   * Перемещает фокус на указанное поле ввода.
+   *
+   * @param targetInput - Ссылка на элемент ввода.
+   * @remarks
+   * Используется для управления фокусом между полями ввода.
+   *
+   * @memberof EntityDialogComponent
+   */
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector(&#x27;input, textarea&#x27;).focus();
   }

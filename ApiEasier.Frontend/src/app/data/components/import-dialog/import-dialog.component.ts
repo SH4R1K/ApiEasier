@@ -1,45 +1,96 @@
 import { NgIf, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ChangeDetectorRef } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { TuiIcon, TuiLink } from '@taiga-ui/core';
-import type { TuiFileLike } from '@taiga-ui/kit';
+import { TuiIcon, TuiLink, TuiButton, TuiAlertService } from '@taiga-ui/core';
 import { TuiAvatar, TuiFiles } from '@taiga-ui/kit';
-import { ChangeDetectorRef } from '@angular/core';
-import { TuiButton } from '@taiga-ui/core';
 import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
-import { TuiDialogContext, TuiAlertService } from '@taiga-ui/core';
+import { TuiDialogContext } from '@taiga-ui/core';
 import { injectContext } from '@taiga-ui/polymorpheus';
+import { FileStatus } from '../../../interfaces/FileStatus';
 
-interface FileStatus {
-  file: TuiFileLike;
-  status: 'loading' | 'normal' | 'error' | 'success';
-  errorMessage: string;
-}
-
+/**
+ * Компонент ImportDialogComponent предназначен для импорта данных API через диалоговое окно.
+ * Позволяет пользователю загружать файлы и обрабатывать их содержимое для создания новых API сервисов.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует реактивные формы для управления загрузкой файлов и обработки данных.
+ *
+ * @example
+ * html
+ * <app-import-dialog></app-import-dialog>
+ */
 @Component({
   selector: 'app-import-dialog',
-  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiIcon, TuiLink, NgFor, TuiButton],
+  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiLink, NgFor, TuiButton],
   templateUrl: './import-dialog.component.html',
-  styleUrl: './import-dialog.component.css',
+  styleUrls: ['./import-dialog.component.css'], // Исправлено с styleUrl на styleUrls
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImportDialogComponent {
+  /**
+   * Контрол для управления загрузкой файлов.
+   *
+   * @type {FormControl<File[]>}
+   * @memberof ImportDialogComponent
+   */
   protected readonly control = new FormControl<File[]>([]);
+
+  /**
+   * Список загруженных файлов с их статусами.
+   *
+   * @type {FileStatus[]}
+   * @memberof ImportDialogComponent
+   */
   protected files: FileStatus[] = [];
+
+  /**
+   * Флаг, указывающий, есть ли загруженные файлы.
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof ImportDialogComponent
+   */
   protected hasFiles = false;
-  protected processedData: ApiServiceStructure[] = []; // Массив для хранения обработанных данных
+
+  /**
+   * Массив для хранения обработанных данных API.
+   *
+   * @type {ApiServiceStructure[]}
+   * @memberof ImportDialogComponent
+   */
+  protected processedData: ApiServiceStructure[] = [];
+
+  /**
+   * Контекст диалогового окна.
+   *
+   * @type {TuiDialogContext<boolean>}
+   * @memberof ImportDialogComponent
+   */
   private readonly context = injectContext<TuiDialogContext<boolean>>();
 
-
-  constructor(private cdr: ChangeDetectorRef, private apiService: ApiServiceRepositoryService, private readonly alerts: TuiAlertService) {
+  /**
+   * Конструктор компонента ImportDialogComponent.
+   *
+   * @param cd - Сервис для управления изменением состояния.
+   * @param apiService - Сервис для взаимодействия с репозиторием API.
+   * @param alerts - Сервис для отображения уведомлений.
+   *
+   * @memberof ImportDialogComponent
+   */
+  constructor(
+    private cd: ChangeDetectorRef,
+    private apiService: ApiServiceRepositoryService,
+    private readonly alerts: TuiAlertService
+  ) {
     this.control.valueChanges.subscribe((files) => {
       if (files) {
         // Обновляем только новые файлы
         const newFiles = files.filter(file => !this.files.some(f => f.file.name === file.name));
         this.files = [
           ...this.files,
-          ...newFiles.map(file => ({ file, status: 'loading' as const, errorMessage: '' })) // Используем 'as const' для явного указания типа
+          ...newFiles.map(file => ({ file, status: 'loading' as const, errorMessage: '' }))
         ];
         this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;
         this.readFiles(newFiles);
@@ -47,6 +98,13 @@ export class ImportDialogComponent {
     });
   }
 
+  /**
+   * Читает содержимое загруженных файлов.
+   *
+   * @param files - Список файлов для чтения.
+   * @private
+   * @memberof ImportDialogComponent
+   */
   private readFiles(files: File[]): void {
     files.forEach(file => {
       const reader = new FileReader();
@@ -55,7 +113,7 @@ export class ImportDialogComponent {
         try {
           const json = JSON.parse(text);
           this.updateFileStatus(file, 'normal');
-          this.processJson(json, file.name); // Передаем имя файла в processJson
+          this.processJson(json, file.name);
         } catch (error) {
           console.error('Ошибка при чтении JSON файла:', error);
           this.updateFileStatus(file, 'error');
@@ -65,15 +123,30 @@ export class ImportDialogComponent {
     });
   }
 
+  /**
+   * Обновляет статус файла.
+   *
+   * @param file - Файл, статус которого нужно обновить.
+   * @param status - Новый статус файла.
+   * @private
+   * @memberof ImportDialogComponent
+   */
   private updateFileStatus(file: File, status: 'loading' | 'normal' | 'error'): void {
     const fileStatus = this.files.find(f => f.file.name === file.name);
     if (fileStatus) {
-      fileStatus.status = status; // Тип уже корректен
+      fileStatus.status = status;
       this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;
-      this.cdr.markForCheck();
+      this.cd.markForCheck();
     }
   }
 
+  /**
+   * Возвращает текстовое описание статуса файла.
+   *
+   * @param file - Файл, для которого нужно получить статус.
+   * @returns {string} Текстовое описание статуса файла.
+   * @memberof ImportDialogComponent
+   */
   protected getFileStatusText(file: FileStatus): string {
     switch (file.status) {
       case 'loading':
@@ -89,6 +162,13 @@ export class ImportDialogComponent {
     }
   }
 
+  /**
+   * Возвращает текущий статус файла.
+   *
+   * @param file - Файл, для которого нужно получить статус.
+   * @returns {'loading' | 'normal' | 'error'} Статус файла.
+   * @memberof ImportDialogComponent
+   */
   protected getFileStatus(file: FileStatus): 'loading' | 'normal' | 'error' {
     switch (file.status) {
       case 'loading':
@@ -102,38 +182,48 @@ export class ImportDialogComponent {
     }
   }
 
+  /**
+   * Обрабатывает JSON данные из файла.
+   *
+   * @param json - JSON данные для обработки.
+   * @param fileName - Имя файла.
+   * @private
+   * @memberof ImportDialogComponent
+   */
   private processJson(json: any, fileName: string): void {
-    const name = fileName.replace(/\.[^/.]+$/, ""); // Убираем расширение файла
+    const name = fileName.replace(/\.[^/.]+$/, "");
     const apiServiceStructure: ApiServiceStructure = {
       name: name,
-      isActive: json.isActive || false, // Пример обработки других полей
+      isActive: json.isActive || false,
       description: json.description || '',
       entities: json.entities || []
     };
-    this.processedData.push(apiServiceStructure); // Сохраняем обработанные данные
+    this.processedData.push(apiServiceStructure);
     console.log('Обработанный JSON:', apiServiceStructure);
   }
 
+  /**
+   * Отправляет обработанные данные на сервер.
+   *
+   * @remarks
+   * Обновляет статус файлов и отображает уведомления о результатах отправки.
+   *
+   * @memberof ImportDialogComponent
+   */
   protected submit(): void {
     if (this.processedData.length > 0) {
       this.files.filter(f => f.status == 'normal').forEach(file => file.status = 'loading');
-      this.cdr.markForCheck();
+      this.cd.markForCheck();
 
-      // Отправляем каждый объект на сервер
       this.processedData.forEach(service => {
         this.apiService.createFullApiService(service).subscribe({
           next: (response) => {
             console.log('Сервис успешно создан:', response);
-            // Обновляем статус файла на "success" (успешно загружен)
-            const index = this.processedData.findIndex(d => d.name === service.name);
-            if (index !== -1) {
-              this.processedData.splice(index, 1);
-            }
             const file = this.files.find(f => f.file.name === service.name + '.json');
             if (file) {
-              file.status = 'success'; // Используем 'success' для обозначения успеха
+              file.status = 'success';
               file.errorMessage = '';
-              this.cdr.markForCheck(); // Обновляем представление
+              this.cd.markForCheck();
             }
             this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;
             if (this.files.every(file => file.status == 'success')) {
@@ -146,16 +236,11 @@ export class ImportDialogComponent {
             }
           },
           error: (response) => {
-            // Обновляем статус файла и сохраняем ошибку
             const file = this.files.find(f => f.file.name === service.name + '.json');
             if (file) {
               file.status = 'error';
               file.errorMessage = `Ошибка при создании сервиса: ${response.error}`;
-              const index = this.processedData.findIndex(d => d.name === service.name);
-              if (index !== -1) {
-                this.processedData.splice(index, 1);
-              }
-              this.cdr.markForCheck(); // Обновляем представление
+              this.cd.markForCheck();
             }
             this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;
           }
@@ -166,14 +251,19 @@ export class ImportDialogComponent {
     }
   }
 
+  /**
+   * Удаляет файл из списка загруженных.
+   *
+   * @param fileToRemove - Файл, который нужно удалить.
+   * @memberof ImportDialogComponent
+   */
   protected removeFile(fileToRemove: FileStatus): void {
     this.files = this.files.filter(file => file !== fileToRemove);
     this.hasFiles = this.files.filter(f => f.status == 'normal').length > 0;
 
-    // Обновляем значение FormControl, чтобы оно соответствовало текущему списку файлов
     const currentFiles = this.control.value ? this.control.value.filter(file => file !== fileToRemove.file) : [];
     this.control.setValue(currentFiles);
 
-    this.cdr.markForCheck(); // Обновляем представление
+    this.cd.markForCheck();
   }
 }

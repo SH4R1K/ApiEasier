@@ -4,21 +4,50 @@ import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
 import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 
+/**
+ * Компонент ExportApiButtonComponent предназначен для экспорта структуры API в формате JSON.
+ * Позволяет пользователю скачать структуру API в виде файла.
+ *
+ * @remarks
+ * Этот компонент интегрируется с сервисом репозитория API для получения структуры API.
+ * Использует Taiga UI для создания интерактивного интерфейса.
+ *
+ * @example
+ * html
+ * <app-export-api-button [apiInfo]="apiData"></app-export-api-button>
+ */
 @Component({
   selector: 'app-export-api-button',
-  imports: [
-    TuiButton
-  ],
+  imports: [TuiButton],
   templateUrl: './export-api-button.component.html',
-  styleUrls: ['./export-api-button.component.css', '../../styles/button.css']
+  styleUrls: ['./export-api-button.component.css', '../../styles/button.css'],
 })
 export class ExportApiButtonComponent {
+  /**
+   * Входной параметр для получения информации о API.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof ExportApiButtonComponent
+   */
   @Input() apiInfo!: apiServiceShortStructure;
 
-  constructor(
-    private apiServiceRepository: ApiServiceRepositoryService,
-  ) { }
+  /**
+   * Конструктор компонента ExportApiButtonComponent.
+   *
+   * @param apiServiceRepository - Сервис для взаимодействия с репозиторием API.
+   *
+   * @memberof ExportApiButtonComponent
+   */
+  constructor(private apiServiceRepository: ApiServiceRepositoryService) {}
 
+  /**
+   * Обработчик нажатия на кнопку экспорта.
+   *
+   * @remarks
+   * Получает структуру API из репозитория и инициирует скачивание файла JSON.
+   *
+   * @memberof ExportApiButtonComponent
+   */
   onClick(): void {
     this.apiServiceRepository.getApiStructureList(this.apiInfo.name).subscribe({
       next: (data: ApiServiceStructure) => {
@@ -26,7 +55,6 @@ export class ExportApiButtonComponent {
         const jsonString = JSON.stringify(dataWithoutName, null, 2);
 
         const blob = new Blob([jsonString], { type: 'application/json' });
-
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
@@ -35,8 +63,8 @@ export class ExportApiButtonComponent {
         window.URL.revokeObjectURL(url);
       },
       error: (error) => {
-        console.log(error)
-      }
+        console.log(error);
+      },
     });
   }
 }

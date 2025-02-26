@@ -122,7 +122,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/data/components/import-dialog/import-dialog.component.ts</code>
+            <code>src/app/interfaces/FileStatus.ts</code>
         </p>
 
 
@@ -273,185 +273,14 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgIf, NgFor } from &#x27;@angular/common&#x27;;
-import { ChangeDetectionStrategy, Component } from &#x27;@angular/core&#x27;;
-import { FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
-import { TuiIcon, TuiLink } from &#x27;@taiga-ui/core&#x27;;
-import type { TuiFileLike } from &#x27;@taiga-ui/kit&#x27;;
-import { TuiAvatar, TuiFiles } from &#x27;@taiga-ui/kit&#x27;;
-import { ChangeDetectorRef } from &#x27;@angular/core&#x27;;
-import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
-import { ApiServiceStructure } from &#x27;../../../services/service-structure-api&#x27;;
-import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
-import { TuiDialogContext, TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
-import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { TuiFileLike } from &#x27;@taiga-ui/kit&#x27;;
 
-interface FileStatus {
+export interface FileStatus {
   file: TuiFileLike;
   status: &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; | &#x27;success&#x27;;
   errorMessage: string;
 }
-
-@Component({
-  selector: &#x27;app-import-dialog&#x27;,
-  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiIcon, TuiLink, NgFor, TuiButton],
-  templateUrl: &#x27;./import-dialog.component.html&#x27;,
-  styleUrl: &#x27;./import-dialog.component.css&#x27;,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class ImportDialogComponent {
-  protected readonly control &#x3D; new FormControl&lt;File[]&gt;([]);
-  protected files: FileStatus[] &#x3D; [];
-  protected hasFiles &#x3D; false;
-  protected processedData: ApiServiceStructure[] &#x3D; []; // Массив для хранения обработанных данных
-  private readonly context &#x3D; injectContext&lt;TuiDialogContext&lt;boolean&gt;&gt;();
-
-
-  constructor(private cdr: ChangeDetectorRef, private apiService: ApiServiceRepositoryService, private readonly alerts: TuiAlertService) {
-    this.control.valueChanges.subscribe((files) &#x3D;&gt; {
-      if (files) {
-        // Обновляем только новые файлы
-        const newFiles &#x3D; files.filter(file &#x3D;&gt; !this.files.some(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; file.name));
-        this.files &#x3D; [
-          ...this.files,
-          ...newFiles.map(file &#x3D;&gt; ({ file, status: &#x27;loading&#x27; as const, errorMessage: &#x27;&#x27; })) // Используем &#x27;as const&#x27; для явного указания типа
-        ];
-        this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
-        this.readFiles(newFiles);
-      }
-    });
-  }
-
-  private readFiles(files: File[]): void {
-    files.forEach(file &#x3D;&gt; {
-      const reader &#x3D; new FileReader();
-      reader.onload &#x3D; (e: ProgressEvent&lt;FileReader&gt;) &#x3D;&gt; {
-        const text &#x3D; e.target?.result as string;
-        try {
-          const json &#x3D; JSON.parse(text);
-          this.updateFileStatus(file, &#x27;normal&#x27;);
-          this.processJson(json, file.name); // Передаем имя файла в processJson
-        } catch (error) {
-          console.error(&#x27;Ошибка при чтении JSON файла:&#x27;, error);
-          this.updateFileStatus(file, &#x27;error&#x27;);
-        }
-      };
-      reader.readAsText(file);
-    });
-  }
-
-  private updateFileStatus(file: File, status: &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27;): void {
-    const fileStatus &#x3D; this.files.find(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; file.name);
-    if (fileStatus) {
-      fileStatus.status &#x3D; status; // Тип уже корректен
-      this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
-      this.cdr.markForCheck();
-    }
-  }
-
-  protected getFileStatusText(file: FileStatus): string {
-    switch (file.status) {
-      case &#x27;loading&#x27;:
-        return &#x27;Файл на проверке&#x27;;
-      case &#x27;normal&#x27;:
-        return &#x27;Файл проверен&#x27;;
-      case &#x27;error&#x27;:
-        return &#x27;Ошибка загрузки файла&#x27;;
-      case &#x27;success&#x27;:
-        return &#x27;Файл загружен&#x27;;
-      default:
-        return &#x27;&#x27;;
-    }
-  }
-
-  protected getFileStatus(file: FileStatus): &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; {
-    switch (file.status) {
-      case &#x27;loading&#x27;:
-        return &#x27;loading&#x27;;
-      case &#x27;normal&#x27;:
-        return &#x27;normal&#x27;;
-      case &#x27;error&#x27;:
-        return &#x27;error&#x27;;
-      case &#x27;success&#x27;:
-        return &#x27;normal&#x27;;
-    }
-  }
-
-  private processJson(json: any, fileName: string): void {
-    const name &#x3D; fileName.replace(/\.[^/.]+$/, &quot;&quot;); // Убираем расширение файла
-    const apiServiceStructure: ApiServiceStructure &#x3D; {
-      name: name,
-      isActive: json.isActive || false, // Пример обработки других полей
-      description: json.description || &#x27;&#x27;,
-      entities: json.entities || []
-    };
-    this.processedData.push(apiServiceStructure); // Сохраняем обработанные данные
-    console.log(&#x27;Обработанный JSON:&#x27;, apiServiceStructure);
-  }
-
-  protected submit(): void {
-    if (this.processedData.length &gt; 0) {
-      this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).forEach(file &#x3D;&gt; file.status &#x3D; &#x27;loading&#x27;);
-      this.cdr.markForCheck();
-
-      // Отправляем каждый объект на сервер
-      this.processedData.forEach(service &#x3D;&gt; {
-        this.apiService.createFullApiService(service).subscribe({
-          next: (response) &#x3D;&gt; {
-            console.log(&#x27;Сервис успешно создан:&#x27;, response);
-            // Обновляем статус файла на &quot;success&quot; (успешно загружен)
-            const index &#x3D; this.processedData.findIndex(d &#x3D;&gt; d.name &#x3D;&#x3D;&#x3D; service.name);
-            if (index !&#x3D;&#x3D; -1) {
-              this.processedData.splice(index, 1);
-            }
-            const file &#x3D; this.files.find(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; service.name + &#x27;.json&#x27;);
-            if (file) {
-              file.status &#x3D; &#x27;success&#x27;; // Используем &#x27;success&#x27; для обозначения успеха
-              file.errorMessage &#x3D; &#x27;&#x27;;
-              this.cdr.markForCheck(); // Обновляем представление
-            }
-            this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
-            if (this.files.every(file &#x3D;&gt; file.status &#x3D;&#x3D; &#x27;success&#x27;)) {
-              this.alerts
-                .open(&#x27;Файлы успешно загружены&#x27;, {
-                  appearance: &#x27;success&#x27;,
-                })
-                .subscribe();
-              this.context.completeWith(false);
-            }
-          },
-          error: (response) &#x3D;&gt; {
-            // Обновляем статус файла и сохраняем ошибку
-            const file &#x3D; this.files.find(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; service.name + &#x27;.json&#x27;);
-            if (file) {
-              file.status &#x3D; &#x27;error&#x27;;
-              file.errorMessage &#x3D; &#x60;Ошибка при создании сервиса: ${response.error}&#x60;;
-              const index &#x3D; this.processedData.findIndex(d &#x3D;&gt; d.name &#x3D;&#x3D;&#x3D; service.name);
-              if (index !&#x3D;&#x3D; -1) {
-                this.processedData.splice(index, 1);
-              }
-              this.cdr.markForCheck(); // Обновляем представление
-            }
-            this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
-          }
-        });
-      });
-    } else {
-      console.warn(&#x27;Нет данных для отправки.&#x27;);
-    }
-  }
-
-  protected removeFile(fileToRemove: FileStatus): void {
-    this.files &#x3D; this.files.filter(file &#x3D;&gt; file !&#x3D;&#x3D; fileToRemove);
-    this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
-
-    // Обновляем значение FormControl, чтобы оно соответствовало текущему списку файлов
-    const currentFiles &#x3D; this.control.value ? this.control.value.filter(file &#x3D;&gt; file !&#x3D;&#x3D; fileToRemove.file) : [];
-    this.control.setValue(currentFiles);
-
-    this.cdr.markForCheck(); // Обновляем представление
-  }
-}</code></pre>
+</code></pre>
     </div>
 </div>
 

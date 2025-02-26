@@ -106,6 +106,10 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент ImportDialogComponent предназначен для импорта данных API через диалоговое окно.
+Позволяет пользователю загружать файлы и обрабатывать их содержимое для создания новых API сервисов.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует реактивные формы для управления загрузкой файлов и обработки данных.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-import-dialog&gt;&lt;/app-import-dialog&gt;</code></pre></div>
+    </p>
 
 
 
@@ -157,13 +172,16 @@
                             <code>ReactiveFormsModule</code>
                             <code>TuiAvatar</code>
                             <code>TuiFiles</code>
-                            <code>TuiIcon</code>
                             <code>TuiLink</code>
                             <code>NgFor</code>
                             <code>TuiButton</code>
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./import-dialog.component.css</code></td>
+            </tr>
 
 
 
@@ -174,10 +192,6 @@
 
 
 
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./import-dialog.component.css</code></td>
-            </tr>
 
 
 
@@ -279,17 +293,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(cdr: ChangeDetectorRef, apiService: <a href="../injectables/ApiServiceRepositoryService.html" target="_self">ApiServiceRepositoryService</a>, alerts: TuiAlertService)</code>
+<code>constructor(cd: ChangeDetectorRef, apiService: <a href="../injectables/ApiServiceRepositoryService.html" target="_self">ApiServiceRepositoryService</a>, alerts: TuiAlertService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:71</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента ImportDialogComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -298,11 +314,12 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>cdr</td>
+                                                        <td>cd</td>
                                                   
                                                         <td>
                                                                     <code>ChangeDetectorRef</code>
@@ -312,6 +329,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для управления изменением состояния.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>apiService</td>
@@ -324,6 +347,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для взаимодействия с репозиторием API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -336,6 +365,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -377,14 +412,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:172</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Возвращает текущий статус файла.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -395,6 +432,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -409,6 +447,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Файл, для которого нужно получить статус.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -418,7 +462,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Статус файла.</p>
+
                             </div>
                 </td>
             </tr>
@@ -446,14 +491,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:150</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Возвращает текстовое описание статуса файла.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -464,6 +511,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -478,6 +526,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Файл, для которого нужно получить статус.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -487,7 +541,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Текстовое описание статуса файла.</p>
+
                             </div>
                 </td>
             </tr>
@@ -515,14 +570,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:193</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает JSON данные из файла.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -533,6 +590,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -547,6 +605,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>JSON данные для обработки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>fileName</td>
@@ -559,6 +623,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя файла.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -596,14 +666,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:108</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Читает содержимое загруженных файлов.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -614,6 +686,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -628,6 +701,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Список файлов для чтения.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -665,14 +744,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="169"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:169</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="260"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:260</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет файл из списка загруженных.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -683,6 +764,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -697,6 +779,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Файл, который нужно удалить.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -734,14 +822,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="117"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:117</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="213"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:213</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Отправляет обработанные данные на сервер.</p>
+<p>Обновляет статус файлов и отображает уведомления о результатах отправки.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -773,14 +864,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:134</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет статус файла.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -791,6 +884,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -805,6 +899,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Файл, статус которого нужно обновить.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>status</td>
@@ -817,6 +917,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новый статус файла.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -858,10 +964,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:32</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:71</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контекст диалогового окна.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -885,10 +997,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:28</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:38</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Контрол для управления загрузкой файлов.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -917,10 +1035,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:29</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:46</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Список загруженных файлов с их статусами.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -943,10 +1067,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:55</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, есть ли загруженные файлы.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -975,10 +1105,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:31</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/components/import-dialog/import-dialog.component.ts:63</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Массив для хранения обработанных данных API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -989,47 +1125,98 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { NgIf, NgFor } from &#x27;@angular/common&#x27;;
-import { ChangeDetectionStrategy, Component } from &#x27;@angular/core&#x27;;
+import { ChangeDetectionStrategy, Component, ChangeDetectorRef } from &#x27;@angular/core&#x27;;
 import { FormControl, ReactiveFormsModule } from &#x27;@angular/forms&#x27;;
-import { TuiIcon, TuiLink } from &#x27;@taiga-ui/core&#x27;;
-import type { TuiFileLike } from &#x27;@taiga-ui/kit&#x27;;
+import { TuiIcon, TuiLink, TuiButton, TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
 import { TuiAvatar, TuiFiles } from &#x27;@taiga-ui/kit&#x27;;
-import { ChangeDetectorRef } from &#x27;@angular/core&#x27;;
-import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
-import { ApiServiceStructure } from &#x27;../../../services/service-structure-api&#x27;;
+import { ApiServiceStructure } from &quot;../../../interfaces/ApiServiceStructure&quot;;
 import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
-import { TuiDialogContext, TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
+import { TuiDialogContext } from &#x27;@taiga-ui/core&#x27;;
 import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
+import { FileStatus } from &#x27;../../../interfaces/FileStatus&#x27;;
 
-interface FileStatus {
-  file: TuiFileLike;
-  status: &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; | &#x27;success&#x27;;
-  errorMessage: string;
-}
-
+/**
+ * Компонент ImportDialogComponent предназначен для импорта данных API через диалоговое окно.
+ * Позволяет пользователю загружать файлы и обрабатывать их содержимое для создания новых API сервисов.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует реактивные формы для управления загрузкой файлов и обработки данных.
+ *
+ * @example
+ * html
+ * &lt;app-import-dialog&gt;&lt;/app-import-dialog&gt;
+ */
 @Component({
   selector: &#x27;app-import-dialog&#x27;,
-  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiIcon, TuiLink, NgFor, TuiButton],
+  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiLink, NgFor, TuiButton],
   templateUrl: &#x27;./import-dialog.component.html&#x27;,
-  styleUrl: &#x27;./import-dialog.component.css&#x27;,
+  styleUrls: [&#x27;./import-dialog.component.css&#x27;], // Исправлено с styleUrl на styleUrls
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImportDialogComponent {
+  /**
+   * Контрол для управления загрузкой файлов.
+   *
+   * @type {FormControl&lt;File[]&gt;}
+   * @memberof ImportDialogComponent
+   */
   protected readonly control &#x3D; new FormControl&lt;File[]&gt;([]);
+
+  /**
+   * Список загруженных файлов с их статусами.
+   *
+   * @type {FileStatus[]}
+   * @memberof ImportDialogComponent
+   */
   protected files: FileStatus[] &#x3D; [];
+
+  /**
+   * Флаг, указывающий, есть ли загруженные файлы.
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof ImportDialogComponent
+   */
   protected hasFiles &#x3D; false;
-  protected processedData: ApiServiceStructure[] &#x3D; []; // Массив для хранения обработанных данных
+
+  /**
+   * Массив для хранения обработанных данных API.
+   *
+   * @type {ApiServiceStructure[]}
+   * @memberof ImportDialogComponent
+   */
+  protected processedData: ApiServiceStructure[] &#x3D; [];
+
+  /**
+   * Контекст диалогового окна.
+   *
+   * @type {TuiDialogContext&lt;boolean&gt;}
+   * @memberof ImportDialogComponent
+   */
   private readonly context &#x3D; injectContext&lt;TuiDialogContext&lt;boolean&gt;&gt;();
 
-
-  constructor(private cdr: ChangeDetectorRef, private apiService: ApiServiceRepositoryService, private readonly alerts: TuiAlertService) {
+  /**
+   * Конструктор компонента ImportDialogComponent.
+   *
+   * @param cd - Сервис для управления изменением состояния.
+   * @param apiService - Сервис для взаимодействия с репозиторием API.
+   * @param alerts - Сервис для отображения уведомлений.
+   *
+   * @memberof ImportDialogComponent
+   */
+  constructor(
+    private cd: ChangeDetectorRef,
+    private apiService: ApiServiceRepositoryService,
+    private readonly alerts: TuiAlertService
+  ) {
     this.control.valueChanges.subscribe((files) &#x3D;&gt; {
       if (files) {
         // Обновляем только новые файлы
         const newFiles &#x3D; files.filter(file &#x3D;&gt; !this.files.some(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; file.name));
         this.files &#x3D; [
           ...this.files,
-          ...newFiles.map(file &#x3D;&gt; ({ file, status: &#x27;loading&#x27; as const, errorMessage: &#x27;&#x27; })) // Используем &#x27;as const&#x27; для явного указания типа
+          ...newFiles.map(file &#x3D;&gt; ({ file, status: &#x27;loading&#x27; as const, errorMessage: &#x27;&#x27; }))
         ];
         this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
         this.readFiles(newFiles);
@@ -1037,6 +1224,13 @@ export class ImportDialogComponent {
     });
   }
 
+  /**
+   * Читает содержимое загруженных файлов.
+   *
+   * @param files - Список файлов для чтения.
+   * @private
+   * @memberof ImportDialogComponent
+   */
   private readFiles(files: File[]): void {
     files.forEach(file &#x3D;&gt; {
       const reader &#x3D; new FileReader();
@@ -1045,7 +1239,7 @@ export class ImportDialogComponent {
         try {
           const json &#x3D; JSON.parse(text);
           this.updateFileStatus(file, &#x27;normal&#x27;);
-          this.processJson(json, file.name); // Передаем имя файла в processJson
+          this.processJson(json, file.name);
         } catch (error) {
           console.error(&#x27;Ошибка при чтении JSON файла:&#x27;, error);
           this.updateFileStatus(file, &#x27;error&#x27;);
@@ -1055,15 +1249,30 @@ export class ImportDialogComponent {
     });
   }
 
+  /**
+   * Обновляет статус файла.
+   *
+   * @param file - Файл, статус которого нужно обновить.
+   * @param status - Новый статус файла.
+   * @private
+   * @memberof ImportDialogComponent
+   */
   private updateFileStatus(file: File, status: &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27;): void {
     const fileStatus &#x3D; this.files.find(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; file.name);
     if (fileStatus) {
-      fileStatus.status &#x3D; status; // Тип уже корректен
+      fileStatus.status &#x3D; status;
       this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
-      this.cdr.markForCheck();
+      this.cd.markForCheck();
     }
   }
 
+  /**
+   * Возвращает текстовое описание статуса файла.
+   *
+   * @param file - Файл, для которого нужно получить статус.
+   * @returns {string} Текстовое описание статуса файла.
+   * @memberof ImportDialogComponent
+   */
   protected getFileStatusText(file: FileStatus): string {
     switch (file.status) {
       case &#x27;loading&#x27;:
@@ -1079,6 +1288,13 @@ export class ImportDialogComponent {
     }
   }
 
+  /**
+   * Возвращает текущий статус файла.
+   *
+   * @param file - Файл, для которого нужно получить статус.
+   * @returns {&#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27;} Статус файла.
+   * @memberof ImportDialogComponent
+   */
   protected getFileStatus(file: FileStatus): &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; {
     switch (file.status) {
       case &#x27;loading&#x27;:
@@ -1092,38 +1308,48 @@ export class ImportDialogComponent {
     }
   }
 
+  /**
+   * Обрабатывает JSON данные из файла.
+   *
+   * @param json - JSON данные для обработки.
+   * @param fileName - Имя файла.
+   * @private
+   * @memberof ImportDialogComponent
+   */
   private processJson(json: any, fileName: string): void {
-    const name &#x3D; fileName.replace(/\.[^/.]+$/, &quot;&quot;); // Убираем расширение файла
+    const name &#x3D; fileName.replace(/\.[^/.]+$/, &quot;&quot;);
     const apiServiceStructure: ApiServiceStructure &#x3D; {
       name: name,
-      isActive: json.isActive || false, // Пример обработки других полей
+      isActive: json.isActive || false,
       description: json.description || &#x27;&#x27;,
       entities: json.entities || []
     };
-    this.processedData.push(apiServiceStructure); // Сохраняем обработанные данные
+    this.processedData.push(apiServiceStructure);
     console.log(&#x27;Обработанный JSON:&#x27;, apiServiceStructure);
   }
 
+  /**
+   * Отправляет обработанные данные на сервер.
+   *
+   * @remarks
+   * Обновляет статус файлов и отображает уведомления о результатах отправки.
+   *
+   * @memberof ImportDialogComponent
+   */
   protected submit(): void {
     if (this.processedData.length &gt; 0) {
       this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).forEach(file &#x3D;&gt; file.status &#x3D; &#x27;loading&#x27;);
-      this.cdr.markForCheck();
+      this.cd.markForCheck();
 
-      // Отправляем каждый объект на сервер
       this.processedData.forEach(service &#x3D;&gt; {
         this.apiService.createFullApiService(service).subscribe({
           next: (response) &#x3D;&gt; {
             console.log(&#x27;Сервис успешно создан:&#x27;, response);
-            // Обновляем статус файла на &quot;success&quot; (успешно загружен)
-            const index &#x3D; this.processedData.findIndex(d &#x3D;&gt; d.name &#x3D;&#x3D;&#x3D; service.name);
-            if (index !&#x3D;&#x3D; -1) {
-              this.processedData.splice(index, 1);
-            }
             const file &#x3D; this.files.find(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; service.name + &#x27;.json&#x27;);
             if (file) {
-              file.status &#x3D; &#x27;success&#x27;; // Используем &#x27;success&#x27; для обозначения успеха
+              file.status &#x3D; &#x27;success&#x27;;
               file.errorMessage &#x3D; &#x27;&#x27;;
-              this.cdr.markForCheck(); // Обновляем представление
+              this.cd.markForCheck();
             }
             this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
             if (this.files.every(file &#x3D;&gt; file.status &#x3D;&#x3D; &#x27;success&#x27;)) {
@@ -1136,16 +1362,11 @@ export class ImportDialogComponent {
             }
           },
           error: (response) &#x3D;&gt; {
-            // Обновляем статус файла и сохраняем ошибку
             const file &#x3D; this.files.find(f &#x3D;&gt; f.file.name &#x3D;&#x3D;&#x3D; service.name + &#x27;.json&#x27;);
             if (file) {
               file.status &#x3D; &#x27;error&#x27;;
               file.errorMessage &#x3D; &#x60;Ошибка при создании сервиса: ${response.error}&#x60;;
-              const index &#x3D; this.processedData.findIndex(d &#x3D;&gt; d.name &#x3D;&#x3D;&#x3D; service.name);
-              if (index !&#x3D;&#x3D; -1) {
-                this.processedData.splice(index, 1);
-              }
-              this.cdr.markForCheck(); // Обновляем представление
+              this.cd.markForCheck();
             }
             this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
           }
@@ -1156,17 +1377,23 @@ export class ImportDialogComponent {
     }
   }
 
+  /**
+   * Удаляет файл из списка загруженных.
+   *
+   * @param fileToRemove - Файл, который нужно удалить.
+   * @memberof ImportDialogComponent
+   */
   protected removeFile(fileToRemove: FileStatus): void {
     this.files &#x3D; this.files.filter(file &#x3D;&gt; file !&#x3D;&#x3D; fileToRemove);
     this.hasFiles &#x3D; this.files.filter(f &#x3D;&gt; f.status &#x3D;&#x3D; &#x27;normal&#x27;).length &gt; 0;
 
-    // Обновляем значение FormControl, чтобы оно соответствовало текущему списку файлов
     const currentFiles &#x3D; this.control.value ? this.control.value.filter(file &#x3D;&gt; file !&#x3D;&#x3D; fileToRemove.file) : [];
     this.control.setValue(currentFiles);
 
-    this.cdr.markForCheck(); // Обновляем представление
+    this.cd.markForCheck();
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -1226,6 +1453,28 @@ export class ImportDialogComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./import-dialog.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.content {
+    display: flex;
+    block-size: 10rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+button[tuiIconButton] {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: red; /* Красный цвет для кнопки удаления */
+}
+
+</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>

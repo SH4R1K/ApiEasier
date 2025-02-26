@@ -124,6 +124,22 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент FilterByInputComponent предназначен для фильтрации элементов на основе ввода пользователя.
+Позволяет пользователю вводить текст для поиска и фильтрации списка элементов.</p>
+<p>Этот компонент использует реактивные формы Angular для управления вводом и фильтрацией данных.
+Интегрируется с Taiga UI для создания интерактивного интерфейса.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-filter-by-input
+  [label]=&quot;&#39;Поиск&#39;&quot;
+  [controlName]=&quot;&#39;search&#39;&quot;
+  [items]=&quot;name&quot;
+  (searchQuery)=&quot;onSearchQuery($event)&quot;&gt;
+&lt;/app-filter-by-input&gt;</code></pre></div>
+    </p>
 
 
 
@@ -291,10 +307,17 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:97</a></div>
                             </td>
                         </tr>
 
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента FilterByInputComponent.</p>
+<p>Подписывается на изменения значения контрола формы и вызывает событие searchQuery.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -322,9 +345,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:53</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Имя контрола формы.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -348,9 +377,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:21</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:62</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Список элементов для фильтрации.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -374,9 +409,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:44</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Метка для поля ввода.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -398,9 +439,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:22</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:70</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое вызывается при изменении поискового запроса.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -431,14 +478,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="44"
-                                    class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:44</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:122</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик нажатия клавиш.</p>
+<p>Предотвращает ввод недопустимых символов.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -449,6 +499,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -463,6 +514,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие нажатия клавиши.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -504,10 +561,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:24</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:78</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Реактивная форма для управления вводом.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -533,9 +596,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/data/components/filter-by-input/filter-by-input.component.ts:89</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает отфильтрованные элементы на основе введенного значения.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code>string[]</code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -549,29 +625,90 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from &#x27;@a
 import { TuiDataListWrapper } from &#x27;@taiga-ui/kit&#x27;;
 import { TuiInputModule } from &#x27;@taiga-ui/legacy&#x27;;
 
+/**
+ * Компонент FilterByInputComponent предназначен для фильтрации элементов на основе ввода пользователя.
+ * Позволяет пользователю вводить текст для поиска и фильтрации списка элементов.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы Angular для управления вводом и фильтрацией данных.
+ * Интегрируется с Taiga UI для создания интерактивного интерфейса.
+ *
+ * @example
+ * html
+ * &lt;app-filter-by-input
+ *   [label]&#x3D;&quot;&#x27;Поиск&#x27;&quot;
+ *   [controlName]&#x3D;&quot;&#x27;search&#x27;&quot;
+ *   [items]&#x3D;&quot;name&quot;
+ *   (searchQuery)&#x3D;&quot;onSearchQuery($event)&quot;&gt;
+ * &lt;/app-filter-by-input&gt;
+
+ */
 @Component({
   selector: &#x27;app-filter-by-input&#x27;,
   standalone: true,
   imports: [
     ReactiveFormsModule,
     TuiDataListWrapper,
-    TuiInputModule
-],
+    TuiInputModule,
+  ],
   templateUrl: &#x27;./filter-by-input.component.html&#x27;,
   styleUrls: [&#x27;./filter-by-input.component.css&#x27;],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterByInputComponent {
+  /**
+   * Метка для поля ввода.
+   *
+   * @type {string}
+   * @default &#x27;Search&#x27;
+   * @memberof FilterByInputComponent
+   */
   @Input() label: string &#x3D; &#x27;Search&#x27;;
+
+  /**
+   * Имя контрола формы.
+   *
+   * @type {string}
+   * @default &#x27;search&#x27;
+   * @memberof FilterByInputComponent
+   */
   @Input() controlName: string &#x3D; &#x27;search&#x27;;
+
+  /**
+   * Список элементов для фильтрации.
+   *
+   * @type {string[]}
+   * @default []
+   * @memberof FilterByInputComponent
+   */
   @Input() items: string[] &#x3D; [];
+
+  /**
+   * Событие, которое вызывается при изменении поискового запроса.
+   *
+   * @type {EventEmitter&lt;string&gt;}
+   * @memberof FilterByInputComponent
+   */
   @Output() searchQuery &#x3D; new EventEmitter&lt;string&gt;();
 
+  /**
+   * Реактивная форма для управления вводом.
+   *
+   * @type {FormGroup}
+   * @memberof FilterByInputComponent
+   */
   form &#x3D; new FormGroup({
     [this.controlName]: new FormControl(&#x27;&#x27;, [Validators.pattern(&#x27;^[a-zA-Z0-9]*$&#x27;)]),
   });
 
-  get filteredItems() {
+  /**
+   * Возвращает отфильтрованные элементы на основе введенного значения.
+   *
+   * @type {string[]}
+   * @returns {string[]} Отфильтрованные элементы.
+   * @memberof FilterByInputComponent
+   */
+  get filteredItems(): string[] {
     const control &#x3D; this.form.get(this.controlName);
     if (control) {
       const value &#x3D; control.value ?? &#x27;&#x27;;
@@ -581,12 +718,29 @@ export class FilterByInputComponent {
     return this.items;
   }
 
+  /**
+   * Конструктор компонента FilterByInputComponent.
+   *
+   * @remarks
+   * Подписывается на изменения значения контрола формы и вызывает событие searchQuery.
+   *
+   * @memberof FilterByInputComponent
+   */
   constructor() {
     this.form.controls[this.controlName].valueChanges.subscribe(value &#x3D;&gt; {
       this.searchQuery.emit(value ?? &#x27;&#x27;);
     });
   }
 
+  /**
+   * Обработчик нажатия клавиш.
+   *
+   * @param event - Событие нажатия клавиши.
+   * @remarks
+   * Предотвращает ввод недопустимых символов.
+   *
+   * @memberof FilterByInputComponent
+   */
   onKeyPress(event: KeyboardEvent): void {
     const inputChar &#x3D; event.key;
     const allowedChars &#x3D; /^[a-zA-Z0-9]$/;

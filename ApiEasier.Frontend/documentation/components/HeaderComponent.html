@@ -106,6 +106,10 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,6 +124,21 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент HeaderComponent предназначен для отображения заголовка страницы с логотипом и кнопкой.
+Позволяет пользователю выполнять действия, такие как возврат на предыдущую страницу или импорт данных.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует диалоговые окна для выполнения операций импорта.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-header
+  [buttonText]=&quot;&#39;Нажми меня&#39;&quot;
+  [isApiPage]=&quot;true&quot;
+  (buttonClick)=&quot;handleButtonClick()&quot;&gt;
+&lt;/app-header&gt;</code></pre></div>
+    </p>
 
 
 
@@ -154,6 +173,10 @@
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./header.component.css</code></td>
+            </tr>
 
 
 
@@ -164,10 +187,6 @@
 
 
 
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./header.component.css</code></td>
-            </tr>
 
 
 
@@ -282,9 +301,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/data/components/header/header.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/components/header/header.component.ts:46</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Текст кнопки в заголовке.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -308,9 +333,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/data/components/header/header.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/components/header/header.component.ts:63</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Флаг, указывающий, является ли текущая страница страницей API.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -334,9 +365,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/data/components/header/header.component.ts:14</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/data/components/header/header.component.ts:37</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>URL логотипа для отображения в заголовке.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -358,9 +395,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/data/components/header/header.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/components/header/header.component.ts:54</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое вызывается при нажатии на кнопку.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -391,14 +434,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/data/components/header/header.component.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/data/components/header/header.component.ts:85</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик нажатия на кнопку.</p>
+<p>Вызывает событие buttonClick для уведомления родительского компонента о нажатии.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -428,14 +474,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/data/components/header/header.component.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/data/components/header/header.component.ts:97</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалоговое окно для импорта данных.</p>
+<p>Использует сервис tuiDialog для отображения диалогового окна.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -468,17 +517,23 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>tuiDialog(ImportDialogComponent, {
     closeable: true,
-      dismissible: true,
-      label: &quot;Импортировать&quot;,
-    })</code>
+    dismissible: true,
+    label: &quot;Импортировать&quot;,
+  })</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/data/components/header/header.component.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/data/components/header/header.component.ts:71</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Диалог для импорта данных.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -494,32 +549,101 @@ import { CommonModule } from &#x27;@angular/common&#x27;;
 import { tuiDialog } from &#x27;@taiga-ui/core&#x27;;
 import { ImportDialogComponent } from &#x27;../import-dialog/import-dialog.component&#x27;;
 
+/**
+ * Компонент HeaderComponent предназначен для отображения заголовка страницы с логотипом и кнопкой.
+ * Позволяет пользователю выполнять действия, такие как возврат на предыдущую страницу или импорт данных.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует диалоговые окна для выполнения операций импорта.
+ *
+ * @example
+ * html
+ * &lt;app-header
+ *   [buttonText]&#x3D;&quot;&#x27;Нажми меня&#x27;&quot;
+ *   [isApiPage]&#x3D;&quot;true&quot;
+ *   (buttonClick)&#x3D;&quot;handleButtonClick()&quot;&gt;
+ * &lt;/app-header&gt;
+ */
 @Component({
   selector: &#x27;app-header&#x27;,
-  imports: [BackButtonComponent,CommonModule],
+  imports: [BackButtonComponent, CommonModule],
   templateUrl: &#x27;./header.component.html&#x27;,
-  styleUrl: &#x27;./header.component.css&#x27;,
+  styleUrls: [&#x27;./header.component.css&#x27;], // Исправлено с styleUrl на styleUrls
 })
 export class HeaderComponent {
-  @Input() logoUrl: string &#x3D; &quot;https://www.titan2.ru/images/temp/logo__ru.jpg&quot;; 
-  @Input() buttonText: string &#x3D; &#x27;&#x27;; 
-  @Output() buttonClick: EventEmitter&lt;void&gt; &#x3D; new EventEmitter&lt;void&gt;(); 
+  /**
+   * URL логотипа для отображения в заголовке.
+   *
+   * @type {string}
+   * @default &quot;https://www.titan2.ru/images/temp/logo__ru.jpg&quot;
+   * @memberof HeaderComponent
+   */
+  @Input() logoUrl: string &#x3D; &quot;https://www.titan2.ru/images/temp/logo__ru.jpg&quot;;
+
+  /**
+   * Текст кнопки в заголовке.
+   *
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @memberof HeaderComponent
+   */
+  @Input() buttonText: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Событие, которое вызывается при нажатии на кнопку.
+   *
+   * @type {EventEmitter&lt;void&gt;}
+   * @memberof HeaderComponent
+   */
+  @Output() buttonClick: EventEmitter&lt;void&gt; &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Флаг, указывающий, является ли текущая страница страницей API.
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof HeaderComponent
+   */
   @Input() isApiPage: boolean &#x3D; false;
 
+  /**
+   * Диалог для импорта данных.
+   *
+   * @type {tuiDialog}
+   * @memberof HeaderComponent
+   */
   private readonly dialog &#x3D; tuiDialog(ImportDialogComponent, {
     closeable: true,
-      dismissible: true,
-      label: &quot;Импортировать&quot;,
-    });
+    dismissible: true,
+    label: &quot;Импортировать&quot;,
+  });
 
+  /**
+   * Обработчик нажатия на кнопку.
+   *
+   * @remarks
+   * Вызывает событие buttonClick для уведомления родительского компонента о нажатии.
+   *
+   * @memberof HeaderComponent
+   */
   Click(): void {
-    this.buttonClick.emit(); 
+    this.buttonClick.emit();
   }
-  
+
+  /**
+   * Открывает диалоговое окно для импорта данных.
+   *
+   * @remarks
+   * Использует сервис tuiDialog для отображения диалогового окна.
+   *
+   * @memberof HeaderComponent
+   */
   Import(): void {
     this.dialog().subscribe();
   }
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -539,6 +663,69 @@ export class HeaderComponent {
 &lt;/div&gt;</code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./header.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.header {
+    background-color: #0056a6;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header a{
+    height: 4rem;
+}
+
+.header a {
+    outline: none; /* Убирает стандартное выделение */
+}
+
+.header a img{
+    height: 4rem;
+}
+
+.header button {
+    background-color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    /* Относительные отступы */
+    margin: 0.625rem 0.5rem;
+    /* Относительные отступы */
+    border-radius: 0.3125rem;
+    /* Относительный радиус скругления */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    /* Относительный размер шрифта */
+}
+
+.header button:hover {
+    background-color: #e6e6e6;
+}
+
+@media only screen and (max-width: 768px) {
+    .header {
+        display: flex;  
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .header a{
+        width: -webkit-fill-available;
+        height: auto;
+    }
+
+    .header a img{
+        width: -webkit-fill-available;
+        height: auto;
+    }
+}</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>

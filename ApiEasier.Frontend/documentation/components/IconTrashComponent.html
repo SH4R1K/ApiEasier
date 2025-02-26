@@ -124,6 +124,23 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент IconTrashComponent предназначен для отображения иконки корзины и управления удалением элементов.
+Позволяет пользователю подтверждать удаление элементов с помощью уведомлений.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует сервисы для управления уведомлениями и маршрутизацией.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-icon-trash
+  [item]=&quot;itemData&quot;
+  [apiInfo]=&quot;apiData&quot;
+  [entityInfo]=&quot;entityData&quot;
+  [endpointInfo]=&quot;endpointData&quot;
+  (responseAlert)=&quot;handleResponseAlert(\$event)&quot;&gt;
+&lt;/app-icon-trash&gt;</code></pre></div>
+    </p>
 
 
 
@@ -251,12 +268,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:74</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента IconTrashComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -265,6 +284,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -279,6 +299,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -291,6 +317,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для управления маршрутизацией.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -319,9 +351,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:50</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Информация об API, связанная с элементом.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -340,9 +378,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:66</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Информация об эндпоинте, связанная с элементом.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -361,9 +405,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:58</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Информация о сущности, связанная с элементом.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -382,9 +432,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:42</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Элемент, который будет удален.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -406,9 +462,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:74</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое вызывается при подтверждении удаления элемента.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -441,14 +503,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/data/components/icon-trash/icon-trash.component.ts:98</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Отображает уведомление для подтверждения удаления элемента.</p>
+<p>Использует сервис TuiAlertService для отображения уведомлений.
+Подписывается на события маршрутизации для автоматического закрытия уведомлений.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -464,31 +530,103 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output, } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, EventEmitter, Input, Output } from &#x27;@angular/core&#x27;;
 import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
 import { switchMap, takeUntil } from &#x27;rxjs&#x27;;
-import { Router,  } from &#x27;@angular/router&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
 import { PolymorpheusComponent } from &#x27;@taiga-ui/polymorpheus&#x27;;
 import { AlertDeleteComponent } from &#x27;../alert-delete/alert-delete.component&#x27;;
-import { apiServiceShortStructure, EntityShort, Endpoint } from &#x27;../../../services/service-structure-api&#x27;;
+import { Endpoint } from &quot;../../../interfaces/Endpoint&quot;;
+import { apiServiceShortStructure } from &quot;../../../interfaces/apiServiceShortStructure&quot;;
+import { EntityShort } from &quot;../../../interfaces/EntityShort&quot;;
 
+/**
+ * Компонент IconTrashComponent предназначен для отображения иконки корзины и управления удалением элементов.
+ * Позволяет пользователю подтверждать удаление элементов с помощью уведомлений.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для управления уведомлениями и маршрутизацией.
+ *
+ * @example
+ * html
+ * &lt;app-icon-trash
+ *   [item]&#x3D;&quot;itemData&quot;
+ *   [apiInfo]&#x3D;&quot;apiData&quot;
+ *   [entityInfo]&#x3D;&quot;entityData&quot;
+ *   [endpointInfo]&#x3D;&quot;endpointData&quot;
+ *   (responseAlert)&#x3D;&quot;handleResponseAlert(\$event)&quot;&gt;
+ * &lt;/app-icon-trash&gt;
+ */
 @Component({
   selector: &#x27;app-icon-trash&#x27;,
   imports: [],
   templateUrl: &#x27;./icon-trash.component.html&#x27;,
-  styleUrls: [&#x27;./icon-trash.component.css&#x27;, &#x27;../../styles/icon.css&#x27;]
+  styleUrls: [&#x27;./icon-trash.component.css&#x27;, &#x27;../../styles/icon.css&#x27;],
 })
 export class IconTrashComponent {
+  /**
+   * Элемент, который будет удален.
+   *
+   * @type {any}
+   * @memberof IconTrashComponent
+   */
   @Input() item: any;
+
+  /**
+   * Информация об API, связанная с элементом.
+   *
+   * @type {apiServiceShortStructure}
+   * @memberof IconTrashComponent
+   */
   @Input() apiInfo!: apiServiceShortStructure;
+
+  /**
+   * Информация о сущности, связанная с элементом.
+   *
+   * @type {EntityShort}
+   * @memberof IconTrashComponent
+   */
   @Input() entityInfo!: EntityShort;
+
+  /**
+   * Информация об эндпоинте, связанная с элементом.
+   *
+   * @type {Endpoint}
+   * @memberof IconTrashComponent
+   */
   @Input() endpointInfo!: Endpoint;
+
+  /**
+   * Событие, которое вызывается при подтверждении удаления элемента.
+   *
+   * @type {EventEmitter&lt;boolean&gt;}
+   * @memberof IconTrashComponent
+   */
   @Output() responseAlert &#x3D; new EventEmitter&lt;boolean&gt;();
+
+  /**
+   * Конструктор компонента IconTrashComponent.
+   *
+   * @param alerts - Сервис для отображения уведомлений.
+   * @param router - Сервис для управления маршрутизацией.
+   *
+   * @memberof IconTrashComponent
+   */
   constructor(
     private alerts: TuiAlertService,
     private router: Router,
-  ) { }
+  ) {}
 
+  /**
+   * Отображает уведомление для подтверждения удаления элемента.
+   *
+   * @remarks
+   * Использует сервис TuiAlertService для отображения уведомлений.
+   * Подписывается на события маршрутизации для автоматического закрытия уведомлений.
+   *
+   * @memberof IconTrashComponent
+   */
   protected showNotification(): void {
     const notification &#x3D; this.alerts
       .open&lt;boolean&gt;(new PolymorpheusComponent(AlertDeleteComponent), {
@@ -508,7 +646,6 @@ export class IconTrashComponent {
         }),
         takeUntil(this.router.events),
       );
-
 
     notification.subscribe();
   }

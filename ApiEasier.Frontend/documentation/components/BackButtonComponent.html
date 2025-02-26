@@ -106,6 +106,10 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент BackButtonComponent предназначен для возврата пользователя на предыдущую страницу.
+Использует Angular Router и Location для управления навигацией.</p>
+<p>Этот компонент предоставляет функциональность кнопки &quot;Назад&quot;, которая позволяет пользователю вернуться
+на предыдущую страницу или на главную страницу, если история навигации пуста.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-back-button&gt;&lt;/app-back-button&gt;</code></pre></div>
+    </p>
 
 
 
@@ -147,6 +162,10 @@
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./back-button.component.css</code></td>
+            </tr>
 
 
 
@@ -157,10 +176,6 @@
 
 
 
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./back-button.component.css</code></td>
-            </tr>
 
 
 
@@ -209,12 +224,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/data/components/back-button/back-button.component.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/data/components/back-button/back-button.component.ts:24</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента BackButtonComponent.</p>
+<p>Внедряет сервисы Location и Router для управления навигацией.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -223,6 +241,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -237,6 +256,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с историей навигации.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -249,6 +274,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для управления маршрутизацией.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -288,14 +319,18 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="14"
-                                    class="link-to-prism">src/app/data/components/back-button/back-button.component.ts:14</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="47"
+                                    class="link-to-prism">src/app/data/components/back-button/back-button.component.ts:47</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод для возврата на предыдущую страницу.</p>
+<p>Проверяет текущий URL и предыдущий URL. Если предыдущий URL начинается с базового домена,
+возвращает пользователя на предыдущую страницу. В противном случае перенаправляет на главную страницу.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -315,22 +350,55 @@
 import { Location } from &#x27;@angular/common&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 
+/**
+ * Компонент BackButtonComponent предназначен для возврата пользователя на предыдущую страницу.
+ * Использует Angular Router и Location для управления навигацией.
+ *
+ * @remarks
+ * Этот компонент предоставляет функциональность кнопки &quot;Назад&quot;, которая позволяет пользователю вернуться
+ * на предыдущую страницу или на главную страницу, если история навигации пуста.
+ *
+ * @example
+ * html
+ * &lt;app-back-button&gt;&lt;/app-back-button&gt;
+ *
+ */
 @Component({
   selector: &#x27;app-back-button&#x27;,
   imports: [],
   templateUrl: &#x27;./back-button.component.html&#x27;,
-  styleUrl: &#x27;./back-button.component.css&#x27;
+  styleUrls: [&#x27;./back-button.component.css&#x27;], // Исправлено с styleUrl на styleUrls
 })
 export class BackButtonComponent {
+  /**
+   * Конструктор компонента BackButtonComponent.
+   *
+   * @param location - Сервис для работы с историей навигации.
+   * @param router - Сервис для управления маршрутизацией.
+   *
+   * @remarks
+   * Внедряет сервисы Location и Router для управления навигацией.
+   *
+   * @memberof BackButtonComponent
+   */
   constructor(private location: Location, private router: Router) {}
 
+  /**
+   * Метод для возврата на предыдущую страницу.
+   *
+   * @remarks
+   * Проверяет текущий URL и предыдущий URL. Если предыдущий URL начинается с базового домена,
+   * возвращает пользователя на предыдущую страницу. В противном случае перенаправляет на главную страницу.
+   *
+   * @memberof BackButtonComponent
+   */
   goBack(): void {
     const currentUrl &#x3D; this.router.url;
     try {
-      const previousUrl &#x3D; this.location.path(true); 
-      const baseDomain &#x3D; &#x27;/&#x27;; 
+      const previousUrl &#x3D; this.location.path(true);
+      const baseDomain &#x3D; &#x27;/&#x27;;
       if (previousUrl.startsWith(baseDomain)) {
-        this.location.back(); 
+        this.location.back();
       } else {
         this.router.navigateByUrl(&#x27;/&#x27;);
       }
@@ -338,8 +406,8 @@ export class BackButtonComponent {
       this.router.navigateByUrl(&#x27;/&#x27;);
     }
   }
-
-}</code></pre>
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
@@ -353,6 +421,30 @@ export class BackButtonComponent {
 </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./back-button.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">button {
+    background-color: white;
+    border: none;
+    padding: 0.625rem 1.25rem;
+    /* Относительные отступы */
+    margin: 0.625rem 0.625rem;
+    /* Относительные отступы */
+    border-radius: 0.3125rem;
+    /* Относительный радиус скругления */
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+    /* Относительный размер шрифта */
+}
+
+button:hover {
+    background-color: #e6e6e6;
+}</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>

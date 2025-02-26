@@ -124,6 +124,21 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент CardEntityComponent предназначен для отображения и управления информацией о сущностях API.
+Позволяет редактировать, удалять и изменять состояние сущностей.</p>
+<p>Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+Использует сервисы для взаимодействия с репозиторием сущностей и управления состоянием.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">html
+&lt;app-card-entity
+  [entityInfo]=&quot;entityData&quot;
+  [apiName]=&quot;apiName&quot;
+   (entityDeleted)=&quot;onEntityDeleted(item.name)&quot;&gt;
+&lt;/app-card-entity&gt;</code></pre></div>
+    </p>
 
 
 
@@ -307,12 +322,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:85</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента CardEntityComponent.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -321,6 +338,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -335,6 +353,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для управления изменением состояния.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>entityRepositoryService</td>
@@ -347,6 +371,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для взаимодействия с репозиторием сущностей.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -359,6 +389,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -392,9 +428,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:62</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Входной параметр для получения имени API.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -413,9 +455,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:53</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Входной параметр для получения информации о сущности.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -437,9 +485,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:70</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое вызывается при удалении сущности.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -472,14 +526,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="80"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:80</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="164"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:164</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает данные, полученные из диалога редактирования.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -490,6 +546,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -504,6 +561,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные сущности, полученные из диалога.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -541,19 +604,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:207</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает удаление сущности.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -580,14 +648,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:181</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает успешное обновление сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -598,6 +668,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -612,6 +683,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Ответ от сервера.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>data</td>
@@ -624,6 +701,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новые данные сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -661,14 +744,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="197"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:197</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ошибку при обновлении сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -679,6 +764,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -693,6 +779,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Объект ошибки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -730,14 +822,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="220"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:220</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ошибки и отображает уведомления.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -748,6 +842,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -762,6 +857,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Сообщение об ошибке.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>error</td>
@@ -774,6 +875,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Объект ошибки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -809,14 +916,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="68"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:68</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:147</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик подтверждения удаления сущности.</p>
+<p>Удаляет сущность из репозитория и уведомляет родительский компонент об удалении.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -846,14 +956,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:111</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик изменения состояния переключателя.</p>
+<p>Обновляет состояние сущности и сохраняет изменения в репозитории.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -864,6 +977,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -878,6 +992,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние переключателя.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -913,14 +1033,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:131</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалог для редактирования информации о сущности.</p>
+<p>Обновляет информацию о сущности после закрытия диалога.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -959,10 +1082,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:38</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:82</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Диалог для редактирования информации о сущности.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -991,7 +1120,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:36</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -1023,7 +1152,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -1055,7 +1184,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:35</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/data/components/card-entity/card-entity.component.ts:73</a></div>
                         </td>
                     </tr>
 
@@ -1075,7 +1204,7 @@
   Input,
   Output,
 } from &#x27;@angular/core&#x27;;
-import { Entity } from &#x27;../../../services/service-structure-api&#x27;;
+import { Entity } from &quot;../../../interfaces/Entity&quot;;
 import { RouterModule } from &#x27;@angular/router&#x27;;
 import { IconTrashComponent } from &#x27;../icon-trash/icon-trash.component&#x27;;
 import { SwitchComponent } from &#x27;../switch/switch.component&#x27;;
@@ -1085,6 +1214,23 @@ import { EntityDialogComponent } from &#x27;../entity-dialog/entity-dialog.compo
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { EntityRepositoryService } from &#x27;../../../repositories/entity-repository.service&#x27;;
 
+/**
+ * Компонент CardEntityComponent предназначен для отображения и управления информацией о сущностях API.
+ * Позволяет редактировать, удалять и изменять состояние сущностей.
+ *
+ * @remarks
+ * Этот компонент интегрируется с Taiga UI для создания интерактивного интерфейса.
+ * Использует сервисы для взаимодействия с репозиторием сущностей и управления состоянием.
+ *
+ * @example
+ * html
+ * &lt;app-card-entity
+ *   [entityInfo]&#x3D;&quot;entityData&quot;
+ *   [apiName]&#x3D;&quot;apiName&quot;
+ *    (entityDeleted)&#x3D;&quot;onEntityDeleted(item.name)&quot;&gt;
+ * &lt;/app-card-entity&gt;
+ * 
+ */
 @Component({
   selector: &#x27;app-card-entity&#x27;,
   imports: [IconTrashComponent, SwitchComponent, CommonModule, RouterModule],
@@ -1097,25 +1243,70 @@ import { EntityRepositoryService } from &#x27;../../../repositories/entity-repos
   ],
 })
 export class CardEntityComponent {
+  /**
+   * Входной параметр для получения информации о сущности.
+   *
+   * @type {Entity}
+   * @memberof CardEntityComponent
+   */
   @Input() entityInfo!: Entity;
+
+  /**
+   * Входной параметр для получения имени API.
+   *
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @memberof CardEntityComponent
+   */
   @Input() apiName: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Событие, которое вызывается при удалении сущности.
+   *
+   * @type {EventEmitter&lt;string&gt;}
+   * @memberof CardEntityComponent
+   */
   @Output() entityDeleted &#x3D; new EventEmitter&lt;string&gt;();
 
   private oldName: string &#x3D; &#x27;&#x27;;
   private sub: Subscription | null &#x3D; null;
   private loading: boolean &#x3D; false;
 
+  /**
+   * Диалог для редактирования информации о сущности.
+   *
+   * @type {tuiDialog}
+   * @memberof CardEntityComponent
+   */
   private readonly dialog &#x3D; tuiDialog(EntityDialogComponent, {
     dismissible: true,
     label: &#x27;Редактировать&#x27;,
   });
 
+  /**
+   * Конструктор компонента CardEntityComponent.
+   *
+   * @param cd - Сервис для управления изменением состояния.
+   * @param entityRepositoryService - Сервис для взаимодействия с репозиторием сущностей.
+   * @param alerts - Сервис для отображения уведомлений.
+   *
+   * @memberof CardEntityComponent
+   */
   constructor(
     private cd: ChangeDetectorRef,
     private entityRepositoryService: EntityRepositoryService,
     private alerts: TuiAlertService
   ) {}
 
+  /**
+   * Обработчик изменения состояния переключателя.
+   *
+   * @param newState - Новое состояние переключателя.
+   * @remarks
+   * Обновляет состояние сущности и сохраняет изменения в репозитории.
+   *
+   * @memberof CardEntityComponent
+   */
   onToggleChange(newState: boolean): void {
     this.entityInfo.isActive &#x3D; newState;
     this.entityRepositoryService
@@ -1127,6 +1318,15 @@ export class CardEntityComponent {
           this.handleError(&#x27;Ошибка при обновлении состояния сервиса&#x27;, error),
       });
   }
+
+  /**
+   * Открывает диалог для редактирования информации о сущности.
+   *
+   * @remarks
+   * Обновляет информацию о сущности после закрытия диалога.
+   *
+   * @memberof CardEntityComponent
+   */
   openEditDialog(): void {
     this.oldName &#x3D; this.entityInfo.name;
     this.dialog({ ...this.entityInfo }).subscribe({
@@ -1135,6 +1335,14 @@ export class CardEntityComponent {
     });
   }
 
+  /**
+   * Обработчик подтверждения удаления сущности.
+   *
+   * @remarks
+   * Удаляет сущность из репозитория и уведомляет родительский компонент об удалении.
+   *
+   * @memberof CardEntityComponent
+   */
   onDeleteConfirmed(): void {
     this.entityRepositoryService
       .deleteApiEntity(this.apiName, this.entityInfo.name)
@@ -1145,8 +1353,13 @@ export class CardEntityComponent {
       });
   }
 
- 
-
+  /**
+   * Обрабатывает данные, полученные из диалога редактирования.
+   *
+   * @param data - Данные сущности, полученные из диалога.
+   * @private
+   * @memberof CardEntityComponent
+   */
   private handleEditDialogData(data: Entity): void {
     this.entityRepositoryService
       .updateApiEntity(this.apiName, this.oldName, data)
@@ -1156,6 +1369,14 @@ export class CardEntityComponent {
       });
   }
 
+  /**
+   * Обрабатывает успешное обновление сущности.
+   *
+   * @param response - Ответ от сервера.
+   * @param data - Новые данные сущности.
+   * @private
+   * @memberof CardEntityComponent
+   */
   private handleEntityUpdate(response: Entity, data: Entity): void {
     console.log(&#x27;Сущность обновлена:&#x27;, response);
     this.entityInfo &#x3D; data;
@@ -1165,15 +1386,36 @@ export class CardEntityComponent {
       .subscribe();
   }
 
+  /**
+   * Обрабатывает ошибку при обновлении сущности.
+   *
+   * @param error - Объект ошибки.
+   * @private
+   * @memberof CardEntityComponent
+   */
   private handleEntityUpdateError(error: any): void {
     this.handleError(&#x27;Ошибка при обновлении сущности&#x27;, error);
   }
 
+  /**
+   * Обрабатывает удаление сущности.
+   *
+   * @private
+   * @memberof CardEntityComponent
+   */
   private handleEntityDeletion(): void {
     console.log(&#x60;Сущность &quot;${this.entityInfo.name}&quot; удалена.&#x60;);
     this.entityDeleted.emit(this.entityInfo.name);
   }
 
+  /**
+   * Обрабатывает ошибки и отображает уведомления.
+   *
+   * @param message - Сообщение об ошибке.
+   * @param error - Объект ошибки.
+   * @private
+   * @memberof CardEntityComponent
+   */
   private handleError(message: string, error: any): void {
     console.error(message, error);
     if (error.status &#x3D;&#x3D;&#x3D; 409) {
