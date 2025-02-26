@@ -1,38 +1,28 @@
 <div>
-  <app-header
-    [isApiPage]="true"
-    [buttonText]="'Добавить API'"
-    (buttonClick)="openCreateDialog()"
-  ></app-header>
+  <app-header [isApiPage]="true" [buttonText]="'Добавить API'" (buttonClick)="openCreateDialog()"></app-header>
   <div class="container">
     <div class="header-section">
-      <app-filter-by-input
-        class="filter-input"
-        [label]="'Search API'"
-        [controlName]="'search'"
-        [items]="apiNames"
-        (searchQuery)="onSearchQuery($event)"
-      ></app-filter-by-input>
+      <app-filter-by-input class="filter-input" [label]="'Search API'" [controlName]="'search'" [items]="apiNames"
+        (searchQuery)="onSearchQuery($event)"></app-filter-by-input>
       <div class="pagination-sort-container">
-        <app-pagination
-          class="custom-pagination"
-          [totalItems]="filteredCards.length"
-          [itemsPerPage]="itemsPerPage"
-          [currentPage]="currentPage"
-          (pageChange)="onPageChange($event)"
-        ></app-pagination>
+        <app-pagination class="custom-pagination" *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"
+          [totalItems]="filteredCards.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+          (pageChange)="onPageChange($event)"></app-pagination>
         <div class="icons-container">
-          <i
-            *ngIf="!isSortedAscending"
-            class="fas fa-sort-alpha-up"
-            (click)="sortCardsOnClick()"
-          ></i>
-          <i
-            *ngIf="isSortedAscending"
-            class="fas fa-sort-alpha-down"
-            (click)="sortCardsOnClick()"
-          ></i>
+          <i *ngIf="!isSortedAscending" class="fas fa-sort-alpha-up" (click)="toggleSort()"></i>
+          <i *ngIf="isSortedAscending" class="fas fa-sort-alpha-down" (click)="toggleSort()"></i>
         </div>
+      </div>
+      <div class="selection-controls">
+        <button tuiButton class="primary-button" (click)="toggleSelectionMode()">
+          {{ isSelectionMode ? 'Отменить выбор' : 'Выбрать' }}
+        </button>
+        <button tuiButton *ngIf="isSelectionMode" class="primary-button" (click)="toggleSelectAll()">
+          {{ isAllSelected ? 'Снять всё' : 'Выбрать всё' }}
+        </button>
+        <button tuiButton *ngIf="selectedApis.size > 0 && isSelectionMode" class="primary-button" (click)="exportSelectedApis()">
+          Экспорт ({{ selectedApis.size }})
+        </button>
       </div>
     </div>
     <div *ngIf="loading; else cardList">
@@ -46,21 +36,17 @@
     <h1>Api-сервисов не найдено.</h1>
   </div>
   <div class="container">
-    <div class="grid">
+    <div class="grid" [class.selection-mode]="isSelectionMode">
       <div *ngFor="let item of paginatedCards" class="card">
-        <app-card-api
-          [apiInfo]="item"
-          (apiDeleted)="onApiDeleted(item.name)"
-        ></app-card-api>
+        <label class="checkbox-container">
+          <input type="checkbox" [checked]="selectedApis.has(item.name)" (change)="toggleApiSelection(item.name)">
+          <span class="checkmark"></span>
+        </label>
+        <app-card-api [apiInfo]="item" (apiDeleted)="onApiDeleted(item.name)"></app-card-api>
       </div>
     </div>
   </div>
-  <app-pagination
-    class="pagination"
-    *ngIf="paginatedCards.length >= itemsPerPage && !searchQueryActive"
-    [totalItems]="filteredCards.length"
-    [itemsPerPage]="itemsPerPage"
-    [currentPage]="currentPage"
-    (pageChange)="onPageChange($event)"
-  ></app-pagination>
+  <app-pagination class="custom-pagination" *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"
+    [totalItems]="filteredCards.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"
+    (pageChange)="onPageChange($event)"></app-pagination>
 </ng-template>
