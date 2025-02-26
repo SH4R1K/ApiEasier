@@ -1,0 +1,1961 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ApiEasier documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ApiEasier documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  EndpointCardListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-endpoint-card-list</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>TuiCardLarge</code>
+                                <code><a href="../components/CardEndpointComponent.html" target="_self" >CardEndpointComponent</a></code>
+                            <code>RouterModule</code>
+                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                                <code><a href="../components/SwitchComponent.html" target="_self" >SwitchComponent</a></code>
+                                <code><a href="../components/LoadingComponent.html" target="_self" >LoadingComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./endpoint-card-list.component.css,<br>../../../styles/card-list.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./endpoint-card-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#apiName" >apiName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialog" >dialog</a>
+                            </li>
+                            <li>
+                                <a href="#endpoint" >endpoint</a>
+                            </li>
+                            <li>
+                                <a href="#endpoints" >endpoints</a>
+                            </li>
+                            <li>
+                                <a href="#entityInfo" >entityInfo</a>
+                            </li>
+                            <li>
+                                <a href="#entityName" >entityName</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#location" >location</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#subscription" >subscription</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createEndpoint" >createEndpoint</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleEndpointCreation" >handleEndpointCreation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleEntityInfoResponse" >handleEntityInfoResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isRouteExists" >isRouteExists</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadData" >loadData</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onEndpointDeleted" >onEndpointDeleted</a>
+                            </li>
+                            <li>
+                                <a href="#onToggleChange" >onToggleChange</a>
+                            </li>
+                            <li>
+                                <a href="#openCreateDialog" >openCreateDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processCreateDialogData" >processCreateDialogData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showRouteExistsError" >showRouteExistsError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateEntityStatus" >updateEntityStatus</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router, cd: ChangeDetectorRef, route: ActivatedRoute, endpointRepositoryService: <a href="../injectables/EndpointRepositoryService.html" target="_self">EndpointRepositoryService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, alerts: TuiAlertService, location: Location)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cd</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>endpointRepositoryService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EndpointRepositoryService.html" target="_self" >EndpointRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>entityRepositoryService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EntityRepositoryService.html" target="_self" >EntityRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alerts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TuiAlertService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>location</td>
+                                                  
+                                                        <td>
+                                                                    <code>Location</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createEndpoint"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>createEndpoint</b></span>
+                        <a href="#createEndpoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createEndpoint(data: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleEndpointCreation"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleEndpointCreation</b></span>
+                        <a href="#handleEndpointCreation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleEndpointCreation(response: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>, data: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="144"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:144</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleEntityInfoResponse"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleEntityInfoResponse</b></span>
+                        <a href="#handleEntityInfoResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleEntityInfoResponse(entity: <a href="../interfaces/Entity.html" target="_self">Entity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:97</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isRouteExists"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isRouteExists</b></span>
+                        <a href="#isRouteExists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isRouteExists(route: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>route</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadData</b></span>
+                        <a href="#loadData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="73"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:73</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEndpointDeleted"></a>
+                    <span class="name">
+                        <span ><b>onEndpointDeleted</b></span>
+                        <a href="#onEndpointDeleted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEndpointDeleted(endpointRoute: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>endpointRoute</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onToggleChange"></a>
+                    <span class="name">
+                        <span ><b>onToggleChange</b></span>
+                        <a href="#onToggleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onToggleChange(newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCreateDialog"></a>
+                    <span class="name">
+                        <span ><b>openCreateDialog</b></span>
+                        <a href="#openCreateDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCreateDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="104"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processCreateDialogData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processCreateDialogData</b></span>
+                        <a href="#processCreateDialogData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processCreateDialogData(data: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:111</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showRouteExistsError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showRouteExistsError</b></span>
+                        <a href="#showRouteExistsError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showRouteExistsError()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:124</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateEntityStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateEntityStatus</b></span>
+                        <a href="#updateEntityStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateEntityStatus(newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:160</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiName"></a>
+                    <span class="name">
+                        <span ><b>apiName</b></span>
+                        <a href="#apiName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>tuiDialog(EndpointDialogComponent, {
+    dismissible: true,
+    label: &#x27;Создать&#x27;,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="endpoint"></a>
+                    <span class="name">
+                        <span ><b>endpoint</b></span>
+                        <a href="#endpoint"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    route: &#x27;&#x27;,
+    type: &#x27;get&#x27;,
+    isActive: false,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="endpoints"></a>
+                    <span class="name">
+                        <span ><b>endpoints</b></span>
+                        <a href="#endpoints"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityInfo"></a>
+                    <span class="name">
+                        <span ><b>entityInfo</b></span>
+                        <a href="#entityInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{} as Entity</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityName"></a>
+                    <span class="name">
+                        <span ><b>entityName</b></span>
+                        <a href="#entityName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="location"></a>
+                    <span class="name">
+                        <span ><b>location</b></span>
+                        <a href="#location"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Location</code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="subscription"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>subscription</b></span>
+                        <a href="#subscription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { Endpoint, Entity } from &#x27;../../../../services/service-structure-api&#x27;;
+import { CommonModule, Location } from &#x27;@angular/common&#x27;;
+import { TuiCardLarge } from &#x27;@taiga-ui/layout&#x27;;
+import { tuiDialog, TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
+import { CardEndpointComponent } from &#x27;../../../components/card-endpoint/card-endpoint.component&#x27;;
+import { HeaderComponent } from &#x27;../../../components/header/header.component&#x27;;
+import { Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ActivatedRoute } from &#x27;@angular/router&#x27;;
+import { EndpointDialogComponent } from &#x27;../../../components/endpoint-dialog/endpoint-dialog.component&#x27;;
+import { SwitchComponent } from &#x27;../../../components/switch/switch.component&#x27;;
+import { EntityRepositoryService } from &#x27;../../../../repositories/entity-repository.service&#x27;;
+import { LoadingComponent } from &#x27;../../../components/loading/loading.component&#x27;;
+import { EndpointRepositoryService } from &#x27;../../../../repositories/endpoint-repository.service&#x27;;
+
+@Component({
+  selector: &#x27;app-endpoint-card-list&#x27;,
+  imports: [
+    CommonModule,
+    TuiCardLarge,
+    CardEndpointComponent,
+    RouterModule,
+    HeaderComponent,
+    SwitchComponent,
+    LoadingComponent,
+  ],
+  templateUrl: &#x27;./endpoint-card-list.component.html&#x27;,
+  styleUrls: [
+    &#x27;./endpoint-card-list.component.css&#x27;,
+    &#x27;../../../styles/card-list.css&#x27;,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class EndpointCardListComponent implements OnInit, OnDestroy {
+  apiName!: string;
+  entityName!: string;
+  loading: boolean &#x3D; true;
+  private subscription: Subscription | null &#x3D; null;
+  endpoints: Endpoint[] &#x3D; [];
+  entityInfo: Entity &#x3D; {} as Entity;
+  location: Location;
+
+  private readonly dialog &#x3D; tuiDialog(EndpointDialogComponent, {
+    dismissible: true,
+    label: &#x27;Создать&#x27;,
+  });
+
+  endpoint: Endpoint &#x3D; {
+    route: &#x27;&#x27;,
+    type: &#x27;get&#x27;,
+    isActive: false,
+  };
+
+  constructor(
+    private router: Router,
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private endpointRepositoryService: EndpointRepositoryService,
+    private entityRepositoryService: EntityRepositoryService,
+    private alerts: TuiAlertService,
+    location: Location
+  ) {
+    this.location &#x3D; location;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) &#x3D;&gt; {
+      this.apiName &#x3D; params[&#x27;apiServiceName&#x27;];
+      this.entityName &#x3D; params[&#x27;entityName&#x27;];
+      this.loadData();
+    });
+  }
+
+  private loadData(): void {
+    this.subscription &#x3D; this.entityRepositoryService
+      .getApiEntity(this.apiName, this.entityName)
+      .subscribe({
+        next: (entity) &#x3D;&gt; this.handleEntityInfoResponse(entity),
+        error: () &#x3D;&gt; {
+          this.loading &#x3D; false;
+          this.cd.markForCheck();
+        },
+      });
+  }
+
+  private handleEntityInfoResponse(entity: Entity): void {
+    this.entityInfo &#x3D; entity;
+    this.endpoints &#x3D; entity.endpoints || [];
+    this.loading &#x3D; false;
+    this.cd.detectChanges();
+  }
+
+  openCreateDialog(): void {
+    this.dialog({ ...this.endpoint }).subscribe({
+      next: (data) &#x3D;&gt; this.processCreateDialogData(data),
+      complete: () &#x3D;&gt; console.info(&#x27;Dialog closed&#x27;),
+    });
+  }
+
+  private processCreateDialogData(data: Endpoint): void {
+    if (this.isRouteExists(data.route)) {
+      this.showRouteExistsError();
+      return;
+    }
+
+    this.createEndpoint(data);
+  }
+
+  private isRouteExists(route: string): boolean {
+    return this.endpoints.some((endpoint) &#x3D;&gt; endpoint.route &#x3D;&#x3D;&#x3D; route);
+  }
+
+  private showRouteExistsError(): void {
+    this.alerts
+      .open(&#x27;Ошибка: Эндпоинт с таким маршрутом уже существует&#x27;, {
+        appearance: &#x27;negative&#x27;,
+      })
+      .subscribe();
+  }
+
+  private createEndpoint(data: Endpoint): void {
+    this.endpointRepositoryService
+      .createEndpoint(this.apiName, this.entityName, data)
+      .subscribe({
+        next: (response) &#x3D;&gt; this.handleEndpointCreation(response, data),
+        error: () &#x3D;&gt; {
+          this.loading &#x3D; false;
+          this.cd.markForCheck();
+        },
+      });
+  }
+
+  private handleEndpointCreation(response: Endpoint, data: Endpoint): void {
+    console.log(&#x27;Эндпоинт добавлен:&#x27;, response);
+    this.endpoints.push(data);
+    this.cd.markForCheck();
+    this.alerts
+      .open(&#x27;Эндпоинт успешно создан&#x27;, {
+        appearance: &#x27;success&#x27;,
+      })
+      .subscribe();
+  }
+
+  onToggleChange(newState: boolean): void {
+    this.entityInfo.isActive &#x3D; newState;
+    this.updateEntityStatus(newState);
+  }
+
+  private updateEntityStatus(newState: boolean): void {
+    this.entityRepositoryService
+      .updateEntityStatus(this.apiName, this.entityName, newState)
+      .subscribe({
+        next: (response) &#x3D;&gt;
+          console.log(&#x27;Состояние сервиса обновлено:&#x27;, response),
+        error: () &#x3D;&gt; {
+          this.loading &#x3D; false;
+          this.cd.markForCheck();
+        },
+      });
+  }
+
+  onEndpointDeleted(endpointRoute: string): void {
+    this.endpoints &#x3D; this.endpoints.filter(
+      (endpoint) &#x3D;&gt; endpoint.route !&#x3D;&#x3D; endpointRoute
+    );
+    this.cd.markForCheck();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header [buttonText]&#x3D;&quot;&#x27;Добавить эндпоинт&#x27;&quot; (buttonClick)&#x3D;&quot;openCreateDialog()&quot; /&gt;
+@if (loading)
+{
+  &lt;app-loading&gt;&lt;/app-loading&gt;
+}
+@else 
+{
+&lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;header-section&quot;&gt;
+        &lt;div class&#x3D;&quot;top-right&quot;&gt;
+            &lt;app-switch [value]&#x3D;&quot;entityInfo.isActive&quot; (toggle)&#x3D;&quot;onToggleChange($event)&quot;&gt;&lt;/app-switch&gt;
+        &lt;/div&gt;
+        &lt;h1 class&#x3D;&quot;entity-title&quot;&gt;{{ entityInfo.name }}&lt;/h1&gt;
+        &lt;div class&#x3D;&quot;entity-structure&quot;&gt;
+            @if(entityInfo.structure !&#x3D; null){
+                 &lt;h3&gt;Структура сущности&lt;/h3&gt;
+                &lt;textarea readonly class&#x3D;&quot;structure-content&quot;&gt;{{ entityInfo.structure | json }}&lt;/textarea&gt;
+            }
+            @else{
+                &lt;h3&gt;Структура сущности отсутствует&lt;/h3&gt;
+            }
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;separator-section&quot;&gt;
+        &lt;h2&gt;Эндпоинты&lt;/h2&gt;
+        &lt;hr class&#x3D;&quot;separator&quot; /&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;grid&quot;&gt;
+        &lt;div *ngFor&#x3D;&quot;let endpoint of endpoints&quot; tuiAppearance&#x3D;&quot;floating&quot; tuiCardLarge class&#x3D;&quot;card&quot;&gt;
+            &lt;app-card-endpoint 
+                [entityInfo]&#x3D;&quot;entityInfo&quot; 
+                [endpointInfo]&#x3D;&quot;endpoint&quot; 
+                [apiName]&#x3D;&quot;apiName&quot;
+                (endpointDeleted)&#x3D;&quot;onEndpointDeleted(endpoint.route)&quot;&gt;
+            &lt;/app-card-endpoint&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./endpoint-card-list.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+                <p class="comment">
+                    <code>../../../styles/card-list.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.container {
+    padding: 20px;
+    position: relative; /* Добавляем относительное позиционирование для контейнера */
+}
+
+.mb-40 {
+    margin-bottom: 40px; /* Добавляем отступ снизу для разделения секций */
+}
+
+.header-section {
+    position: relative; /* Добавляем относительное позиционирование для заголовочной секции */
+    margin-bottom: 20px;
+    padding-right: 1.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+.edit-button, .delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.edit-button {
+    background-color: #0056a6;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #004080;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
+.separator-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.separator-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: rgb(0 0 0 / 3%);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 22%);
+    padding: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: normal;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    max-height: 300px; /* Ограничиваем высоту карточки */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+p {
+    word-wrap: break-word; /* Перенос слов на новую строку, если они не помещаются */
+    white-space: normal; /* Разрешаем перенос текста на новую строку */
+}
+
+.top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.structure-content {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none; /* Запрещаем изменение размера */
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header [buttonText]="\'Добавить эндпоинт\'" (buttonClick)="openCreateDialog()" />@if (loading){  <app-loading></app-loading>}@else {<div class="container">    <div class="header-section">        <div class="top-right">            <app-switch [value]="entityInfo.isActive" (toggle)="onToggleChange($event)"></app-switch>        </div>        <h1 class="entity-title">{{ entityInfo.name }}</h1>        <div class="entity-structure">            @if(entityInfo.structure != null){                 <h3>Структура сущности</h3>                <textarea readonly class="structure-content">{{ entityInfo.structure | json }}</textarea>            }            @else{                <h3>Структура сущности отсутствует</h3>            }        </div>    </div>    <div class="separator-section">        <h2>Эндпоинты</h2>        <hr class="separator" />    </div>    <div class="grid">        <div *ngFor="let endpoint of endpoints" tuiAppearance="floating" tuiCardLarge class="card">            <app-card-endpoint                 [entityInfo]="entityInfo"                 [endpointInfo]="endpoint"                 [apiName]="apiName"                (endpointDeleted)="onEndpointDeleted(endpoint.route)">            </app-card-endpoint>        </div>    </div></div>}</div>'
+    var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'EndpointCardListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EndpointCardListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

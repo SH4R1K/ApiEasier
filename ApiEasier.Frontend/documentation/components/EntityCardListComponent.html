@@ -1,0 +1,2717 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ApiEasier documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ApiEasier documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  EntityCardListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/pages/entity-card-list/entity-card-list.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-entity-card-list</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>TuiCardLarge</code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/CardEntityComponent.html" target="_self" >CardEntityComponent</a></code>
+                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                                <code><a href="../components/SwitchComponent.html" target="_self" >SwitchComponent</a></code>
+                                <code><a href="../components/LoadingComponent.html" target="_self" >LoadingComponent</a></code>
+                                <code><a href="../components/FilterByInputComponent.html" target="_self" >FilterByInputComponent</a></code>
+                                <code><a href="../components/PaginationComponent.html" target="_self" >PaginationComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./entity-card-list.component.css,<br>../../styles/card-list.css,<br>../../styles/icon.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./entity-card-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#apiInfo" >apiInfo</a>
+                            </li>
+                            <li>
+                                <a href="#apiName" >apiName</a>
+                            </li>
+                            <li>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialog" >dialog</a>
+                            </li>
+                            <li>
+                                <a href="#entities" >entities</a>
+                            </li>
+                            <li>
+                                <a href="#entity" >entity</a>
+                            </li>
+                            <li>
+                                <a href="#entityNames" >entityNames</a>
+                            </li>
+                            <li>
+                                <a href="#filteredEntities" >filteredEntities</a>
+                            </li>
+                            <li>
+                                <a href="#isSortedAscending" >isSortedAscending</a>
+                            </li>
+                            <li>
+                                <a href="#itemsPerPage" >itemsPerPage</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#searchQueryActive" >searchQueryActive</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sub" >sub</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createEntity" >createEntity</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#fetchApiData" >fetchApiData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#filterEntities" >filterEntities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleApiStructureResponse" >handleApiStructureResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleCreateDialogData" >handleCreateDialogData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleEntityCreation" >handleEntityCreation</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isEntityNameExists" >isEntityNameExists</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadData" >loadData</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onEntityDeleted" >onEntityDeleted</a>
+                            </li>
+                            <li>
+                                <a href="#onPageChange" >onPageChange</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchQuery" >onSearchQuery</a>
+                            </li>
+                            <li>
+                                <a href="#onToggleChange" >onToggleChange</a>
+                            </li>
+                            <li>
+                                <a href="#openCreateDialog" >openCreateDialog</a>
+                            </li>
+                            <li>
+                                <a href="#sortCards" >sortCards</a>
+                            </li>
+                            <li>
+                                <a href="#sortCardsOnClick" >sortCardsOnClick</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateApiServiceStatus" >updateApiServiceStatus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updatePagination" >updatePagination</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#totalPages" >totalPages</a>
+                                </li>
+                                <li>
+                                    <a href="#paginatedEntities" >paginatedEntities</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(cd: ChangeDetectorRef, route: ActivatedRoute, router: Router, apiService: <a href="../injectables/ApiService.html" target="_self">ApiService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, alerts: TuiAlertService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:70</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>cd</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>apiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApiService.html" target="_self" >ApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>entityRepositoryService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EntityRepositoryService.html" target="_self" >EntityRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alerts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TuiAlertService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createEntity"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>createEntity</b></span>
+                        <a href="#createEntity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createEntity(data: <a href="../interfaces/Entity.html" target="_self">Entity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fetchApiData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>fetchApiData</b></span>
+                        <a href="#fetchApiData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>fetchApiData(apiName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="120"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../injectables/ApiService.html" target="_self" >Observable&lt;ApiServiceStructure&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filterEntities"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>filterEntities</b></span>
+                        <a href="#filterEntities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>filterEntities(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:207</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;&#x27;</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleApiStructureResponse"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleApiStructureResponse</b></span>
+                        <a href="#handleApiStructureResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleApiStructureResponse(apiStructure: <a href="../interfaces/ApiServiceStructure.html" target="_self">ApiServiceStructure</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="128"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:128</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiStructure</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ApiServiceStructure.html" target="_self" >ApiServiceStructure</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleCreateDialogData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleCreateDialogData</b></span>
+                        <a href="#handleCreateDialogData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleCreateDialogData(data: <a href="../interfaces/Entity.html" target="_self">Entity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="147"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:147</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleEntityCreation"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleEntityCreation</b></span>
+                        <a href="#handleEntityCreation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleEntityCreation(response: <a href="../interfaces/Entity.html" target="_self">Entity</a>, data: <a href="../interfaces/Entity.html" target="_self">Entity</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="173"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:173</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isEntityNameExists"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isEntityNameExists</b></span>
+                        <a href="#isEntityNameExists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isEntityNameExists(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="159"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:159</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadData</b></span>
+                        <a href="#loadData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="108"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:108</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="85"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:85</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEntityDeleted"></a>
+                    <span class="name">
+                        <span ><b>onEntityDeleted</b></span>
+                        <a href="#onEntityDeleted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEntityDeleted(entityName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entityName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onPageChange"></a>
+                    <span class="name">
+                        <span ><b>onPageChange</b></span>
+                        <a href="#onPageChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onPageChange(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchQuery"></a>
+                    <span class="name">
+                        <span ><b>onSearchQuery</b></span>
+                        <a href="#onSearchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSearchQuery(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onToggleChange"></a>
+                    <span class="name">
+                        <span ><b>onToggleChange</b></span>
+                        <a href="#onToggleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onToggleChange(newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:89</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCreateDialog"></a>
+                    <span class="name">
+                        <span ><b>openCreateDialog</b></span>
+                        <a href="#openCreateDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCreateDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortCards"></a>
+                    <span class="name">
+                        <span ><b>sortCards</b></span>
+                        <a href="#sortCards"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortCards()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortCardsOnClick"></a>
+                    <span class="name">
+                        <span ><b>sortCardsOnClick</b></span>
+                        <a href="#sortCardsOnClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortCardsOnClick()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="192"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:192</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateApiServiceStatus"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateApiServiceStatus</b></span>
+                        <a href="#updateApiServiceStatus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateApiServiceStatus(newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePagination"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updatePagination</b></span>
+                        <a href="#updatePagination"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updatePagination()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="231"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiInfo"></a>
+                    <span class="name">
+                        <span ><b>apiInfo</b></span>
+                        <a href="#apiInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ApiServiceStructure.html" target="_self" >ApiServiceStructure</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{} as ApiServiceStructure</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiName"></a>
+                    <span class="name">
+                        <span ><b>apiName</b></span>
+                        <a href="#apiName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>tuiDialog(EntityDialogComponent, {
+    dismissible: true,
+    label: &#x27;Создать&#x27;,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entities"></a>
+                    <span class="name">
+                        <span ><b>entities</b></span>
+                        <a href="#entities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Entity.html" target="_self" >Entity[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entity"></a>
+                    <span class="name">
+                        <span ><b>entity</b></span>
+                        <a href="#entity"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &#x27;&#x27;,
+    isActive: false,
+    structure: null,
+    endpoints: [],
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entityNames"></a>
+                    <span class="name">
+                        <span ><b>entityNames</b></span>
+                        <a href="#entityNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredEntities"></a>
+                    <span class="name">
+                        <span ><b>filteredEntities</b></span>
+                        <a href="#filteredEntities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Entity.html" target="_self" >Entity[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSortedAscending"></a>
+                    <span class="name">
+                        <span ><b>isSortedAscending</b></span>
+                        <a href="#isSortedAscending"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemsPerPage"></a>
+                    <span class="name">
+                        <span ><b>itemsPerPage</b></span>
+                        <a href="#itemsPerPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>16</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQueryActive"></a>
+                    <span class="name">
+                        <span ><b>searchQueryActive</b></span>
+                        <a href="#searchQueryActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sub"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sub</b></span>
+                        <a href="#sub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalPages"></a>
+                        <span class="name"><b>totalPages</b><a href="#totalPages"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>totalPages()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="215" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:215</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginatedEntities"></a>
+                        <span class="name"><b>paginatedEntities</b><a href="#paginatedEntities"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>paginatedEntities()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:219</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import { Observable, Subscription, switchMap } from &#x27;rxjs&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import {
+  ApiServiceStructure,
+  Entity,
+} from &#x27;../../../services/service-structure-api&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { TuiCardLarge } from &#x27;@taiga-ui/layout&#x27;;
+import { tuiDialog, TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
+import { CardEntityComponent } from &#x27;../../components/card-entity/card-entity.component&#x27;;
+import { HeaderComponent } from &#x27;../../components/header/header.component&#x27;;
+import { SwitchComponent } from &#x27;../../components/switch/switch.component&#x27;;
+import { EntityDialogComponent } from &#x27;../../components/entity-dialog/entity-dialog.component&#x27;;
+import { ApiService } from &#x27;../../../services/api-service.service&#x27;;
+import { EntityRepositoryService } from &#x27;../../../repositories/entity-repository.service&#x27;;
+import { LoadingComponent } from &#x27;../../components/loading/loading.component&#x27;;
+import { FilterByInputComponent } from &#x27;../../components/filter-by-input/filter-by-input.component&#x27;;
+import { PaginationComponent } from &#x27;../../components/pagination/pagination.component&#x27;;
+
+@Component({
+  selector: &#x27;app-entity-card-list&#x27;,
+  imports: [
+    TuiCardLarge,
+    CommonModule,
+    CardEntityComponent,
+    HeaderComponent,
+    SwitchComponent,
+    LoadingComponent,
+    FilterByInputComponent,
+    PaginationComponent,
+  ],
+  templateUrl: &#x27;./entity-card-list.component.html&#x27;,
+  styleUrls: [
+    &#x27;./entity-card-list.component.css&#x27;,
+    &#x27;../../styles/card-list.css&#x27;,
+    &#x27;../../styles/icon.css&#x27;,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class EntityCardListComponent implements OnInit, OnDestroy {
+  entities: Entity[] &#x3D; [];
+  filteredEntities: Entity[] &#x3D; [];
+  entityNames: string[] &#x3D; [];
+  private sub: Subscription | null &#x3D; null;
+  apiName!: string;
+  loading: boolean &#x3D; true;
+  apiInfo: ApiServiceStructure &#x3D; {} as ApiServiceStructure;
+  isSortedAscending: boolean &#x3D; true;
+  currentPage: number &#x3D; 1;
+  itemsPerPage: number &#x3D; 16;
+  searchQueryActive &#x3D; false;
+
+  private readonly dialog &#x3D; tuiDialog(EntityDialogComponent, {
+    dismissible: true,
+    label: &#x27;Создать&#x27;,
+  });
+
+  entity: Entity &#x3D; {
+    name: &#x27;&#x27;,
+    isActive: false,
+    structure: null,
+    endpoints: [],
+  };
+
+  constructor(
+    private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService,
+    private entityRepositoryService: EntityRepositoryService,
+    private alerts: TuiAlertService
+  ) {}
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.loadData();
+  }
+
+  onToggleChange(newState: boolean): void {
+    this.updateApiServiceStatus(newState);
+  }
+
+  openCreateDialog(): void {
+    this.dialog({ ...this.entity }).subscribe({
+      next: (data) &#x3D;&gt; this.handleCreateDialogData(data),
+      complete: () &#x3D;&gt; console.info(&#x27;Dialog closed&#x27;),
+    });
+  }
+
+  onEntityDeleted(entityName: string): void {
+    this.entities &#x3D; this.entities.filter(
+      (entity) &#x3D;&gt; entity.name !&#x3D;&#x3D; entityName
+    );
+    this.filterEntities();
+    this.cd.markForCheck();
+  }
+
+  private loadData(): void {
+    this.sub &#x3D; this.route.params
+      .pipe(switchMap((params) &#x3D;&gt; this.fetchApiData(params[&#x27;name&#x27;])))
+      .subscribe({
+        next: (apiStructure) &#x3D;&gt; this.handleApiStructureResponse(apiStructure),
+        error: () &#x3D;&gt; {
+          this.loading &#x3D; false;
+          this.cd.markForCheck();
+        },
+      });
+  }
+
+  private fetchApiData(apiName: string): Observable&lt;ApiServiceStructure&gt; {
+    if (!apiName) {
+      throw new Error(&#x27;API name is null&#x27;);
+    }
+    this.apiName &#x3D; apiName;
+    return this.apiService.getApiStructureList(this.apiName);
+  }
+
+  private handleApiStructureResponse(apiStructure: ApiServiceStructure): void {
+    this.apiInfo &#x3D; apiStructure;
+    this.entities &#x3D; apiStructure.entities;
+    this.filterEntities();
+    this.loading &#x3D; false;
+    this.cd.markForCheck();
+  }
+
+  private updateApiServiceStatus(newState: boolean): void {
+    this.apiInfo.isActive &#x3D; newState;
+    this.apiService.updateApiServiceStatus(this.apiName, newState).subscribe({
+      next: (response) &#x3D;&gt; console.log(&#x27;Состояние сервиса обновлено:&#x27;, response),
+      error: () &#x3D;&gt; {
+        this.loading &#x3D; false;
+        this.cd.markForCheck();
+      },
+    });
+  }
+
+  private handleCreateDialogData(data: Entity): void {
+    if (this.isEntityNameExists(data.name)) {
+      this.alerts
+        .open(&#x27;Ошибка: Сущность с таким именем уже существует&#x27;, {
+          appearance: &#x27;negative&#x27;,
+        })
+        .subscribe();
+      return;
+    }
+    this.createEntity(data);
+  }
+
+  private isEntityNameExists(name: string): boolean {
+    return this.entities.some((entity) &#x3D;&gt; entity.name &#x3D;&#x3D;&#x3D; name);
+  }
+
+  private createEntity(data: Entity): void {
+    this.entityRepositoryService.createApiEntity(this.apiName, data).subscribe({
+      next: (response) &#x3D;&gt; this.handleEntityCreation(response, data),
+      error: () &#x3D;&gt; {
+        this.loading &#x3D; false;
+        this.cd.markForCheck();
+      },
+    });
+  }
+
+  private handleEntityCreation(response: Entity, data: Entity): void {
+    console.log(&#x27;Сущность добавлена:&#x27;, response);
+    this.entities.push(data);
+    this.filterEntities();
+    this.sortCards();
+    this.cd.markForCheck();
+    this.alerts
+      .open(&#x27;Сущность успешно создана&#x27;, { appearance: &#x27;success&#x27; })
+      .subscribe();
+  }
+
+  sortCards(): void {
+    if (this.isSortedAscending) {
+      this.filteredEntities.sort((a, b) &#x3D;&gt; a.name.localeCompare(b.name));
+    } else {
+      this.filteredEntities.sort((a, b) &#x3D;&gt; b.name.localeCompare(a.name));
+    }
+  }
+
+  sortCardsOnClick(): void {
+    this.isSortedAscending &#x3D; !this.isSortedAscending;
+    this.sortCards();
+    this.cd.markForCheck();
+  }
+
+  onSearchQuery(query: string): void {
+    this.searchQueryActive &#x3D; !!query;
+    this.filteredEntities &#x3D; this.entities.filter((entity) &#x3D;&gt;
+      entity.name.includes(query)
+    );
+    this.sortCards();
+    this.updatePagination();
+  }
+
+  private filterEntities(query: string &#x3D; &#x27;&#x27;): void {
+    this.filteredEntities &#x3D; this.entities.filter((entity) &#x3D;&gt;
+      entity.name.includes(query)
+    );
+    this.entityNames &#x3D; this.filteredEntities.map((entity) &#x3D;&gt; entity.name);
+    this.updatePagination();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredEntities.length / this.itemsPerPage);
+  }
+
+  get paginatedEntities(): Entity[] {
+    const startIndex &#x3D; (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredEntities.slice(
+      startIndex,
+      startIndex + this.itemsPerPage
+    );
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage &#x3D; page;
+  }
+
+  private updatePagination(): void {
+    if (this.currentPage &gt; this.totalPages) {
+      this.currentPage &#x3D; this.totalPages;
+    }
+    if (this.currentPage &lt; 1) {
+      this.currentPage &#x3D; 1;
+    }
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header
+  [buttonText]&#x3D;&quot;&#x27;Добавить сущность&#x27;&quot;
+  (buttonClick)&#x3D;&quot;openCreateDialog()&quot;
+&gt;&lt;/app-header&gt;
+
+&lt;div *ngIf&#x3D;&quot;loading; else content&quot;&gt;
+  &lt;app-loading&gt;&lt;/app-loading&gt;
+&lt;/div&gt;
+
+&lt;ng-template #content&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;mb-40&quot;&gt;
+      &lt;!-- Заголовок и описание --&gt;
+      &lt;div class&#x3D;&quot;header-section&quot;&gt;
+        &lt;div class&#x3D;&quot;top-right&quot;&gt;
+          &lt;app-switch
+            [value]&#x3D;&quot;apiInfo.isActive&quot;
+            (toggle)&#x3D;&quot;onToggleChange($event)&quot;
+          &gt;&lt;/app-switch&gt;
+        &lt;/div&gt;
+        &lt;h1&gt;{{ apiInfo.name }}&lt;/h1&gt;
+        &lt;p&gt;{{ apiInfo.description }}&lt;/p&gt;
+        &lt;h3 *ngIf&#x3D;&quot;filteredEntities.length &#x3D;&#x3D; 0&quot;&gt;Сущностей нет&lt;/h3&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div *ngIf&#x3D;&quot;filteredEntities.length &gt; 0&quot;&gt;
+      &lt;!-- Сепаратор и заголовок &quot;Сущности&quot; --&gt;
+      &lt;div class&#x3D;&quot;separator-section&quot;&gt;
+        &lt;h2&gt;Сущности&lt;/h2&gt;
+        &lt;hr class&#x3D;&quot;separator&quot; /&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Фильтрация, сортировка и пагинация --&gt;
+      &lt;div class&#x3D;&quot;filter-section&quot;&gt;
+        &lt;app-filter-by-input
+          class&#x3D;&quot;filter-input&quot;
+          [label]&#x3D;&quot;&#x27;Search Entity&#x27;&quot;
+          [controlName]&#x3D;&quot;&#x27;search&#x27;&quot;
+          [items]&#x3D;&quot;entityNames&quot;
+          (searchQuery)&#x3D;&quot;onSearchQuery($event)&quot;
+        &gt;&lt;/app-filter-by-input&gt;
+        &lt;div class&#x3D;&quot;pagination-sort-container&quot;&gt;
+          &lt;app-pagination
+            class&#x3D;&quot;custom-pagination&quot;
+            [totalItems]&#x3D;&quot;filteredEntities.length&quot;
+            [itemsPerPage]&#x3D;&quot;itemsPerPage&quot;
+            [currentPage]&#x3D;&quot;currentPage&quot;
+            (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+          &gt;&lt;/app-pagination&gt;
+          &lt;div class&#x3D;&quot;icons-container&quot;&gt;
+            &lt;i
+              *ngIf&#x3D;&quot;!isSortedAscending&quot;
+              class&#x3D;&quot;fas fa-sort-alpha-up&quot;
+              (click)&#x3D;&quot;sortCardsOnClick()&quot;
+            &gt;&lt;/i&gt;
+            &lt;i
+              *ngIf&#x3D;&quot;isSortedAscending&quot;
+              class&#x3D;&quot;fas fa-sort-alpha-down&quot;
+              (click)&#x3D;&quot;sortCardsOnClick()&quot;
+            &gt;&lt;/i&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Список сущностей --&gt;
+      &lt;div class&#x3D;&quot;grid&quot;&gt;
+        &lt;div
+          *ngFor&#x3D;&quot;let item of paginatedEntities&quot;
+          tuiAppearance&#x3D;&quot;floating&quot;
+          tuiCardLarge
+          class&#x3D;&quot;card&quot;
+        &gt;
+          &lt;app-card-entity
+            [entityInfo]&#x3D;&quot;item&quot;
+            [apiName]&#x3D;&quot;apiInfo.name&quot;
+            (entityDeleted)&#x3D;&quot;onEntityDeleted(item.name)&quot;
+          &gt;&lt;/app-card-entity&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;mt-20&quot;&gt;
+        &lt;!-- Пагинация --&gt;
+        &lt;app-pagination
+          class&#x3D;&quot;custom-pagination&quot;
+          *ngIf&#x3D;&quot;paginatedEntities.length &gt;&#x3D; itemsPerPage &amp;&amp; !searchQueryActive&quot;
+          [totalItems]&#x3D;&quot;filteredEntities.length&quot;
+          [itemsPerPage]&#x3D;&quot;itemsPerPage&quot;
+          [currentPage]&#x3D;&quot;currentPage&quot;
+          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+        &gt;&lt;/app-pagination&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/ng-template&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./entity-card-list.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.filter-section {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Two columns for larger screens */
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+  padding: 0px;
+  margin-bottom: 20px;
+}
+
+.filter-input {
+  grid-column: 1; /* Search input in the first column */
+}
+
+.pagination-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 2; /* Pagination and sort container in the second column */
+}
+
+.custom-pagination {
+  flex: 1; /* Pagination takes available space */
+  justify-self: center; /* Center alignment */
+}
+
+.icons-container {
+  flex: 1; /* Icons container takes available space */
+  display: flex;
+  justify-content: flex-end; /* Right alignment */
+}
+
+/* Adjust styles for mobile devices */
+@media (max-width: 600px) {
+  .filter-section {
+    grid-template-columns: 1fr; /* Single column for mobile */
+    text-align: center; /* Center align text */
+  }
+
+  .filter-input {
+    grid-column: 1; /* Search input in the single column */
+    justify-self: center; /* Center alignment */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit the maximum width */
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+
+  .pagination-sort-container {
+    grid-column: 1; /* Pagination and sort container in the single column */
+    justify-content: center; /* Center alignment */
+    width: 100%; /* Full width */
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+
+  .custom-pagination {
+    justify-self: center; /* Center alignment */
+  }
+
+  .icons-container {
+    justify-content: flex-end; /* Right alignment */
+  }
+}
+</code></pre>
+                <p class="comment">
+                    <code>../../styles/card-list.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.container {
+    padding: 20px;
+    position: relative; /* Добавляем относительное позиционирование для контейнера */
+}
+
+.mb-40 {
+    margin-bottom: 40px; /* Добавляем отступ снизу для разделения секций */
+}
+
+.header-section {
+    position: relative; /* Добавляем относительное позиционирование для заголовочной секции */
+    margin-bottom: 20px;
+    padding-right: 1.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+.edit-button, .delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.edit-button {
+    background-color: #0056a6;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #004080;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
+.separator-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.separator-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: rgb(0 0 0 / 3%);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 22%);
+    padding: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: normal;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    max-height: 300px; /* Ограничиваем высоту карточки */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+p {
+    word-wrap: break-word; /* Перенос слов на новую строку, если они не помещаются */
+    white-space: normal; /* Разрешаем перенос текста на новую строку */
+}
+
+.top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.structure-content {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none; /* Запрещаем изменение размера */
+}</code></pre>
+                <p class="comment">
+                    <code>../../styles/icon.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">  
+i {
+    margin-right: 15px; /* 10px * 1.2 */
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+    font-size: 20px; /* Увеличиваем размер шрифта на 20% */
+}
+
+i:hover {
+    color: #000;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header  [buttonText]="\'Добавить сущность\'"  (buttonClick)="openCreateDialog()"></app-header><div *ngIf="loading; else content">  <app-loading></app-loading></div><ng-template #content>  <div class="container">    <div class="mb-40">      <!-- Заголовок и описание -->      <div class="header-section">        <div class="top-right">          <app-switch            [value]="apiInfo.isActive"            (toggle)="onToggleChange($event)"          ></app-switch>        </div>        <h1>{{ apiInfo.name }}</h1>        <p>{{ apiInfo.description }}</p>        <h3 *ngIf="filteredEntities.length == 0">Сущностей нет</h3>      </div>    </div>    <div *ngIf="filteredEntities.length > 0">      <!-- Сепаратор и заголовок "Сущности" -->      <div class="separator-section">        <h2>Сущности</h2>        <hr class="separator" />      </div>      <!-- Фильтрация, сортировка и пагинация -->      <div class="filter-section">        <app-filter-by-input          class="filter-input"          [label]="\'Search Entity\'"          [controlName]="\'search\'"          [items]="entityNames"          (searchQuery)="onSearchQuery($event)"        ></app-filter-by-input>        <div class="pagination-sort-container">          <app-pagination            class="custom-pagination"            [totalItems]="filteredEntities.length"            [itemsPerPage]="itemsPerPage"            [currentPage]="currentPage"            (pageChange)="onPageChange($event)"          ></app-pagination>          <div class="icons-container">            <i              *ngIf="!isSortedAscending"              class="fas fa-sort-alpha-up"              (click)="sortCardsOnClick()"            ></i>            <i              *ngIf="isSortedAscending"              class="fas fa-sort-alpha-down"              (click)="sortCardsOnClick()"            ></i>          </div>        </div>      </div>      <!-- Список сущностей -->      <div class="grid">        <div          *ngFor="let item of paginatedEntities"          tuiAppearance="floating"          tuiCardLarge          class="card"        >          <app-card-entity            [entityInfo]="item"            [apiName]="apiInfo.name"            (entityDeleted)="onEntityDeleted(item.name)"          ></app-card-entity>        </div>      </div>      <div class="mt-20">        <!-- Пагинация -->        <app-pagination          class="custom-pagination"          *ngIf="paginatedEntities.length >= itemsPerPage && !searchQueryActive"          [totalItems]="filteredEntities.length"          [itemsPerPage]="itemsPerPage"          [currentPage]="currentPage"          (pageChange)="onPageChange($event)"        ></app-pagination>      </div>    </div>  </div></ng-template></div>'
+    var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'EntityCardListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'EntityCardListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

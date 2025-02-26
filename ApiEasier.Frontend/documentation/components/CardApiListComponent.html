@@ -1,0 +1,3279 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ApiEasier documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ApiEasier documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CardApiListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/pages/card-api-list/card-api-list.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-card-api-list</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                                <code><a href="../components/CardApiComponent.html" target="_self" >CardApiComponent</a></code>
+                            <code>CommonModule</code>
+                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                            <code>RouterModule</code>
+                                <code><a href="../components/LoadingComponent.html" target="_self" >LoadingComponent</a></code>
+                            <code>TuiInputSliderModule</code>
+                            <code>TuiTextfieldControllerModule</code>
+                                <code><a href="../components/PaginationComponent.html" target="_self" >PaginationComponent</a></code>
+                                <code><a href="../components/FilterByInputComponent.html" target="_self" >FilterByInputComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./card-api-list.component.css,<br>../../styles/card-list.css,<br>../../styles/icon.css,<br>../../styles/button.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./card-api-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#api" >api</a>
+                            </li>
+                            <li>
+                                <a href="#apiNames" >apiNames</a>
+                            </li>
+                            <li>
+                                <a href="#cards" >cards</a>
+                            </li>
+                            <li>
+                                <a href="#currentPage" >currentPage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#dialog" >dialog</a>
+                            </li>
+                            <li>
+                                <a href="#errorCode" >errorCode</a>
+                            </li>
+                            <li>
+                                <a href="#errorMessage" >errorMessage</a>
+                            </li>
+                            <li>
+                                <a href="#filteredCards" >filteredCards</a>
+                            </li>
+                            <li>
+                                <a href="#isAllSelected" >isAllSelected</a>
+                            </li>
+                            <li>
+                                <a href="#isSelectionMode" >isSelectionMode</a>
+                            </li>
+                            <li>
+                                <a href="#isSortedAscending" >isSortedAscending</a>
+                            </li>
+                            <li>
+                                <a href="#itemsPerPage" >itemsPerPage</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#searchQueryActive" >searchQueryActive</a>
+                            </li>
+                            <li>
+                                <a href="#selectedApis" >selectedApis</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sub" >sub</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#checkAllSelectedState" >checkAllSelectedState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#createApiService" >createApiService</a>
+                            </li>
+                            <li>
+                                <a href="#exportSelectedApis" >exportSelectedApis</a>
+                            </li>
+                            <li>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleApiResponse" >handleApiResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleError" >handleError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleWindowResize" >handleWindowResize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#isApiNameExists" >isApiNameExists</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadApiList" >loadApiList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#navigateToErrorPage" >navigateToErrorPage</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onApiDeleted" >onApiDeleted</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#onApiServiceCreated" >onApiServiceCreated</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#onDialogClose" >onDialogClose</a>
+                            </li>
+                            <li>
+                                <a href="#onPageChange" >onPageChange</a>
+                            </li>
+                            <li>
+                                <a href="#onSearchQuery" >onSearchQuery</a>
+                            </li>
+                            <li>
+                                <a href="#openCreateDialog" >openCreateDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#processDialogData" >processDialogData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#removeApiByName" >removeApiByName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showApiNameExistsError" >showApiNameExistsError</a>
+                            </li>
+                            <li>
+                                <a href="#sortCards" >sortCards</a>
+                            </li>
+                            <li>
+                                <a href="#toggleApiSelection" >toggleApiSelection</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSelectAll" >toggleSelectAll</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSelectionMode" >toggleSelectionMode</a>
+                            </li>
+                            <li>
+                                <a href="#toggleSort" >toggleSort</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updateApiList" >updateApiList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#updatePagination" >updatePagination</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#totalPages" >totalPages</a>
+                                </li>
+                                <li>
+                                    <a href="#paginatedCards" >paginatedCards</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(apiServiceRepository: <a href="../injectables/ApiServiceRepositoryService.html" target="_self">ApiServiceRepositoryService</a>, changeDetector: ChangeDetectorRef, router: Router, alerts: TuiAlertService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:75</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>apiServiceRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApiServiceRepositoryService.html" target="_self" >ApiServiceRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>changeDetector</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alerts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TuiAlertService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkAllSelectedState"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>checkAllSelectedState</b></span>
+                        <a href="#checkAllSelectedState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkAllSelectedState()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:132</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createApiService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>createApiService</b></span>
+                        <a href="#createApiService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createApiService(data: <a href="../interfaces/apiServiceShortStructure.html" target="_self">apiServiceShortStructure</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="252"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:252</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="exportSelectedApis"></a>
+                    <span class="name">
+                        <span ><b>exportSelectedApis</b></span>
+                        <a href="#exportSelectedApis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>exportSelectedApis()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="138"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:138</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="330"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:330</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleApiResponse"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleApiResponse</b></span>
+                        <a href="#handleApiResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleApiResponse()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>{ next: (apiList: {}) &#x3D;&gt; void; error: (error: any) &#x3D;&gt; void; }</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleError</b></span>
+                        <a href="#handleError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleError(error: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:206</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>error</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleWindowResize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleWindowResize</b></span>
+                        <a href="#handleWindowResize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleWindowResize()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isApiNameExists"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>isApiNameExists</b></span>
+                        <a href="#isApiNameExists"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>isApiNameExists(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="238"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:238</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadApiList"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadApiList</b></span>
+                        <a href="#loadApiList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadApiList()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="181"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:181</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateToErrorPage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>navigateToErrorPage</b></span>
+                        <a href="#navigateToErrorPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>navigateToErrorPage(errorCode: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, errorMessage: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="212"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:212</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>errorCode</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>errorMessage</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:88</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onApiDeleted"></a>
+                    <span class="name">
+                        <span ><b>onApiDeleted</b></span>
+                        <a href="#onApiDeleted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onApiDeleted(apiName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="268"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:268</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onApiServiceCreated"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>onApiServiceCreated</b></span>
+                        <a href="#onApiServiceCreated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onApiServiceCreated(response: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, data: <a href="../interfaces/apiServiceShortStructure.html" target="_self">apiServiceShortStructure</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>response</td>
+                                            <td>
+                                                            <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                            <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDialogClose"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>onDialogClose</b></span>
+                        <a href="#onDialogClose"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onDialogClose()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:242</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onPageChange"></a>
+                    <span class="name">
+                        <span ><b>onPageChange</b></span>
+                        <a href="#onPageChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onPageChange(page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="301"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:301</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>page</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onSearchQuery"></a>
+                    <span class="name">
+                        <span ><b>onSearchQuery</b></span>
+                        <a href="#onSearchQuery"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onSearchQuery(query: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:281</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>query</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openCreateDialog"></a>
+                    <span class="name">
+                        <span ><b>openCreateDialog</b></span>
+                        <a href="#openCreateDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>openCreateDialog(event?: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="218"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:218</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="processDialogData"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>processDialogData</b></span>
+                        <a href="#processDialogData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>processDialogData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="225"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:225</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >{ next: (data: apiServiceShortStructure) &#x3D;&gt; void; complete: () &#x3D;&gt; void; }</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeApiByName"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>removeApiByName</b></span>
+                        <a href="#removeApiByName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeApiByName(apiName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:275</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showApiNameExistsError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showApiNameExistsError</b></span>
+                        <a href="#showApiNameExistsError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showApiNameExistsError()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:246</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sortCards"></a>
+                    <span class="name">
+                        <span ><b>sortCards</b></span>
+                        <a href="#sortCards"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>sortCards()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="315"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:315</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleApiSelection"></a>
+                    <span class="name">
+                        <span ><b>toggleApiSelection</b></span>
+                        <a href="#toggleApiSelection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleApiSelection(apiName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSelectAll"></a>
+                    <span class="name">
+                        <span ><b>toggleSelectAll</b></span>
+                        <a href="#toggleSelectAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSelectAll()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSelectionMode"></a>
+                    <span class="name">
+                        <span ><b>toggleSelectionMode</b></span>
+                        <a href="#toggleSelectionMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSelectionMode()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleSort"></a>
+                    <span class="name">
+                        <span ><b>toggleSort</b></span>
+                        <a href="#toggleSort"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleSort()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="323"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:323</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateApiList"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updateApiList</b></span>
+                        <a href="#updateApiList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateApiList(apiList: <a href="../interfaces/apiServiceShortStructure.html" target="_self">apiServiceShortStructure[]</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:196</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiList</td>
+                                            <td>
+                                                            <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure[]</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updatePagination"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>updatePagination</b></span>
+                        <a href="#updatePagination"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updatePagination()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="307"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:307</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="api"></a>
+                    <span class="name">
+                        <span ><b>api</b></span>
+                        <a href="#api"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &#x27;&#x27;,
+    isActive: false,
+    description: &#x27;&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiNames"></a>
+                    <span class="name">
+                        <span ><b>apiNames</b></span>
+                        <a href="#apiNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="cards"></a>
+                    <span class="name">
+                        <span ><b>cards</b></span>
+                        <a href="#cards"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentPage"></a>
+                    <span class="name">
+                        <span ><b>currentPage</b></span>
+                        <a href="#currentPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>1</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:57</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialog"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>dialog</b></span>
+                        <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>tuiDialog(ApiDialogComponent, {
+    dismissible: true,
+    label: &#x27;Создать&#x27;,
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorCode"></a>
+                    <span class="name">
+                        <span ><b>errorCode</b></span>
+                        <a href="#errorCode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorMessage"></a>
+                    <span class="name">
+                        <span ><b>errorMessage</b></span>
+                        <a href="#errorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="filteredCards"></a>
+                    <span class="name">
+                        <span ><b>filteredCards</b></span>
+                        <a href="#filteredCards"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isAllSelected"></a>
+                    <span class="name">
+                        <span ><b>isAllSelected</b></span>
+                        <a href="#isAllSelected"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSelectionMode"></a>
+                    <span class="name">
+                        <span ><b>isSelectionMode</b></span>
+                        <a href="#isSelectionMode"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSortedAscending"></a>
+                    <span class="name">
+                        <span ><b>isSortedAscending</b></span>
+                        <a href="#isSortedAscending"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:59</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="itemsPerPage"></a>
+                    <span class="name">
+                        <span ><b>itemsPerPage</b></span>
+                        <a href="#itemsPerPage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>16</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="searchQueryActive"></a>
+                    <span class="name">
+                        <span ><b>searchQueryActive</b></span>
+                        <a href="#searchQueryActive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedApis"></a>
+                    <span class="name">
+                        <span ><b>selectedApis</b></span>
+                        <a href="#selectedApis"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Set&lt;string&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sub"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sub</b></span>
+                        <a href="#sub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-accessors">
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="totalPages"></a>
+                        <span class="name"><b>totalPages</b><a href="#totalPages"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>totalPages()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="292" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:292</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="paginatedCards"></a>
+                        <span class="name"><b>paginatedCards</b><a href="#paginatedCards"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>get</b><code>paginatedCards()</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="296" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:296</a></div>
+                                </td>
+                            </tr>
+
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectorRef,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { ApiHubServiceService } from &#x27;../../../services/api-hub-service.service&#x27;;
+import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
+import { Router } from &#x27;@angular/router&#x27;;
+import { TuiAlertService, tuiDialog } from &#x27;@taiga-ui/core&#x27;;
+import { apiServiceShortStructure, ApiServiceStructure } from &#x27;../../../services/service-structure-api&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { CardApiComponent } from &#x27;../../components/card-api/card-api.component&#x27;;
+import { HeaderComponent } from &#x27;../../components/header/header.component&#x27;;
+import { RouterModule } from &#x27;@angular/router&#x27;;
+import { LoadingComponent } from &#x27;../../components/loading/loading.component&#x27;;
+import { PaginationComponent } from &#x27;../../components/pagination/pagination.component&#x27;;
+import {
+  TuiInputSliderModule,
+  TuiTextfieldControllerModule,
+} from &#x27;@taiga-ui/legacy&#x27;;
+import { ApiDialogComponent } from &#x27;../../components/api-dialog/api-dialog.component&#x27;;
+import { FilterByInputComponent } from &#x27;../../components/filter-by-input/filter-by-input.component&#x27;;
+import JSZip from &#x27;jszip&#x27;;
+
+@Component({
+  selector: &#x27;app-card-api-list&#x27;,
+  imports: [
+    CardApiComponent,
+    CommonModule,
+    HeaderComponent,
+    RouterModule,
+    LoadingComponent,
+    TuiInputSliderModule,
+    TuiTextfieldControllerModule,
+    PaginationComponent,
+    FilterByInputComponent,
+  ],
+  templateUrl: &#x27;./card-api-list.component.html&#x27;,
+  styleUrls: [
+    &#x27;./card-api-list.component.css&#x27;,
+    &#x27;../../styles/card-list.css&#x27;,
+    &#x27;../../styles/icon.css&#x27;,
+    &#x27;../../styles/button.css&#x27;
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class CardApiListComponent implements OnInit, OnDestroy {
+  cards: apiServiceShortStructure[] &#x3D; [];
+  filteredCards: apiServiceShortStructure[] &#x3D; [];
+  apiNames: string[] &#x3D; [];
+  private sub: Subscription | null &#x3D; null;
+  loading &#x3D; true;
+  itemsPerPage &#x3D; 16;
+  currentPage &#x3D; 1;
+  searchQueryActive &#x3D; false;
+  isSortedAscending &#x3D; true;
+  errorMessage &#x3D; &#x27;&#x27;;
+  errorCode &#x3D; &#x27;&#x27;;
+  selectedApis &#x3D; new Set&lt;string&gt;();
+  isSelectionMode &#x3D; false;
+  isAllSelected &#x3D; false;
+
+  api: apiServiceShortStructure &#x3D; {
+    name: &#x27;&#x27;,
+    isActive: false,
+    description: &#x27;&#x27;,
+  };
+
+  private readonly dialog &#x3D; tuiDialog(ApiDialogComponent, {
+    dismissible: true,
+    label: &#x27;Создать&#x27;,
+  });
+
+  constructor(
+    private apiServiceRepository: ApiServiceRepositoryService,
+    private changeDetector: ChangeDetectorRef,
+    private router: Router,
+    private readonly alerts: TuiAlertService,
+  ) {}
+
+  private handleWindowResize() {
+    this.changeDetector.detectChanges();
+  }
+  
+  ngOnInit(): void {
+    this.loadApiList();
+    window.addEventListener(&#x27;resize&#x27;, () &#x3D;&gt; this.handleWindowResize());
+  }
+  
+  ngOnDestroy(): void {
+    window.removeEventListener(&#x27;resize&#x27;, () &#x3D;&gt; this.handleWindowResize());
+    this.sub?.unsubscribe();
+  }
+
+  // Переключаем режим выбора
+  toggleSelectionMode(): void {
+    this.isSelectionMode &#x3D; !this.isSelectionMode;
+    if (!this.isSelectionMode) {
+      this.selectedApis.clear();
+      this.isAllSelected &#x3D; false;
+    }
+  }
+
+  toggleApiSelection(apiName: string): void {
+    if (!this.isSelectionMode) return;
+    
+    if (this.selectedApis.has(apiName)) {
+      this.selectedApis.delete(apiName);
+    } else {
+      this.selectedApis.add(apiName);
+    }
+    this.checkAllSelectedState();
+    this.changeDetector.markForCheck(); // Добавлено
+  }
+  
+    toggleSelectAll(): void {
+      if (this.isAllSelected) {
+        // Снимаем выделение со всех элементов
+        this.filteredCards.forEach(item &#x3D;&gt; this.selectedApis.delete(item.name));
+      } else {
+        // Добавляем все элементы всех страниц
+        this.filteredCards.forEach(item &#x3D;&gt; this.selectedApis.add(item.name));
+      }
+      this.isAllSelected &#x3D; !this.isAllSelected;
+      this.changeDetector.markForCheck();
+    }
+
+  // Проверка состояния &quot;Выбрано все&quot;
+  private checkAllSelectedState(): void {
+    this.isAllSelected &#x3D; this.filteredCards.length &gt; 0 &amp;&amp; 
+      this.filteredCards.every(item &#x3D;&gt; this.selectedApis.has(item.name));
+  }
+
+  // Метод для экспорта выбранных API
+  exportSelectedApis(): void {
+    this.loading &#x3D; true;
+    if (this.selectedApis.size &#x3D;&#x3D;&#x3D; 0) return;
+    
+    const selectedNames &#x3D; Array.from(this.selectedApis);
+    const exportPromises &#x3D; selectedNames.map(name &#x3D;&gt; 
+      this.apiServiceRepository.getApiStructureList(name).toPromise()
+    );
+  
+    Promise.all(exportPromises)
+      .then(results &#x3D;&gt; {
+        const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+        const zip &#x3D; new JSZip();
+        
+        results.forEach((data, index) &#x3D;&gt; {
+          if (!data) return;
+          
+          const { name, ...dataWithoutName } &#x3D; data;
+          const fileName &#x3D; &#x60;${name || &#x60;api-${index}&#x60;}.json&#x60;;
+          zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
+        });
+  
+        zip.generateAsync({ type: &#x27;blob&#x27; })
+          .then((content: Blob) &#x3D;&gt; {
+            const url &#x3D; window.URL.createObjectURL(content);
+            const a &#x3D; document.createElement(&#x27;a&#x27;);
+            a.href &#x3D; url;
+            a.download &#x3D; &#x60;apis-export-${timestamp}.zip&#x60;;
+            a.click();
+            window.URL.revokeObjectURL(url);
+          });
+      })
+      .catch((error: any) &#x3D;&gt; {
+        console.error(&#x27;Export error:&#x27;, error);
+        this.alerts.open(&#x27;Ошибка экспорта&#x27;, { appearance: &#x27;negative&#x27; }).subscribe();
+      })
+      .finally(() &#x3D;&gt; {
+        this.loading &#x3D; false;
+        this.selectedApis.clear();
+        this.isSelectionMode &#x3D; false;
+      });
+  }
+
+  private loadApiList(): void {
+    this.sub &#x3D; this.apiServiceRepository.getApiList().subscribe(this.handleApiResponse());
+  }
+
+  private handleApiResponse() {
+    return {
+      next: (apiList: apiServiceShortStructure[]) &#x3D;&gt; {
+        this.updateApiList(apiList);
+      },
+      error: (error: any) &#x3D;&gt; {
+        this.handleError(error);
+      },
+    };
+  }
+
+  private updateApiList(apiList: apiServiceShortStructure[]): void {
+    this.cards &#x3D; apiList;
+    this.filteredCards &#x3D; [...apiList]; // Создаем копию массива
+    this.sortCards(); // Сортируем после обновления
+    this.apiNames &#x3D; apiList.map(api &#x3D;&gt; api.name);
+    this.updatePagination();
+    this.changeDetector.detectChanges();
+    this.loading &#x3D; false;
+  }
+
+  private handleError(error: any): void {
+    this.errorMessage &#x3D; error.message;
+    this.errorCode &#x3D; error.status;
+    this.navigateToErrorPage(this.errorCode, this.errorMessage);
+  }
+
+  private navigateToErrorPage(errorCode: string, errorMessage: string): void {
+    this.router.navigate([&#x27;/error&#x27;], {
+      queryParams: { code: errorCode, message: errorMessage },
+    });
+  }
+
+  openCreateDialog(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+    }
+    this.dialog({ ...this.api }).subscribe(this.processDialogData());
+  }
+
+  private processDialogData() {
+    return {
+      next: (data: apiServiceShortStructure) &#x3D;&gt; {
+        if (this.isApiNameExists(data.name)) {
+          this.showApiNameExistsError();
+        } else {
+          this.createApiService(data);
+        }
+      },
+      complete: () &#x3D;&gt; this.onDialogClose(),
+    };
+  }
+
+  private isApiNameExists(name: string): boolean {
+    return this.cards.some(card &#x3D;&gt; card.name &#x3D;&#x3D;&#x3D; name);
+  }
+
+  private onDialogClose(): void {
+    console.info(&#x27;Dialog closed&#x27;);
+  }
+
+  private showApiNameExistsError(): void {
+    this.alerts.open(&#x27;Ошибка: API с таким именем уже существует&#x27;, {
+      appearance: &#x27;negative&#x27;,
+    }).subscribe();
+  }
+
+  private createApiService(data: apiServiceShortStructure): void {
+    this.apiServiceRepository.createApiService(data).subscribe({
+      next: (response) &#x3D;&gt; this.onApiServiceCreated(response, data),
+      error: (error) &#x3D;&gt; this.handleError(error),
+    });
+  }
+
+  private onApiServiceCreated(response: any, data: apiServiceShortStructure): void {
+    this.cards.push(data);
+    this.sortCards();
+    this.changeDetector.markForCheck();
+    this.alerts.open(&#x27;API успешно создано&#x27;, {
+      appearance: &#x27;success&#x27;,
+    }).subscribe();
+  }
+
+  onApiDeleted(apiName: string): void {
+    this.selectedApis.delete(apiName);
+    this.removeApiByName(apiName);
+    this.updatePagination();
+    this.changeDetector.markForCheck();
+  }
+
+  private removeApiByName(apiName: string): void {
+    this.cards &#x3D; this.cards.filter(card &#x3D;&gt; card.name !&#x3D;&#x3D; apiName);
+    this.filteredCards &#x3D; this.filteredCards.filter(card &#x3D;&gt; card.name !&#x3D;&#x3D; apiName);
+    this.apiNames &#x3D; this.apiNames.filter(name &#x3D;&gt; name !&#x3D;&#x3D; apiName);
+  }
+
+  onSearchQuery(query: string): void {
+    this.searchQueryActive &#x3D; !!query;
+    this.filteredCards &#x3D; this.cards.filter(card &#x3D;&gt; 
+      card.name.toLowerCase().includes(query.toLowerCase())
+    );
+    this.currentPage &#x3D; 1;
+    this.sortCards();
+    this.updatePagination();
+    this.changeDetector.markForCheck();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredCards.length / this.itemsPerPage);
+  }
+
+  get paginatedCards(): apiServiceShortStructure[] {
+    const startIndex &#x3D; (this.currentPage - 1) * this.itemsPerPage;
+    return this.filteredCards.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  onPageChange(page: number): void {
+    this.currentPage &#x3D; page;
+    this.checkAllSelectedState(); // Обновляем состояние после смены страницы
+    this.changeDetector.markForCheck();
+  }
+
+  private updatePagination(): void {
+    const newCurrentPage &#x3D; Math.max(1, Math.min(this.currentPage, this.totalPages));
+    if (newCurrentPage !&#x3D;&#x3D; this.currentPage) {
+      this.currentPage &#x3D; newCurrentPage;
+      this.changeDetector.markForCheck();
+    }
+  }
+
+  sortCards(): void {
+    this.filteredCards.sort((a, b) &#x3D;&gt; 
+      this.isSortedAscending 
+        ? a.name.localeCompare(b.name) 
+        : b.name.localeCompare(a.name)
+    );
+  }
+  
+  toggleSort(): void {
+    this.isSortedAscending &#x3D; !this.isSortedAscending;
+    this.sortCards();
+    this.updatePagination();
+    this.changeDetector.markForCheck();
+  }
+
+  goBack(): void {
+    this.router.navigate([&#x27;/&#x27;]);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div&gt;
+  &lt;app-header [isApiPage]&#x3D;&quot;true&quot; [buttonText]&#x3D;&quot;&#x27;Добавить API&#x27;&quot; (buttonClick)&#x3D;&quot;openCreateDialog()&quot;&gt;&lt;/app-header&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;header-section&quot;&gt;
+      &lt;app-filter-by-input class&#x3D;&quot;filter-input&quot; [label]&#x3D;&quot;&#x27;Search API&#x27;&quot; [controlName]&#x3D;&quot;&#x27;search&#x27;&quot; [items]&#x3D;&quot;apiNames&quot;
+        (searchQuery)&#x3D;&quot;onSearchQuery($event)&quot;&gt;&lt;/app-filter-by-input&gt;
+      &lt;div class&#x3D;&quot;pagination-sort-container&quot;&gt;
+        &lt;app-pagination class&#x3D;&quot;custom-pagination&quot; *ngIf&#x3D;&quot;filteredCards.length &gt; itemsPerPage &amp;&amp; !searchQueryActive&quot;
+          [totalItems]&#x3D;&quot;filteredCards.length&quot; [itemsPerPage]&#x3D;&quot;itemsPerPage&quot; [currentPage]&#x3D;&quot;currentPage&quot;
+          (pageChange)&#x3D;&quot;onPageChange($event)&quot;&gt;&lt;/app-pagination&gt;
+        &lt;div class&#x3D;&quot;icons-container&quot;&gt;
+          &lt;i *ngIf&#x3D;&quot;!isSortedAscending&quot; class&#x3D;&quot;fas fa-sort-alpha-up&quot; (click)&#x3D;&quot;toggleSort()&quot;&gt;&lt;/i&gt;
+          &lt;i *ngIf&#x3D;&quot;isSortedAscending&quot; class&#x3D;&quot;fas fa-sort-alpha-down&quot; (click)&#x3D;&quot;toggleSort()&quot;&gt;&lt;/i&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div class&#x3D;&quot;selection-controls&quot;&gt;
+        &lt;button tuiButton class&#x3D;&quot;primary-button&quot; (click)&#x3D;&quot;toggleSelectionMode()&quot;&gt;
+          {{ isSelectionMode ? &#x27;Отменить выбор&#x27; : &#x27;Выбрать&#x27; }}
+        &lt;/button&gt;
+        &lt;button tuiButton *ngIf&#x3D;&quot;isSelectionMode&quot; class&#x3D;&quot;primary-button&quot; (click)&#x3D;&quot;toggleSelectAll()&quot;&gt;
+          {{ isAllSelected ? &#x27;Снять всё&#x27; : &#x27;Выбрать всё&#x27; }}
+        &lt;/button&gt;
+        &lt;button tuiButton *ngIf&#x3D;&quot;selectedApis.size &gt; 0 &amp;&amp; isSelectionMode&quot; class&#x3D;&quot;primary-button&quot; (click)&#x3D;&quot;exportSelectedApis()&quot;&gt;
+          Экспорт ({{ selectedApis.size }})
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div *ngIf&#x3D;&quot;loading; else cardList&quot;&gt;
+      &lt;app-loading&gt;&lt;/app-loading&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;ng-template #cardList&gt;
+  &lt;div *ngIf&#x3D;&quot;cards.length &#x3D;&#x3D; 0&quot;&gt;
+    &lt;h1&gt;Api-сервисов не найдено.&lt;/h1&gt;
+  &lt;/div&gt;
+  &lt;div class&#x3D;&quot;container&quot;&gt;
+    &lt;div class&#x3D;&quot;grid&quot; [class.selection-mode]&#x3D;&quot;isSelectionMode&quot;&gt;
+      &lt;div *ngFor&#x3D;&quot;let item of paginatedCards&quot; class&#x3D;&quot;card&quot;&gt;
+        &lt;label class&#x3D;&quot;checkbox-container&quot;&gt;
+          &lt;input type&#x3D;&quot;checkbox&quot; [checked]&#x3D;&quot;selectedApis.has(item.name)&quot; (change)&#x3D;&quot;toggleApiSelection(item.name)&quot;&gt;
+          &lt;span class&#x3D;&quot;checkmark&quot;&gt;&lt;/span&gt;
+        &lt;/label&gt;
+        &lt;app-card-api [apiInfo]&#x3D;&quot;item&quot; (apiDeleted)&#x3D;&quot;onApiDeleted(item.name)&quot;&gt;&lt;/app-card-api&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;app-pagination class&#x3D;&quot;custom-pagination&quot; *ngIf&#x3D;&quot;filteredCards.length &gt; itemsPerPage &amp;&amp; !searchQueryActive&quot;
+    [totalItems]&#x3D;&quot;filteredCards.length&quot; [itemsPerPage]&#x3D;&quot;itemsPerPage&quot; [currentPage]&#x3D;&quot;currentPage&quot;
+    (pageChange)&#x3D;&quot;onPageChange($event)&quot;&gt;&lt;/app-pagination&gt;
+&lt;/ng-template&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./card-api-list.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.header-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* Three columns for larger screens */
+  align-items: center;
+  gap: 10px; /* Spacing between elements */
+  padding: 0px;
+}
+
+.filter-input {
+  grid-column: 1; /* Search input in the first column */
+}
+
+.pagination-sort-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  grid-column: 2 / span 2; /* Pagination and sort container spans the second and third columns */
+}
+
+.custom-pagination {
+  flex: 1; /* Pagination takes available space */
+  justify-self: center; /* Center alignment */
+}
+
+.icons-container {
+  flex: 1; /* Icons container takes available space */
+  display: flex;
+  justify-content: flex-end; /* Right alignment */
+}
+
+/* Adjust styles for mobile devices */
+@media (max-width: 600px) {
+  .header-section {
+    grid-template-columns: 1fr; /* Single column for mobile */
+    text-align: center; /* Center align text */
+  }
+
+  .filter-input {
+    grid-column: 1; /* Search input in the single column */
+    justify-self: center; /* Center alignment */
+    width: 100%; /* Full width */
+    max-width: 300px; /* Limit the maximum width */
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+
+  .pagination-sort-container {
+    grid-column: 1; /* Pagination and sort container in the single column */
+    justify-content: center; /* Center alignment */
+    width: 100%; /* Full width */
+    margin-bottom: 10px; /* Spacing between elements */
+  }
+
+  .custom-pagination {
+    justify-self: center; /* Center alignment */
+  }
+
+  .icons-container {
+    justify-content: flex-end; /* Right alignment */
+  }
+}
+
+.checkbox-container input {
+  opacity: 0;
+  position: absolute;
+}
+
+.checkmark {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 2px solid #0056a6;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+  background-color: #0056a6;
+}
+
+.checkmark:after {
+  content: &quot;&quot;;
+  position: absolute;
+  display: none;
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Добавим новые стили */
+.selection-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-right: auto;
+}
+
+.checkbox-container {
+  display: none;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  z-index: 1;
+}
+
+.selection-mode .checkbox-container {
+  display: block;
+}
+
+.primary-button{
+  margin: 0px;
+  margin-top: 1rem;
+}</code></pre>
+                <p class="comment">
+                    <code>../../styles/card-list.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.container {
+    padding: 20px;
+    position: relative; /* Добавляем относительное позиционирование для контейнера */
+}
+
+.mb-40 {
+    margin-bottom: 40px; /* Добавляем отступ снизу для разделения секций */
+}
+
+.header-section {
+    position: relative; /* Добавляем относительное позиционирование для заголовочной секции */
+    margin-bottom: 20px;
+    padding-right: 1.5rem;
+}
+
+.actions {
+    display: flex;
+    gap: 10px; /* Расстояние между кнопками */
+}
+
+.edit-button, .delete-button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.edit-button {
+    background-color: #0056a6;
+    color: white;
+}
+
+.edit-button:hover {
+    background-color: #004080;
+}
+
+.delete-button {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #cc0000;
+}
+
+.separator-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.separator-section h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.separator {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 0 auto;
+    width: 50%;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: rgb(0 0 0 / 3%);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 22%);
+    padding: 20px;
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: normal;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    max-height: 300px; /* Ограничиваем высоту карточки */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 992px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+p {
+    word-wrap: break-word; /* Перенос слов на новую строку, если они не помещаются */
+    white-space: normal; /* Разрешаем перенос текста на новую строку */
+}
+
+.top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.structure-content {
+    width: 100%;
+    height: 150px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: none; /* Запрещаем изменение размера */
+}</code></pre>
+                <p class="comment">
+                    <code>../../styles/icon.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">  
+i {
+    margin-right: 15px; /* 10px * 1.2 */
+    cursor: pointer;
+    color: #666;
+    transition: color 0.3s;
+    font-size: 20px; /* Увеличиваем размер шрифта на 20% */
+}
+
+i:hover {
+    color: #000;
+}</code></pre>
+                <p class="comment">
+                    <code>../../styles/button.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.primary-button {
+    background-color: #0056a6;
+    color: white;
+    border: none;
+    block-size: auto;
+    padding: 7px 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .primary-button:hover {
+    background-color: #004080;
+  }</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div>  <app-header [isApiPage]="true" [buttonText]="\'Добавить API\'" (buttonClick)="openCreateDialog()"></app-header>  <div class="container">    <div class="header-section">      <app-filter-by-input class="filter-input" [label]="\'Search API\'" [controlName]="\'search\'" [items]="apiNames"        (searchQuery)="onSearchQuery($event)"></app-filter-by-input>      <div class="pagination-sort-container">        <app-pagination class="custom-pagination" *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"          [totalItems]="filteredCards.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"          (pageChange)="onPageChange($event)"></app-pagination>        <div class="icons-container">          <i *ngIf="!isSortedAscending" class="fas fa-sort-alpha-up" (click)="toggleSort()"></i>          <i *ngIf="isSortedAscending" class="fas fa-sort-alpha-down" (click)="toggleSort()"></i>        </div>      </div>      <div class="selection-controls">        <button tuiButton class="primary-button" (click)="toggleSelectionMode()">          {{ isSelectionMode ? \'Отменить выбор\' : \'Выбрать\' }}        </button>        <button tuiButton *ngIf="isSelectionMode" class="primary-button" (click)="toggleSelectAll()">          {{ isAllSelected ? \'Снять всё\' : \'Выбрать всё\' }}        </button>        <button tuiButton *ngIf="selectedApis.size > 0 && isSelectionMode" class="primary-button" (click)="exportSelectedApis()">          Экспорт ({{ selectedApis.size }})        </button>      </div>    </div>    <div *ngIf="loading; else cardList">      <app-loading></app-loading>    </div>  </div></div><ng-template #cardList>  <div *ngIf="cards.length == 0">    <h1>Api-сервисов не найдено.</h1>  </div>  <div class="container">    <div class="grid" [class.selection-mode]="isSelectionMode">      <div *ngFor="let item of paginatedCards" class="card">        <label class="checkbox-container">          <input type="checkbox" [checked]="selectedApis.has(item.name)" (change)="toggleApiSelection(item.name)">          <span class="checkmark"></span>        </label>        <app-card-api [apiInfo]="item" (apiDeleted)="onApiDeleted(item.name)"></app-card-api>      </div>    </div>  </div>  <app-pagination class="custom-pagination" *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"    [totalItems]="filteredCards.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"    (pageChange)="onPageChange($event)"></app-pagination></ng-template></div>'
+    var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CardApiListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CardApiListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,1965 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ApiEasier documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">ApiEasier documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ApiEndpointListComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-api-endpoint-list</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>TuiAccordion</code>
+                                <code><a href="../components/LoadingComponent.html" target="_self" >LoadingComponent</a></code>
+                            <code>CommonModule</code>
+                            <code>RouterModule</code>
+                            <code>TuiButton</code>
+                                <code><a href="../components/HeaderComponent.html" target="_self" >HeaderComponent</a></code>
+                                <code><a href="../components/SwitchComponent.html" target="_self" >SwitchComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./api-endpoint-list.component.css,<br>../../styles/button.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./api-endpoint-list.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#apiInfo" >apiInfo</a>
+                            </li>
+                            <li>
+                                <a href="#apiName" >apiName</a>
+                            </li>
+                            <li>
+                                <a href="#entities" >entities</a>
+                            </li>
+                            <li>
+                                <a href="#isCopied" >isCopied</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#sub" >sub</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#copyTextToClipboard" >copyTextToClipboard</a>
+                            </li>
+                            <li>
+                                <a href="#copyToClipboard" >copyToClipboard</a>
+                            </li>
+                            <li>
+                                <a href="#getUrl" >getUrl</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#handleApiStructureResponse" >handleApiStructureResponse</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadApiStructure" >loadApiStructure</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onApiToggleChange" >onApiToggleChange</a>
+                            </li>
+                            <li>
+                                <a href="#onEndpointToggleChange" >onEndpointToggleChange</a>
+                            </li>
+                            <li>
+                                <a href="#onEntityToggleChange" >onEntityToggleChange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showCopySuccess" >showCopySuccess</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(route: ActivatedRoute, router: Router, apiService: <a href="../injectables/ApiService.html" target="_self">ApiService</a>, apiServiceRepository: <a href="../injectables/ApiServiceRepositoryService.html" target="_self">ApiServiceRepositoryService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, endpointRepositoryService: <a href="../injectables/EndpointRepositoryService.html" target="_self">EndpointRepositoryService</a>, cd: ChangeDetectorRef, alerts: TuiAlertService)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:48</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>apiService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApiService.html" target="_self" >ApiService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>apiServiceRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ApiServiceRepositoryService.html" target="_self" >ApiServiceRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>entityRepositoryService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EntityRepositoryService.html" target="_self" >EntityRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>endpointRepositoryService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EndpointRepositoryService.html" target="_self" >EndpointRepositoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>cd</td>
+                                                  
+                                                        <td>
+                                                                    <code>ChangeDetectorRef</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>alerts</td>
+                                                  
+                                                        <td>
+                                                                    <code>TuiAlertService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyTextToClipboard"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>copyTextToClipboard</b></span>
+                        <a href="#copyTextToClipboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>copyTextToClipboard(text: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>text</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="copyToClipboard"></a>
+                    <span class="name">
+                        <span ><b>copyToClipboard</b></span>
+                        <a href="#copyToClipboard"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>copyToClipboard(entityName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, endpoint: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="93"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:93</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entityName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>endpoint</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getUrl"></a>
+                    <span class="name">
+                        <span ><b>getUrl</b></span>
+                        <a href="#getUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getUrl(entityName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, endpoint: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entityName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>endpoint</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleApiStructureResponse"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>handleApiStructureResponse</b></span>
+                        <a href="#handleApiStructureResponse"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>handleApiStructureResponse(apiStructure: <a href="../interfaces/ApiServiceStructure.html" target="_self">ApiServiceStructure</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>apiStructure</td>
+                                            <td>
+                                                            <code><a href="../interfaces/ApiServiceStructure.html" target="_self" >ApiServiceStructure</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadApiStructure"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadApiStructure</b></span>
+                        <a href="#loadApiStructure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadApiStructure()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:74</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onApiToggleChange"></a>
+                    <span class="name">
+                        <span ><b>onApiToggleChange</b></span>
+                        <a href="#onApiToggleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onApiToggleChange(newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:126</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEndpointToggleChange"></a>
+                    <span class="name">
+                        <span ><b>onEndpointToggleChange</b></span>
+                        <a href="#onEndpointToggleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEndpointToggleChange(entity: <a href="../interfaces/Entity.html" target="_self">Entity</a>, endpoint: <a href="../interfaces/Endpoint.html" target="_self">Endpoint</a>, newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:154</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>endpoint</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Endpoint.html" target="_self" >Endpoint</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEntityToggleChange"></a>
+                    <span class="name">
+                        <span ><b>onEntityToggleChange</b></span>
+                        <a href="#onEntityToggleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEntityToggleChange(entity: <a href="../interfaces/Entity.html" target="_self">Entity</a>, newState: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:140</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entity</td>
+                                            <td>
+                                                            <code><a href="../interfaces/Entity.html" target="_self" >Entity</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>newState</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showCopySuccess"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showCopySuccess</b></span>
+                        <a href="#showCopySuccess"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showCopySuccess(url: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>url</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiInfo"></a>
+                    <span class="name">
+                        <span ><b>apiInfo</b></span>
+                        <a href="#apiInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>literal type</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{ isActive: false }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:47</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apiName"></a>
+                    <span class="name">
+                        <span ><b>apiName</b></span>
+                        <a href="#apiName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="entities"></a>
+                    <span class="name">
+                        <span ><b>entities</b></span>
+                        <a href="#entities"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Entity.html" target="_self" >Entity[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:43</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isCopied"></a>
+                    <span class="name">
+                        <span ><b>isCopied</b></span>
+                        <a href="#isCopied"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:48</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loading"></a>
+                    <span class="name">
+                        <span ><b>loading</b></span>
+                        <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:45</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="sub"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>sub</b></span>
+                        <a href="#sub"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Subscription | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from &#x27;@angular/core&#x27;;
+import {
+  ApiServiceStructure,
+  Endpoint,
+  Entity,
+} from &#x27;../../../services/service-structure-api&#x27;;
+import { TuiAccordion } from &#x27;@taiga-ui/experimental&#x27;;
+import { Subscription } from &#x27;rxjs&#x27;;
+import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ApiService } from &#x27;../../../services/api-service.service&#x27;;
+import { LoadingComponent } from &#x27;../../components/loading/loading.component&#x27;;
+import { CommonModule } from &#x27;@angular/common&#x27;;
+import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
+import { HeaderComponent } from &#x27;../../components/header/header.component&#x27;;
+import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
+import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
+import { EndpointRepositoryService } from &#x27;../../../repositories/endpoint-repository.service&#x27;;
+import { EntityRepositoryService } from &#x27;../../../repositories/entity-repository.service&#x27;;
+import { SwitchComponent } from &#x27;../../components/switch/switch.component&#x27;;
+
+@Component({
+  selector: &#x27;app-api-endpoint-list&#x27;,
+  imports: [
+    TuiAccordion,
+    LoadingComponent,
+    CommonModule,
+    RouterModule,
+    TuiButton,
+    HeaderComponent,
+    SwitchComponent,
+  ],
+  templateUrl: &#x27;./api-endpoint-list.component.html&#x27;,
+  styleUrls: [&#x27;./api-endpoint-list.component.css&#x27;, &#x27;../../styles/button.css&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ApiEndpointListComponent implements OnInit, OnDestroy {
+  entities: Entity[] &#x3D; [];
+  private sub: Subscription | null &#x3D; null;
+  loading: boolean &#x3D; true;
+  apiName!: string;
+  apiInfo: { isActive: boolean } &#x3D; { isActive: false };
+  isCopied: string | null &#x3D; null;
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private apiService: ApiService,
+    private apiServiceRepository: ApiServiceRepositoryService,
+    private entityRepositoryService: EntityRepositoryService,
+    private endpointRepositoryService: EndpointRepositoryService,
+    private cd: ChangeDetectorRef,
+    private alerts: TuiAlertService
+  ) {}
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.route.params.subscribe((params) &#x3D;&gt; {
+      this.apiName &#x3D; params[&#x27;name&#x27;];
+      if (this.apiName) {
+        this.loadApiStructure();
+      }
+    });
+  }
+
+  private loadApiStructure(): void {
+    this.sub &#x3D; this.apiService.getApiStructureList(this.apiName).subscribe({
+      next: (apiStructure) &#x3D;&gt; this.handleApiStructureResponse(apiStructure),
+      error: () &#x3D;&gt; {
+        this.loading &#x3D; false;
+        this.cd.markForCheck();
+      },
+    });
+  }
+
+  private handleApiStructureResponse(apiStructure: ApiServiceStructure): void {
+    if (apiStructure) {
+      this.entities &#x3D; apiStructure.entities;
+      this.apiInfo.isActive &#x3D; apiStructure.isActive; // Set the API state here
+      this.loading &#x3D; false;
+      this.cd.markForCheck();
+    }
+  }
+
+  copyToClipboard(entityName: string, endpoint: Endpoint): void {
+    const url &#x3D; this.getUrl(entityName, endpoint);
+    this.copyTextToClipboard(url);
+  }
+
+  private copyTextToClipboard(text: string): void {
+    const textarea &#x3D; document.createElement(&#x27;textarea&#x27;);
+    textarea.value &#x3D; text;
+    document.body.appendChild(textarea);
+    textarea.select();
+    try {
+      document.execCommand(&#x27;copy&#x27;);
+      this.showCopySuccess(text);
+    } catch (err) {
+      console.error(&#x27;Error copying URL:&#x27;, err);
+    } finally {
+      document.body.removeChild(textarea);
+    }
+  }
+
+  private showCopySuccess(url: string): void {
+    this.isCopied &#x3D; url;
+    this.cd.markForCheck();
+    setTimeout(() &#x3D;&gt; {
+      this.isCopied &#x3D; null;
+      this.cd.markForCheck();
+    }, 2000);
+  }
+
+  getUrl(entityName: string, endpoint: Endpoint): string {
+    return &#x60;${window.location.origin}/api/ApiEmu/${this.apiName}/${entityName}/${endpoint.route}&#x60;;
+  }
+
+  onApiToggleChange(newState: boolean): void {
+    this.apiInfo.isActive &#x3D; newState;
+    this.apiServiceRepository
+      .updateApiServiceStatus(this.apiName, newState)
+      .subscribe({
+        next: (response) &#x3D;&gt; {
+          console.log(&#x27;Состояние API обновлено:&#x27;, response);
+        },
+        error: (error) &#x3D;&gt; {
+          console.error(&#x27;Ошибка при обновлении состояния API:&#x27;, error);
+        },
+      });
+  }
+
+  onEntityToggleChange(entity: Entity, newState: boolean): void {
+    entity.isActive &#x3D; newState;
+    this.entityRepositoryService
+      .updateEntityStatus(this.apiName, entity.name, newState)
+      .subscribe({
+        next: (response) &#x3D;&gt; {
+          console.log(&#x27;Состояние сущности обновлено:&#x27;, response);
+        },
+        error: (error) &#x3D;&gt; {
+          console.error(&#x27;Ошибка при обновлении состояния сущности:&#x27;, error);
+        },
+      });
+  }
+
+  onEndpointToggleChange(
+    entity: Entity,
+    endpoint: Endpoint,
+    newState: boolean
+  ): void {
+    endpoint.isActive &#x3D; newState;
+    this.endpointRepositoryService
+      .updateEndpointStatus(this.apiName, entity.name, endpoint.route, newState)
+      .subscribe({
+        next: (response) &#x3D;&gt; {
+          console.log(&#x27;Состояние эндпоинта обновлено:&#x27;, response);
+        },
+        error: (error) &#x3D;&gt; {
+          console.error(&#x27;Ошибка при обновлении состояния эндпоинта:&#x27;, error);
+        },
+      });
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;app-header /&gt;
+@if (loading) {
+&lt;app-loading&gt;&lt;/app-loading&gt;
+} @else {
+&lt;div class&#x3D;&quot;endpoint-list&quot;&gt;
+  &lt;div class&#x3D;&quot;api-header&quot;&gt;
+    &lt;h1&gt;{{ apiName }}&lt;/h1&gt;
+    &lt;app-switch
+      [value]&#x3D;&quot;apiInfo.isActive&quot;
+      (toggle)&#x3D;&quot;onApiToggleChange($event)&quot;
+    &gt;&lt;/app-switch&gt;
+  &lt;/div&gt;
+  &lt;ng-container *ngIf&#x3D;&quot;entities.length &gt; 0; else noEntities&quot;&gt;
+    &lt;tui-accordion tuiAppearance&#x3D;&quot;floating&quot; [closeOthers]&#x3D;&quot;false&quot;&gt;
+      &lt;ng-container *ngFor&#x3D;&quot;let entity of entities&quot;&gt;
+        &lt;button tuiAccordion class&#x3D;&quot;accordion&quot;&gt;
+          {{ entity.name }}
+          &lt;app-switch
+            [value]&#x3D;&quot;entity.isActive&quot;
+            (toggle)&#x3D;&quot;onEntityToggleChange(entity, $event)&quot;
+          &gt;&lt;/app-switch&gt;
+        &lt;/button&gt;
+        &lt;tui-expand&gt;
+          &lt;ng-container
+            *ngIf&#x3D;&quot;
+              entity?.endpoints &amp;&amp; entity.endpoints.length &gt; 0;
+              else emptyEntityOrApi
+            &quot;
+          &gt;
+            &lt;ul&gt;
+              &lt;li
+                *ngFor&#x3D;&quot;let endpoint of entity.endpoints&quot;
+                class&#x3D;&quot;endpoint-item&quot;
+              &gt;
+                &lt;div class&#x3D;&quot;endpoint-header&quot;&gt;
+                  &lt;div class&#x3D;&quot;endpoint-route&quot;&gt;{{ endpoint.route }}&lt;/div&gt;
+                  &lt;div class&#x3D;&quot;endpoint-type&quot;&gt;{{ endpoint.type }}&lt;/div&gt;
+                  &lt;app-switch
+                    [value]&#x3D;&quot;endpoint.isActive&quot;
+                    (toggle)&#x3D;&quot;onEndpointToggleChange(entity, endpoint, $event)&quot;
+                  &gt;&lt;/app-switch&gt;
+                &lt;/div&gt;
+                &lt;div class&#x3D;&quot;url-container&quot;&gt;
+                  &lt;div class&#x3D;&quot;copy-url-field&quot;&gt;
+                    &lt;input
+                      type&#x3D;&quot;text&quot;
+                      readonly
+                      [value]&#x3D;&quot;getUrl(entity.name, endpoint)&quot;
+                      class&#x3D;&quot;url-input&quot;
+                      #urlInput
+                    /&gt;
+                    &lt;button
+                      tuiButton
+                      tuiAppearance&#x3D;&quot;flat&quot;
+                      (click)&#x3D;&quot;copyToClipboard(entity.name, endpoint)&quot;
+                      class&#x3D;&quot;copy-button&quot;
+                      [class.copied]&#x3D;&quot;
+                        isCopied &#x3D;&#x3D;&#x3D; getUrl(entity.name, endpoint)
+                      &quot;
+                    &gt;
+                      &lt;i
+                        class&#x3D;&quot;fas&quot;
+                        [ngClass]&#x3D;&quot;{
+                          &#x27;fa-clone&#x27;:
+                            isCopied !&#x3D;&#x3D; getUrl(entity.name, endpoint),
+                          &#x27;fa-check&#x27;: isCopied &#x3D;&#x3D;&#x3D; getUrl(entity.name, endpoint)
+                        }&quot;
+                      &gt;&lt;/i&gt;
+                    &lt;/button&gt;
+                  &lt;/div&gt;
+                &lt;/div&gt;
+              &lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/ng-container&gt;
+          &lt;ng-template #emptyEntityOrApi&gt;
+            &lt;ng-container
+              *ngIf&#x3D;&quot;entity?.endpoints?.length &#x3D;&#x3D;&#x3D; 0; else noendpoints&quot;
+            &gt;
+              &lt;p&gt;Нет доступных эндпоинтов.&lt;/p&gt;
+              &lt;button
+                class&#x3D;&quot;primary-button&quot;
+                tuiButton
+                tuiAppearance&#x3D;&quot;floating&quot;
+                routerLink&#x3D;&quot;/ApiEntity/{{ apiName }}/{{ entity.name }}&quot;
+              &gt;
+                Перейти к деталям сущности
+              &lt;/button&gt;
+            &lt;/ng-container&gt;
+            &lt;ng-template #noendpoints&gt;
+              &lt;button
+                class&#x3D;&quot;primary-button&quot;
+                tuiButton
+                tuiAppearance&#x3D;&quot;floating&quot;
+                routerLink&#x3D;&quot;/ApiDetails/{{ apiName }}&quot;
+              &gt;
+                Перейти к деталям API
+              &lt;/button&gt;
+            &lt;/ng-template&gt;
+          &lt;/ng-template&gt;
+        &lt;/tui-expand&gt;
+      &lt;/ng-container&gt;
+    &lt;/tui-accordion&gt;
+  &lt;/ng-container&gt;
+  &lt;ng-template #noEntities&gt;
+    &lt;p&gt;Нет доступных сущностей и эндпоинтов&lt;/p&gt;
+  &lt;/ng-template&gt;
+&lt;/div&gt;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./api-endpoint-list.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/* Общие стили */
+.container {
+  padding: 20px;
+  gap: 20px;
+}
+
+.endpoint-list {
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 3rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Ensure the accordion button is positioned relatively */
+.accordion {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: transparent;
+    border-radius: 0px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  /* Position the switch absolutely within the accordion button */
+  .accordion app-switch {
+    position: absolute;
+    right: 45px; /* Increase this value to position the switch further from the default icon */
+    margin-left: auto;
+    margin-right: 0;
+  }
+  
+  /* Ensure the chevron icon is still visible and positioned correctly */
+  .accordion::after {
+    content: var(--t-icon-end);
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    order: 3;
+  }
+  
+  /* Ensure the switch in the API header stays in line */
+  .api-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background: transparent;
+    border-radius: 0px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .api-header h1 {
+    margin: 0;
+    flex-grow: 1;
+  }
+  
+  .api-header app-switch {
+    margin-left: 10px;
+  }
+  
+.tui-expand {
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 0 0 8px 8px;
+}
+
+
+/* Список эндпоинтов */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.endpoint-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 5px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.3s ease;
+}
+
+.endpoint-item:last-child {
+  border-bottom: none;
+}
+
+/* Заголовок эндпоинта */
+.endpoint-header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.endpoint-route {
+  font-weight: bold;
+  color: #0056a6; /* Установлено на черный цвет */
+  word-wrap: break-word;
+  font-size: 1rem;
+}
+.endpoint-type {
+  color: #000; /* Установлено на черный цвет */
+  word-wrap: break-word;
+  font-size: 1rem;
+}
+
+/* Блок URL */
+.url-container {
+  width: 100%;
+}
+
+.copy-url-field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.url-input {
+  flex: 1;
+  padding: 8px 12px; /* Отступы внутри текстового поля */
+  border: 1px solid #ddd; /* Граница текстового поля */
+  outline: none;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #333;
+  border-radius: 4px 0 0 4px; /* Закругление левой стороны */
+  height: 40px; /* Высота текстового поля */
+  box-sizing: border-box; /* Учитываем padding и border в общей высоте */
+}
+
+.copy-button {
+  background: #f0f0f0;
+  border: 1px solid #ddd; /* Граница кнопки */
+  color: #555;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px; /* Отступы внутри кнопки */
+  border-radius: 0 4px 4px 0; /* Закругление правой стороны */
+  height: 40px; /* Высота кнопки */
+  font-size: 1rem;
+  box-sizing: border-box; /* Учитываем padding и border в общей высоте */
+}
+
+.copy-button:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.copy-button.copied {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.copy-button.copied i {
+  transform: rotate(360deg);
+  margin-right: 0; /* Убираем отступ для галочки */
+}
+
+/* Медиа-запросы */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  .endpoint-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .endpoint-type,
+  .endpoint-route {
+    margin-bottom: 5px;
+  }
+}
+
+.primary-button {
+  margin: 0px !important;
+}
+</code></pre>
+                <p class="comment">
+                    <code>../../styles/button.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.primary-button {
+    background-color: #0056a6;
+    color: white;
+    border: none;
+    block-size: auto;
+    padding: 7px 13px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .primary-button:hover {
+    background-color: #004080;
+  }</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><app-header />@if (loading) {<app-loading></app-loading>} @else {<div class="endpoint-list">  <div class="api-header">    <h1>{{ apiName }}</h1>    <app-switch      [value]="apiInfo.isActive"      (toggle)="onApiToggleChange($event)"    ></app-switch>  </div>  <ng-container *ngIf="entities.length > 0; else noEntities">    <tui-accordion tuiAppearance="floating" [closeOthers]="false">      <ng-container *ngFor="let entity of entities">        <button tuiAccordion class="accordion">          {{ entity.name }}          <app-switch            [value]="entity.isActive"            (toggle)="onEntityToggleChange(entity, $event)"          ></app-switch>        </button>        <tui-expand>          <ng-container            *ngIf="              entity?.endpoints && entity.endpoints.length > 0;              else emptyEntityOrApi            "          >            <ul>              <li                *ngFor="let endpoint of entity.endpoints"                class="endpoint-item"              >                <div class="endpoint-header">                  <div class="endpoint-route">{{ endpoint.route }}</div>                  <div class="endpoint-type">{{ endpoint.type }}</div>                  <app-switch                    [value]="endpoint.isActive"                    (toggle)="onEndpointToggleChange(entity, endpoint, $event)"                  ></app-switch>                </div>                <div class="url-container">                  <div class="copy-url-field">                    <input                      type="text"                      readonly                      [value]="getUrl(entity.name, endpoint)"                      class="url-input"                      #urlInput                    />                    <button                      tuiButton                      tuiAppearance="flat"                      (click)="copyToClipboard(entity.name, endpoint)"                      class="copy-button"                      [class.copied]="                        isCopied === getUrl(entity.name, endpoint)                      "                    >                      <i                        class="fas"                        [ngClass]="{                          \'fa-clone\':                            isCopied !== getUrl(entity.name, endpoint),                          \'fa-check\': isCopied === getUrl(entity.name, endpoint)                        }"                      ></i>                    </button>                  </div>                </div>              </li>            </ul>          </ng-container>          <ng-template #emptyEntityOrApi>            <ng-container              *ngIf="entity?.endpoints?.length === 0; else noendpoints"            >              <p>Нет доступных эндпоинтов.</p>              <button                class="primary-button"                tuiButton                tuiAppearance="floating"                routerLink="/ApiEntity/{{ apiName }}/{{ entity.name }}"              >                Перейти к деталям сущности              </button>            </ng-container>            <ng-template #noendpoints>              <button                class="primary-button"                tuiButton                tuiAppearance="floating"                routerLink="/ApiDetails/{{ apiName }}"              >                Перейти к деталям API              </button>            </ng-template>          </ng-template>        </tui-expand>      </ng-container>    </tui-accordion>  </ng-container>  <ng-template #noEntities>    <p>Нет доступных сущностей и эндпоинтов</p>  </ng-template></div>}</div>'
+    var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ApiEndpointListComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ApiEndpointListComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
