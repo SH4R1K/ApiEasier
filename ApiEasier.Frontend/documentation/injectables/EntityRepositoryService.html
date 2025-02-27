@@ -119,6 +119,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для управления сущностями.</p>
+<p>Этот сервис предоставляет методы для получения, создания, обновления и удаления сущностей.
+Он взаимодействует с <code>EntityService</code> для выполнения операций.</p>
+
+            </p>
 
 
 
@@ -176,7 +185,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/repositories/entity-repository.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/repositories/entity-repository.service.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -239,14 +248,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:54</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создает новую сущность для указанного API сервиса.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -257,6 +268,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -271,6 +283,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entity</td>
@@ -283,6 +301,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Структура новой сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -292,7 +316,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий созданную сущность.</p>
+
                             </div>
                 </td>
             </tr>
@@ -318,14 +343,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="79"
+                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:79</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет сущность по её имени для указанного API сервиса.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -336,6 +363,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -350,6 +378,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -362,6 +396,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -371,7 +411,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, указывающий на успешное удаление.</p>
+
                             </div>
                 </td>
             </tr>
@@ -397,14 +438,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:17</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:42</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает сущность по её имени для указанного API сервиса.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -415,6 +458,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -429,6 +473,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -441,6 +491,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -450,7 +506,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий сущность.</p>
+
                             </div>
                 </td>
             </tr>
@@ -476,14 +533,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:30</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список сущностей для указанного API сервиса.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -494,6 +553,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -508,6 +568,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -517,7 +583,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий список сущностей.</p>
+
                             </div>
                 </td>
             </tr>
@@ -543,14 +610,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:67</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующую сущность для указанного API сервиса.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -561,6 +630,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -575,6 +645,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -587,6 +663,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entity</td>
@@ -599,6 +681,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новая структура сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -608,7 +696,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий обновленную сущность.</p>
+
                             </div>
                 </td>
             </tr>
@@ -634,14 +723,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/repositories/entity-repository.service.ts:92</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет статус активности сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -652,6 +743,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -666,6 +758,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -678,6 +776,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>isActive</td>
@@ -690,6 +794,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новый статус активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -699,7 +809,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, указывающий на успешное обновление статуса.</p>
+
                             </div>
                 </td>
             </tr>
@@ -716,6 +827,16 @@ import { EntityService } from &#x27;../services/entity-service.service&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import { Entity } from &quot;../interfaces/Entity&quot;;
 
+/**
+ * Сервис для управления сущностями.
+ *
+ * @remarks
+ * Этот сервис предоставляет методы для получения, создания, обновления и удаления сущностей.
+ * Он взаимодействует с &#x60;EntityService&#x60; для выполнения операций.
+ *
+ * @type {EntityRepositoryService}
+ * @memberof Component
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -723,30 +844,78 @@ export class EntityRepositoryService {
 
   constructor(private entityService: EntityService) { }
 
+  /**
+   * Получает список сущностей для указанного API сервиса.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @returns {Observable&lt;Entity[]&gt;} Наблюдаемый объект, содержащий список сущностей.
+   * @memberof EntityRepositoryService
+   */
   getApiEntityList(apiServiceName: string): Observable&lt;Entity[]&gt; {
     return this.entityService.getApiEntityList(apiServiceName);
-  } 
+  }
 
+  /**
+   * Получает сущность по её имени для указанного API сервиса.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @returns {Observable&lt;Entity&gt;} Наблюдаемый объект, содержащий сущность.
+   * @memberof EntityRepositoryService
+   */
   getApiEntity(apiServiceName: string, entityName: string): Observable&lt;Entity&gt; {
     return this.entityService.getApiEntity(apiServiceName, entityName);
   }
 
+  /**
+   * Создает новую сущность для указанного API сервиса.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {Entity} entity - Структура новой сущности.
+   * @returns {Observable&lt;Entity&gt;} Наблюдаемый объект, содержащий созданную сущность.
+   * @memberof EntityRepositoryService
+   */
   createApiEntity(apiServiceName: string, entity: Entity): Observable&lt;Entity&gt; {
     return this.entityService.createApiEntity(apiServiceName, entity);
   }
 
+  /**
+   * Обновляет существующую сущность для указанного API сервиса.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {Entity} entity - Новая структура сущности.
+   * @returns {Observable&lt;Entity&gt;} Наблюдаемый объект, содержащий обновленную сущность.
+   * @memberof EntityRepositoryService
+   */
   updateApiEntity(apiServiceName: string, entityName: string, entity: Entity): Observable&lt;Entity&gt; {
     return this.entityService.updateApiEntity(apiServiceName, entityName, entity);
   }
 
+  /**
+   * Удаляет сущность по её имени для указанного API сервиса.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @returns {Observable&lt;void&gt;} Наблюдаемый объект, указывающий на успешное удаление.
+   * @memberof EntityRepositoryService
+   */
   deleteApiEntity(apiServiceName: string, entityName: string): Observable&lt;void&gt; {
     return this.entityService.deleteApiEntity(apiServiceName, entityName);
-  } 
+  }
 
+  /**
+   * Обновляет статус активности сущности.
+   *
+   * @param {string} serviceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {boolean} isActive - Новый статус активности.
+   * @returns {Observable&lt;any&gt;} Наблюдаемый объект, указывающий на успешное обновление статуса.
+   * @memberof EntityRepositoryService
+   */
   updateEntityStatus(serviceName: string, entityName: string, isActive: boolean): Observable&lt;any&gt; {
     return this.entityService.updateEntityStatus(serviceName, entityName, isActive);
   }
-
 }
 </code></pre>
     </div>

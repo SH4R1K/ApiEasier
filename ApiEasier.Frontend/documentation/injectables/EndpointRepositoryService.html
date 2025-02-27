@@ -119,6 +119,15 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для управления конечными точками (endpoints).</p>
+<p>Этот сервис предоставляет методы для получения, создания, обновления и удаления конечных точек.
+Он взаимодействует с <code>EndpointService</code> для выполнения операций.</p>
+
+            </p>
 
 
 
@@ -176,7 +185,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -239,14 +248,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:17</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:44</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создает новую конечную точку для указанного API сервиса и сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -257,6 +268,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -271,6 +283,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -283,6 +301,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpoint</td>
@@ -295,6 +319,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Структура новой конечной точки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -304,7 +334,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий созданную конечную точку.</p>
+
                             </div>
                 </td>
             </tr>
@@ -330,14 +361,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="29"
-                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:29</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:84</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет конечную точку по её имени для указанного API сервиса и сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -348,6 +381,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -362,6 +396,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -374,6 +414,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpointName</td>
@@ -386,6 +432,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя конечной точки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -395,7 +447,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, указывающий на успешное удаление.</p>
+
                             </div>
                 </td>
             </tr>
@@ -421,14 +474,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="21"
-                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:21</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="57"
+                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:57</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает конечную точку по её имени для указанного API сервиса и сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -439,6 +494,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -453,6 +509,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -465,6 +527,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpointName</td>
@@ -477,6 +545,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя конечной точки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -486,7 +560,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий конечную точку.</p>
+
                             </div>
                 </td>
             </tr>
@@ -512,14 +587,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="13"
-                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:13</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:31</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает список конечных точек для указанного API сервиса и сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -530,6 +607,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -544,6 +622,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -556,6 +640,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -565,7 +655,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий список конечных точек.</p>
+
                             </div>
                 </td>
             </tr>
@@ -591,14 +682,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:71</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет существующую конечную точку для указанного API сервиса и сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -609,6 +702,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -623,6 +717,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -635,6 +735,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpointName</td>
@@ -647,6 +753,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя конечной точки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpoint</td>
@@ -659,6 +771,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новая структура конечной точки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -668,7 +786,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, содержащий обновленную конечную точку.</p>
+
                             </div>
                 </td>
             </tr>
@@ -694,14 +813,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/repositories/endpoint-repository.service.ts:98</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет статус активности конечной точки.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -712,6 +833,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -726,6 +848,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API сервиса.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>entityName</td>
@@ -738,6 +866,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpointName</td>
@@ -750,6 +884,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя конечной точки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>isActive</td>
@@ -762,6 +902,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новый статус активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -771,7 +917,8 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <p>Наблюдаемый объект, указывающий на успешное обновление статуса.</p>
+
                             </div>
                 </td>
             </tr>
@@ -788,6 +935,16 @@ import { EndpointService as EndpointService } from &#x27;../services/endpoint-se
 import { Endpoint as Endpoint } from &quot;../interfaces/Endpoint&quot;;
 import { Observable } from &#x27;rxjs&#x27;;
 
+/**
+ * Сервис для управления конечными точками (endpoints).
+ *
+ * @remarks
+ * Этот сервис предоставляет методы для получения, создания, обновления и удаления конечных точек.
+ * Он взаимодействует с &#x60;EndpointService&#x60; для выполнения операций.
+ *
+ * @type {EndpointRepositoryService}
+ * @memberof Component
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;
 })
@@ -795,30 +952,84 @@ export class EndpointRepositoryService {
 
   constructor(private endpointService: EndpointService) { }
 
+  /**
+   * Получает список конечных точек для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @returns {Observable&lt;Endpoint[]&gt;} Наблюдаемый объект, содержащий список конечных точек.
+   * @memberof EndpointRepositoryService
+   */
   getEndpointList(apiServiceName: string, entityName: string): Observable&lt;Endpoint[]&gt; {
     return this.endpointService.getEndpointList(apiServiceName, entityName);
   }
 
+  /**
+   * Создает новую конечную точку для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {Endpoint} endpoint - Структура новой конечной точки.
+   * @returns {Observable&lt;Endpoint&gt;} Наблюдаемый объект, содержащий созданную конечную точку.
+   * @memberof EndpointRepositoryService
+   */
   createEndpoint(apiServiceName: string, entityName: string, endpoint: Endpoint): Observable&lt;Endpoint&gt; {
     return this.endpointService.createEndpoint(apiServiceName, entityName, endpoint);
   }
 
+  /**
+   * Получает конечную точку по её имени для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} endpointName - Имя конечной точки.
+   * @returns {Observable&lt;Endpoint&gt;} Наблюдаемый объект, содержащий конечную точку.
+   * @memberof EndpointRepositoryService
+   */
   getEndpointByName(apiServiceName: string, entityName: string, endpointName: string): Observable&lt;Endpoint&gt; {
     return this.endpointService.getEndpointByName(apiServiceName, entityName, endpointName);
   }
 
+  /**
+   * Обновляет существующую конечную точку для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} endpointName - Имя конечной точки.
+   * @param {Endpoint} endpoint - Новая структура конечной точки.
+   * @returns {Observable&lt;Endpoint&gt;} Наблюдаемый объект, содержащий обновленную конечную точку.
+   * @memberof EndpointRepositoryService
+   */
   updateEndpoint(apiServiceName: string, entityName: string, endpointName: string, endpoint: Endpoint): Observable&lt;Endpoint&gt; {
     return this.endpointService.updateEndpoint(apiServiceName, entityName, endpointName, endpoint);
   }
 
+  /**
+   * Удаляет конечную точку по её имени для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} endpointName - Имя конечной точки.
+   * @returns {Observable&lt;void&gt;} Наблюдаемый объект, указывающий на успешное удаление.
+   * @memberof EndpointRepositoryService
+   */
   deleteEndpoint(apiServiceName: string, entityName: string, endpointName: string): Observable&lt;void&gt; {
     return this.endpointService.deleteEndpoint(apiServiceName, entityName, endpointName);
   }
-  
+
+  /**
+   * Обновляет статус активности конечной точки.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} endpointName - Имя конечной точки.
+   * @param {boolean} isActive - Новый статус активности.
+   * @returns {Observable&lt;any&gt;} Наблюдаемый объект, указывающий на успешное обновление статуса.
+   * @memberof EndpointRepositoryService
+   */
   updateEndpointStatus(apiServiceName: string, entityName: string, endpointName: string, isActive: boolean): Observable&lt;any&gt; {
     return this.endpointService.updateEndpointStatus(apiServiceName, entityName, endpointName, isActive);
   }
-
 }
 </code></pre>
     </div>

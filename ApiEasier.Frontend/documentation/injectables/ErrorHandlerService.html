@@ -119,6 +119,16 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Сервис для обработки ошибок HTTP-запросов.</p>
+<p>Этот сервис предоставляет метод для обработки ошибок, возникающих при выполнении HTTP-запросов.
+Он анализирует статус ошибки и выполняет соответствующие действия, такие как отображение сообщений об ошибках
+и перенаправление пользователя на страницы ошибок.</p>
+
+            </p>
 
 
 
@@ -161,7 +171,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/services/error-handler.service.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/services/error-handler.service.ts:20</a></div>
                             </td>
                         </tr>
 
@@ -236,14 +246,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">src/app/services/error-handler.service.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/app/services/error-handler.service.ts:30</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ошибки HTTP-запросов.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -254,6 +266,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -268,6 +281,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Объект ошибки HTTP.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -294,12 +313,30 @@ import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
 
+/**
+ * Сервис для обработки ошибок HTTP-запросов.
+ *
+ * @remarks
+ * Этот сервис предоставляет метод для обработки ошибок, возникающих при выполнении HTTP-запросов.
+ * Он анализирует статус ошибки и выполняет соответствующие действия, такие как отображение сообщений об ошибках
+ * и перенаправление пользователя на страницы ошибок.
+ *
+ * @type {ErrorHandlerService}
+ * @memberof Component
+ */
 @Injectable({
   providedIn: &#x27;root&#x27;,
 })
 export class ErrorHandlerService {
   constructor(private router: Router, private alertService: TuiAlertService) {}
 
+  /**
+   * Обрабатывает ошибки HTTP-запросов.
+   *
+   * @param {HttpErrorResponse} error - Объект ошибки HTTP.
+   * @returns {void}
+   * @memberof ErrorHandlerService
+   */
   handleError(error: HttpErrorResponse): void {
     let errorMessage &#x3D; &#x27;Произошла ошибка при обработке запроса&#x27;;
     let errorCode &#x3D; error.status || &#x27;Unknown&#x27;;

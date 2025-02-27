@@ -3,12 +3,30 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
 
+/**
+ * Сервис для обработки ошибок HTTP-запросов.
+ *
+ * @remarks
+ * Этот сервис предоставляет метод для обработки ошибок, возникающих при выполнении HTTP-запросов.
+ * Он анализирует статус ошибки и выполняет соответствующие действия, такие как отображение сообщений об ошибках
+ * и перенаправление пользователя на страницы ошибок.
+ *
+ * @type {ErrorHandlerService}
+ * @memberof Component
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class ErrorHandlerService {
   constructor(private router: Router, private alertService: TuiAlertService) {}
 
+  /**
+   * Обрабатывает ошибки HTTP-запросов.
+   *
+   * @param {HttpErrorResponse} error - Объект ошибки HTTP.
+   * @returns {void}
+   * @memberof ErrorHandlerService
+   */
   handleError(error: HttpErrorResponse): void {
     let errorMessage = 'Произошла ошибка при обработке запроса';
     let errorCode = error.status || 'Unknown';
