@@ -22,6 +22,18 @@ import { LoadingComponent } from '../../components/loading/loading.component';
 import { FilterByInputComponent } from '../../components/filter-by-input/filter-by-input.component';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 
+/**
+ * Компонент EntityCardListComponent отвечает за отображение списка сущностей (entities)
+ * для выбранного API. Поддерживает создание, удаление и обновление состояния сущностей.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы для управления состоянием сущностей.
+ *
+ * @example
+ * HTML:
+ * ```html
+ * <app-entity-card-list></app-entity-card-list>
+ */
 @Component({
   selector: 'app-entity-card-list',
   imports: [
@@ -43,23 +55,103 @@ import { PaginationComponent } from '../../components/pagination/pagination.comp
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntityCardListComponent implements OnInit, OnDestroy {
+  /**
+   * Список сущностей.
+   * @type {Entity[]}
+   * @memberof EntityCardListComponent
+   */
   entities: Entity[] = [];
+
+  /**
+   * Отфильтрованный список сущностей.
+   * @type {Entity[]}
+   * @memberof EntityCardListComponent
+   */
   filteredEntities: Entity[] = [];
+
+  /**
+   * Список имен сущностей.
+   * @type {string[]}
+   * @memberof EntityCardListComponent
+   */
   entityNames: string[] = [];
+
+  /**
+   * Подписка для управления процессом получения данных.
+   * @type {Subscription | null}
+   * @memberof EntityCardListComponent
+   */
   private sub: Subscription | null = null;
+
+  /**
+   * Имя API, для которого отображаются сущности.
+   * @type {string}
+   * @memberof EntityCardListComponent
+   */
   apiName!: string;
+
+  /**
+   * Флаг, указывающий, загружаются ли данные в данный момент.
+   * @type {boolean}
+   * @default true
+   * @memberof EntityCardListComponent
+   */
   loading: boolean = true;
+
+  /**
+   * Информация о структуре API.
+   * @type {ApiServiceStructure}
+   * @memberof EntityCardListComponent
+   */
   apiInfo: ApiServiceStructure = {} as ApiServiceStructure;
+
+  /**
+   * Флаг, указывающий, отсортированы ли сущности по возрастанию.
+   * @type {boolean}
+   * @default true
+   * @memberof EntityCardListComponent
+   */
   isSortedAscending: boolean = true;
+
+  /**
+   * Текущая страница пагинации.
+   * @type {number}
+   * @default 1
+   * @memberof EntityCardListComponent
+   */
   currentPage: number = 1;
+
+  /**
+   * Количество элементов на странице.
+   * @type {number}
+   * @default 16
+   * @memberof EntityCardListComponent
+   */
   itemsPerPage: number = 16;
+
+  /**
+   * Флаг, указывающий, активен ли поисковый запрос.
+   * @type {boolean}
+   * @default false
+   * @memberof EntityCardListComponent
+   */
   searchQueryActive = false;
 
+  /**
+   * Диалог для создания новой сущности.
+   * @type {tuiDialog}
+   * @memberof EntityCardListComponent
+   */
   private readonly dialog = tuiDialog(EntityDialogComponent, {
     dismissible: true,
     label: 'Создать',
   });
 
+  /**
+   * Объект для создания новой сущности.
+   * @type {Entity}
+   * @memberof EntityCardListComponent
+   */
   entity: Entity = {
     name: '',
     isActive: false,
@@ -67,6 +159,15 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     endpoints: [],
   };
 
+  /**
+   * Конструктор компонента.
+   * @param {ChangeDetectorRef} cd - Ссылка на детектор изменений для ручного обнаружения изменений.
+   * @param {ActivatedRoute} route - Активированный маршрут для получения параметров маршрута.
+   * @param {Router} router - Роутер для навигации между представлениями.
+   * @param {ApiService} apiService - Сервис для работы с API.
+   * @param {EntityRepositoryService} entityRepositoryService - Сервис для работы с сущностями.
+   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений.
+   */
   constructor(
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
@@ -76,18 +177,41 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     private alerts: TuiAlertService
   ) {}
 
+  /**
+   * Метод жизненного цикла, который вызывается при уничтожении компонента.
+   * Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.
+   *
+   * @memberof EntityCardListComponent
+   */
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
 
+  /**
+   * Метод жизненного цикла, который вызывается при инициализации компонента.
+   * Загружает данные о сущностях.
+   *
+   * @memberof EntityCardListComponent
+   */
   ngOnInit(): void {
     this.loadData();
   }
 
+  /**
+   * Обрабатывает изменение состояния активности API.
+   *
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof EntityCardListComponent
+   */
   onToggleChange(newState: boolean): void {
     this.updateApiServiceStatus(newState);
   }
 
+  /**
+   * Открывает диалог создания новой сущности.
+   *
+   * @memberof EntityCardListComponent
+   */
   openCreateDialog(): void {
     this.dialog({ ...this.entity }).subscribe({
       next: (data) => this.handleCreateDialogData(data),
@@ -95,6 +219,12 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает удаление сущности.
+   *
+   * @param {string} entityName - Имя удаленной сущности.
+   * @memberof EntityCardListComponent
+   */
   onEntityDeleted(entityName: string): void {
     this.entities = this.entities.filter(
       (entity) => entity.name !== entityName
@@ -103,6 +233,12 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
+  /**
+   * Загружает данные о сущностях.
+   *
+   * @private
+   * @memberof EntityCardListComponent
+   */
   private loadData(): void {
     this.sub = this.route.params
       .pipe(switchMap((params) => this.fetchApiData(params['name'])))
@@ -115,6 +251,14 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Получает данные о структуре API.
+   *
+   * @private
+   * @param {string} apiName - Имя API.
+   * @returns {Observable<ApiServiceStructure>} - Наблюдаемый объект с данными о структуре API.
+   * @memberof EntityCardListComponent
+   */
   private fetchApiData(apiName: string): Observable<ApiServiceStructure> {
     if (!apiName) {
       throw new Error('API name is null');
@@ -123,6 +267,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     return this.apiService.getApiStructureList(this.apiName);
   }
 
+  /**
+   * Обрабатывает ответ с данными о структуре API.
+   *
+   * @private
+   * @param {ApiServiceStructure} apiStructure - Данные о структуре API.
+   * @memberof EntityCardListComponent
+   */
   private handleApiStructureResponse(apiStructure: ApiServiceStructure): void {
     this.apiInfo = apiStructure;
     this.entities = apiStructure.entities;
@@ -131,6 +282,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
+  /**
+   * Обновляет состояние активности API.
+   *
+   * @private
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof EntityCardListComponent
+   */
   private updateApiServiceStatus(newState: boolean): void {
     this.apiInfo.isActive = newState;
     this.apiService.updateApiServiceStatus(this.apiName, newState).subscribe({
@@ -142,6 +300,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает данные из диалога создания сущности.
+   *
+   * @private
+   * @param {Entity} data - Данные новой сущности.
+   * @memberof EntityCardListComponent
+   */
   private handleCreateDialogData(data: Entity): void {
     if (this.isEntityNameExists(data.name)) {
       this.alerts
@@ -154,10 +319,25 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.createEntity(data);
   }
 
+  /**
+   * Проверяет, существует ли сущность с указанным именем.
+   *
+   * @private
+   * @param {string} name - Имя сущности.
+   * @returns {boolean} - Существует ли сущность с указанным именем.
+   * @memberof EntityCardListComponent
+   */
   private isEntityNameExists(name: string): boolean {
     return this.entities.some((entity) => entity.name === name);
   }
 
+  /**
+   * Создает новую сущность.
+   *
+   * @private
+   * @param {Entity} data - Данные новой сущности.
+   * @memberof EntityCardListComponent
+   */
   private createEntity(data: Entity): void {
     this.entityRepositoryService.createApiEntity(this.apiName, data).subscribe({
       next: (response) => this.handleEntityCreation(response, data),
@@ -168,6 +348,14 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает успешное создание сущности.
+   *
+   * @private
+   * @param {Entity} response - Ответ сервера.
+   * @param {Entity} data - Данные новой сущности.
+   * @memberof EntityCardListComponent
+   */
   private handleEntityCreation(response: Entity, data: Entity): void {
     console.log('Сущность добавлена:', response);
     this.entities.push(data);
@@ -179,6 +367,11 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /**
+   * Сортирует сущности.
+   *
+   * @memberof EntityCardListComponent
+   */
   sortCards(): void {
     if (this.isSortedAscending) {
       this.filteredEntities.sort((a, b) => a.name.localeCompare(b.name));
@@ -187,12 +380,23 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Переключает сортировку сущностей.
+   *
+   * @memberof EntityCardListComponent
+   */
   sortCardsOnClick(): void {
     this.isSortedAscending = !this.isSortedAscending;
     this.sortCards();
     this.cd.markForCheck();
   }
 
+  /**
+   * Обрабатывает поисковый запрос.
+   *
+   * @param {string} query - Поисковый запрос.
+   * @memberof EntityCardListComponent
+   */
   onSearchQuery(query: string): void {
     this.searchQueryActive = !!query;
     this.filteredEntities = this.entities.filter((entity) =>
@@ -202,6 +406,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.updatePagination();
   }
 
+  /**
+   * Фильтрует сущности по запросу.
+   *
+   * @private
+   * @param {string} [query=''] - Поисковый запрос.
+   * @memberof EntityCardListComponent
+   */
   private filterEntities(query: string = ''): void {
     this.filteredEntities = this.entities.filter((entity) =>
       entity.name.includes(query)
@@ -210,10 +421,22 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.updatePagination();
   }
 
+  /**
+   * Возвращает общее количество страниц.
+   *
+   * @type {number}
+   * @memberof EntityCardListComponent
+   */
   get totalPages(): number {
     return Math.ceil(this.filteredEntities.length / this.itemsPerPage);
   }
 
+  /**
+   * Возвращает отфильтрованные сущности для текущей страницы.
+   *
+   * @type {Entity[]}
+   * @memberof EntityCardListComponent
+   */
   get paginatedEntities(): Entity[] {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredEntities.slice(
@@ -222,10 +445,22 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * Обрабатывает изменение страницы.
+   *
+   * @param {number} page - Номер страницы.
+   * @memberof EntityCardListComponent
+   */
   onPageChange(page: number): void {
     this.currentPage = page;
   }
 
+  /**
+   * Обновляет пагинацию.
+   *
+   * @private
+   * @memberof EntityCardListComponent
+   */
   private updatePagination(): void {
     if (this.currentPage > this.totalPages) {
       this.currentPage = this.totalPages;

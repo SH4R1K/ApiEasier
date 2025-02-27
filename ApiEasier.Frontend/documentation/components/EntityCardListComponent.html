@@ -124,6 +124,17 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент EntityCardListComponent отвечает за отображение списка сущностей (entities)
+для выбранного API. Поддерживает создание, удаление и обновление состояния сущностей.</p>
+<p>Этот компонент использует реактивные формы для управления состоянием сущностей.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-entity-card-list&gt;&lt;/app-entity-card-list&gt;</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -371,12 +382,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:68</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:160</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -385,6 +398,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -399,6 +413,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Ссылка на детектор изменений для ручного обнаружения изменений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>route</td>
@@ -411,6 +431,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Активированный маршрут для получения параметров маршрута.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -423,6 +449,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Роутер для навигации между представлениями.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>apiService</td>
@@ -435,6 +467,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>entityRepositoryService</td>
@@ -447,6 +485,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с сущностями.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -459,6 +503,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис уведомлений для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -500,14 +550,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="161"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:161</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="341"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:341</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создает новую сущность.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -518,6 +570,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -532,6 +585,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные новой сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -569,14 +628,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="118"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:118</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="262"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:262</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Получает данные о структуре API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -587,6 +648,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -601,6 +663,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -610,7 +678,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Наблюдаемый объект с данными о структуре API.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -638,14 +709,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="205"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:205</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="416"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:416</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Фильтрует сущности по запросу.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -657,6 +730,7 @@
                                                 <td>Type</td>
                                             <td>Optional</td>
                                                 <td>Default value</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -674,6 +748,12 @@
                                                     <code>&#x27;&#x27;</code>
                                             </td>
 
+                                            <td>
+                                                    <ul>
+<li>Поисковый запрос.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -711,14 +791,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:277</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ответ с данными о структуре API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -729,6 +811,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -743,6 +826,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные о структуре API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -780,14 +869,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:145</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="310"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:310</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает данные из диалога создания сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -798,6 +889,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -812,6 +904,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные новой сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -849,14 +947,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="171"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:171</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="359"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:359</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает успешное создание сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -867,6 +967,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -881,6 +982,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Ответ сервера.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>data</td>
@@ -893,6 +1000,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные новой сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -930,14 +1043,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="157"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:157</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="330"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:330</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Проверяет, существует ли сущность с указанным именем.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -948,6 +1063,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -962,6 +1078,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -971,7 +1093,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Существует ли сущность с указанным именем.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -999,19 +1124,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="106"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:106</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="242"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:242</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Загружает данные о сущностях.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1036,14 +1166,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="79"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:79</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="186"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:186</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при уничтожении компонента.
+Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1073,14 +1206,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="83"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:83</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="196"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:196</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при инициализации компонента.
+Загружает данные о сущностях.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1110,14 +1246,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="228"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:228</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает удаление сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1128,6 +1266,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1142,6 +1281,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя удаленной сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1177,14 +1322,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="225"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:225</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="454"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:454</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает изменение страницы.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1195,6 +1342,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1209,6 +1357,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Номер страницы.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1244,14 +1398,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="196"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:196</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="400"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:400</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает поисковый запрос.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1262,6 +1418,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1276,6 +1433,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Поисковый запрос.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1311,14 +1474,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="206"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:206</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает изменение состояния активности API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1329,6 +1494,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1343,6 +1509,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1378,14 +1550,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:215</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалог создания новой сущности.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1415,14 +1589,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="182"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:182</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="375"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:375</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Сортирует сущности.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1452,14 +1628,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="190"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:190</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="388"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:388</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Переключает сортировку сущностей.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1491,14 +1669,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="134"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:134</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="292"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:292</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет состояние активности API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1509,6 +1689,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1523,6 +1704,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1560,19 +1747,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="229"
-                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:229</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="464"
+                                    class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:464</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет пагинацию.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1607,10 +1799,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:106</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Информация о структуре API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1633,10 +1831,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:50</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:91</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Имя API, для которого отображаются сущности.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1664,10 +1868,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:122</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Текущая страница пагинации.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1694,10 +1904,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="145" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:145</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Диалог для создания новой сущности.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1725,10 +1941,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:63</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Список сущностей.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1761,10 +1983,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:155</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Объект для создания новой сущности.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1792,10 +2020,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:77</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Список имен сущностей.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1823,10 +2057,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:70</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Отфильтрованный список сущностей.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1854,10 +2094,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="114" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:114</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, отсортированы ли сущности по возрастанию.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1885,10 +2131,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:130</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Количество элементов на странице.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1916,10 +2168,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:99</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, загружаются ли данные в данный момент.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1941,10 +2199,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:138</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, активен ли поисковый запрос.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1973,10 +2237,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:84</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Подписка для управления процессом получения данных.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2002,9 +2272,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="213" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:213</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="430" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:430</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает общее количество страниц.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -2024,9 +2307,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="217" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:217</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="440" class="link-to-prism">src/app/data/pages/entity-card-list/entity-card-list.component.ts:440</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает отфильтрованные сущности для текущей страницы.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/Entity.html" target="_self" >Entity[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -2059,6 +2355,18 @@ import { LoadingComponent } from &#x27;../../components/loading/loading.componen
 import { FilterByInputComponent } from &#x27;../../components/filter-by-input/filter-by-input.component&#x27;;
 import { PaginationComponent } from &#x27;../../components/pagination/pagination.component&#x27;;
 
+/**
+ * Компонент EntityCardListComponent отвечает за отображение списка сущностей (entities)
+ * для выбранного API. Поддерживает создание, удаление и обновление состояния сущностей.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы для управления состоянием сущностей.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-entity-card-list&gt;&lt;/app-entity-card-list&gt;
+ */
 @Component({
   selector: &#x27;app-entity-card-list&#x27;,
   imports: [
@@ -2080,23 +2388,103 @@ import { PaginationComponent } from &#x27;../../components/pagination/pagination
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EntityCardListComponent implements OnInit, OnDestroy {
+  /**
+   * Список сущностей.
+   * @type {Entity[]}
+   * @memberof EntityCardListComponent
+   */
   entities: Entity[] &#x3D; [];
+
+  /**
+   * Отфильтрованный список сущностей.
+   * @type {Entity[]}
+   * @memberof EntityCardListComponent
+   */
   filteredEntities: Entity[] &#x3D; [];
+
+  /**
+   * Список имен сущностей.
+   * @type {string[]}
+   * @memberof EntityCardListComponent
+   */
   entityNames: string[] &#x3D; [];
+
+  /**
+   * Подписка для управления процессом получения данных.
+   * @type {Subscription | null}
+   * @memberof EntityCardListComponent
+   */
   private sub: Subscription | null &#x3D; null;
+
+  /**
+   * Имя API, для которого отображаются сущности.
+   * @type {string}
+   * @memberof EntityCardListComponent
+   */
   apiName!: string;
+
+  /**
+   * Флаг, указывающий, загружаются ли данные в данный момент.
+   * @type {boolean}
+   * @default true
+   * @memberof EntityCardListComponent
+   */
   loading: boolean &#x3D; true;
+
+  /**
+   * Информация о структуре API.
+   * @type {ApiServiceStructure}
+   * @memberof EntityCardListComponent
+   */
   apiInfo: ApiServiceStructure &#x3D; {} as ApiServiceStructure;
+
+  /**
+   * Флаг, указывающий, отсортированы ли сущности по возрастанию.
+   * @type {boolean}
+   * @default true
+   * @memberof EntityCardListComponent
+   */
   isSortedAscending: boolean &#x3D; true;
+
+  /**
+   * Текущая страница пагинации.
+   * @type {number}
+   * @default 1
+   * @memberof EntityCardListComponent
+   */
   currentPage: number &#x3D; 1;
+
+  /**
+   * Количество элементов на странице.
+   * @type {number}
+   * @default 16
+   * @memberof EntityCardListComponent
+   */
   itemsPerPage: number &#x3D; 16;
+
+  /**
+   * Флаг, указывающий, активен ли поисковый запрос.
+   * @type {boolean}
+   * @default false
+   * @memberof EntityCardListComponent
+   */
   searchQueryActive &#x3D; false;
 
+  /**
+   * Диалог для создания новой сущности.
+   * @type {tuiDialog}
+   * @memberof EntityCardListComponent
+   */
   private readonly dialog &#x3D; tuiDialog(EntityDialogComponent, {
     dismissible: true,
     label: &#x27;Создать&#x27;,
   });
 
+  /**
+   * Объект для создания новой сущности.
+   * @type {Entity}
+   * @memberof EntityCardListComponent
+   */
   entity: Entity &#x3D; {
     name: &#x27;&#x27;,
     isActive: false,
@@ -2104,6 +2492,15 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     endpoints: [],
   };
 
+  /**
+   * Конструктор компонента.
+   * @param {ChangeDetectorRef} cd - Ссылка на детектор изменений для ручного обнаружения изменений.
+   * @param {ActivatedRoute} route - Активированный маршрут для получения параметров маршрута.
+   * @param {Router} router - Роутер для навигации между представлениями.
+   * @param {ApiService} apiService - Сервис для работы с API.
+   * @param {EntityRepositoryService} entityRepositoryService - Сервис для работы с сущностями.
+   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений.
+   */
   constructor(
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
@@ -2113,18 +2510,41 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     private alerts: TuiAlertService
   ) {}
 
+  /**
+   * Метод жизненного цикла, который вызывается при уничтожении компонента.
+   * Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.
+   *
+   * @memberof EntityCardListComponent
+   */
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
 
+  /**
+   * Метод жизненного цикла, который вызывается при инициализации компонента.
+   * Загружает данные о сущностях.
+   *
+   * @memberof EntityCardListComponent
+   */
   ngOnInit(): void {
     this.loadData();
   }
 
+  /**
+   * Обрабатывает изменение состояния активности API.
+   *
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof EntityCardListComponent
+   */
   onToggleChange(newState: boolean): void {
     this.updateApiServiceStatus(newState);
   }
 
+  /**
+   * Открывает диалог создания новой сущности.
+   *
+   * @memberof EntityCardListComponent
+   */
   openCreateDialog(): void {
     this.dialog({ ...this.entity }).subscribe({
       next: (data) &#x3D;&gt; this.handleCreateDialogData(data),
@@ -2132,6 +2552,12 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает удаление сущности.
+   *
+   * @param {string} entityName - Имя удаленной сущности.
+   * @memberof EntityCardListComponent
+   */
   onEntityDeleted(entityName: string): void {
     this.entities &#x3D; this.entities.filter(
       (entity) &#x3D;&gt; entity.name !&#x3D;&#x3D; entityName
@@ -2140,6 +2566,12 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
+  /**
+   * Загружает данные о сущностях.
+   *
+   * @private
+   * @memberof EntityCardListComponent
+   */
   private loadData(): void {
     this.sub &#x3D; this.route.params
       .pipe(switchMap((params) &#x3D;&gt; this.fetchApiData(params[&#x27;name&#x27;])))
@@ -2152,6 +2584,14 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Получает данные о структуре API.
+   *
+   * @private
+   * @param {string} apiName - Имя API.
+   * @returns {Observable&lt;ApiServiceStructure&gt;} - Наблюдаемый объект с данными о структуре API.
+   * @memberof EntityCardListComponent
+   */
   private fetchApiData(apiName: string): Observable&lt;ApiServiceStructure&gt; {
     if (!apiName) {
       throw new Error(&#x27;API name is null&#x27;);
@@ -2160,6 +2600,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     return this.apiService.getApiStructureList(this.apiName);
   }
 
+  /**
+   * Обрабатывает ответ с данными о структуре API.
+   *
+   * @private
+   * @param {ApiServiceStructure} apiStructure - Данные о структуре API.
+   * @memberof EntityCardListComponent
+   */
   private handleApiStructureResponse(apiStructure: ApiServiceStructure): void {
     this.apiInfo &#x3D; apiStructure;
     this.entities &#x3D; apiStructure.entities;
@@ -2168,6 +2615,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.cd.markForCheck();
   }
 
+  /**
+   * Обновляет состояние активности API.
+   *
+   * @private
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof EntityCardListComponent
+   */
   private updateApiServiceStatus(newState: boolean): void {
     this.apiInfo.isActive &#x3D; newState;
     this.apiService.updateApiServiceStatus(this.apiName, newState).subscribe({
@@ -2179,6 +2633,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает данные из диалога создания сущности.
+   *
+   * @private
+   * @param {Entity} data - Данные новой сущности.
+   * @memberof EntityCardListComponent
+   */
   private handleCreateDialogData(data: Entity): void {
     if (this.isEntityNameExists(data.name)) {
       this.alerts
@@ -2191,10 +2652,25 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.createEntity(data);
   }
 
+  /**
+   * Проверяет, существует ли сущность с указанным именем.
+   *
+   * @private
+   * @param {string} name - Имя сущности.
+   * @returns {boolean} - Существует ли сущность с указанным именем.
+   * @memberof EntityCardListComponent
+   */
   private isEntityNameExists(name: string): boolean {
     return this.entities.some((entity) &#x3D;&gt; entity.name &#x3D;&#x3D;&#x3D; name);
   }
 
+  /**
+   * Создает новую сущность.
+   *
+   * @private
+   * @param {Entity} data - Данные новой сущности.
+   * @memberof EntityCardListComponent
+   */
   private createEntity(data: Entity): void {
     this.entityRepositoryService.createApiEntity(this.apiName, data).subscribe({
       next: (response) &#x3D;&gt; this.handleEntityCreation(response, data),
@@ -2205,6 +2681,14 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает успешное создание сущности.
+   *
+   * @private
+   * @param {Entity} response - Ответ сервера.
+   * @param {Entity} data - Данные новой сущности.
+   * @memberof EntityCardListComponent
+   */
   private handleEntityCreation(response: Entity, data: Entity): void {
     console.log(&#x27;Сущность добавлена:&#x27;, response);
     this.entities.push(data);
@@ -2216,6 +2700,11 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /**
+   * Сортирует сущности.
+   *
+   * @memberof EntityCardListComponent
+   */
   sortCards(): void {
     if (this.isSortedAscending) {
       this.filteredEntities.sort((a, b) &#x3D;&gt; a.name.localeCompare(b.name));
@@ -2224,12 +2713,23 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Переключает сортировку сущностей.
+   *
+   * @memberof EntityCardListComponent
+   */
   sortCardsOnClick(): void {
     this.isSortedAscending &#x3D; !this.isSortedAscending;
     this.sortCards();
     this.cd.markForCheck();
   }
 
+  /**
+   * Обрабатывает поисковый запрос.
+   *
+   * @param {string} query - Поисковый запрос.
+   * @memberof EntityCardListComponent
+   */
   onSearchQuery(query: string): void {
     this.searchQueryActive &#x3D; !!query;
     this.filteredEntities &#x3D; this.entities.filter((entity) &#x3D;&gt;
@@ -2239,6 +2739,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.updatePagination();
   }
 
+  /**
+   * Фильтрует сущности по запросу.
+   *
+   * @private
+   * @param {string} [query&#x3D;&#x27;&#x27;] - Поисковый запрос.
+   * @memberof EntityCardListComponent
+   */
   private filterEntities(query: string &#x3D; &#x27;&#x27;): void {
     this.filteredEntities &#x3D; this.entities.filter((entity) &#x3D;&gt;
       entity.name.includes(query)
@@ -2247,10 +2754,22 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.updatePagination();
   }
 
+  /**
+   * Возвращает общее количество страниц.
+   *
+   * @type {number}
+   * @memberof EntityCardListComponent
+   */
   get totalPages(): number {
     return Math.ceil(this.filteredEntities.length / this.itemsPerPage);
   }
 
+  /**
+   * Возвращает отфильтрованные сущности для текущей страницы.
+   *
+   * @type {Entity[]}
+   * @memberof EntityCardListComponent
+   */
   get paginatedEntities(): Entity[] {
     const startIndex &#x3D; (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredEntities.slice(
@@ -2259,10 +2778,22 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     );
   }
 
+  /**
+   * Обрабатывает изменение страницы.
+   *
+   * @param {number} page - Номер страницы.
+   * @memberof EntityCardListComponent
+   */
   onPageChange(page: number): void {
     this.currentPage &#x3D; page;
   }
 
+  /**
+   * Обновляет пагинацию.
+   *
+   * @private
+   * @memberof EntityCardListComponent
+   */
   private updatePagination(): void {
     if (this.currentPage &gt; this.totalPages) {
       this.currentPage &#x3D; this.totalPages;
@@ -2355,18 +2886,6 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
             (entityDeleted)&#x3D;&quot;onEntityDeleted(item.name)&quot;
           &gt;&lt;/app-card-entity&gt;
         &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;mt-20&quot;&gt;
-        &lt;!-- Пагинация --&gt;
-        &lt;app-pagination
-          class&#x3D;&quot;custom-pagination&quot;
-          *ngIf&#x3D;&quot;paginatedEntities.length &gt;&#x3D; itemsPerPage &amp;&amp; !searchQueryActive&quot;
-          [totalItems]&#x3D;&quot;filteredEntities.length&quot;
-          [itemsPerPage]&#x3D;&quot;itemsPerPage&quot;
-          [currentPage]&#x3D;&quot;currentPage&quot;
-          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
-        &gt;&lt;/app-pagination&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
@@ -2619,7 +3138,7 @@ i:hover {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-header  [buttonText]="\'Добавить сущность\'"  (buttonClick)="openCreateDialog()"></app-header><div *ngIf="loading; else content">  <app-loading></app-loading></div><ng-template #content>  <div class="container">    <div class="mb-40">      <!-- Заголовок и описание -->      <div class="header-section">        <div class="top-right">          <app-switch            [value]="apiInfo.isActive"            (toggle)="onToggleChange($event)"          ></app-switch>        </div>        <h1>{{ apiInfo.name }}</h1>        <p>{{ apiInfo.description }}</p>        <h3 *ngIf="filteredEntities.length == 0">Сущностей нет</h3>      </div>    </div>    <div *ngIf="filteredEntities.length > 0">      <!-- Сепаратор и заголовок "Сущности" -->      <div class="separator-section">        <h2>Сущности</h2>        <hr class="separator" />      </div>      <!-- Фильтрация, сортировка и пагинация -->      <div class="filter-section">        <app-filter-by-input          class="filter-input"          [label]="\'Search Entity\'"          [controlName]="\'search\'"          [items]="entityNames"          (searchQuery)="onSearchQuery($event)"        ></app-filter-by-input>        <div class="pagination-sort-container">          <app-pagination            class="custom-pagination"            [totalItems]="filteredEntities.length"            [itemsPerPage]="itemsPerPage"            [currentPage]="currentPage"            (pageChange)="onPageChange($event)"          ></app-pagination>          <div class="icons-container">            <i              *ngIf="!isSortedAscending"              class="fas fa-sort-alpha-up"              (click)="sortCardsOnClick()"            ></i>            <i              *ngIf="isSortedAscending"              class="fas fa-sort-alpha-down"              (click)="sortCardsOnClick()"            ></i>          </div>        </div>      </div>      <!-- Список сущностей -->      <div class="grid">        <div          *ngFor="let item of paginatedEntities"          tuiAppearance="floating"          tuiCardLarge          class="card"        >          <app-card-entity            [entityInfo]="item"            [apiName]="apiInfo.name"            (entityDeleted)="onEntityDeleted(item.name)"          ></app-card-entity>        </div>      </div>      <div class="mt-20">        <!-- Пагинация -->        <app-pagination          class="custom-pagination"          *ngIf="paginatedEntities.length >= itemsPerPage && !searchQueryActive"          [totalItems]="filteredEntities.length"          [itemsPerPage]="itemsPerPage"          [currentPage]="currentPage"          (pageChange)="onPageChange($event)"        ></app-pagination>      </div>    </div>  </div></ng-template></div>'
+        var COMPONENT_TEMPLATE = '<div><app-header  [buttonText]="\'Добавить сущность\'"  (buttonClick)="openCreateDialog()"></app-header><div *ngIf="loading; else content">  <app-loading></app-loading></div><ng-template #content>  <div class="container">    <div class="mb-40">      <!-- Заголовок и описание -->      <div class="header-section">        <div class="top-right">          <app-switch            [value]="apiInfo.isActive"            (toggle)="onToggleChange($event)"          ></app-switch>        </div>        <h1>{{ apiInfo.name }}</h1>        <p>{{ apiInfo.description }}</p>        <h3 *ngIf="filteredEntities.length == 0">Сущностей нет</h3>      </div>    </div>    <div *ngIf="filteredEntities.length > 0">      <!-- Сепаратор и заголовок "Сущности" -->      <div class="separator-section">        <h2>Сущности</h2>        <hr class="separator" />      </div>      <!-- Фильтрация, сортировка и пагинация -->      <div class="filter-section">        <app-filter-by-input          class="filter-input"          [label]="\'Search Entity\'"          [controlName]="\'search\'"          [items]="entityNames"          (searchQuery)="onSearchQuery($event)"        ></app-filter-by-input>        <div class="pagination-sort-container">          <app-pagination            class="custom-pagination"            [totalItems]="filteredEntities.length"            [itemsPerPage]="itemsPerPage"            [currentPage]="currentPage"            (pageChange)="onPageChange($event)"          ></app-pagination>          <div class="icons-container">            <i              *ngIf="!isSortedAscending"              class="fas fa-sort-alpha-up"              (click)="sortCardsOnClick()"            ></i>            <i              *ngIf="isSortedAscending"              class="fas fa-sort-alpha-down"              (click)="sortCardsOnClick()"            ></i>          </div>        </div>      </div>      <!-- Список сущностей -->      <div class="grid">        <div          *ngFor="let item of paginatedEntities"          tuiAppearance="floating"          tuiCardLarge          class="card"        >          <app-card-entity            [entityInfo]="item"            [apiName]="apiInfo.name"            (entityDeleted)="onEntityDeleted(item.name)"          ></app-card-entity>        </div>      </div>    </div>  </div></ng-template></div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EntityCardListComponent'};

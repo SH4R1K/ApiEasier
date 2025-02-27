@@ -124,6 +124,19 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент ApiEndpointListComponent отвечает за отображение списка конечных точек API
+и управление их состоянием активности. Взаимодействует с различными сервисами для получения
+и обновления структуры API и их статусов.</p>
+<p>Этот компонент использует реактивные формы для управления состоянием переключателей.
+Поддерживает валидацию и может быть настроен для отображения иконок и изменения внешнего вида.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-api-endpoint-list&gt;&lt;/app-api-endpoint-list&gt;</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -295,17 +308,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, router: Router, apiService: <a href="../injectables/ApiService.html" target="_self">ApiService</a>, apiServiceRepository: <a href="../injectables/ApiServiceRepositoryService.html" target="_self">ApiServiceRepositoryService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, endpointRepositoryService: <a href="../injectables/EndpointRepositoryService.html" target="_self">EndpointRepositoryService</a>, cd: ChangeDetectorRef, alerts: TuiAlertService)</code>
+<code>constructor(route: ActivatedRoute, apiService: <a href="../injectables/ApiService.html" target="_self">ApiService</a>, apiServiceRepository: <a href="../injectables/ApiServiceRepositoryService.html" target="_self">ApiServiceRepositoryService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, endpointRepositoryService: <a href="../injectables/EndpointRepositoryService.html" target="_self">EndpointRepositoryService</a>, cd: ChangeDetectorRef, alerts: TuiAlertService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:96</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -314,6 +329,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -328,18 +344,12 @@
                                                             No
                                                     </td>
                                                     
-                                                </tr>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
                                                         <td>
-                                                                    <code>Router</code>
+                                                                <ul>
+<li>Активированный маршрут для получения параметров маршрута.</li>
+</ul>
+
                                                         </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
                                                 </tr>
                                                 <tr>
                                                         <td>apiService</td>
@@ -352,6 +362,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис API для получения структуры API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>apiServiceRepository</td>
@@ -364,6 +380,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Репозиторий сервиса для обновления статуса API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>entityRepositoryService</td>
@@ -376,6 +398,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Репозиторий сервиса для обновления статуса сущности.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>endpointRepositoryService</td>
@@ -388,6 +416,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Репозиторий сервиса для обновления статуса конечной точки.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>cd</td>
@@ -400,6 +434,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Ссылка на детектор изменений для ручного обнаружения изменений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -412,6 +452,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис уведомлений для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -453,14 +499,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="194"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:194</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Копирует текст в буфер обмена.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -471,6 +519,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -485,6 +534,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Текст для копирования.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -520,14 +575,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="91"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:91</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="182"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:182</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Копирует URL в буфер обмена.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -538,6 +595,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -552,6 +610,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpoint</td>
@@ -564,6 +628,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Конечная точка.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -599,14 +669,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="233"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:233</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Возвращает URL для сущности и конечной точки.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -617,6 +689,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -631,6 +704,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpoint</td>
@@ -643,6 +722,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Конечная точка.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -652,7 +737,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Сформированный URL.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -680,14 +768,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:166</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ответ с структурой API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -698,6 +788,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -712,6 +803,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Структура API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -749,19 +846,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:149</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Загружает структуру API.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -786,14 +888,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:124</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при уничтожении компонента.
+Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -823,14 +928,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="63"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:63</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:134</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при инициализации компонента.
+Подписывается на параметры маршрута и загружает структуру API.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -860,14 +968,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="124"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:124</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="243"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:243</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает изменение состояния активности API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -878,6 +988,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -892,6 +1003,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -927,14 +1044,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="152"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:152</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="286"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:286</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает изменение состояния активности конечной точки.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -945,6 +1064,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -959,6 +1079,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Сущность.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>endpoint</td>
@@ -971,6 +1097,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Конечная точка.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>newState</td>
@@ -983,6 +1115,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1018,14 +1156,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="138"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:138</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="264"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:264</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает изменение состояния активности сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1036,6 +1176,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1050,6 +1191,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Сущность.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>newState</td>
@@ -1062,6 +1209,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1099,14 +1252,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="216"
+                                    class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:216</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Показывает уведомление об успешном копировании URL.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1117,6 +1272,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1131,6 +1287,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Скопированный URL.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1176,10 +1338,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:89</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Объект, содержащий состояние активности API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1202,10 +1370,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:82</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Имя управляемого API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1233,10 +1407,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:41</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:60</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Массив сущностей, полученных из структуры API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1264,10 +1444,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:96</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, был ли URL скопирован в буфер обмена.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1295,10 +1481,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:75</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, загружаются ли данные в данный момент.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1327,10 +1519,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:42</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/data/pages/api-endpoint-list/api-endpoint-list.component.ts:67</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Подписка для управления процессом получения структуры API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1352,7 +1550,7 @@ import { Entity } from &quot;../../../interfaces/Entity&quot;;
 import { ApiServiceStructure } from &quot;../../../interfaces/ApiServiceStructure&quot;;
 import { TuiAccordion } from &#x27;@taiga-ui/experimental&#x27;;
 import { Subscription } from &#x27;rxjs&#x27;;
-import { ActivatedRoute, Router, RouterModule } from &#x27;@angular/router&#x27;;
+import { ActivatedRoute, RouterModule } from &#x27;@angular/router&#x27;;
 import { ApiService } from &#x27;../../../services/api-service.service&#x27;;
 import { LoadingComponent } from &#x27;../../components/loading/loading.component&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
@@ -1364,6 +1562,20 @@ import { EndpointRepositoryService } from &#x27;../../../repositories/endpoint-r
 import { EntityRepositoryService } from &#x27;../../../repositories/entity-repository.service&#x27;;
 import { SwitchComponent } from &#x27;../../components/switch/switch.component&#x27;;
 
+/**
+ * Компонент ApiEndpointListComponent отвечает за отображение списка конечных точек API
+ * и управление их состоянием активности. Взаимодействует с различными сервисами для получения
+ * и обновления структуры API и их статусов.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы для управления состоянием переключателей.
+ * Поддерживает валидацию и может быть настроен для отображения иконок и изменения внешнего вида.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-api-endpoint-list&gt;&lt;/app-api-endpoint-list&gt;
+ */
 @Component({
   selector: &#x27;app-api-endpoint-list&#x27;,
   imports: [
@@ -1380,16 +1592,61 @@ import { SwitchComponent } from &#x27;../../components/switch/switch.component&#
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ApiEndpointListComponent implements OnInit, OnDestroy {
+  /**
+   * Массив сущностей, полученных из структуры API.
+   * @type {Entity[]}
+   * @memberof ApiEndpointListComponent
+   */
   entities: Entity[] &#x3D; [];
+
+  /**
+   * Подписка для управления процессом получения структуры API.
+   * @type {Subscription | null}
+   * @memberof ApiEndpointListComponent
+   */
   private sub: Subscription | null &#x3D; null;
+
+  /**
+   * Флаг, указывающий, загружаются ли данные в данный момент.
+   * @type {boolean}
+   * @default true
+   * @memberof ApiEndpointListComponent
+   */
   loading: boolean &#x3D; true;
+
+  /**
+   * Имя управляемого API.
+   * @type {string}
+   * @memberof ApiEndpointListComponent
+   */
   apiName!: string;
+
+  /**
+   * Объект, содержащий состояние активности API.
+   * @type {{ isActive: boolean }}
+   * @memberof ApiEndpointListComponent
+   */
   apiInfo: { isActive: boolean } &#x3D; { isActive: false };
+
+  /**
+   * Флаг, указывающий, был ли URL скопирован в буфер обмена.
+   * @type {string | null}
+   * @memberof ApiEndpointListComponent
+   */
   isCopied: string | null &#x3D; null;
 
+  /**
+   * Конструктор компонента.
+   * @param {ActivatedRoute} route - Активированный маршрут для получения параметров маршрута.
+   * @param {ApiService} apiService - Сервис API для получения структуры API.
+   * @param {ApiServiceRepositoryService} apiServiceRepository - Репозиторий сервиса для обновления статуса API.
+   * @param {EntityRepositoryService} entityRepositoryService - Репозиторий сервиса для обновления статуса сущности.
+   * @param {EndpointRepositoryService} endpointRepositoryService - Репозиторий сервиса для обновления статуса конечной точки.
+   * @param {ChangeDetectorRef} cd - Ссылка на детектор изменений для ручного обнаружения изменений.
+   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений.
+   */
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
     private apiService: ApiService,
     private apiServiceRepository: ApiServiceRepositoryService,
     private entityRepositoryService: EntityRepositoryService,
@@ -1398,10 +1655,22 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
     private alerts: TuiAlertService
   ) {}
 
+  /**
+   * Метод жизненного цикла, который вызывается при уничтожении компонента.
+   * Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.
+   *
+   * @memberof ApiEndpointListComponent
+   */
   ngOnDestroy(): void {
     this.sub?.unsubscribe();
   }
 
+  /**
+   * Метод жизненного цикла, который вызывается при инициализации компонента.
+   * Подписывается на параметры маршрута и загружает структуру API.
+   *
+   * @memberof ApiEndpointListComponent
+   */
   ngOnInit(): void {
     this.route.params.subscribe((params) &#x3D;&gt; {
       this.apiName &#x3D; params[&#x27;name&#x27;];
@@ -1411,6 +1680,12 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Загружает структуру API.
+   *
+   * @private
+   * @memberof ApiEndpointListComponent
+   */
   private loadApiStructure(): void {
     this.sub &#x3D; this.apiService.getApiStructureList(this.apiName).subscribe({
       next: (apiStructure) &#x3D;&gt; this.handleApiStructureResponse(apiStructure),
@@ -1421,20 +1696,41 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает ответ с структурой API.
+   *
+   * @private
+   * @param {ApiServiceStructure} apiStructure - Структура API.
+   * @memberof ApiEndpointListComponent
+   */
   private handleApiStructureResponse(apiStructure: ApiServiceStructure): void {
     if (apiStructure) {
       this.entities &#x3D; apiStructure.entities;
-      this.apiInfo.isActive &#x3D; apiStructure.isActive; // Set the API state here
+      this.apiInfo.isActive &#x3D; apiStructure.isActive; // Устанавливает состояние API
       this.loading &#x3D; false;
       this.cd.markForCheck();
     }
   }
 
+  /**
+   * Копирует URL в буфер обмена.
+   *
+   * @param {string} entityName - Имя сущности.
+   * @param {Endpoint} endpoint - Конечная точка.
+   * @memberof ApiEndpointListComponent
+   */
   copyToClipboard(entityName: string, endpoint: Endpoint): void {
     const url &#x3D; this.getUrl(entityName, endpoint);
     this.copyTextToClipboard(url);
   }
 
+  /**
+   * Копирует текст в буфер обмена.
+   *
+   * @private
+   * @param {string} text - Текст для копирования.
+   * @memberof ApiEndpointListComponent
+   */
   private copyTextToClipboard(text: string): void {
     const textarea &#x3D; document.createElement(&#x27;textarea&#x27;);
     textarea.value &#x3D; text;
@@ -1444,12 +1740,19 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
       document.execCommand(&#x27;copy&#x27;);
       this.showCopySuccess(text);
     } catch (err) {
-      console.error(&#x27;Error copying URL:&#x27;, err);
+      console.error(&#x27;Ошибка при копировании URL:&#x27;, err);
     } finally {
       document.body.removeChild(textarea);
     }
   }
 
+  /**
+   * Показывает уведомление об успешном копировании URL.
+   *
+   * @private
+   * @param {string} url - Скопированный URL.
+   * @memberof ApiEndpointListComponent
+   */
   private showCopySuccess(url: string): void {
     this.isCopied &#x3D; url;
     this.cd.markForCheck();
@@ -1459,10 +1762,24 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
     }, 2000);
   }
 
+  /**
+   * Возвращает URL для сущности и конечной точки.
+   *
+   * @param {string} entityName - Имя сущности.
+   * @param {Endpoint} endpoint - Конечная точка.
+   * @returns {string} - Сформированный URL.
+   * @memberof ApiEndpointListComponent
+   */
   getUrl(entityName: string, endpoint: Endpoint): string {
     return &#x60;${window.location.origin}/api/ApiEmu/${this.apiName}/${entityName}/${endpoint.route}&#x60;;
   }
 
+  /**
+   * Обрабатывает изменение состояния активности API.
+   *
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof ApiEndpointListComponent
+   */
   onApiToggleChange(newState: boolean): void {
     this.apiInfo.isActive &#x3D; newState;
     this.apiServiceRepository
@@ -1477,6 +1794,13 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Обрабатывает изменение состояния активности сущности.
+   *
+   * @param {Entity} entity - Сущность.
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof ApiEndpointListComponent
+   */
   onEntityToggleChange(entity: Entity, newState: boolean): void {
     entity.isActive &#x3D; newState;
     this.entityRepositoryService
@@ -1491,6 +1815,14 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Обрабатывает изменение состояния активности конечной точки.
+   *
+   * @param {Entity} entity - Сущность.
+   * @param {Endpoint} endpoint - Конечная точка.
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof ApiEndpointListComponent
+   */
   onEndpointToggleChange(
     entity: Entity,
     endpoint: Endpoint,

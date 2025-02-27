@@ -120,10 +120,21 @@
     <h3>File</h3>
 </p>
 <p class="comment">
-    <code>src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts</code>
+    <code>src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts</code>
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент EndpointCardListComponent отвечает за отображение списка конечных точек (эндпоинтов)
+для выбранного API и сущности. Поддерживает создание, удаление и обновление состояния эндпоинтов.</p>
+<p>Этот компонент использует реактивные формы для управления состоянием эндпоинтов.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-endpoint-card-list&gt;&lt;/app-endpoint-card-list&gt;</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -176,7 +187,7 @@
 
             <tr>
                 <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./endpoint-card-list.component.css,<br>../../../styles/card-list.css</code></td>
+                <td class="col-md-9"><code>./endpoint-card-list.component.css,<br>../../styles/card-list.css</code></td>
             </tr>
 
 
@@ -316,17 +327,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(router: Router, cd: ChangeDetectorRef, route: ActivatedRoute, endpointRepositoryService: <a href="../injectables/EndpointRepositoryService.html" target="_self">EndpointRepositoryService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, alerts: TuiAlertService, location: Location)</code>
+<code>constructor(cd: ChangeDetectorRef, route: ActivatedRoute, endpointRepositoryService: <a href="../injectables/EndpointRepositoryService.html" target="_self">EndpointRepositoryService</a>, entityRepositoryService: <a href="../injectables/EntityRepositoryService.html" target="_self">EntityRepositoryService</a>, alerts: TuiAlertService, location: Location)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:122</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -335,21 +348,10 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                        <td>router</td>
-                                                  
-                                                        <td>
-                                                                    <code>Router</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
                                                 <tr>
                                                         <td>cd</td>
                                                   
@@ -361,6 +363,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Ссылка на детектор изменений для ручного обнаружения изменений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>route</td>
@@ -373,6 +381,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Активированный маршрут для получения параметров маршрута.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>endpointRepositoryService</td>
@@ -385,6 +399,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с эндпоинтами.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>entityRepositoryService</td>
@@ -397,6 +417,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с сущностями.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -409,6 +435,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис уведомлений для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>location</td>
@@ -421,6 +453,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для работы с местоположением.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -462,14 +500,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:261</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создает новый эндпоинт.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -480,6 +520,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -494,6 +535,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные нового эндпоинта.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -531,14 +578,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="145"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:145</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="281"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:281</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает успешное создание эндпоинта.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -549,6 +598,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -563,6 +613,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Ответ сервера.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>data</td>
@@ -575,6 +631,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные нового эндпоинта.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -612,14 +674,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="193"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:193</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ответ с информацией о сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -630,6 +694,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -644,6 +709,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Информация о сущности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -681,14 +752,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="121"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:121</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="236"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:236</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Проверяет, существует ли эндпоинт с указанным маршрутом.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -699,6 +772,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -713,6 +787,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Маршрут эндпоинта.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -722,7 +802,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Существует ли эндпоинт с указанным маршрутом.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -750,19 +833,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="174"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:174</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Загружает данные о сущности и её эндпоинтах.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -787,14 +875,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="74"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:74</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:150</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при уничтожении компонента.
+Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -824,14 +915,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="160"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:160</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при инициализации компонента.
+Подписывается на параметры маршрута и загружает данные.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -861,14 +955,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="174"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:174</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="329"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:329</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает удаление эндпоинта.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -879,6 +975,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -893,6 +990,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Маршрут удаленного эндпоинта.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -928,14 +1031,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="156"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:156</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="298"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:298</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает изменение состояния активности сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -946,6 +1051,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -960,6 +1066,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -995,14 +1107,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="105"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:105</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:205</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалог создания нового эндпоинта.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1034,14 +1148,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="219"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:219</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает данные из диалога создания эндпоинта.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1052,6 +1168,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1066,6 +1183,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные нового эндпоинта.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1103,19 +1226,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:246</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Показывает ошибку, если эндпоинт с указанным маршрутом уже существует.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1142,14 +1270,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="161"
-                                    class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:161</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="310"
+                                    class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:310</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет состояние активности сущности.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1160,6 +1290,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1174,6 +1305,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Новое состояние активности.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1214,10 +1351,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:58</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Имя API, для которого отображаются эндпоинты.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1244,10 +1387,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:108</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Диалог для создания нового эндпоинта.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1279,10 +1428,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:118</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Объект для создания нового эндпоинта.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1310,10 +1465,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:47</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:87</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Список эндпоинтов.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1341,10 +1502,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:48</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:94</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Информация о сущности.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1367,10 +1534,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:65</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Имя сущности, для которой отображаются эндпоинты.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1398,10 +1571,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:45</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:73</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, загружаются ли данные в данный момент.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1424,10 +1603,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:49</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:101</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сервис для работы с местоположением.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1456,10 +1641,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/data/pages/endpoints-page/endpoin-card-list/endpoint-card-list.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/data/pages/endpoint-card-list/endpoint-card-list.component.ts:80</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Подписка для управления процессом получения данных.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -1469,29 +1660,39 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
 } from &#x27;@angular/core&#x27;;
-import { Subscription } from &#x27;rxjs&#x27;;
-import { Endpoint } from &quot;../../../../interfaces/Endpoint&quot;;
-import { Entity } from &quot;../../../../interfaces/Entity&quot;;
-import { CommonModule, Location } from &#x27;@angular/common&#x27;;
 import { TuiCardLarge } from &#x27;@taiga-ui/layout&#x27;;
-import { tuiDialog, TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
-import { CardEndpointComponent } from &#x27;../../../components/card-endpoint/card-endpoint.component&#x27;;
-import { HeaderComponent } from &#x27;../../../components/header/header.component&#x27;;
-import { Router, RouterModule } from &#x27;@angular/router&#x27;;
-import { ActivatedRoute } from &#x27;@angular/router&#x27;;
-import { EndpointDialogComponent } from &#x27;../../../components/endpoint-dialog/endpoint-dialog.component&#x27;;
-import { SwitchComponent } from &#x27;../../../components/switch/switch.component&#x27;;
-import { EntityRepositoryService } from &#x27;../../../../repositories/entity-repository.service&#x27;;
-import { LoadingComponent } from &#x27;../../../components/loading/loading.component&#x27;;
-import { EndpointRepositoryService } from &#x27;../../../../repositories/endpoint-repository.service&#x27;;
-
+import { Subscription } from &#x27;rxjs&#x27;;
+import { CardEndpointComponent } from &#x27;../../components/card-endpoint/card-endpoint.component&#x27;;
+import { ActivatedRoute, RouterModule } from &#x27;@angular/router&#x27;;
+import { HeaderComponent } from &#x27;../../components/header/header.component&#x27;;
+import { SwitchComponent } from &#x27;../../components/switch/switch.component&#x27;;
+import { LoadingComponent } from &#x27;../../components/loading/loading.component&#x27;;
+import { Endpoint } from &#x27;../../../interfaces/Endpoint&#x27;;
+import { Entity } from &#x27;../../../interfaces/Entity&#x27;;
+import { EndpointDialogComponent } from &#x27;../../components/endpoint-dialog/endpoint-dialog.component&#x27;;
+import { TuiAlertService, tuiDialog } from &#x27;@taiga-ui/core&#x27;;
+import { EndpointRepositoryService } from &#x27;../../../repositories/endpoint-repository.service&#x27;;
+import { EntityRepositoryService } from &#x27;../../../repositories/entity-repository.service&#x27;;
+/**
+ * Компонент EndpointCardListComponent отвечает за отображение списка конечных точек (эндпоинтов)
+ * для выбранного API и сущности. Поддерживает создание, удаление и обновление состояния эндпоинтов.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы для управления состоянием эндпоинтов.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-endpoint-card-list&gt;&lt;/app-endpoint-card-list&gt;
+ */
 @Component({
   selector: &#x27;app-endpoint-card-list&#x27;,
   imports: [
@@ -1506,32 +1707,92 @@ import { EndpointRepositoryService } from &#x27;../../../../repositories/endpoin
   templateUrl: &#x27;./endpoint-card-list.component.html&#x27;,
   styleUrls: [
     &#x27;./endpoint-card-list.component.css&#x27;,
-    &#x27;../../../styles/card-list.css&#x27;,
+    &#x27;../../styles/card-list.css&#x27;,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EndpointCardListComponent implements OnInit, OnDestroy {
+  /**
+   * Имя API, для которого отображаются эндпоинты.
+   * @type {string}
+   * @memberof EndpointCardListComponent
+   */
   apiName!: string;
+
+  /**
+   * Имя сущности, для которой отображаются эндпоинты.
+   * @type {string}
+   * @memberof EndpointCardListComponent
+   */
   entityName!: string;
+
+  /**
+   * Флаг, указывающий, загружаются ли данные в данный момент.
+   * @type {boolean}
+   * @default true
+   * @memberof EndpointCardListComponent
+   */
   loading: boolean &#x3D; true;
+
+  /**
+   * Подписка для управления процессом получения данных.
+   * @type {Subscription | null}
+   * @memberof EndpointCardListComponent
+   */
   private subscription: Subscription | null &#x3D; null;
+
+  /**
+   * Список эндпоинтов.
+   * @type {Endpoint[]}
+   * @memberof EndpointCardListComponent
+   */
   endpoints: Endpoint[] &#x3D; [];
+
+  /**
+   * Информация о сущности.
+   * @type {Entity}
+   * @memberof EndpointCardListComponent
+   */
   entityInfo: Entity &#x3D; {} as Entity;
+
+  /**
+   * Сервис для работы с местоположением.
+   * @type {Location}
+   * @memberof EndpointCardListComponent
+   */
   location: Location;
 
+  /**
+   * Диалог для создания нового эндпоинта.
+   * @type {tuiDialog}
+   * @memberof EndpointCardListComponent
+   */
   private readonly dialog &#x3D; tuiDialog(EndpointDialogComponent, {
     dismissible: true,
     label: &#x27;Создать&#x27;,
   });
 
+  /**
+   * Объект для создания нового эндпоинта.
+   * @type {Endpoint}
+   * @memberof EndpointCardListComponent
+   */
   endpoint: Endpoint &#x3D; {
     route: &#x27;&#x27;,
     type: &#x27;get&#x27;,
     isActive: false,
   };
 
+  /**
+   * Конструктор компонента.
+   * @param {ChangeDetectorRef} cd - Ссылка на детектор изменений для ручного обнаружения изменений.
+   * @param {ActivatedRoute} route - Активированный маршрут для получения параметров маршрута.
+   * @param {EndpointRepositoryService} endpointRepositoryService - Сервис для работы с эндпоинтами.
+   * @param {EntityRepositoryService} entityRepositoryService - Сервис для работы с сущностями.
+   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений.
+   * @param {Location} location - Сервис для работы с местоположением.
+   */
   constructor(
-    private router: Router,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
     private endpointRepositoryService: EndpointRepositoryService,
@@ -1542,10 +1803,22 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
     this.location &#x3D; location;
   }
 
+  /**
+   * Метод жизненного цикла, который вызывается при уничтожении компонента.
+   * Отписывается от всех активных подписок, чтобы предотвратить утечки памяти.
+   *
+   * @memberof EndpointCardListComponent
+   */
   ngOnDestroy(): void {
     this.subscription?.unsubscribe();
   }
 
+  /**
+   * Метод жизненного цикла, который вызывается при инициализации компонента.
+   * Подписывается на параметры маршрута и загружает данные.
+   *
+   * @memberof EndpointCardListComponent
+   */
   ngOnInit(): void {
     this.route.params.subscribe((params) &#x3D;&gt; {
       this.apiName &#x3D; params[&#x27;apiServiceName&#x27;];
@@ -1554,6 +1827,12 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Загружает данные о сущности и её эндпоинтах.
+   *
+   * @private
+   * @memberof EndpointCardListComponent
+   */
   private loadData(): void {
     this.subscription &#x3D; this.entityRepositoryService
       .getApiEntity(this.apiName, this.entityName)
@@ -1566,6 +1845,13 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Обрабатывает ответ с информацией о сущности.
+   *
+   * @private
+   * @param {Entity} entity - Информация о сущности.
+   * @memberof EndpointCardListComponent
+   */
   private handleEntityInfoResponse(entity: Entity): void {
     this.entityInfo &#x3D; entity;
     this.endpoints &#x3D; entity.endpoints || [];
@@ -1573,6 +1859,11 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
     this.cd.detectChanges();
   }
 
+  /**
+   * Открывает диалог создания нового эндпоинта.
+   *
+   * @memberof EndpointCardListComponent
+   */
   openCreateDialog(): void {
     this.dialog({ ...this.endpoint }).subscribe({
       next: (data) &#x3D;&gt; this.processCreateDialogData(data),
@@ -1580,6 +1871,13 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Обрабатывает данные из диалога создания эндпоинта.
+   *
+   * @private
+   * @param {Endpoint} data - Данные нового эндпоинта.
+   * @memberof EndpointCardListComponent
+   */
   private processCreateDialogData(data: Endpoint): void {
     if (this.isRouteExists(data.route)) {
       this.showRouteExistsError();
@@ -1589,10 +1887,24 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
     this.createEndpoint(data);
   }
 
+  /**
+   * Проверяет, существует ли эндпоинт с указанным маршрутом.
+   *
+   * @private
+   * @param {string} route - Маршрут эндпоинта.
+   * @returns {boolean} - Существует ли эндпоинт с указанным маршрутом.
+   * @memberof EndpointCardListComponent
+   */
   private isRouteExists(route: string): boolean {
     return this.endpoints.some((endpoint) &#x3D;&gt; endpoint.route &#x3D;&#x3D;&#x3D; route);
   }
 
+  /**
+   * Показывает ошибку, если эндпоинт с указанным маршрутом уже существует.
+   *
+   * @private
+   * @memberof EndpointCardListComponent
+   */
   private showRouteExistsError(): void {
     this.alerts
       .open(&#x27;Ошибка: Эндпоинт с таким маршрутом уже существует&#x27;, {
@@ -1601,6 +1913,13 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /**
+   * Создает новый эндпоинт.
+   *
+   * @private
+   * @param {Endpoint} data - Данные нового эндпоинта.
+   * @memberof EndpointCardListComponent
+   */
   private createEndpoint(data: Endpoint): void {
     this.endpointRepositoryService
       .createEndpoint(this.apiName, this.entityName, data)
@@ -1613,6 +1932,14 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Обрабатывает успешное создание эндпоинта.
+   *
+   * @private
+   * @param {Endpoint} response - Ответ сервера.
+   * @param {Endpoint} data - Данные нового эндпоинта.
+   * @memberof EndpointCardListComponent
+   */
   private handleEndpointCreation(response: Endpoint, data: Endpoint): void {
     console.log(&#x27;Эндпоинт добавлен:&#x27;, response);
     this.endpoints.push(data);
@@ -1624,11 +1951,24 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
+  /**
+   * Обрабатывает изменение состояния активности сущности.
+   *
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof EndpointCardListComponent
+   */
   onToggleChange(newState: boolean): void {
     this.entityInfo.isActive &#x3D; newState;
     this.updateEntityStatus(newState);
   }
 
+  /**
+   * Обновляет состояние активности сущности.
+   *
+   * @private
+   * @param {boolean} newState - Новое состояние активности.
+   * @memberof EndpointCardListComponent
+   */
   private updateEntityStatus(newState: boolean): void {
     this.entityRepositoryService
       .updateEntityStatus(this.apiName, this.entityName, newState)
@@ -1642,6 +1982,12 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Обрабатывает удаление эндпоинта.
+   *
+   * @param {string} endpointRoute - Маршрут удаленного эндпоинта.
+   * @memberof EndpointCardListComponent
+   */
   onEndpointDeleted(endpointRoute: string): void {
     this.endpoints &#x3D; this.endpoints.filter(
       (endpoint) &#x3D;&gt; endpoint.route !&#x3D;&#x3D; endpointRoute
@@ -1703,7 +2049,7 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
                 </p>
                 <pre class="line-numbers"><code class="language-scss"></code></pre>
                 <p class="comment">
-                    <code>../../../styles/card-list.css</code>
+                    <code>../../styles/card-list.css</code>
                 </p>
                 <pre class="line-numbers"><code class="language-scss">.container {
     padding: 20px;

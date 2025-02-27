@@ -124,6 +124,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент CardApiListComponent отвечает за отображение списка API в виде карточек
+и управление их состоянием. Поддерживает фильтрацию, сортировку, пагинацию и экспорт выбранных API.</p>
+<p>Этот компонент использует реактивные формы для управления состоянием карточек.
+Поддерживает валидацию и может быть настроен для отображения иконок и изменения внешнего вида.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-card-api-list&gt;&lt;/app-card-api-list&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-none"></code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -282,9 +294,6 @@
                                 <a href="#exportSelectedApis" >exportSelectedApis</a>
                             </li>
                             <li>
-                                <a href="#goBack" >goBack</a>
-                            </li>
-                            <li>
                                     <span class="modifier">Private</span>
                                 <a href="#handleApiResponse" >handleApiResponse</a>
                             </li>
@@ -409,12 +418,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:76</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:190</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -423,6 +434,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -437,6 +449,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Репозиторий сервиса для управления API.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>changeDetector</td>
@@ -449,6 +467,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Ссылка на детектор изменений для ручного обнаружения изменений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -461,6 +485,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Роутер для навигации между представлениями.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -473,6 +503,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис уведомлений для отображения уведомлений.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -514,19 +550,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="588"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:588</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Проверяет состояние &quot;Выбрано все&quot;.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -553,14 +594,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="253"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:253</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="387"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:387</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Создает новый API сервис.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -571,6 +614,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -585,6 +629,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные нового API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -620,51 +670,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="139"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:139</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="599"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:599</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="goBack"></a>
-                    <span class="name">
-                        <span ><b>goBack</b></span>
-                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>goBack()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="331"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:331</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                        <div class="io-description"><p>Экспортирует выбранные API в ZIP-архив.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -696,19 +711,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="186"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:186</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="256"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:256</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ответ списка API.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>    <code>{ next: (apiList: {}) &#x3D;&gt; void; error: (error: any) &#x3D;&gt; void; }</code>
 
                         </div>
+                            <div class="io-description">
+                                <ul>
+<li>Объект с обработчиками next и error.</li>
+</ul>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -735,14 +758,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="207"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:207</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="291"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:291</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает ошибку.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -753,6 +778,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -767,6 +793,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Объект ошибки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -804,19 +836,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="85"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:85</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="211"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:211</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик изменения размера окна.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -843,14 +880,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="239"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:239</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="352"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:352</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Проверяет, существует ли API с указанным именем.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -861,6 +900,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -875,6 +915,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -884,7 +930,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Существует ли API с указанным именем.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -912,19 +961,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="182"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:182</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="243"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:243</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Загружает список API.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -951,14 +1005,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="213"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:213</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:305</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Перенаправляет на страницу ошибки.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -969,6 +1025,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -983,6 +1040,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Код ошибки.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>errorMessage</td>
@@ -995,6 +1058,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Сообщение об ошибке.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1030,14 +1099,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:232</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при уничтожении компонента.
+Удаляет обработчик изменения размера окна и отписывается от всех активных подписок.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1067,14 +1139,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="89"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:89</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="221"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:221</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при инициализации компонента.
+Загружает список API и добавляет обработчик изменения размера окна.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1104,14 +1179,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="269"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:269</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="422"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:422</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик удаления API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1122,6 +1199,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1136,6 +1214,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя удаленного API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1173,14 +1257,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="260"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:260</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="402"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:402</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик успешного создания API сервиса.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1191,6 +1277,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1205,6 +1292,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Ответ сервера.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>data</td>
@@ -1217,6 +1310,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Данные нового API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1254,19 +1353,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="243"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:243</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="362"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:362</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик закрытия диалога.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1291,14 +1395,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="302"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:302</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="488"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:488</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обработчик изменения страницы.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1309,6 +1415,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1323,6 +1430,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Номер страницы.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1358,14 +1471,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="282"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:282</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="450"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:450</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает поисковый запрос.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1376,6 +1491,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1390,6 +1506,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Поисковый запрос.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1425,14 +1547,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="219"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:219</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="317"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:317</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалог создания нового API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1443,6 +1567,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1457,6 +1582,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Событие.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1494,19 +1625,27 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="226"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:226</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="331"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:331</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обрабатывает данные из диалога.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >{ next: (data: apiServiceShortStructure) &#x3D;&gt; void; complete: () &#x3D;&gt; void; }</a></code>
 
                         </div>
+                            <div class="io-description">
+                                <ul>
+<li>Объект с обработчиками next и complete.</li>
+</ul>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1533,14 +1672,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="276"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:276</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="436"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:436</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Удаляет API по имени.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1551,6 +1692,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1565,6 +1707,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1602,19 +1750,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="247"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:247</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="372"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:372</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Показывает ошибку, если API с указанным именем уже существует.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1639,14 +1792,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="316"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:316</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="516"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:516</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Сортирует карточки.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1676,14 +1831,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="108"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:108</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="555"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:555</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Переключает выбор API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1694,6 +1851,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1708,6 +1866,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Имя API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1743,14 +1907,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="120"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:120</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="572"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:572</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Переключает выбор всех API.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1780,14 +1946,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="541"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:541</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Переключает режим выбора.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1817,14 +1985,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="324"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:324</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="529"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:529</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Переключает сортировку.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -1856,14 +2026,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="197"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:197</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="274"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:274</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет список API.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -1874,6 +2046,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -1888,6 +2061,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>Список API.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1925,19 +2104,24 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="308"
-                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:308</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="500"
+                                    class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:500</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Обновляет пагинацию.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
+                            <div class="io-description">
+                                
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -1976,10 +2160,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="176" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:176</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Объект для создания нового API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2007,10 +2197,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:54</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:85</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Массив имен API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2038,10 +2234,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:52</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="71" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:71</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Массив карточек API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2069,10 +2271,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:58</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:116</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Текущая страница пагинации.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2099,10 +2307,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:73</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="187" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:187</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Диалог для создания нового API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2130,10 +2344,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:62</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:146</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Код ошибки.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2161,10 +2381,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:139</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сообщение об ошибке.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2192,10 +2418,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:53</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:78</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Отфильтрованный массив карточек API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2217,10 +2449,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:169</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, выбраны ли все элементы.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2242,10 +2480,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:64</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="161" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:161</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, включен ли режим выбора.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2267,10 +2511,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:60</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:132</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, отсортированы ли карточки по возрастанию.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2298,10 +2548,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:57</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:108</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Количество элементов на странице.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2323,10 +2579,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:56</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:100</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, загружаются ли данные в данный момент.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2348,10 +2610,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:124</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Флаг, указывающий, активен ли поисковый запрос.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2373,10 +2641,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:63</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:153</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Множество выбранных API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2405,10 +2679,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:55</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:92</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Подписка для управления процессом получения списка API.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -2434,9 +2714,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="293" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:293</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="467" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:467</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает общее количество страниц.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -2456,9 +2749,22 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="297" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:297</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="477" class="link-to-prism">src/app/data/pages/card-api-list/card-api-list.component.ts:477</a></div>
                                 </td>
                             </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-description"><p>Возвращает отфильтрованные карточки для текущей страницы.</p>
+</div>
+
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>        <code><a href="../interfaces/apiServiceShortStructure.html" target="_self" >apiServiceShortStructure[]</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
 
             </tbody>
         </table>
@@ -2479,8 +2785,8 @@ import { ApiHubServiceService } from &#x27;../../../services/api-hub-service.ser
 import { ApiServiceRepositoryService } from &#x27;../../../repositories/api-service-repository.service&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
 import { TuiAlertService, tuiDialog } from &#x27;@taiga-ui/core&#x27;;
-import { ApiServiceStructure } from &quot;../../../interfaces/ApiServiceStructure&quot;;
-import { apiServiceShortStructure } from &quot;../../../interfaces/apiServiceShortStructure&quot;;
+import { ApiServiceStructure } from &#x27;../../../interfaces/ApiServiceStructure&#x27;;
+import { apiServiceShortStructure } from &#x27;../../../interfaces/apiServiceShortStructure&#x27;;
 import { CommonModule } from &#x27;@angular/common&#x27;;
 import { CardApiComponent } from &#x27;../../components/card-api/card-api.component&#x27;;
 import { HeaderComponent } from &#x27;../../components/header/header.component&#x27;;
@@ -2495,6 +2801,20 @@ import { ApiDialogComponent } from &#x27;../../components/api-dialog/api-dialog.
 import { FilterByInputComponent } from &#x27;../../components/filter-by-input/filter-by-input.component&#x27;;
 import JSZip from &#x27;jszip&#x27;;
 
+/**
+ * Компонент CardApiListComponent отвечает за отображение списка API в виде карточек
+ * и управление их состоянием. Поддерживает фильтрацию, сортировку, пагинацию и экспорт выбранных API.
+ *
+ * @remarks
+ * Этот компонент использует реактивные формы для управления состоянием карточек.
+ * Поддерживает валидацию и может быть настроен для отображения иконок и изменения внешнего вида.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-card-api-list&gt;&lt;/app-card-api-list&gt;
+ * &#x60;&#x60;&#x60;
+ */
 @Component({
   selector: &#x27;app-card-api-list&#x27;,
   imports: [
@@ -2513,145 +2833,201 @@ import JSZip from &#x27;jszip&#x27;;
     &#x27;./card-api-list.component.css&#x27;,
     &#x27;../../styles/card-list.css&#x27;,
     &#x27;../../styles/icon.css&#x27;,
-    &#x27;../../styles/button.css&#x27;
+    &#x27;../../styles/button.css&#x27;,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CardApiListComponent implements OnInit, OnDestroy {
+  /**
+   * Массив карточек API.
+   * @type {apiServiceShortStructure[]}
+   * @memberof CardApiListComponent
+   */
   cards: apiServiceShortStructure[] &#x3D; [];
+
+  /**
+   * Отфильтрованный массив карточек API.
+   * @type {apiServiceShortStructure[]}
+   * @memberof CardApiListComponent
+   */
   filteredCards: apiServiceShortStructure[] &#x3D; [];
+
+  /**
+   * Массив имен API.
+   * @type {string[]}
+   * @memberof CardApiListComponent
+   */
   apiNames: string[] &#x3D; [];
+
+  /**
+   * Подписка для управления процессом получения списка API.
+   * @type {Subscription | null}
+   * @memberof CardApiListComponent
+   */
   private sub: Subscription | null &#x3D; null;
+
+  /**
+   * Флаг, указывающий, загружаются ли данные в данный момент.
+   * @type {boolean}
+   * @default true
+   * @memberof CardApiListComponent
+   */
   loading &#x3D; true;
+
+  /**
+   * Количество элементов на странице.
+   * @type {number}
+   * @default 16
+   * @memberof CardApiListComponent
+   */
   itemsPerPage &#x3D; 16;
+
+  /**
+   * Текущая страница пагинации.
+   * @type {number}
+   * @default 1
+   * @memberof CardApiListComponent
+   */
   currentPage &#x3D; 1;
+
+  /**
+   * Флаг, указывающий, активен ли поисковый запрос.
+   * @type {boolean}
+   * @default false
+   * @memberof CardApiListComponent
+   */
   searchQueryActive &#x3D; false;
+
+  /**
+   * Флаг, указывающий, отсортированы ли карточки по возрастанию.
+   * @type {boolean}
+   * @default true
+   * @memberof CardApiListComponent
+   */
   isSortedAscending &#x3D; true;
+
+  /**
+   * Сообщение об ошибке.
+   * @type {string}
+   * @memberof CardApiListComponent
+   */
   errorMessage &#x3D; &#x27;&#x27;;
+
+  /**
+   * Код ошибки.
+   * @type {string}
+   * @memberof CardApiListComponent
+   */
   errorCode &#x3D; &#x27;&#x27;;
+
+  /**
+   * Множество выбранных API.
+   * @type {Set&lt;string&gt;}
+   * @memberof CardApiListComponent
+   */
   selectedApis &#x3D; new Set&lt;string&gt;();
+
+  /**
+   * Флаг, указывающий, включен ли режим выбора.
+   * @type {boolean}
+   * @default false
+   * @memberof CardApiListComponent
+   */
   isSelectionMode &#x3D; false;
+
+  /**
+   * Флаг, указывающий, выбраны ли все элементы.
+   * @type {boolean}
+   * @default false
+   * @memberof CardApiListComponent
+   */
   isAllSelected &#x3D; false;
 
+  /**
+   * Объект для создания нового API.
+   * @type {apiServiceShortStructure}
+   * @memberof CardApiListComponent
+   */
   api: apiServiceShortStructure &#x3D; {
     name: &#x27;&#x27;,
     isActive: false,
     description: &#x27;&#x27;,
   };
 
+  /**
+   * Диалог для создания нового API.
+   * @type {tuiDialog}
+   * @memberof CardApiListComponent
+   */
   private readonly dialog &#x3D; tuiDialog(ApiDialogComponent, {
     dismissible: true,
     label: &#x27;Создать&#x27;,
   });
 
+  /**
+   * Конструктор компонента.
+   * @param {ApiServiceRepositoryService} apiServiceRepository - Репозиторий сервиса для управления API.
+   * @param {ChangeDetectorRef} changeDetector - Ссылка на детектор изменений для ручного обнаружения изменений.
+   * @param {Router} router - Роутер для навигации между представлениями.
+   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений.
+   */
   constructor(
     private apiServiceRepository: ApiServiceRepositoryService,
     private changeDetector: ChangeDetectorRef,
     private router: Router,
-    private readonly alerts: TuiAlertService,
+    private readonly alerts: TuiAlertService
   ) {}
 
+  /**
+   * Обработчик изменения размера окна.
+   * @private
+   * @memberof CardApiListComponent
+   */
   private handleWindowResize() {
     this.changeDetector.detectChanges();
   }
-  
+
+  /**
+   * Метод жизненного цикла, который вызывается при инициализации компонента.
+   * Загружает список API и добавляет обработчик изменения размера окна.
+   *
+   * @memberof CardApiListComponent
+   */
   ngOnInit(): void {
     this.loadApiList();
     window.addEventListener(&#x27;resize&#x27;, () &#x3D;&gt; this.handleWindowResize());
   }
-  
+
+  /**
+   * Метод жизненного цикла, который вызывается при уничтожении компонента.
+   * Удаляет обработчик изменения размера окна и отписывается от всех активных подписок.
+   *
+   * @memberof CardApiListComponent
+   */
   ngOnDestroy(): void {
     window.removeEventListener(&#x27;resize&#x27;, () &#x3D;&gt; this.handleWindowResize());
     this.sub?.unsubscribe();
   }
 
-  // Переключаем режим выбора
-  toggleSelectionMode(): void {
-    this.isSelectionMode &#x3D; !this.isSelectionMode;
-    if (!this.isSelectionMode) {
-      this.selectedApis.clear();
-      this.isAllSelected &#x3D; false;
-    }
-  }
-
-  toggleApiSelection(apiName: string): void {
-    if (!this.isSelectionMode) return;
-    
-    if (this.selectedApis.has(apiName)) {
-      this.selectedApis.delete(apiName);
-    } else {
-      this.selectedApis.add(apiName);
-    }
-    this.checkAllSelectedState();
-    this.changeDetector.markForCheck(); // Добавлено
-  }
-  
-    toggleSelectAll(): void {
-      if (this.isAllSelected) {
-        // Снимаем выделение со всех элементов
-        this.filteredCards.forEach(item &#x3D;&gt; this.selectedApis.delete(item.name));
-      } else {
-        // Добавляем все элементы всех страниц
-        this.filteredCards.forEach(item &#x3D;&gt; this.selectedApis.add(item.name));
-      }
-      this.isAllSelected &#x3D; !this.isAllSelected;
-      this.changeDetector.markForCheck();
-    }
-
-  // Проверка состояния &quot;Выбрано все&quot;
-  private checkAllSelectedState(): void {
-    this.isAllSelected &#x3D; this.filteredCards.length &gt; 0 &amp;&amp; 
-      this.filteredCards.every(item &#x3D;&gt; this.selectedApis.has(item.name));
-  }
-
-  // Метод для экспорта выбранных API
-  exportSelectedApis(): void {
-    this.loading &#x3D; true;
-    if (this.selectedApis.size &#x3D;&#x3D;&#x3D; 0) return;
-    
-    const selectedNames &#x3D; Array.from(this.selectedApis);
-    const exportPromises &#x3D; selectedNames.map(name &#x3D;&gt; 
-      this.apiServiceRepository.getApiStructureList(name).toPromise()
-    );
-  
-    Promise.all(exportPromises)
-      .then(results &#x3D;&gt; {
-        const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
-        const zip &#x3D; new JSZip();
-        
-        results.forEach((data, index) &#x3D;&gt; {
-          if (!data) return;
-          
-          const { name, ...dataWithoutName } &#x3D; data;
-          const fileName &#x3D; &#x60;${name || &#x60;api-${index}&#x60;}.json&#x60;;
-          zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
-        });
-  
-        zip.generateAsync({ type: &#x27;blob&#x27; })
-          .then((content: Blob) &#x3D;&gt; {
-            const url &#x3D; window.URL.createObjectURL(content);
-            const a &#x3D; document.createElement(&#x27;a&#x27;);
-            a.href &#x3D; url;
-            a.download &#x3D; &#x60;apis-export-${timestamp}.zip&#x60;;
-            a.click();
-            window.URL.revokeObjectURL(url);
-          });
-      })
-      .catch((error: any) &#x3D;&gt; {
-        console.error(&#x27;Export error:&#x27;, error);
-        this.alerts.open(&#x27;Ошибка экспорта&#x27;, { appearance: &#x27;negative&#x27; }).subscribe();
-      })
-      .finally(() &#x3D;&gt; {
-        this.loading &#x3D; false;
-        this.selectedApis.clear();
-        this.isSelectionMode &#x3D; false;
-      });
-  }
-
+  /**
+   * Загружает список API.
+   *
+   * @private
+   * @memberof CardApiListComponent
+   */
   private loadApiList(): void {
-    this.sub &#x3D; this.apiServiceRepository.getApiList().subscribe(this.handleApiResponse());
+    this.sub &#x3D; this.apiServiceRepository
+      .getApiList()
+      .subscribe(this.handleApiResponse());
   }
 
+  /**
+   * Обрабатывает ответ списка API.
+   *
+   * @private
+   * @returns {Object} - Объект с обработчиками next и error.
+   * @memberof CardApiListComponent
+   */
   private handleApiResponse() {
     return {
       next: (apiList: apiServiceShortStructure[]) &#x3D;&gt; {
@@ -2663,28 +3039,56 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     };
   }
 
+  /**
+   * Обновляет список API.
+   *
+   * @private
+   * @param {apiServiceShortStructure[]} apiList - Список API.
+   * @memberof CardApiListComponent
+   */
   private updateApiList(apiList: apiServiceShortStructure[]): void {
     this.cards &#x3D; apiList;
-    this.filteredCards &#x3D; [...apiList]; // Создаем копию массива
-    this.sortCards(); // Сортируем после обновления
-    this.apiNames &#x3D; apiList.map(api &#x3D;&gt; api.name);
+    this.filteredCards &#x3D; [...apiList];
+    this.sortCards();
+    this.apiNames &#x3D; apiList.map((api) &#x3D;&gt; api.name);
     this.updatePagination();
     this.changeDetector.detectChanges();
     this.loading &#x3D; false;
   }
 
+  /**
+   * Обрабатывает ошибку.
+   *
+   * @private
+   * @param {any} error - Объект ошибки.
+   * @memberof CardApiListComponent
+   */
   private handleError(error: any): void {
     this.errorMessage &#x3D; error.message;
     this.errorCode &#x3D; error.status;
     this.navigateToErrorPage(this.errorCode, this.errorMessage);
   }
 
+  /**
+   * Перенаправляет на страницу ошибки.
+   *
+   * @private
+   * @param {string} errorCode - Код ошибки.
+   * @param {string} errorMessage - Сообщение об ошибке.
+   * @memberof CardApiListComponent
+   */
   private navigateToErrorPage(errorCode: string, errorMessage: string): void {
     this.router.navigate([&#x27;/error&#x27;], {
       queryParams: { code: errorCode, message: errorMessage },
     });
   }
 
+  /**
+   * Открывает диалог создания нового API.
+   *
+   * @param {Event} [event] - Событие.
+   * @memberof CardApiListComponent
+   */
   openCreateDialog(event?: Event): void {
     if (event) {
       event.preventDefault();
@@ -2692,6 +3096,13 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.dialog({ ...this.api }).subscribe(this.processDialogData());
   }
 
+  /**
+   * Обрабатывает данные из диалога.
+   *
+   * @private
+   * @returns {Object} - Объект с обработчиками next и complete.
+   * @memberof CardApiListComponent
+   */
   private processDialogData() {
     return {
       next: (data: apiServiceShortStructure) &#x3D;&gt; {
@@ -2705,20 +3116,49 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     };
   }
 
+  /**
+   * Проверяет, существует ли API с указанным именем.
+   *
+   * @private
+   * @param {string} name - Имя API.
+   * @returns {boolean} - Существует ли API с указанным именем.
+   * @memberof CardApiListComponent
+   */
   private isApiNameExists(name: string): boolean {
-    return this.cards.some(card &#x3D;&gt; card.name &#x3D;&#x3D;&#x3D; name);
+    return this.cards.some((card) &#x3D;&gt; card.name &#x3D;&#x3D;&#x3D; name);
   }
 
+  /**
+   * Обработчик закрытия диалога.
+   *
+   * @private
+   * @memberof CardApiListComponent
+   */
   private onDialogClose(): void {
     console.info(&#x27;Dialog closed&#x27;);
   }
 
+  /**
+   * Показывает ошибку, если API с указанным именем уже существует.
+   *
+   * @private
+   * @memberof CardApiListComponent
+   */
   private showApiNameExistsError(): void {
-    this.alerts.open(&#x27;Ошибка: API с таким именем уже существует&#x27;, {
-      appearance: &#x27;negative&#x27;,
-    }).subscribe();
+    this.alerts
+      .open(&#x27;Ошибка: API с таким именем уже существует&#x27;, {
+        appearance: &#x27;negative&#x27;,
+      })
+      .subscribe();
   }
 
+  /**
+   * Создает новый API сервис.
+   *
+   * @private
+   * @param {apiServiceShortStructure} data - Данные нового API.
+   * @memberof CardApiListComponent
+   */
   private createApiService(data: apiServiceShortStructure): void {
     this.apiServiceRepository.createApiService(data).subscribe({
       next: (response) &#x3D;&gt; this.onApiServiceCreated(response, data),
@@ -2726,15 +3166,34 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     });
   }
 
-  private onApiServiceCreated(response: any, data: apiServiceShortStructure): void {
+  /**
+   * Обработчик успешного создания API сервиса.
+   *
+   * @private
+   * @param {any} response - Ответ сервера.
+   * @param {apiServiceShortStructure} data - Данные нового API.
+   * @memberof CardApiListComponent
+   */
+  private onApiServiceCreated(
+    response: any,
+    data: apiServiceShortStructure
+  ): void {
     this.cards.push(data);
     this.sortCards();
     this.changeDetector.markForCheck();
-    this.alerts.open(&#x27;API успешно создано&#x27;, {
-      appearance: &#x27;success&#x27;,
-    }).subscribe();
+    this.alerts
+      .open(&#x27;API успешно создано&#x27;, {
+        appearance: &#x27;success&#x27;,
+      })
+      .subscribe();
   }
 
+  /**
+   * Обработчик удаления API.
+   *
+   * @param {string} apiName - Имя удаленного API.
+   * @memberof CardApiListComponent
+   */
   onApiDeleted(apiName: string): void {
     this.selectedApis.delete(apiName);
     this.removeApiByName(apiName);
@@ -2742,15 +3201,30 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
+  /**
+   * Удаляет API по имени.
+   *
+   * @private
+   * @param {string} apiName - Имя API.
+   * @memberof CardApiListComponent
+   */
   private removeApiByName(apiName: string): void {
-    this.cards &#x3D; this.cards.filter(card &#x3D;&gt; card.name !&#x3D;&#x3D; apiName);
-    this.filteredCards &#x3D; this.filteredCards.filter(card &#x3D;&gt; card.name !&#x3D;&#x3D; apiName);
-    this.apiNames &#x3D; this.apiNames.filter(name &#x3D;&gt; name !&#x3D;&#x3D; apiName);
+    this.cards &#x3D; this.cards.filter((card) &#x3D;&gt; card.name !&#x3D;&#x3D; apiName);
+    this.filteredCards &#x3D; this.filteredCards.filter(
+      (card) &#x3D;&gt; card.name !&#x3D;&#x3D; apiName
+    );
+    this.apiNames &#x3D; this.apiNames.filter((name) &#x3D;&gt; name !&#x3D;&#x3D; apiName);
   }
 
+  /**
+   * Обрабатывает поисковый запрос.
+   *
+   * @param {string} query - Поисковый запрос.
+   * @memberof CardApiListComponent
+   */
   onSearchQuery(query: string): void {
     this.searchQueryActive &#x3D; !!query;
-    this.filteredCards &#x3D; this.cards.filter(card &#x3D;&gt; 
+    this.filteredCards &#x3D; this.cards.filter((card) &#x3D;&gt;
       card.name.toLowerCase().includes(query.toLowerCase())
     );
     this.currentPage &#x3D; 1;
@@ -2759,37 +3233,74 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
+  /**
+   * Возвращает общее количество страниц.
+   *
+   * @type {number}
+   * @memberof CardApiListComponent
+   */
   get totalPages(): number {
     return Math.ceil(this.filteredCards.length / this.itemsPerPage);
   }
 
+  /**
+   * Возвращает отфильтрованные карточки для текущей страницы.
+   *
+   * @type {apiServiceShortStructure[]}
+   * @memberof CardApiListComponent
+   */
   get paginatedCards(): apiServiceShortStructure[] {
     const startIndex &#x3D; (this.currentPage - 1) * this.itemsPerPage;
     return this.filteredCards.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
+  /**
+   * Обработчик изменения страницы.
+   *
+   * @param {number} page - Номер страницы.
+   * @memberof CardApiListComponent
+   */
   onPageChange(page: number): void {
     this.currentPage &#x3D; page;
-    this.checkAllSelectedState(); // Обновляем состояние после смены страницы
+    this.checkAllSelectedState();
     this.changeDetector.markForCheck();
   }
 
+  /**
+   * Обновляет пагинацию.
+   *
+   * @private
+   * @memberof CardApiListComponent
+   */
   private updatePagination(): void {
-    const newCurrentPage &#x3D; Math.max(1, Math.min(this.currentPage, this.totalPages));
+    const newCurrentPage &#x3D; Math.max(
+      1,
+      Math.min(this.currentPage, this.totalPages)
+    );
     if (newCurrentPage !&#x3D;&#x3D; this.currentPage) {
       this.currentPage &#x3D; newCurrentPage;
       this.changeDetector.markForCheck();
     }
   }
 
+  /**
+   * Сортирует карточки.
+   *
+   * @memberof CardApiListComponent
+   */
   sortCards(): void {
-    this.filteredCards.sort((a, b) &#x3D;&gt; 
-      this.isSortedAscending 
-        ? a.name.localeCompare(b.name) 
+    this.filteredCards.sort((a, b) &#x3D;&gt;
+      this.isSortedAscending
+        ? a.name.localeCompare(b.name)
         : b.name.localeCompare(a.name)
     );
   }
-  
+
+  /**
+   * Переключает сортировку.
+   *
+   * @memberof CardApiListComponent
+   */
   toggleSort(): void {
     this.isSortedAscending &#x3D; !this.isSortedAscending;
     this.sortCards();
@@ -2797,8 +3308,111 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  goBack(): void {
-    this.router.navigate([&#x27;/&#x27;]);
+  /**
+   * Переключает режим выбора.
+   *
+   * @memberof CardApiListComponent
+   */
+  toggleSelectionMode(): void {
+    this.isSelectionMode &#x3D; !this.isSelectionMode;
+    if (!this.isSelectionMode) {
+      this.selectedApis.clear();
+      this.isAllSelected &#x3D; false;
+    }
+  }
+
+  /**
+   * Переключает выбор API.
+   *
+   * @param {string} apiName - Имя API.
+   * @memberof CardApiListComponent
+   */
+  toggleApiSelection(apiName: string): void {
+    if (!this.isSelectionMode) return;
+
+    if (this.selectedApis.has(apiName)) {
+      this.selectedApis.delete(apiName);
+    } else {
+      this.selectedApis.add(apiName);
+    }
+    this.checkAllSelectedState();
+    this.changeDetector.markForCheck();
+  }
+
+  /**
+   * Переключает выбор всех API.
+   *
+   * @memberof CardApiListComponent
+   */
+  toggleSelectAll(): void {
+    if (this.isAllSelected) {
+      this.filteredCards.forEach((item) &#x3D;&gt; this.selectedApis.delete(item.name));
+    } else {
+      this.filteredCards.forEach((item) &#x3D;&gt; this.selectedApis.add(item.name));
+    }
+    this.isAllSelected &#x3D; !this.isAllSelected;
+    this.changeDetector.markForCheck();
+  }
+
+  /**
+   * Проверяет состояние &quot;Выбрано все&quot;.
+   *
+   * @private
+   * @memberof CardApiListComponent
+   */
+  private checkAllSelectedState(): void {
+    this.isAllSelected &#x3D;
+      this.filteredCards.length &gt; 0 &amp;&amp;
+      this.filteredCards.every((item) &#x3D;&gt; this.selectedApis.has(item.name));
+  }
+
+  /**
+   * Экспортирует выбранные API в ZIP-архив.
+   *
+   * @memberof CardApiListComponent
+   */
+  exportSelectedApis(): void {
+    this.loading &#x3D; true;
+    if (this.selectedApis.size &#x3D;&#x3D;&#x3D; 0) return;
+
+    const selectedNames &#x3D; Array.from(this.selectedApis);
+    const exportPromises &#x3D; selectedNames.map((name) &#x3D;&gt;
+      this.apiServiceRepository.getApiStructureList(name).toPromise()
+    );
+
+    Promise.all(exportPromises)
+      .then((results) &#x3D;&gt; {
+        const timestamp &#x3D; new Date().toISOString().replace(/[:.]/g, &#x27;-&#x27;);
+        const zip &#x3D; new JSZip();
+
+        results.forEach((data, index) &#x3D;&gt; {
+          if (!data) return;
+
+          const { name, ...dataWithoutName } &#x3D; data;
+          const fileName &#x3D; &#x60;${name || &#x60;api-${index}&#x60;}.json&#x60;;
+          zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
+        });
+
+        zip.generateAsync({ type: &#x27;blob&#x27; }).then((content: Blob) &#x3D;&gt; {
+          const url &#x3D; window.URL.createObjectURL(content);
+          const a &#x3D; document.createElement(&#x27;a&#x27;);
+          a.href &#x3D; url;
+          a.download &#x3D; &#x60;apis-export-${timestamp}.zip&#x60;;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        });
+      })
+      .catch((error: any) &#x3D;&gt; {
+        console.error(&#x27;Export error:&#x27;, error);
+        this.alerts
+          .open(&#x27;Ошибка экспорта&#x27;, { appearance: &#x27;negative&#x27; })
+          .subscribe();
+      })
+      .finally(() &#x3D;&gt; {
+        this.loading &#x3D; false;
+        this.selectedApis.clear();
+        this.isSelectionMode &#x3D; false;
+      });
   }
 }
 </code></pre>
@@ -2806,28 +3420,64 @@ export class CardApiListComponent implements OnInit, OnDestroy {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div&gt;
-  &lt;app-header [isApiPage]&#x3D;&quot;true&quot; [buttonText]&#x3D;&quot;&#x27;Добавить API&#x27;&quot; (buttonClick)&#x3D;&quot;openCreateDialog()&quot;&gt;&lt;/app-header&gt;
+  &lt;app-header
+    [isApiPage]&#x3D;&quot;true&quot;
+    [buttonText]&#x3D;&quot;&#x27;Добавить API&#x27;&quot;
+    (buttonClick)&#x3D;&quot;openCreateDialog()&quot;
+  &gt;&lt;/app-header&gt;
   &lt;div class&#x3D;&quot;container&quot;&gt;
     &lt;div class&#x3D;&quot;header-section&quot;&gt;
-      &lt;app-filter-by-input class&#x3D;&quot;filter-input&quot; [label]&#x3D;&quot;&#x27;Search API&#x27;&quot; [controlName]&#x3D;&quot;&#x27;search&#x27;&quot; [items]&#x3D;&quot;apiNames&quot;
-        (searchQuery)&#x3D;&quot;onSearchQuery($event)&quot;&gt;&lt;/app-filter-by-input&gt;
+      &lt;app-filter-by-input
+        class&#x3D;&quot;filter-input&quot;
+        [label]&#x3D;&quot;&#x27;Search API&#x27;&quot;
+        [controlName]&#x3D;&quot;&#x27;search&#x27;&quot;
+        [items]&#x3D;&quot;apiNames&quot;
+        (searchQuery)&#x3D;&quot;onSearchQuery($event)&quot;
+      &gt;&lt;/app-filter-by-input&gt;
       &lt;div class&#x3D;&quot;pagination-sort-container&quot;&gt;
-        &lt;app-pagination class&#x3D;&quot;custom-pagination&quot; *ngIf&#x3D;&quot;filteredCards.length &gt; itemsPerPage &amp;&amp; !searchQueryActive&quot;
-          [totalItems]&#x3D;&quot;filteredCards.length&quot; [itemsPerPage]&#x3D;&quot;itemsPerPage&quot; [currentPage]&#x3D;&quot;currentPage&quot;
-          (pageChange)&#x3D;&quot;onPageChange($event)&quot;&gt;&lt;/app-pagination&gt;
+        &lt;app-pagination
+          class&#x3D;&quot;custom-pagination&quot;
+          *ngIf&#x3D;&quot;filteredCards.length &gt; itemsPerPage &amp;&amp; !searchQueryActive&quot;
+          [totalItems]&#x3D;&quot;filteredCards.length&quot;
+          [itemsPerPage]&#x3D;&quot;itemsPerPage&quot;
+          [currentPage]&#x3D;&quot;currentPage&quot;
+          (pageChange)&#x3D;&quot;onPageChange($event)&quot;
+        &gt;&lt;/app-pagination&gt;
         &lt;div class&#x3D;&quot;icons-container&quot;&gt;
-          &lt;i *ngIf&#x3D;&quot;!isSortedAscending&quot; class&#x3D;&quot;fas fa-sort-alpha-up&quot; (click)&#x3D;&quot;toggleSort()&quot;&gt;&lt;/i&gt;
-          &lt;i *ngIf&#x3D;&quot;isSortedAscending&quot; class&#x3D;&quot;fas fa-sort-alpha-down&quot; (click)&#x3D;&quot;toggleSort()&quot;&gt;&lt;/i&gt;
+          &lt;i
+            *ngIf&#x3D;&quot;!isSortedAscending&quot;
+            class&#x3D;&quot;fas fa-sort-alpha-up&quot;
+            (click)&#x3D;&quot;toggleSort()&quot;
+          &gt;&lt;/i&gt;
+          &lt;i
+            *ngIf&#x3D;&quot;isSortedAscending&quot;
+            class&#x3D;&quot;fas fa-sort-alpha-down&quot;
+            (click)&#x3D;&quot;toggleSort()&quot;
+          &gt;&lt;/i&gt;
         &lt;/div&gt;
       &lt;/div&gt;
       &lt;div class&#x3D;&quot;selection-controls&quot;&gt;
-        &lt;button tuiButton class&#x3D;&quot;primary-button&quot; (click)&#x3D;&quot;toggleSelectionMode()&quot;&gt;
-          {{ isSelectionMode ? &#x27;Отменить выбор&#x27; : &#x27;Выбрать&#x27; }}
+        &lt;button
+          tuiButton
+          class&#x3D;&quot;primary-button&quot;
+          (click)&#x3D;&quot;toggleSelectionMode()&quot;
+        &gt;
+          {{ isSelectionMode ? &quot;Отменить выбор&quot; : &quot;Выбрать&quot; }}
         &lt;/button&gt;
-        &lt;button tuiButton *ngIf&#x3D;&quot;isSelectionMode&quot; class&#x3D;&quot;primary-button&quot; (click)&#x3D;&quot;toggleSelectAll()&quot;&gt;
-          {{ isAllSelected ? &#x27;Снять всё&#x27; : &#x27;Выбрать всё&#x27; }}
+        &lt;button
+          tuiButton
+          *ngIf&#x3D;&quot;isSelectionMode&quot;
+          class&#x3D;&quot;primary-button&quot;
+          (click)&#x3D;&quot;toggleSelectAll()&quot;
+        &gt;
+          {{ isAllSelected ? &quot;Снять всё&quot; : &quot;Выбрать всё&quot; }}
         &lt;/button&gt;
-        &lt;button tuiButton *ngIf&#x3D;&quot;selectedApis.size &gt; 0 &amp;&amp; isSelectionMode&quot; class&#x3D;&quot;primary-button&quot; (click)&#x3D;&quot;exportSelectedApis()&quot;&gt;
+        &lt;button
+          tuiButton
+          *ngIf&#x3D;&quot;selectedApis.size &gt; 0 &amp;&amp; isSelectionMode&quot;
+          class&#x3D;&quot;primary-button&quot;
+          (click)&#x3D;&quot;exportSelectedApis()&quot;
+        &gt;
           Экспорт ({{ selectedApis.size }})
         &lt;/button&gt;
       &lt;/div&gt;
@@ -2846,17 +3496,22 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     &lt;div class&#x3D;&quot;grid&quot; [class.selection-mode]&#x3D;&quot;isSelectionMode&quot;&gt;
       &lt;div *ngFor&#x3D;&quot;let item of paginatedCards&quot; class&#x3D;&quot;card&quot;&gt;
         &lt;label class&#x3D;&quot;checkbox-container&quot;&gt;
-          &lt;input type&#x3D;&quot;checkbox&quot; [checked]&#x3D;&quot;selectedApis.has(item.name)&quot; (change)&#x3D;&quot;toggleApiSelection(item.name)&quot;&gt;
+          &lt;input
+            type&#x3D;&quot;checkbox&quot;
+            [checked]&#x3D;&quot;selectedApis.has(item.name)&quot;
+            (change)&#x3D;&quot;toggleApiSelection(item.name)&quot;
+          /&gt;
           &lt;span class&#x3D;&quot;checkmark&quot;&gt;&lt;/span&gt;
         &lt;/label&gt;
-        &lt;app-card-api [apiInfo]&#x3D;&quot;item&quot; (apiDeleted)&#x3D;&quot;onApiDeleted(item.name)&quot;&gt;&lt;/app-card-api&gt;
+        &lt;app-card-api
+          [apiInfo]&#x3D;&quot;item&quot;
+          (apiDeleted)&#x3D;&quot;onApiDeleted(item.name)&quot;
+        &gt;&lt;/app-card-api&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
-  &lt;app-pagination class&#x3D;&quot;custom-pagination&quot; *ngIf&#x3D;&quot;filteredCards.length &gt; itemsPerPage &amp;&amp; !searchQueryActive&quot;
-    [totalItems]&#x3D;&quot;filteredCards.length&quot; [itemsPerPage]&#x3D;&quot;itemsPerPage&quot; [currentPage]&#x3D;&quot;currentPage&quot;
-    (pageChange)&#x3D;&quot;onPageChange($event)&quot;&gt;&lt;/app-pagination&gt;
-&lt;/ng-template&gt;</code></pre>
+&lt;/ng-template&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -3184,7 +3839,7 @@ i:hover {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div>  <app-header [isApiPage]="true" [buttonText]="\'Добавить API\'" (buttonClick)="openCreateDialog()"></app-header>  <div class="container">    <div class="header-section">      <app-filter-by-input class="filter-input" [label]="\'Search API\'" [controlName]="\'search\'" [items]="apiNames"        (searchQuery)="onSearchQuery($event)"></app-filter-by-input>      <div class="pagination-sort-container">        <app-pagination class="custom-pagination" *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"          [totalItems]="filteredCards.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"          (pageChange)="onPageChange($event)"></app-pagination>        <div class="icons-container">          <i *ngIf="!isSortedAscending" class="fas fa-sort-alpha-up" (click)="toggleSort()"></i>          <i *ngIf="isSortedAscending" class="fas fa-sort-alpha-down" (click)="toggleSort()"></i>        </div>      </div>      <div class="selection-controls">        <button tuiButton class="primary-button" (click)="toggleSelectionMode()">          {{ isSelectionMode ? \'Отменить выбор\' : \'Выбрать\' }}        </button>        <button tuiButton *ngIf="isSelectionMode" class="primary-button" (click)="toggleSelectAll()">          {{ isAllSelected ? \'Снять всё\' : \'Выбрать всё\' }}        </button>        <button tuiButton *ngIf="selectedApis.size > 0 && isSelectionMode" class="primary-button" (click)="exportSelectedApis()">          Экспорт ({{ selectedApis.size }})        </button>      </div>    </div>    <div *ngIf="loading; else cardList">      <app-loading></app-loading>    </div>  </div></div><ng-template #cardList>  <div *ngIf="cards.length == 0">    <h1>Api-сервисов не найдено.</h1>  </div>  <div class="container">    <div class="grid" [class.selection-mode]="isSelectionMode">      <div *ngFor="let item of paginatedCards" class="card">        <label class="checkbox-container">          <input type="checkbox" [checked]="selectedApis.has(item.name)" (change)="toggleApiSelection(item.name)">          <span class="checkmark"></span>        </label>        <app-card-api [apiInfo]="item" (apiDeleted)="onApiDeleted(item.name)"></app-card-api>      </div>    </div>  </div>  <app-pagination class="custom-pagination" *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"    [totalItems]="filteredCards.length" [itemsPerPage]="itemsPerPage" [currentPage]="currentPage"    (pageChange)="onPageChange($event)"></app-pagination></ng-template></div>'
+        var COMPONENT_TEMPLATE = '<div><div>  <app-header    [isApiPage]="true"    [buttonText]="\'Добавить API\'"    (buttonClick)="openCreateDialog()"  ></app-header>  <div class="container">    <div class="header-section">      <app-filter-by-input        class="filter-input"        [label]="\'Search API\'"        [controlName]="\'search\'"        [items]="apiNames"        (searchQuery)="onSearchQuery($event)"      ></app-filter-by-input>      <div class="pagination-sort-container">        <app-pagination          class="custom-pagination"          *ngIf="filteredCards.length > itemsPerPage && !searchQueryActive"          [totalItems]="filteredCards.length"          [itemsPerPage]="itemsPerPage"          [currentPage]="currentPage"          (pageChange)="onPageChange($event)"        ></app-pagination>        <div class="icons-container">          <i            *ngIf="!isSortedAscending"            class="fas fa-sort-alpha-up"            (click)="toggleSort()"          ></i>          <i            *ngIf="isSortedAscending"            class="fas fa-sort-alpha-down"            (click)="toggleSort()"          ></i>        </div>      </div>      <div class="selection-controls">        <button          tuiButton          class="primary-button"          (click)="toggleSelectionMode()"        >          {{ isSelectionMode ? "Отменить выбор" : "Выбрать" }}        </button>        <button          tuiButton          *ngIf="isSelectionMode"          class="primary-button"          (click)="toggleSelectAll()"        >          {{ isAllSelected ? "Снять всё" : "Выбрать всё" }}        </button>        <button          tuiButton          *ngIf="selectedApis.size > 0 && isSelectionMode"          class="primary-button"          (click)="exportSelectedApis()"        >          Экспорт ({{ selectedApis.size }})        </button>      </div>    </div>    <div *ngIf="loading; else cardList">      <app-loading></app-loading>    </div>  </div></div><ng-template #cardList>  <div *ngIf="cards.length == 0">    <h1>Api-сервисов не найдено.</h1>  </div>  <div class="container">    <div class="grid" [class.selection-mode]="isSelectionMode">      <div *ngFor="let item of paginatedCards" class="card">        <label class="checkbox-container">          <input            type="checkbox"            [checked]="selectedApis.has(item.name)"            (change)="toggleApiSelection(item.name)"          />          <span class="checkmark"></span>        </label>        <app-card-api          [apiInfo]="item"          (apiDeleted)="onApiDeleted(item.name)"        ></app-card-api>      </div>    </div>  </div></ng-template></div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CardApiListComponent'};
