@@ -369,17 +369,12 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
   }
 
   private handleError(error: any): void {
-    const userFriendlyMessage = 'Произошла ошибка. Пожалуйста, попробуйте снова позже. 😊';
-    this.alerts.open(userFriendlyMessage, { appearance: 'negative' }).subscribe();
+    const userMessage = 'Произошла ошибка. Пожалуйста, попробуйте снова позже. 😊';
+    this.alerts.open(userMessage, { appearance: 'negative' }).subscribe();
     this.loading = false;
     this.cd.markForCheck();
   }
 
-  /**
-   * Сортирует сущности.
-   *
-   * @memberof EntityCardListComponent
-   */
   sortCards(): void {
     if (this.isSortedAscending) {
       this.filteredEntities.sort((a, b) => a.name.localeCompare(b.name));
