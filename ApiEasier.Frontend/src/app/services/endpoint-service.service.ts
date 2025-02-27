@@ -78,6 +78,16 @@ export class EndpointService {
     );
   }
 
+  /**
+   * Обновляет существующую конечную точку для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} actionName - Имя конечной точки.
+   * @param {Endpoint} action - Новая структура конечной точки.
+   * @returns {Observable<Endpoint>} Наблюдаемый объект, содержащий обновленную конечную точку.
+   * @memberof EndpointService
+   */
   updateEndpoint(
     apiServiceName: string,
     entityName: string,
@@ -90,6 +100,15 @@ export class EndpointService {
     );
   }
 
+  /**
+   * Удаляет конечную точку по её имени для указанного API сервиса и сущности.
+   *
+   * @param {string} apiServiceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} actionName - Имя конечной точки.
+   * @returns {Observable<void>} Наблюдаемый объект, указывающий на успешное удаление.
+   * @memberof EndpointService
+   */
   deleteEndpoint(
     apiServiceName: string,
     entityName: string,
@@ -100,6 +119,16 @@ export class EndpointService {
     );
   }
 
+  /**
+   * Обновляет статус активности конечной точки.
+   *
+   * @param {string} serviceName - Имя API сервиса.
+   * @param {string} entityName - Имя сущности.
+   * @param {string} endpoint - Имя конечной точки.
+   * @param {boolean} isActive - Новый статус активности.
+   * @returns {Observable<any>} Наблюдаемый объект, указывающий на успешное обновление статуса.
+   * @memberof EndpointService
+   */
   updateEndpointStatus(
     serviceName: string,
     entityName: string,
@@ -112,3 +141,4 @@ export class EndpointService {
     );
   }
 }
+

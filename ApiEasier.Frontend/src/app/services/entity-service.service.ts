@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-import { Entity } from "../interfaces/Entity";
-import { apiServiceShortStructure } from "../interfaces/apiServiceShortStructure";
-import { TuiAlertService } from '@taiga-ui/core';
-import { ErrorHandlerService } from './error-handler.service';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Entity } from '../interfaces/Entity';
+import { apiServiceShortStructure } from '../interfaces/apiServiceShortStructure';
 
 /**
  * Сервис для управления сущностями API.
