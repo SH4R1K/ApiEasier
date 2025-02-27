@@ -106,6 +106,10 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -120,6 +124,18 @@
 </p>
 
 
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Компонент ErrorDisplayComponent отвечает за отображение страницы с ошибкой.
+Он получает код ошибки и сообщение об ошибке из параметров маршрута и отображает их пользователю.</p>
+<p>Этот компонент используется для отображения информации об ошибках, которые произошли в приложении.
+Он предоставляет пользователю возможность вернуться на главную страницу.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">HTML:
+```html
+&lt;app-error-display&gt;&lt;/app-error-display&gt;</code></pre></div>
+    </p>
 
 
     <p class="comment">
@@ -159,6 +175,10 @@
                 </td>
             </tr>
 
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./error-display.component.css</code></td>
+            </tr>
 
 
 
@@ -169,10 +189,6 @@
 
 
 
-            <tr>
-                <td class="col-md-3">styleUrl</td>
-                <td class="col-md-9"><code>./error-display.component.css</code></td>
-            </tr>
 
 
 
@@ -241,12 +257,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:37</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор компонента.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -255,6 +273,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -269,6 +288,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Активированный маршрут для получения параметров маршрута.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>router</td>
@@ -281,6 +306,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Роутер для навигации между представлениями.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -320,14 +351,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="65"
+                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:65</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод для возврата на главную страницу.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -357,14 +390,17 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="17"
-                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:17</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:52</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод жизненного цикла, который вызывается при инициализации компонента.
+Получает параметры маршрута и устанавливает код ошибки и сообщение об ошибке.</p>
+</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -399,10 +435,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:30</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Код ошибки.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -425,10 +467,16 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:37</a></div>
                         </td>
                     </tr>
 
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сообщение об ошибке.</p>
+</div>
+                </td>
+            </tr>
 
         </tbody>
     </table>
@@ -442,18 +490,53 @@
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
 import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
 
+/**
+ * Компонент ErrorDisplayComponent отвечает за отображение страницы с ошибкой.
+ * Он получает код ошибки и сообщение об ошибке из параметров маршрута и отображает их пользователю.
+ *
+ * @remarks
+ * Этот компонент используется для отображения информации об ошибках, которые произошли в приложении.
+ * Он предоставляет пользователю возможность вернуться на главную страницу.
+ *
+ * @example
+ * HTML:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-error-display&gt;&lt;/app-error-display&gt;
+ */
 @Component({
   selector: &#x27;app-error-display&#x27;,
   imports: [TuiButton],
   templateUrl: &#x27;./error-display.component.html&#x27;,
-  styleUrl: &#x27;./error-display.component.css&#x27;,
+  styleUrls: [&#x27;./error-display.component.css&#x27;],
 })
 export class ErrorDisplayComponent implements OnInit {
+  /**
+   * Код ошибки.
+   * @type {string}
+   * @memberof ErrorDisplayComponent
+   */
   errorCode!: string;
+
+  /**
+   * Сообщение об ошибке.
+   * @type {string}
+   * @memberof ErrorDisplayComponent
+   */
   errorMessage!: string;
 
+  /**
+   * Конструктор компонента.
+   * @param {ActivatedRoute} route - Активированный маршрут для получения параметров маршрута.
+   * @param {Router} router - Роутер для навигации между представлениями.
+   */
   constructor(private route: ActivatedRoute, private router: Router) {}
 
+  /**
+   * Метод жизненного цикла, который вызывается при инициализации компонента.
+   * Получает параметры маршрута и устанавливает код ошибки и сообщение об ошибке.
+   *
+   * @memberof ErrorDisplayComponent
+   */
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) &#x3D;&gt; {
       this.errorCode &#x3D; params[&#x27;code&#x27;] || &#x27;Unknown Error&#x27;;
@@ -462,6 +545,11 @@ export class ErrorDisplayComponent implements OnInit {
     });
   }
 
+  /**
+   * Метод для возврата на главную страницу.
+   *
+   * @memberof ErrorDisplayComponent
+   */
   goBack(): void {
     this.router.navigate([&#x27;/&#x27;]);
   }
@@ -487,6 +575,108 @@ export class ErrorDisplayComponent implements OnInit {
   </code></pre>
     </div>
 
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./error-display.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 50px auto;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+  color: #d9534f; /* Цвет для заголовка ошибки */
+}
+
+h3 {
+  margin: 0;
+  font-size: 24px;
+  color: #0056a6;
+  width: 65%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 2rem;
+}
+
+p {
+  margin: 10px 0;
+  color: #666;
+  font-size: 16px;
+  line-height: 1.5;
+  height: calc(1.5em * 2);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+.primary-button {
+  background-color: #0056a6;
+  color: white;
+  border: 2px solid #0056a6; /* Добавлена граница */
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s, border-color 0.3s; /* Добавлено изменение цвета границы */
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.primary-button:hover {
+  background-color: #004080;
+  border-color: #003366; /* Изменение цвета границы при наведении */
+  transform: scale(1.05); /* Увеличение кнопки при наведении */
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+/* Стилизация полосы прокрутки для WebKit-браузеров */
+p::-webkit-scrollbar {
+  width: 8px;
+}
+
+p::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+p::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+p::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</code></pre>
+    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
