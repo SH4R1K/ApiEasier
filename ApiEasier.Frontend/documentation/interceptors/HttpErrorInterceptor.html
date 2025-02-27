@@ -120,6 +120,19 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерсептор HttpErrorInterceptor перехватывает HTTP-запросы и обрабатывает ошибки,
+возникающие в процессе выполнения запросов. Он использует сервис ErrorHandlerService
+для обработки ошибок и TuiAlertService для отображения уведомлений об ошибках.</p>
+<p>Этот интерсептор позволяет централизованно обрабатывать ошибки HTTP-запросов,
+что упрощает управление ошибками в приложении. Он автоматически показывает
+уведомления об ошибках пользователю и может быть настроен для выполнения
+дополнительных действий при возникновении ошибок.</p>
+
+            </p>
 
 
             <section data-compodoc="block-index">
@@ -161,12 +174,14 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/interceptors/http-error.interceptor.ts:12</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/interceptors/http-error.interceptor.ts:24</a></div>
                             </td>
                         </tr>
 
                 <tr>
                     <td class="col-md-4">
+                            <div class="io-description"><p>Конструктор интерсептора.</p>
+</div>
                             <div>
                                     <b>Parameters :</b>
                                     <table class="params">
@@ -175,6 +190,7 @@
                                                 <td>Name</td>
                                                     <td>Type</td>
                                                 <td>Optional</td>
+                                                    <td>Description</td>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -189,6 +205,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис для обработки ошибок.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                                 <tr>
                                                         <td>alerts</td>
@@ -201,6 +223,12 @@
                                                             No
                                                     </td>
                                                     
+                                                        <td>
+                                                                <ul>
+<li>Сервис уведомлений для отображения уведомлений об ошибках.</li>
+</ul>
+
+                                                        </td>
                                                 </tr>
                                         </tbody>
                                     </table>
@@ -236,14 +264,16 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="16"
-                                    class="link-to-prism">src/app/interceptors/http-error.interceptor.ts:16</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/app/interceptors/http-error.interceptor.ts:39</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Метод перехвата HTTP-запросов.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -254,6 +284,7 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
+                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -268,6 +299,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>HTTP-запрос.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                         <tr>
                                                 <td>next</td>
@@ -280,6 +317,12 @@
                                             </td>
 
 
+                                            <td>
+                                                    <ul>
+<li>HTTP-обработчик.</li>
+</ul>
+
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -289,7 +332,10 @@
 
                         </div>
                             <div class="io-description">
-                                
+                                <ul>
+<li>Наблюдаемый объект с HTTP-событиями.</li>
+</ul>
+
                             </div>
                 </td>
             </tr>
@@ -311,11 +357,34 @@ import { Router } from &#x27;@angular/router&#x27;;
 import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
 import { ErrorHandlerService } from &#x27;../services/error-handler.service&#x27;;
 
+/**
+ * Интерсептор HttpErrorInterceptor перехватывает HTTP-запросы и обрабатывает ошибки,
+ * возникающие в процессе выполнения запросов. Он использует сервис ErrorHandlerService
+ * для обработки ошибок и TuiAlertService для отображения уведомлений об ошибках.
+ *
+ * @remarks
+ * Этот интерсептор позволяет централизованно обрабатывать ошибки HTTP-запросов,
+ * что упрощает управление ошибками в приложении. Он автоматически показывает
+ * уведомления об ошибках пользователю и может быть настроен для выполнения
+ * дополнительных действий при возникновении ошибок.
+ *
+ */
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-
+  /**
+   * Конструктор интерсептора.
+   * @param {ErrorHandlerService} errorHandler - Сервис для обработки ошибок.
+   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений об ошибках.
+   */
   constructor(private errorHandler: ErrorHandlerService, private alerts: TuiAlertService) {}
 
+  /**
+   * Метод перехвата HTTP-запросов.
+   * @param {HttpRequest&lt;any&gt;} req - HTTP-запрос.
+   * @param {HttpHandler} next - HTTP-обработчик.
+   * @returns {Observable&lt;HttpEvent&lt;any&gt;&gt;} - Наблюдаемый объект с HTTP-событиями.
+   * @memberof HttpErrorInterceptor
+   */
   intercept(req: HttpRequest&lt;any&gt;, next: HttpHandler): Observable&lt;HttpEvent&lt;any&gt;&gt; {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) &#x3D;&gt; {

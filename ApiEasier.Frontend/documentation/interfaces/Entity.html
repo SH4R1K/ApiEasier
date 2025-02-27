@@ -126,6 +126,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс, представляющий сущность.</p>
+<p>Этот интерфейс используется для описания сущности, включая её структуру и связанные конечные точки.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -206,6 +214,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Массив конечных точек, связанных с сущностью.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -227,6 +241,12 @@
                                     </td>
                                 </tr>
 
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>false
+</code>
+                                    </td>
+                                </tr>
 
                                     <tr>
                                         <td class="col-md-4">
@@ -239,6 +259,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Флаг активности сущности.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -272,6 +298,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Название сущности.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -305,6 +337,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Структура сущности.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -314,11 +352,40 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Endpoint } from &quot;./Endpoint&quot;;
 
-
+/**
+ * Интерфейс, представляющий сущность.
+ *
+ * @remarks
+ * Этот интерфейс используется для описания сущности, включая её структуру и связанные конечные точки.
+ *
+ * @type {{ name: string, isActive: boolean, structure: any, endpoints: Endpoint[] }}
+ * @default { name: &#x27;&#x27;, isActive: false, structure: {}, endpoints: [] }
+ * @memberof Component
+ */
 export interface Entity {
+  /**
+   * Название сущности.
+   * @type {string}
+   */
   name: string;
+
+  /**
+   * Флаг активности сущности.
+   * @type {boolean}
+   * @default false
+   */
   isActive: boolean;
+
+  /**
+   * Структура сущности.
+   * @type {any}
+   */
   structure: any;
+
+  /**
+   * Массив конечных точек, связанных с сущностью.
+   * @type {Endpoint[]}
+   */
   endpoints: Endpoint[];
 }
 </code></pre>

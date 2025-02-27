@@ -126,6 +126,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс, представляющий статус файла.</p>
+<p>Этот интерфейс используется для описания состояния файла, включая статус загрузки и сообщение об ошибке.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -200,6 +208,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Сообщение об ошибке.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -233,6 +247,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Объект файла.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -266,6 +286,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Статус файла.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -275,9 +301,33 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { TuiFileLike } from &#x27;@taiga-ui/kit&#x27;;
 
+/**
+ * Интерфейс, представляющий статус файла.
+ *
+ * @remarks
+ * Этот интерфейс используется для описания состояния файла, включая статус загрузки и сообщение об ошибке.
+ *
+ * @type {{ file: TuiFileLike, status: &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; | &#x27;success&#x27;, errorMessage: string }}
+ * @default { file: {}, status: &#x27;normal&#x27;, errorMessage: &#x27;&#x27; }
+ * @memberof Component
+ */
 export interface FileStatus {
+  /**
+   * Объект файла.
+   * @type {TuiFileLike}
+   */
   file: TuiFileLike;
+
+  /**
+   * Статус файла.
+   * @type {&#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; | &#x27;success&#x27;}
+   */
   status: &#x27;loading&#x27; | &#x27;normal&#x27; | &#x27;error&#x27; | &#x27;success&#x27;;
+
+  /**
+   * Сообщение об ошибке.
+   * @type {string}
+   */
   errorMessage: string;
 }
 </code></pre>

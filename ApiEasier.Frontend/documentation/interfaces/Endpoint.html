@@ -126,6 +126,14 @@
         </p>
 
 
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Интерфейс, представляющий конечную точку (endpoint).</p>
+<p>Этот интерфейс используется для описания маршрута, типа и статуса активности конечной точки.</p>
+
+            </p>
 
 
         <section data-compodoc="block-index">
@@ -188,6 +196,12 @@
                                     </td>
                                 </tr>
 
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value : </i><code>false
+</code>
+                                    </td>
+                                </tr>
 
                                     <tr>
                                         <td class="col-md-4">
@@ -200,6 +214,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Флаг активности конечной точки.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -233,6 +253,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Маршрут конечной точки.</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                     <table class="table table-sm table-bordered">
@@ -266,6 +292,12 @@
 
 
 
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Тип конечной точки (например, GET, POST).</p>
+</div>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
             </section>
@@ -274,8 +306,23 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface Endpoint {
+  /**
+   * Маршрут конечной точки.
+   * @type {string}
+   */
   route: string;
+
+  /**
+   * Тип конечной точки (например, GET, POST).
+   * @type {string}
+   */
   type: string;
+
+  /**
+   * Флаг активности конечной точки.
+   * @type {boolean}
+   * @default false
+   */
   isActive: boolean;
 }
 </code></pre>
