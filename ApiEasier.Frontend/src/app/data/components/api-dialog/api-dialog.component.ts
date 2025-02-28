@@ -11,7 +11,7 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
-import { apiServiceShortStructure } from '../../../services/service-structure-api';
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 
 @Component({
   selector: 'app-api-edit-dialog',

@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
-import { ErrorHandlerService } from './error-handler.service';
+import { ErrorHandlerService } from '../services/error-handler.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {

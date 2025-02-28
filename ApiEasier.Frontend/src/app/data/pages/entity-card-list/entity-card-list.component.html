@@ -35,7 +35,7 @@
       <div class="filter-section">
         <app-filter-by-input
           class="filter-input"
-          [label]="'Search Entity'"
+          [label]="'Поиск Entity'"
           [controlName]="'search'"
           [items]="entityNames"
           (searchQuery)="onSearchQuery($event)"
@@ -77,18 +77,6 @@
             (entityDeleted)="onEntityDeleted(item.name)"
           ></app-card-entity>
         </div>
-      </div>
-
-      <div class="mt-20">
-        <!-- Пагинация -->
-        <app-pagination
-          class="custom-pagination"
-          *ngIf="paginatedEntities.length >= itemsPerPage && !searchQueryActive"
-          [totalItems]="filteredEntities.length"
-          [itemsPerPage]="itemsPerPage"
-          [currentPage]="currentPage"
-          (pageChange)="onPageChange($event)"
-        ></app-pagination>
       </div>
     </div>
   </div>

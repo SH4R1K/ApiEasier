@@ -4,10 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TuiAlertService } from '@taiga-ui/core';
-import {
-  apiServiceShortStructure,
-  ApiServiceStructure,
-} from './service-structure-api';
+import { ApiServiceStructure } from "../interfaces/ApiServiceStructure";
+import { apiServiceShortStructure } from "../interfaces/apiServiceShortStructure";
 import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
