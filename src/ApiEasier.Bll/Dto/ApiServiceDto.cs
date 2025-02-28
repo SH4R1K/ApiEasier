@@ -25,7 +25,7 @@ namespace ApiEasier.Bll.Dto
         /// <summary>
         /// Описание API-сервиса.
         /// </summary>
-        [StringLength(255)]
+        [StringLength(1000)]
         public string? Description
         {
             get => _description;
