@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { TuiButton } from '@taiga-ui/core';
-import { apiServiceShortStructure, ApiServiceStructure } from '../../../services/service-structure-api';
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 
 @Component({

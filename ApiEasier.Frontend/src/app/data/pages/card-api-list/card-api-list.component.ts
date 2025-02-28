@@ -10,7 +10,8 @@ import { ApiHubServiceService } from '../../../services/api-hub-service.service'
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 import { Router } from '@angular/router';
 import { TuiAlertService, tuiDialog } from '@taiga-ui/core';
-import { apiServiceShortStructure, ApiServiceStructure } from '../../../services/service-structure-api';
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { CommonModule } from '@angular/common';
 import { CardApiComponent } from '../../components/card-api/card-api.component';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -93,89 +94,6 @@ export class CardApiListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     window.removeEventListener('resize', () => this.handleWindowResize());
     this.sub?.unsubscribe();
-  }
-
-  // Переключаем режим выбора
-  toggleSelectionMode(): void {
-    this.isSelectionMode = !this.isSelectionMode;
-    if (!this.isSelectionMode) {
-      this.selectedApis.clear();
-      this.isAllSelected = false;
-    }
-  }
-
-  toggleApiSelection(apiName: string): void {
-    if (!this.isSelectionMode) return;
-    
-    if (this.selectedApis.has(apiName)) {
-      this.selectedApis.delete(apiName);
-    } else {
-      this.selectedApis.add(apiName);
-    }
-    this.checkAllSelectedState();
-    this.changeDetector.markForCheck(); // Добавлено
-  }
-  
-    toggleSelectAll(): void {
-      if (this.isAllSelected) {
-        // Снимаем выделение со всех элементов
-        this.filteredCards.forEach(item => this.selectedApis.delete(item.name));
-      } else {
-        // Добавляем все элементы всех страниц
-        this.filteredCards.forEach(item => this.selectedApis.add(item.name));
-      }
-      this.isAllSelected = !this.isAllSelected;
-      this.changeDetector.markForCheck();
-    }
-
-  // Проверка состояния "Выбрано все"
-  private checkAllSelectedState(): void {
-    this.isAllSelected = this.filteredCards.length > 0 && 
-      this.filteredCards.every(item => this.selectedApis.has(item.name));
-  }
-
-  // Метод для экспорта выбранных API
-  exportSelectedApis(): void {
-    this.loading = true;
-    if (this.selectedApis.size === 0) return;
-    
-    const selectedNames = Array.from(this.selectedApis);
-    const exportPromises = selectedNames.map(name => 
-      this.apiServiceRepository.getApiStructureList(name).toPromise()
-    );
-  
-    Promise.all(exportPromises)
-      .then(results => {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const zip = new JSZip();
-        
-        results.forEach((data, index) => {
-          if (!data) return;
-          
-          const { name, ...dataWithoutName } = data;
-          const fileName = `${name || `api-${index}`}.json`;
-          zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
-        });
-  
-        zip.generateAsync({ type: 'blob' })
-          .then((content: Blob) => {
-            const url = window.URL.createObjectURL(content);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `apis-export-${timestamp}.zip`;
-            a.click();
-            window.URL.revokeObjectURL(url);
-          });
-      })
-      .catch((error: any) => {
-        console.error('Export error:', error);
-        this.alerts.open('Ошибка экспорта', { appearance: 'negative' }).subscribe();
-      })
-      .finally(() => {
-        this.loading = false;
-        this.selectedApis.clear();
-        this.isSelectionMode = false;
-      });
   }
 
   private loadApiList(): void {
@@ -327,7 +245,86 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  goBack(): void {
-    this.router.navigate(['/']);
+ // Переключаем режим выбора
+ toggleSelectionMode(): void {
+  this.isSelectionMode = !this.isSelectionMode;
+  if (!this.isSelectionMode) {
+    this.selectedApis.clear();
+    this.isAllSelected = false;
   }
+}
+
+toggleApiSelection(apiName: string): void {
+  if (!this.isSelectionMode) return;
+  
+  if (this.selectedApis.has(apiName)) {
+    this.selectedApis.delete(apiName);
+  } else {
+    this.selectedApis.add(apiName);
+  }
+  this.checkAllSelectedState();
+  this.changeDetector.markForCheck(); // Добавлено
+}
+
+  toggleSelectAll(): void {
+    if (this.isAllSelected) {
+      // Снимаем выделение со всех элементов
+      this.filteredCards.forEach(item => this.selectedApis.delete(item.name));
+    } else {
+      // Добавляем все элементы всех страниц
+      this.filteredCards.forEach(item => this.selectedApis.add(item.name));
+    }
+    this.isAllSelected = !this.isAllSelected;
+    this.changeDetector.markForCheck();
+  }
+
+// Проверка состояния "Выбрано все"
+private checkAllSelectedState(): void {
+  this.isAllSelected = this.filteredCards.length > 0 && 
+    this.filteredCards.every(item => this.selectedApis.has(item.name));
+}
+
+// Метод для экспорта выбранных API
+exportSelectedApis(): void {
+  this.loading = true;
+  if (this.selectedApis.size === 0) return;
+  
+  const selectedNames = Array.from(this.selectedApis);
+  const exportPromises = selectedNames.map(name => 
+    this.apiServiceRepository.getApiStructureList(name).toPromise()
+  );
+
+  Promise.all(exportPromises)
+    .then(results => {
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const zip = new JSZip();
+      
+      results.forEach((data, index) => {
+        if (!data) return;
+        
+        const { name, ...dataWithoutName } = data;
+        const fileName = `${name || `api-${index}`}.json`;
+        zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
+      });
+
+      zip.generateAsync({ type: 'blob' })
+        .then((content: Blob) => {
+          const url = window.URL.createObjectURL(content);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `apis-export-${timestamp}.zip`;
+          a.click();
+          window.URL.revokeObjectURL(url);
+        });
+    })
+    .catch((error: any) => {
+      console.error('Export error:', error);
+      this.alerts.open('Ошибка экспорта', { appearance: 'negative' }).subscribe();
+    })
+    .finally(() => {
+      this.loading = false;
+      this.selectedApis.clear();
+      this.isSelectionMode = false;
+    });
+}
 }

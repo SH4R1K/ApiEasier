@@ -78,18 +78,6 @@
           ></app-card-entity>
         </div>
       </div>
-
-      <div class="mt-20">
-        <!-- Пагинация -->
-        <app-pagination
-          class="custom-pagination"
-          *ngIf="paginatedEntities.length >= itemsPerPage && !searchQueryActive"
-          [totalItems]="filteredEntities.length"
-          [itemsPerPage]="itemsPerPage"
-          [currentPage]="currentPage"
-          (pageChange)="onPageChange($event)"
-        ></app-pagination>
-      </div>
     </div>
   </div>
 </ng-template>

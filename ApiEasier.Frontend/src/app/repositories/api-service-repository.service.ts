@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  apiServiceShortStructure,
-  ApiServiceStructure,
-} from '../services/service-structure-api';
+import { ApiServiceStructure } from "../interfaces/ApiServiceStructure";
+import { apiServiceShortStructure } from "../interfaces/apiServiceShortStructure";
 import { ApiService } from '../services/api-service.service';
 
 @Injectable({

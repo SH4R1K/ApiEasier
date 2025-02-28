@@ -5,11 +5,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import {
-  ApiServiceStructure,
-  Endpoint,
-  Entity,
-} from '../../../services/service-structure-api';
+import { Endpoint } from "../../../interfaces/Endpoint";
+import { Entity } from "../../../interfaces/Entity";
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
 import { TuiAccordion } from '@taiga-ui/experimental';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';

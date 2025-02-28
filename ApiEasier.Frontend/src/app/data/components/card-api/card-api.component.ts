@@ -14,7 +14,7 @@ import {
   TuiAlertService,
 } from '@taiga-ui/core';
 import { RouterModule } from '@angular/router';
-import { apiServiceShortStructure } from '../../../services/service-structure-api';
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { SwitchComponent } from '../switch/switch.component';
 import { ApiDialogComponent } from '../api-dialog/api-dialog.component';
 import { Location } from '@angular/common';
