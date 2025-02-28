@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -19,6 +18,7 @@ import { EndpointDialogComponent } from '../../components/endpoint-dialog/endpoi
 import { TuiAlertService, tuiDialog } from '@taiga-ui/core';
 import { EndpointRepositoryService } from '../../../repositories/endpoint-repository.service';
 import { EntityRepositoryService } from '../../../repositories/entity-repository.service';
+import { CommonModule } from '@angular/common';
 /**
  * Компонент EndpointCardListComponent отвечает за отображение списка конечных точек (эндпоинтов)
  * для выбранного API и сущности. Поддерживает создание, удаление и обновление состояния эндпоинтов.

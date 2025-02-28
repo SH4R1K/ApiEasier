@@ -4,8 +4,6 @@ import {
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { TuiAlertService } from '@taiga-ui/core';
 import { ErrorHandlerService } from '../services/error-handler.service';
 
 /**
@@ -25,9 +23,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   /**
    * Конструктор интерсептора.
    * @param {ErrorHandlerService} errorHandler - Сервис для обработки ошибок.
-   * @param {TuiAlertService} alerts - Сервис уведомлений для отображения уведомлений об ошибках.
    */
-  constructor(private errorHandler: ErrorHandlerService, private alerts: TuiAlertService) {}
+  constructor(private errorHandler: ErrorHandlerService,) {}
 
   /**
    * Метод перехвата HTTP-запросов.
@@ -40,7 +37,6 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
         this.errorHandler.handleError(error);
-        this.alerts.open(error.message, { appearance: 'negative' }).subscribe();
         return throwError(error);
       })
     );

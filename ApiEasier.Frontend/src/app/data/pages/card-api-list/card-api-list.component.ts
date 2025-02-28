@@ -232,12 +232,89 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.sub?.unsubscribe();
   }
 
-  /**
-   * Загружает список API.
-   *
-   * @private
-   * @memberof CardApiListComponent
-   */
+  // Переключаем режим выбора
+  toggleSelectionMode(): void {
+    this.isSelectionMode = !this.isSelectionMode;
+    if (!this.isSelectionMode) {
+      this.selectedApis.clear();
+      this.isAllSelected = false;
+    }
+  }
+
+  toggleApiSelection(apiName: string): void {
+    if (!this.isSelectionMode) return;
+    
+    if (this.selectedApis.has(apiName)) {
+      this.selectedApis.delete(apiName);
+    } else {
+      this.selectedApis.add(apiName);
+    }
+    this.checkAllSelectedState();
+    this.changeDetector.markForCheck(); // Добавлено
+  }
+  
+    toggleSelectAll(): void {
+      if (this.isAllSelected) {
+        // Снимаем выделение со всех элементов
+        this.filteredCards.forEach(item => this.selectedApis.delete(item.name));
+      } else {
+        // Добавляем все элементы всех страниц
+        this.filteredCards.forEach(item => this.selectedApis.add(item.name));
+      }
+      this.isAllSelected = !this.isAllSelected;
+      this.changeDetector.markForCheck();
+    }
+
+  // Проверка состояния "Выбрано все"
+  private checkAllSelectedState(): void {
+    this.isAllSelected = this.filteredCards.length > 0 && 
+      this.filteredCards.every(item => this.selectedApis.has(item.name));
+  }
+
+  // Метод для экспорта выбранных API
+  exportSelectedApis(): void {
+    this.loading = true;
+    if (this.selectedApis.size === 0) return;
+    
+    const selectedNames = Array.from(this.selectedApis);
+    const exportPromises = selectedNames.map(name => 
+      this.apiServiceRepository.getApiStructureList(name).toPromise()
+    );
+  
+    Promise.all(exportPromises)
+      .then(results => {
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const zip = new JSZip();
+        
+        results.forEach((data, index) => {
+          if (!data) return;
+          
+          const { name, ...dataWithoutName } = data;
+          const fileName = `${name || `api-${index}`}.json`;
+          zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
+        });
+  
+        zip.generateAsync({ type: 'blob' })
+          .then((content: Blob) => {
+            const url = window.URL.createObjectURL(content);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `apis-export-${timestamp}.zip`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+          });
+      })
+      .catch((error: any) => {
+        console.error('Export error:', error);
+        this.alerts.open('Ошибка экспорта', { appearance: 'negative' }).subscribe();
+      })
+      .finally(() => {
+        this.loading = false;
+        this.selectedApis.clear();
+        this.isSelectionMode = false;
+      });
+  }
+
   private loadApiList(): void {
     this.sub = this.apiServiceRepository
       .getApiList()
@@ -531,110 +608,7 @@ export class CardApiListComponent implements OnInit, OnDestroy {
     this.changeDetector.markForCheck();
   }
 
-  /**
-   * Переключает режим выбора.
-   *
-   * @memberof CardApiListComponent
-   */
-  toggleSelectionMode(): void {
-    this.isSelectionMode = !this.isSelectionMode;
-    if (!this.isSelectionMode) {
-      this.selectedApis.clear();
-      this.isAllSelected = false;
-    }
-  }
-
-  /**
-   * Переключает выбор API.
-   *
-   * @param {string} apiName - Имя API.
-   * @memberof CardApiListComponent
-   */
-  toggleApiSelection(apiName: string): void {
-    if (!this.isSelectionMode) return;
-
-    if (this.selectedApis.has(apiName)) {
-      this.selectedApis.delete(apiName);
-    } else {
-      this.selectedApis.add(apiName);
-    }
-    this.checkAllSelectedState();
-    this.changeDetector.markForCheck();
-  }
-
-  /**
-   * Переключает выбор всех API.
-   *
-   * @memberof CardApiListComponent
-   */
-  toggleSelectAll(): void {
-    if (this.isAllSelected) {
-      this.filteredCards.forEach((item) => this.selectedApis.delete(item.name));
-    } else {
-      this.filteredCards.forEach((item) => this.selectedApis.add(item.name));
-    }
-    this.isAllSelected = !this.isAllSelected;
-    this.changeDetector.markForCheck();
-  }
-
-  /**
-   * Проверяет состояние "Выбрано все".
-   *
-   * @private
-   * @memberof CardApiListComponent
-   */
-  private checkAllSelectedState(): void {
-    this.isAllSelected =
-      this.filteredCards.length > 0 &&
-      this.filteredCards.every((item) => this.selectedApis.has(item.name));
-  }
-
-  /**
-   * Экспортирует выбранные API в ZIP-архив.
-   *
-   * @memberof CardApiListComponent
-   */
-  exportSelectedApis(): void {
-    this.loading = true;
-    if (this.selectedApis.size === 0) return;
-
-    const selectedNames = Array.from(this.selectedApis);
-    const exportPromises = selectedNames.map((name) =>
-      this.apiServiceRepository.getApiStructureList(name).toPromise()
-    );
-
-    Promise.all(exportPromises)
-      .then((results) => {
-        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-        const zip = new JSZip();
-
-        results.forEach((data, index) => {
-          if (!data) return;
-
-          const { name, ...dataWithoutName } = data;
-          const fileName = `${name || `api-${index}`}.json`;
-          zip.file(fileName, JSON.stringify(dataWithoutName, null, 2));
-        });
-
-        zip.generateAsync({ type: 'blob' }).then((content: Blob) => {
-          const url = window.URL.createObjectURL(content);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `apis-export-${timestamp}.zip`;
-          a.click();
-          window.URL.revokeObjectURL(url);
-        });
-      })
-      .catch((error: any) => {
-        console.error('Export error:', error);
-        this.alerts
-          .open('Ошибка экспорта', { appearance: 'negative' })
-          .subscribe();
-      })
-      .finally(() => {
-        this.loading = false;
-        this.selectedApis.clear();
-        this.isSelectionMode = false;
-      });
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }
