@@ -1,14 +1,18 @@
 <div class="header">
-  <a href="/">
-    <img [alt]="'Company Logo'" [src]="logoUrl" />
-  </a>
+  <div class="logo-container">
+      <img 
+        alt="Company Logo" 
+        [src]="logoUrl" 
+        (click)="onLogoClick($event)"
+      />
+  </div>
   <div>
-    @if(isApiPage){
+    <ng-container *ngIf="isApiPage">
       <button (click)="Import()">Импортировать</button>
-    }
-    @if(buttonText != ''){
+    </ng-container>
+    <ng-container *ngIf="buttonText !== ''">
       <button (click)="Click()">{{ buttonText }}</button>
-    }
+    </ng-container>
     <app-back-button></app-back-button>
   </div>
 </div>

@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { BackButtonComponent } from '../back-button/back-button.component';
 import { CommonModule } from '@angular/common';
+import { Location } from '@angular/common';
 import { tuiDialog } from '@taiga-ui/core';
 import { ImportDialogComponent } from '../import-dialog/import-dialog.component';
+import { Router } from '@angular/router';
 
 /**
  * Компонент HeaderComponent предназначен для отображения заголовка страницы с логотипом и кнопкой.
@@ -24,17 +26,17 @@ import { ImportDialogComponent } from '../import-dialog/import-dialog.component'
   selector: 'app-header',
   imports: [BackButtonComponent, CommonModule],
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'], // Исправлено с styleUrl на styleUrls
+  styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   /**
    * URL логотипа для отображения в заголовке.
    *
    * @type {string}
-   * @default "https://www.titan2.ru/images/temp/logo__ru.jpg"
+   * @default "public/logo__ru.jpg"
    * @memberof HeaderComponent
    */
-  @Input() logoUrl: string = "https://www.titan2.ru/images/temp/logo__ru.jpg";
+  @Input() logoUrl: string = 'public/logo__ru.jpg';
 
   /**
    * Текст кнопки в заголовке.
@@ -62,6 +64,8 @@ export class HeaderComponent {
    */
   @Input() isApiPage: boolean = false;
 
+  constructor(private location: Location, private router: Router) {}
+
   /**
    * Диалог для импорта данных.
    *
@@ -71,8 +75,22 @@ export class HeaderComponent {
   private readonly dialog = tuiDialog(ImportDialogComponent, {
     closeable: true,
     dismissible: true,
-    label: "Импортировать",
+    label: 'Импортировать',
   });
+
+  imageLoaded: boolean = false;
+
+  ngOnInit(): void {
+    const img = new Image();
+    img.src = this.logoUrl;
+    img.onload = () => {
+      this.imageLoaded = true;
+    };
+  }
+
+  onLogoClick(event: Event): void {
+    this.router.navigateByUrl('/');
+  }
 
   /**
    * Обработчик нажатия на кнопку.
