@@ -148,6 +148,7 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
             [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
             string apiEntityName,
             [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            [StringLength(200, ErrorMessage = "Имя не может быть больше 200 символов")]
             string apiEndpointName,
             [FromBody] ApiEndpointDto apiEndpointDto)
         {
