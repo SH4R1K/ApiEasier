@@ -13,6 +13,7 @@ namespace ApiEasier.Bll.Dto
         /// </summary>
         [Required]
         [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+        [StringLength(200, ErrorMessage = "Имя не может быть больше 200 символов")]
         public required string Route { get; set; }
 
         /// <summary>
