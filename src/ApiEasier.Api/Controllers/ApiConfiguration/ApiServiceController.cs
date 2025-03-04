@@ -109,7 +109,10 @@ namespace ApiEasier.Api.Controllers.ApiConfiguration
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
-        public async Task<IActionResult> UpdateApiService(string apiServiceName, [FromBody] ApiServiceDto apiServiceDto)
+        public async Task<IActionResult> UpdateApiService(
+            [RegularExpression(@"^[a-zA-Z0-9]+$", ErrorMessage = "Имя может содержать только буквы, цифры.")]
+            [StringLength(200, ErrorMessage = "Имя не может быть больше 200 символов")]
+            string apiServiceName, [FromBody] ApiServiceDto apiServiceDto)
         {
             try
             {
