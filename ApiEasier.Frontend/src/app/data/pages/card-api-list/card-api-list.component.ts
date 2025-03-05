@@ -6,7 +6,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ApiHubServiceService } from '../../../services/api-hub-service.service';
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 import { Router } from '@angular/router';
 import { TuiAlertService, tuiDialog } from '@taiga-ui/core';
@@ -124,8 +123,15 @@ export class CardApiListComponent implements OnInit, OnDestroy {
   private handleError(error: any): void {
     this.errorMessage = error.message;
     this.errorCode = error.status;
-    this.navigateToErrorPage(this.errorCode, this.errorMessage);
+  
+    if (error.status === 400) {
+      const userFriendlyMessage = 'Неверный запрос. Пожалуйста, проверьте введенные данные и попробуйте снова. 😊';
+      this.alerts.open(userFriendlyMessage, { appearance: 'negative' }).subscribe();
+    } else {
+      this.navigateToErrorPage(this.errorCode, this.errorMessage);
+    }
   }
+  
 
   private navigateToErrorPage(errorCode: string, errorMessage: string): void {
     this.router.navigate(['/error'], {
