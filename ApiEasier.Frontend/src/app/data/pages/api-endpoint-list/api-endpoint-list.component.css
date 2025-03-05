@@ -9,13 +9,22 @@
 }
 
 h1 {
-  font-size: 2.5rem;
-  color: #333;
   margin-bottom: 3rem;
-  font-weight: 600;
-  text-align: center;
+    font-weight: 600;
+    color: #333;
+    width: 65%; /* Ширина элемента */
+    text-overflow: ellipsis; /* Добавляем троеточие */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+    overflow: hidden; /* Скрываем текст, который не помещается */
+    height: 2rem;
 }
-
+.limited-text {
+  display: block; /* или inline-block, в зависимости от ваших нужд */
+  width: 35%; /* Установите нужную ширину */
+  white-space: nowrap; /* Запретить перенос строк */
+  overflow: hidden; /* Скрыть переполнение */
+  text-overflow: ellipsis; /* Добавить многоточие в конце */
+}
 /* Ensure the accordion button is positioned relatively */
 .accordion {
     position: relative;
@@ -102,12 +111,17 @@ ul {
 .endpoint-route {
   font-weight: bold;
   color: #0056a6; /* Установлено на черный цвет */
+  width: 25%;
   word-wrap: break-word;
+  white-space: nowrap; /* Запретить перенос строк */
+  overflow: hidden; /* Скрыть переполнение */
+  text-overflow: ellipsis; /* Добавить многоточие в конце */
   font-size: 1rem;
 }
 .endpoint-type {
   color: #000; /* Установлено на черный цвет */
   word-wrap: break-word;
+  align-items: normal;
   font-size: 1rem;
 }
 

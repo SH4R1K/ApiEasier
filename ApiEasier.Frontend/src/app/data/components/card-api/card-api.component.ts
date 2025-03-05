@@ -123,7 +123,7 @@ export class CardApiComponent {
     this.apiServiceRepository.deleteApiService(this.apiInfo.name).subscribe({
       next: () => {
         console.log(`Сервис "${this.apiInfo.name}" удален.`);
-        this.apiDeleted.emit(); // Emit the event to notify the parent component
+        this.apiDeleted.emit(); 
       },
       error: (error) => {
         console.error('Ошибка при удалении сервиса:', error);
