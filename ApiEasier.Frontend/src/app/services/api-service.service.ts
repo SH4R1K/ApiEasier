@@ -23,11 +23,7 @@ import { ErrorHandlerService } from './error-handler.service';
 export class ApiService {
   private baseUrl = `${window.location.origin}/api`;
 
-  constructor(
-    private http: HttpClient,
-    private errorHandler: ErrorHandlerService,
-    private alerts: TuiAlertService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Получает список всех API сервисов.
@@ -36,9 +32,9 @@ export class ApiService {
    * @memberof ApiService
    */
   getApiList(): Observable<apiServiceShortStructure[]> {
-    return this.http
-      .get<apiServiceShortStructure[]>(`${this.baseUrl}/ApiService`)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.get<apiServiceShortStructure[]>(
+      `${this.baseUrl}/ApiService`
+    );
   }
 
   /**
@@ -49,11 +45,9 @@ export class ApiService {
    * @memberof ApiService
    */
   getApiStructureList(name: string): Observable<ApiServiceStructure> {
-    return this.http
-      .get<ApiServiceStructure>(
-        `${this.baseUrl}/ApiService/${encodeURIComponent(name)}`
-      )
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.get<ApiServiceStructure>(
+      `${this.baseUrl}/ApiService/${encodeURIComponent(name)}`
+    );
   }
 
   /**
@@ -66,9 +60,10 @@ export class ApiService {
   createApiService(
     service: apiServiceShortStructure
   ): Observable<apiServiceShortStructure> {
-    return this.http
-      .post<apiServiceShortStructure>(`${this.baseUrl}/ApiService`, service)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.post<apiServiceShortStructure>(
+      `${this.baseUrl}/ApiService`,
+      service
+    );
   }
 
   /**
@@ -79,9 +74,7 @@ export class ApiService {
    * @memberof ApiService
    */
   createFullApiService(service: ApiServiceStructure): Observable<void> {
-    return this.http
-      .post<void>(`${this.baseUrl}/ApiService`, service)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.post<void>(`${this.baseUrl}/ApiService`, service);
   }
 
   /**
@@ -96,12 +89,10 @@ export class ApiService {
     oldName: string,
     service: apiServiceShortStructure
   ): Observable<apiServiceShortStructure> {
-    return this.http
-      .put<apiServiceShortStructure>(
-        `${this.baseUrl}/ApiService/${encodeURIComponent(oldName)}`,
-        service
-      )
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.put<apiServiceShortStructure>(
+      `${this.baseUrl}/ApiService/${encodeURIComponent(oldName)}`,
+      service
+    );
   }
 
   /**
@@ -112,11 +103,9 @@ export class ApiService {
    * @memberof ApiService
    */
   deleteApiService(serviceName: string): Observable<void> {
-    return this.http
-      .delete<void>(
-        `${this.baseUrl}/ApiService/${encodeURIComponent(serviceName)}`
-      )
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.delete<void>(
+      `${this.baseUrl}/ApiService/${encodeURIComponent(serviceName)}`
+    );
   }
 
   /**
@@ -131,27 +120,11 @@ export class ApiService {
     serviceName: string,
     isActive: boolean
   ): Observable<any> {
-    return this.http
-      .patch<any>(
-        `${this.baseUrl}/ApiService/${encodeURIComponent(
-          serviceName
-        )}/${isActive}`,
-        null
-      )
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
-  }
-
-  /**
-   * Обрабатывает ошибки HTTP-запросов.
-   *
-   * @private
-   * @param {HttpErrorResponse} error - Объект ошибки HTTP.
-   * @returns {Observable<never>} Наблюдаемый объект, указывающий на ошибку.
-   * @memberof ApiService
-   */
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    this.errorHandler.handleError(error);
-    this.alerts.open(error.message, { appearance: 'negative' }).subscribe();
-    return throwError(error);
+    return this.http.patch<any>(
+      `${this.baseUrl}/ApiService/${encodeURIComponent(
+        serviceName
+      )}/${isActive}`,
+      null
+    );
   }
 }

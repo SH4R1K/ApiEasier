@@ -45,7 +45,6 @@ export class BackButtonComponent {
    * @memberof BackButtonComponent
    */
   goBack(): void {
-    const currentUrl = this.router.url;
     try {
       const previousUrl = this.location.path(true);
       const baseDomain = '/';

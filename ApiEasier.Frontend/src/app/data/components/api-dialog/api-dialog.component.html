@@ -18,6 +18,7 @@
   tuiTextfieldSize="m"
   maxlength="1000"
   [(ngModel)]="data.description"
+  (input)="onDescriptionInput($event)"
   (keydown.enter)="submit($event)"
   (keydown.arrowUp)="moveFocus(nameInputRef)"
   (keydown.arrowDown)="moveFocus(nameInputRef)"

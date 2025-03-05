@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { TuiAlertService } from '@taiga-ui/core';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
+import { TuiAlertService } from "@taiga-ui/core";
 
 /**
  * Сервис для обработки ошибок HTTP-запросов.
@@ -18,7 +18,23 @@ import { TuiAlertService } from '@taiga-ui/core';
   providedIn: 'root',
 })
 export class ErrorHandlerService {
-  constructor(private router: Router, private alertService: TuiAlertService) {}
+  private errorMessages: { [key: number]: string } = {
+    404: 'Страница не найдена. Возможно, она была удалена или перемещена. 🕵️‍♂️',
+    405: 'Метод не разрешен. Попробуйте другой метод запроса. 🛑',
+    406: 'Неприемлемый запрос. Сервер не может отправить ответ в запрашиваемом формате. 🚫',
+    408: 'Время ожидания запроса истекло. Попробуйте еще раз. ⏳',
+    409: 'Конфликт. Попробуйте обновить данные и повторите запрос. 💥',
+    410: 'Ресурс удален и больше недоступен. 🗑️',
+    413: 'Слишком большая полезная нагрузка. Уменьшите размер запроса. 📦',
+    418: 'Я чайник. ☕️',
+    422: 'Необработанный контент. Запрос не может быть обработан. 📜',
+    429: 'Слишком много запросов. Попробуйте позже. 🕒',
+    502: 'Плохой шлюз. Сервер недоступен. Попробуйте позже. 🌐',
+    503: 'Сервис временно недоступен. Мы на ремонте! 🔧',
+    504: 'Время ожидания ответа от сервера истекло. Попробуйте еще раз. ⏰',
+  };
+
+  constructor(private router: Router, private readonly alert: TuiAlertService) {}
 
   /**
    * Обрабатывает ошибки HTTP-запросов.
@@ -28,41 +44,32 @@ export class ErrorHandlerService {
    * @memberof ErrorHandlerService
    */
   handleError(error: HttpErrorResponse): void {
-    let errorMessage = 'Произошла ошибка при обработке запроса';
-    let errorCode = error.status || 'Unknown';
+    console.error('Error occurred:', error);
+    const errorCode = error.status as number;
 
-    switch (error.status) {
-      case 400:
-        errorMessage = 'Неверный запрос. Проверьте данные и попробуйте снова. 🤦‍♂️';
-        this.alertService.open(`Error ${errorCode}: ${errorMessage}`).subscribe();
-        break;
-      case 404:
-        errorMessage = 'Страница не найдена. Возможно, она была удалена или перемещена. 🕵️‍♂️';
-        this.router.navigate(['/page-not-found']);
-        return;
-      case 408:
-        errorMessage = 'Время ожидания запроса истекло. Попробуйте еще раз. ⏳';
-        break;
-      case 500:
-        errorMessage = 'Внутренняя ошибка сервера. Мы уже работаем над этим! 🛠️';
-        break;
-      case 502:
-        errorMessage = 'Плохой шлюз. Сервер недоступен. Попробуйте позже. 🌐';
-        break;
-      case 503:
-        errorMessage = 'Сервис временно недоступен. Мы на ремонте! 🔧';
-        break;
-      case 504:
-        errorMessage = 'Время ожидания ответа от сервера истекло. Попробуйте еще раз. ⏰';
-        break;
-      default:
-        errorMessage = `Неизвестная ошибка: ${errorMessage}. Код: ${errorCode}. 🤷‍♂️`;
-        break;
+    if (errorCode === 400) {
+      this.handleBadRequestError();
+      return;
     }
 
-    // Переход на страницу ошибки для всех остальных случаев
+    const errorMessage =
+      this.errorMessages[errorCode] ||
+      `Неизвестная ошибка. Код: ${errorCode}. 🤷‍♂️`;
+
+    if (errorCode === 404) {
+      this.router.navigate(['/page-not-found']);
+      return;
+    }
+
     this.router.navigate(['/error'], {
       queryParams: { code: errorCode, message: errorMessage },
     });
+  }
+
+  private handleBadRequestError(): void {
+    const badRequestErorMessage =
+      'Неверный запрос. Проверьте данные и попробуйте снова. 🤦‍♂️';
+    this.alert.open(badRequestErorMessage).subscribe();
+    return;
   }
 }

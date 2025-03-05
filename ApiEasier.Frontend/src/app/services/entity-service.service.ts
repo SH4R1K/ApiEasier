@@ -1,4 +1,3 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -6,6 +5,7 @@ import { Entity } from "../interfaces/Entity";
 import { apiServiceShortStructure } from "../interfaces/apiServiceShortStructure";
 import { TuiAlertService } from '@taiga-ui/core';
 import { ErrorHandlerService } from './error-handler.service';
+import { HttpClient } from '@angular/common/http';
 
 /**
  * Сервис для управления сущностями API.
@@ -23,11 +23,7 @@ import { ErrorHandlerService } from './error-handler.service';
 export class EntityService {
   private baseUrl = `${window.location.origin}/api`;
 
-  constructor(
-    private http: HttpClient,
-    private errorHandler: ErrorHandlerService,
-    private alerts: TuiAlertService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Получает список сущностей для указанного API сервиса.
@@ -37,9 +33,9 @@ export class EntityService {
    * @memberof EntityService
    */
   getApiEntityList(apiServiceName: string): Observable<Entity[]> {
-    return this.http
-      .get<Entity[]>(`${this.baseUrl}/ApiEntity/${apiServiceName}`)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.get<Entity[]>(
+      `${this.baseUrl}/ApiEntity/${apiServiceName}`
+    );
   }
 
   /**
@@ -51,9 +47,9 @@ export class EntityService {
    * @memberof EntityService
    */
   getApiEntity(apiServiceName: string, entityName: string): Observable<Entity> {
-    return this.http
-      .get<Entity>(`${this.baseUrl}/ApiEntity/${apiServiceName}/${entityName}`)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.get<Entity>(
+      `${this.baseUrl}/ApiEntity/${apiServiceName}/${entityName}`
+    );
   }
 
   /**
@@ -65,9 +61,10 @@ export class EntityService {
    * @memberof EntityService
    */
   createApiEntity(apiServiceName: string, entity: Entity): Observable<Entity> {
-    return this.http
-      .post<Entity>(`${this.baseUrl}/ApiEntity/${apiServiceName}`, entity)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.post<Entity>(
+      `${this.baseUrl}/ApiEntity/${apiServiceName}`,
+      entity
+    );
   }
 
   /**
@@ -84,12 +81,10 @@ export class EntityService {
     entityName: string,
     entity: Entity
   ): Observable<Entity> {
-    return this.http
-      .put<Entity>(
-        `${this.baseUrl}/ApiEntity/${apiServiceName}/${entityName}`,
-        entity
-      )
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.put<Entity>(
+      `${this.baseUrl}/ApiEntity/${apiServiceName}/${entityName}`,
+      entity
+    );
   }
 
   /**
@@ -104,9 +99,9 @@ export class EntityService {
     apiServiceName: string,
     entityName: string
   ): Observable<void> {
-    return this.http
-      .delete<void>(`${this.baseUrl}/ApiEntity/${apiServiceName}/${entityName}`)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.delete<void>(
+      `${this.baseUrl}/ApiEntity/${apiServiceName}/${entityName}`
+    );
   }
 
   /**
@@ -123,12 +118,10 @@ export class EntityService {
     entityName: string,
     isActive: boolean
   ): Observable<any> {
-    return this.http
-      .patch<any>(
-        `${this.baseUrl}/ApiEntity/${serviceName}/${entityName}/${isActive}`,
-        null
-      )
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
+    return this.http.patch<any>(
+      `${this.baseUrl}/ApiEntity/${serviceName}/${entityName}/${isActive}`,
+      null
+    );
   }
 
   /**
@@ -138,22 +131,8 @@ export class EntityService {
    * @memberof EntityService
    */
   getAllApiServices(): Observable<apiServiceShortStructure[]> {
-    return this.http
-      .get<apiServiceShortStructure[]>(`${this.baseUrl}/ApiServices`)
-      .pipe(catchError((err: HttpErrorResponse) => this.handleError(err)));
-  }
-
-  /**
-   * Обрабатывает ошибки HTTP-запросов.
-   *
-   * @private
-   * @param {HttpErrorResponse} error - Объект ошибки HTTP.
-   * @returns {Observable<never>} Наблюдаемый объект, указывающий на ошибку.
-   * @memberof EntityService
-   */
-  private handleError(error: HttpErrorResponse): Observable<never> {
-    this.errorHandler.handleError(error);
-    this.alerts.open(error.message, { appearance: 'negative' }).subscribe();
-    return throwError(error);
+    return this.http.get<apiServiceShortStructure[]>(
+      `${this.baseUrl}/ApiServices`
+    );
   }
 }
