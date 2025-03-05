@@ -1,0 +1,10 @@
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #0056a6;
+    width: 85%; /* Ширина элемента */
+    text-overflow: ellipsis; /* Добавляем троеточие */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+    overflow: hidden; /* Скрываем текст, который не помещается */
+    height: 2rem;
+}
