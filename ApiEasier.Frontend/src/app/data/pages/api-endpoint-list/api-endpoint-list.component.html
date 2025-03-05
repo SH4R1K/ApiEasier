@@ -14,7 +14,7 @@
     <tui-accordion tuiAppearance="floating" [closeOthers]="false">
       <ng-container *ngFor="let entity of entities">
         <button tuiAccordion class="accordion">
-          {{ entity.name }}
+          <span class="limited-text">{{ entity.name }}</span>
           <app-switch
             [value]="entity.isActive"
             (toggle)="onEntityToggleChange(entity, $event)"
