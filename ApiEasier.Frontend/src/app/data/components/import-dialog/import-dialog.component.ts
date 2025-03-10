@@ -6,7 +6,7 @@ import type { TuiFileLike } from '@taiga-ui/kit';
 import { TuiAvatar, TuiFiles } from '@taiga-ui/kit';
 import { ChangeDetectorRef } from '@angular/core';
 import { TuiButton } from '@taiga-ui/core';
-import { ApiServiceStructure } from '../../../services/service-structure-api';
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
 import { ApiServiceRepositoryService } from '../../../repositories/api-service-repository.service';
 import { TuiDialogContext, TuiAlertService } from '@taiga-ui/core';
 import { injectContext } from '@taiga-ui/polymorpheus';
@@ -19,7 +19,7 @@ interface FileStatus {
 
 @Component({
   selector: 'app-import-dialog',
-  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiIcon, TuiLink, NgFor, TuiButton],
+  imports: [NgIf, ReactiveFormsModule, TuiAvatar, TuiFiles, TuiLink, NgFor, TuiButton],
   templateUrl: './import-dialog.component.html',
   styleUrl: './import-dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,15 +1,18 @@
 <div class="error-container">
-    <h1>{{ errorCode }}</h1>
-    <p>{{ errorMessage }}</p>
-    <button
-      appearance="outline-grayscale"
-      size="s"
-      tuiButton
-      type="button"
-      class="tui-space_right-1"
-      (click)="goBack()"
-    >
-      Go Back
-    </button>
-  </div>
-  
+  <h1>{{ errorCode }}</h1>
+  <p>{{ errorMessage }}</p>
+  <p>
+    Вы будете автоматически возвращены на предыдущую страницу через
+    {{ timeLeft }} секунд...
+  </p>
+  <button
+    appearance="outline-grayscale"
+    size="s"
+    tuiButton
+    type="button"
+    class="tui-space_right-1"
+    (click)="goBack()"
+  >
+    Go Back
+  </button>
+</div>

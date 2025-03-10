@@ -14,7 +14,7 @@ import {
   TuiAlertService,
 } from '@taiga-ui/core';
 import { RouterModule } from '@angular/router';
-import { apiServiceShortStructure } from '../../../services/service-structure-api';
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { SwitchComponent } from '../switch/switch.component';
 import { ApiDialogComponent } from '../api-dialog/api-dialog.component';
 import { Location } from '@angular/common';
@@ -123,7 +123,7 @@ export class CardApiComponent {
     this.apiServiceRepository.deleteApiService(this.apiInfo.name).subscribe({
       next: () => {
         console.log(`Сервис "${this.apiInfo.name}" удален.`);
-        this.apiDeleted.emit(); // Emit the event to notify the parent component
+        this.apiDeleted.emit(); 
       },
       error: (error) => {
         console.error('Ошибка при удалении сервиса:', error);

@@ -6,19 +6,20 @@ import {
   OnInit,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { Endpoint, Entity } from '../../../../services/service-structure-api';
+import { Endpoint } from "../../../interfaces/Endpoint";
+import { Entity } from "../../../interfaces/Entity";
 import { CommonModule, Location } from '@angular/common';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { tuiDialog, TuiAlertService } from '@taiga-ui/core';
-import { CardEndpointComponent } from '../../../components/card-endpoint/card-endpoint.component';
-import { HeaderComponent } from '../../../components/header/header.component';
+import { CardEndpointComponent } from '../../components/card-endpoint/card-endpoint.component';
+import { HeaderComponent } from '../../components/header/header.component';
 import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { EndpointDialogComponent } from '../../../components/endpoint-dialog/endpoint-dialog.component';
-import { SwitchComponent } from '../../../components/switch/switch.component';
-import { EntityRepositoryService } from '../../../../repositories/entity-repository.service';
-import { LoadingComponent } from '../../../components/loading/loading.component';
-import { EndpointRepositoryService } from '../../../../repositories/endpoint-repository.service';
+import { EndpointDialogComponent } from '../../components/endpoint-dialog/endpoint-dialog.component';
+import { SwitchComponent } from '../../components/switch/switch.component';
+import { EntityRepositoryService } from '../../../repositories/entity-repository.service';
+import { LoadingComponent } from '../../components/loading/loading.component';
+import { EndpointRepositoryService } from '../../../repositories/endpoint-repository.service';
 
 @Component({
   selector: 'app-endpoint-card-list',
@@ -34,7 +35,7 @@ import { EndpointRepositoryService } from '../../../../repositories/endpoint-rep
   templateUrl: './endpoint-card-list.component.html',
   styleUrls: [
     './endpoint-card-list.component.css',
-    '../../../styles/card-list.css',
+    '../../styles/card-list.css',
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

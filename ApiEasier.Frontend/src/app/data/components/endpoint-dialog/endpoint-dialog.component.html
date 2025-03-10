@@ -1,6 +1,7 @@
 <tui-input
   tuiAutoFocus
   tuiTextfieldSize="m"
+  maxlength="200"
   [(ngModel)]="data.route"
   (input)="onInput($event)"
   (keydown.enter)="submit()"

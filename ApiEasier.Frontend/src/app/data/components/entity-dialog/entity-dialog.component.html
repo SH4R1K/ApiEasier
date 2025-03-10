@@ -3,6 +3,8 @@
       #nameInput
       tuiAutoFocus
       tuiTextfieldSize="m"
+      maxlength="200"
+      max
       [(ngModel)]="data.name"
       (input)="onInput($event)"
       (keydown.enter)="handleSubmit()"
@@ -26,7 +28,7 @@
     </tui-textarea>
   
     <p>
-      <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="handleSubmit()">
+      <button size="m" tuiButton type="button" [disabled]="!hasValue"  (click)="handleSubmit()">
         Отправить
       </button>
     </p>

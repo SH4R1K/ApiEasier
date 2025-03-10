@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { Entity } from '../../../services/service-structure-api';
+import { Entity } from "../../../interfaces/Entity";
 import { RouterModule } from '@angular/router';
 import { IconTrashComponent } from '../icon-trash/icon-trash.component';
 import { SwitchComponent } from '../switch/switch.component';

@@ -7,10 +7,8 @@ import {
 } from '@angular/core';
 import { Observable, Subscription, switchMap } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-  ApiServiceStructure,
-  Entity,
-} from '../../../services/service-structure-api';
+import { Entity } from "../../../interfaces/Entity";
+import { ApiServiceStructure } from "../../../interfaces/ApiServiceStructure";
 import { CommonModule } from '@angular/common';
 import { TuiCardLarge } from '@taiga-ui/layout';
 import { tuiDialog, TuiAlertService } from '@taiga-ui/core';
@@ -163,9 +161,10 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
   private createEntity(data: Entity): void {
     this.entityRepositoryService.createApiEntity(this.apiName, data).subscribe({
       next: (response) => this.handleEntityCreation(response, data),
-      error: () => {
+      error: (error) => {
         this.loading = false;
         this.cd.markForCheck();
+        this.handleError(error);
       },
     });
   }
@@ -179,6 +178,13 @@ export class EntityCardListComponent implements OnInit, OnDestroy {
     this.alerts
       .open('Сущность успешно создана', { appearance: 'success' })
       .subscribe();
+  }
+
+  private handleError(error: any): void {
+    const userFriendlyMessage = 'Произошла ошибка. Пожалуйста, попробуйте снова позже. 😊';
+    this.alerts.open(userFriendlyMessage, { appearance: 'negative' }).subscribe();
+    this.loading = false;
+    this.cd.markForCheck();
   }
 
   sortCards(): void {

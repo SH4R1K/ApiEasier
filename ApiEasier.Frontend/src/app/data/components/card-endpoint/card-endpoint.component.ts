@@ -6,11 +6,9 @@ import {
   Output,
 } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import {
-  Endpoint,
-  apiServiceShortStructure,
-  Entity,
-} from '../../../services/service-structure-api';
+import { Endpoint } from "../../../interfaces/Endpoint";
+import { Entity } from "../../../interfaces/Entity";
+import { apiServiceShortStructure } from "../../../interfaces/apiServiceShortStructure";
 import { Subscription } from 'rxjs';
 import { SwitchComponent } from '../switch/switch.component';
 import { IconTrashComponent } from '../icon-trash/icon-trash.component';

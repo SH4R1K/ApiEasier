@@ -27,6 +27,16 @@
                 "output": "public"
               },
               {
+                "glob": "apiEasierFavicon.ico",
+                "input": "public",
+                "output": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "public",
+                "output": "public"
+              },
+              {
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons/src",
                 "output": "assets/taiga-ui/icons"
@@ -74,7 +84,9 @@
             }
           },
           "defaultConfiguration": "development",
-          "options": {"proxyConfig": "src/proxy.conf.json"} 
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

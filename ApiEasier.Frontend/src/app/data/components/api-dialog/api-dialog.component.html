@@ -2,6 +2,7 @@
   #nameInput
   tuiAutoFocus
   tuiTextfieldSize="m"
+  maxlength="200"
   [(ngModel)]="data.name"
   (input)="onInput($event)"
   (keydown.enter)="submit($event)"
@@ -15,7 +16,9 @@
   #descriptionInput
   tuiAutoFocus
   tuiTextfieldSize="m"
+  maxlength="1000"
   [(ngModel)]="data.description"
+  (input)="onDescriptionInput($event)"
   (keydown.enter)="submit($event)"
   (keydown.arrowUp)="moveFocus(nameInputRef)"
   (keydown.arrowDown)="moveFocus(nameInputRef)"

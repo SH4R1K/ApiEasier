@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  HostListener,
   ViewChild,
   ElementRef,
 } from '@angular/core';
@@ -24,7 +23,7 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/legacy';
 import { injectContext } from '@taiga-ui/polymorpheus';
-import { Entity } from '../../../services/service-structure-api';
+import { Entity } from "../../../interfaces/Entity";
 
 @Component({
   selector: 'app-entity-edit-dialog',
@@ -110,6 +109,16 @@ export class EntityDialogComponent {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  private showWarning(message: string): void {
+    this.alerts
+      .open(message, {
+        label: 'Предупреждение',
+        appearance: 'warning',
+        autoClose: 5000,
+      })
+      .subscribe();
+  }
+
   private showError(message: string): void {
     this.alerts
       .open(message, {
@@ -122,12 +131,26 @@ export class EntityDialogComponent {
 
   protected onInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    const value = input.value;
-    const cleanedValue = value.replace(/[^a-zA-Z0-9]/g, '');
-    input.value = cleanedValue;
-    this.data.name = cleanedValue;
+    const cleanedValue = input.value.replace(/[^a-zA-Z0-9]/g, '');
+
+    const maxLength = 200; 
+    const finalValue = this.checkLengthAndWarn(cleanedValue, maxLength);
+
+    input.value = finalValue;
+    this.data.name = finalValue;
   }
 
+  private checkLengthAndWarn(value: string, maxLength: number, warningThreshold: number = 15): string {
+    if (value.length > maxLength) {
+      this.showError(`Вы превышаете допустимую длину в ${maxLength} символов, добавление новых символов невозможно `);
+      return value.slice(0, maxLength); 
+    } else if (value.length > maxLength - warningThreshold) {
+      this.showWarning(`Вы приближаетесь к границе по длине символов. Осталось ${maxLength - value.length} символов.`);
+    }
+    return value;
+  }
+
+    
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector('input, textarea').focus();
   }
