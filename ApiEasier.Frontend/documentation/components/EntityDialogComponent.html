@@ -350,8 +350,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="266"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:266</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:257</a></div>
                         </td>
                     </tr>
 
@@ -570,8 +570,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="277"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:277</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="266"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:266</a></div>
                         </td>
                     </tr>
 
@@ -639,8 +639,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="255"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:255</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:246</a></div>
                         </td>
                     </tr>
 
@@ -797,16 +797,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="236"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:236</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:227</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Отображает сообщение об ошибке.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -817,7 +815,6 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -832,12 +829,6 @@
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>Сообщение об ошибке.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -1547,15 +1538,6 @@ export class EntityDialogComponent {
       .subscribe();
   }
 
- 
-
-  /**
-   * Отображает сообщение об ошибке.
-   *
-   * @param message - Сообщение об ошибке.
-   * @private
-   * @memberof EntityDialogComponent
-   */
   private showError(message: string): void {
     this.alerts
       .open(message, {
@@ -1595,8 +1577,6 @@ export class EntityDialogComponent {
     }
     return value;
   }
-
-    
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector(&#x27;input, textarea&#x27;).focus();
   }

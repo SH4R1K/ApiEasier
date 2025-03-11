@@ -200,7 +200,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/services/endpoint-service.service.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/services/endpoint-service.service.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -263,8 +263,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -376,8 +376,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="113"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:113</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -489,8 +489,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -602,8 +602,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="34"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:34</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -697,8 +697,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -828,8 +828,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="133"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:133</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:132</a></div>
                         </td>
                     </tr>
 
@@ -964,7 +964,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/services/endpoint-service.service.ts:22</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/services/endpoint-service.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -978,22 +978,9 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import { Observable, throwError } from &#x27;rxjs&#x27;;
-import { catchError } from &#x27;rxjs/operators&#x27;;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import { Router } from &#x27;@angular/router&#x27;;
->>>>>>> 0eb3894 (добавлена документация к обычным компонентам)
-=======
->>>>>>> c1b38d2 (документация)
-=======
-import { Router } from &#x27;@angular/router&#x27;;
->>>>>>> f12d8b4 (вкусно и точка.)
-import { Endpoint } from &quot;../interfaces/Endpoint&quot;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { Endpoint } from &#x27;../interfaces/Endpoint&#x27;;
 import { HttpClient } from &#x27;@angular/common/http&#x27;;
-
 /**
  * Сервис для управления конечными точками (endpoints).
  *
@@ -1010,7 +997,9 @@ import { HttpClient } from &#x27;@angular/common/http&#x27;;
 export class EndpointService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api&#x60;;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+  ) {}
 
   /**
    * Получает список конечных точек для указанного API сервиса и сущности.

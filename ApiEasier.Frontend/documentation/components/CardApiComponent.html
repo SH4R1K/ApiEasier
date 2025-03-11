@@ -921,7 +921,7 @@ export class CardApiComponent {
     this.apiServiceRepository.deleteApiService(this.apiInfo.name).subscribe({
       next: () &#x3D;&gt; {
         console.log(&#x60;Сервис &quot;${this.apiInfo.name}&quot; удален.&#x60;);
-        this.apiDeleted.emit(); 
+        this.apiDeleted.emit();
       },
       error: (error) &#x3D;&gt; {
         console.error(&#x27;Ошибка при удалении сервиса:&#x27;, error);

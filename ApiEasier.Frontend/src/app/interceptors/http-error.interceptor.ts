@@ -10,7 +10,7 @@ import { ErrorHandlerService } from '../services/error-handler.service';
 /**
  * Интерсептор HttpErrorInterceptor перехватывает HTTP-запросы и обрабатывает ошибки,
  * возникающие в процессе выполнения запросов. Он использует сервис ErrorHandlerService
- * для обработки ошибок и TuiAlertService для отображения уведомлений об ошибках.
+ * для обработки ошибок.
  *
  * @remarks
  * Этот интерсептор позволяет централизованно обрабатывать ошибки HTTP-запросов,

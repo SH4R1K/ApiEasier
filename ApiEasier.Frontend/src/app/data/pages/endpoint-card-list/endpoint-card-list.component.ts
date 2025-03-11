@@ -1,4 +1,3 @@
-
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -6,20 +5,22 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { TuiCardLarge } from '@taiga-ui/layout';
 import { Subscription } from 'rxjs';
+import { Endpoint } from "../../../interfaces/Endpoint";
+import { Entity } from "../../../interfaces/Entity";
+import { CommonModule, Location } from '@angular/common';
+import { TuiCardLarge } from '@taiga-ui/layout';
+import { tuiDialog, TuiAlertService } from '@taiga-ui/core';
 import { CardEndpointComponent } from '../../components/card-endpoint/card-endpoint.component';
-import { ActivatedRoute, RouterModule } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
-import { SwitchComponent } from '../../components/switch/switch.component';
-import { LoadingComponent } from '../../components/loading/loading.component';
-import { Endpoint } from '../../../interfaces/Endpoint';
-import { Entity } from '../../../interfaces/Entity';
+import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { EndpointDialogComponent } from '../../components/endpoint-dialog/endpoint-dialog.component';
-import { TuiAlertService, tuiDialog } from '@taiga-ui/core';
-import { EndpointRepositoryService } from '../../../repositories/endpoint-repository.service';
+import { SwitchComponent } from '../../components/switch/switch.component';
 import { EntityRepositoryService } from '../../../repositories/entity-repository.service';
-import { CommonModule } from '@angular/common';
+import { LoadingComponent } from '../../components/loading/loading.component';
+import { EndpointRepositoryService } from '../../../repositories/endpoint-repository.service';
+
 /**
  * Компонент EndpointCardListComponent отвечает за отображение списка конечных точек (эндпоинтов)
  * для выбранного API и сущности. Поддерживает создание, удаление и обновление состояния эндпоинтов.
@@ -132,6 +133,7 @@ export class EndpointCardListComponent implements OnInit, OnDestroy {
    * @param {Location} location - Сервис для работы с местоположением.
    */
   constructor(
+    private router: Router,
     private cd: ChangeDetectorRef,
     private route: ActivatedRoute,
     private endpointRepositoryService: EndpointRepositoryService,

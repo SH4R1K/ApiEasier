@@ -137,6 +137,12 @@
     </p>
 
 
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
 
 
 <section data-compodoc="block-metadata">
@@ -209,6 +215,9 @@
                                     <span class="modifier">Readonly</span>
                                 <a href="#dialog" >dialog</a>
                             </li>
+                            <li>
+                                <a href="#imageLoaded" >imageLoaded</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -226,6 +235,9 @@
                             </li>
                             <li>
                                 <a href="#Import" >Import</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
                             </li>
                             <li>
                                 <a href="#onLogoClick" >onLogoClick</a>
@@ -287,7 +299,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/data/components/header/header.component.ts:34</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/components/header/header.component.ts:65</a></div>
                             </td>
                         </tr>
 
@@ -360,9 +372,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/data/components/header/header.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/data/components/header/header.component.ts:48</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Текст кнопки в заголовке.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -386,9 +404,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/data/components/header/header.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/components/header/header.component.ts:65</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Флаг, указывающий, является ли текущая страница страницей API.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <table class="table table-sm table-bordered">
@@ -407,14 +431,20 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&quot;https://www.titan2.ru/images/temp/logo__ru.jpg&quot;</code>
+                        <i>Default value : </i><code>&#x27;public/logo__ru.jpg&#x27;</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/data/components/header/header.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/data/components/header/header.component.ts:39</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>URL логотипа для отображения в заголовке.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -436,9 +466,15 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/data/components/header/header.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/data/components/header/header.component.ts:56</a></div>
                             </td>
                         </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Событие, которое вызывается при нажатии на кнопку.</p>
+</div>
+                    </td>
+                </tr>
             </tbody>
         </table>
 </section>
@@ -469,17 +505,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/app/data/components/header/header.component.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/data/components/header/header.component.ts:95</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Обработчик нажатия на кнопку.</p>
-<p>Вызывает событие buttonClick для уведомления родительского компонента о нажатии.</p>
-</div>
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -509,8 +542,48 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/app/data/components/header/header.component.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/data/components/header/header.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Открывает диалоговое окно для импорта данных.</p>
+<p>Использует сервис tuiDialog для отображения диалогового окна.</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/app/data/components/header/header.component.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -546,8 +619,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/app/data/components/header/header.component.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/app/data/components/header/header.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -616,14 +689,14 @@
                     <td class="col-md-4">
                         <i>Default value : </i><code>tuiDialog(ImportDialogComponent, {
     closeable: true,
-      dismissible: true,
-      label: &quot;Импортировать&quot;,
-    })</code>
+    dismissible: true,
+    label: &#x27;Импортировать&#x27;,
+  })</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/data/components/header/header.component.ts:44</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/components/header/header.component.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -633,6 +706,37 @@
 </div>
                 </td>
             </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="imageLoaded"></a>
+                    <span class="name">
+                        <span ><b>imageLoaded</b></span>
+                        <a href="#imageLoaded"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/data/components/header/header.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
 
         </tbody>
     </table>
@@ -649,6 +753,7 @@ import { Location } from &#x27;@angular/common&#x27;;
 import { tuiDialog } from &#x27;@taiga-ui/core&#x27;;
 import { ImportDialogComponent } from &#x27;../import-dialog/import-dialog.component&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
+
 /**
  * Компонент HeaderComponent предназначен для отображения заголовка страницы с логотипом и кнопкой.
  * Позволяет пользователю выполнять действия, такие как возврат на предыдущую страницу или импорт данных.
@@ -671,10 +776,40 @@ import { Router } from &#x27;@angular/router&#x27;;
   templateUrl: &#x27;./header.component.html&#x27;,
   styleUrl: &#x27;./header.component.css&#x27;,
 })
-export class HeaderComponent {
-  @Input() logoUrl: string &#x3D; &quot;https://www.titan2.ru/images/temp/logo__ru.jpg&quot;; 
-  @Input() buttonText: string &#x3D; &#x27;&#x27;; 
-  @Output() buttonClick: EventEmitter&lt;void&gt; &#x3D; new EventEmitter&lt;void&gt;(); 
+export class HeaderComponent implements OnInit {
+  /**
+   * URL логотипа для отображения в заголовке.
+   *
+   * @type {string}
+   * @default &quot;public/logo__ru.jpg&quot;
+   * @memberof HeaderComponent
+   */
+  @Input() logoUrl: string &#x3D; &#x27;public/logo__ru.jpg&#x27;;
+
+  /**
+   * Текст кнопки в заголовке.
+   *
+   * @type {string}
+   * @default &#x27;&#x27;
+   * @memberof HeaderComponent
+   */
+  @Input() buttonText: string &#x3D; &#x27;&#x27;;
+
+  /**
+   * Событие, которое вызывается при нажатии на кнопку.
+   *
+   * @type {EventEmitter&lt;void&gt;}
+   * @memberof HeaderComponent
+   */
+  @Output() buttonClick: EventEmitter&lt;void&gt; &#x3D; new EventEmitter&lt;void&gt;();
+
+  /**
+   * Флаг, указывающий, является ли текущая страница страницей API.
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof HeaderComponent
+   */
   @Input() isApiPage: boolean &#x3D; false;
 
   constructor(private location: Location, private router: Router) {}
@@ -687,26 +822,36 @@ export class HeaderComponent {
    */
   private readonly dialog &#x3D; tuiDialog(ImportDialogComponent, {
     closeable: true,
-      dismissible: true,
-      label: &quot;Импортировать&quot;,
-    });
+    dismissible: true,
+    label: &#x27;Импортировать&#x27;,
+  });
+  imageLoaded: boolean &#x3D; false;
 
-  /**
-   * Обработчик нажатия на кнопку.
-   *
-   * @remarks
-   * Вызывает событие buttonClick для уведомления родительского компонента о нажатии.
-   *
-   * @memberof HeaderComponent
-   */
-  Click(): void {
-    this.buttonClick.emit();
+  ngOnInit(): void {
+    const img &#x3D; new Image();
+    img.src &#x3D; this.logoUrl;
+    img.onload &#x3D; () &#x3D;&gt; {
+      this.imageLoaded &#x3D; true;
+    };
   }
-  
+
   onLogoClick(event: Event): void {
     this.router.navigateByUrl(&#x27;/&#x27;);
   }
   
+
+  Click(): void {
+    this.buttonClick.emit();
+  }
+
+  /**
+   * Открывает диалоговое окно для импорта данных.
+   *
+   * @remarks
+   * Использует сервис tuiDialog для отображения диалогового окна.
+   *
+   * @memberof HeaderComponent
+   */
   Import(): void {
     this.dialog().subscribe();
   }
