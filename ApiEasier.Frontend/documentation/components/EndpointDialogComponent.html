@@ -106,10 +106,6 @@
                 role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
         </li>
         <li class="nav-item">
-            <a href="#styleData" class="nav-link"
-                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
-        </li>
-        <li class="nav-item">
             <a href="#tree" class="nav-link"
                 role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
         </li>
@@ -176,10 +172,6 @@
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-3">styleUrls</td>
-                <td class="col-md-9"><code>./endpoint-dialog.component.css</code></td>
-            </tr>
 
 
 
@@ -190,6 +182,10 @@
 
 
 
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./endpoint-dialog.component.css</code></td>
+            </tr>
 
 
 
@@ -211,6 +207,11 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#alerts" >alerts</a>
+                            </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Readonly</span>
@@ -238,12 +239,24 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#checkLengthAndWarn" >checkLengthAndWarn</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Protected</span>
                                 <a href="#onInput" >onInput</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                 <a href="#showDialog" >showDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showError" >showError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showWarning" >showWarning</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
@@ -292,6 +305,107 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="checkLengthAndWarn"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>checkLengthAndWarn</b></span>
+                        <a href="#checkLengthAndWarn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkLengthAndWarn(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, maxLength: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, warningThreshold: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="161"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:161</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>maxLength</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>warningThreshold</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>15</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="onInput"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -310,8 +424,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="129"
-                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:129</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="150"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:150</a></div>
                         </td>
                     </tr>
 
@@ -389,8 +503,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:116</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="117"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:117</a></div>
                         </td>
                     </tr>
 
@@ -450,6 +564,144 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="showError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showError</b></span>
+                        <a href="#showError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showError(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:131</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showWarning"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showWarning</b></span>
+                        <a href="#showWarning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showWarning(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="submit"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -468,8 +720,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="98"
-                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:98</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -498,6 +750,33 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="alerts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>alerts</b></span>
+                        <a href="#alerts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TuiAlertService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:52</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="context"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -514,7 +793,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:67</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -585,7 +864,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:60</a></div>
                         </td>
                     </tr>
 
@@ -620,7 +899,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:76</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:77</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -655,7 +934,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:86</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">src/app/data/components/endpoint-dialog/endpoint-dialog.component.ts:87</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -679,12 +958,11 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { TemplateRef } from &#x27;@angular/core&#x27;;
-import { Component, inject } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, inject, TemplateRef } from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { TuiAutoFocus } from &#x27;@taiga-ui/cdk&#x27;;
 import type { TuiDialogContext } from &#x27;@taiga-ui/core&#x27;;
-import { TuiButton, TuiDialogService, TuiTextfield } from &#x27;@taiga-ui/core&#x27;;
+import { TuiAlertService, TuiButton, TuiDialogService, TuiTextfield } from &#x27;@taiga-ui/core&#x27;;
 import { TuiDataListWrapper, TuiSlider } from &#x27;@taiga-ui/kit&#x27;;
 import {
   TuiInputModule,
@@ -692,7 +970,7 @@ import {
   TuiTextfieldControllerModule,
 } from &#x27;@taiga-ui/legacy&#x27;;
 import { injectContext } from &#x27;@taiga-ui/polymorpheus&#x27;;
-import { Endpoint } from &quot;../../../interfaces/Endpoint&quot;;
+import { Endpoint } from &#x27;../../../interfaces/Endpoint&#x27;;
 
 /**
  * Компонент EndpointDialogComponent предназначен для отображения диалогового окна редактирования эндпоинта.
@@ -720,7 +998,7 @@ import { Endpoint } from &quot;../../../interfaces/Endpoint&quot;;
     TuiTextfieldControllerModule,
   ],
   templateUrl: &#x27;./endpoint-dialog.component.html&#x27;,
-  styleUrls: [&#x27;./endpoint-dialog.component.css&#x27;],
+  styleUrl: &#x27;./endpoint-dialog.component.css&#x27;,
 })
 export class EndpointDialogComponent {
   /**
@@ -730,6 +1008,7 @@ export class EndpointDialogComponent {
    * @memberof EndpointDialogComponent
    */
   private readonly dialogs &#x3D; inject(TuiDialogService);
+  private readonly alerts &#x3D; inject(TuiAlertService);
 
   /**
    * Список доступных типов запросов для эндпоинта.
@@ -777,9 +1056,9 @@ export class EndpointDialogComponent {
    * @memberof EndpointDialogComponent
    */
   protected submit(): void {
-    if (event) {
-      event.preventDefault();
-    }
+
+
+
     if (this.hasValue) {
       this.context.completeWith(this.data);
     }
@@ -798,6 +1077,26 @@ export class EndpointDialogComponent {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  private showWarning(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Предупреждение&#x27;,
+        appearance: &#x27;warning&#x27;,
+        autoClose: 5000,
+      })
+      .subscribe();
+  }
+
+  private showError(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Ошибка&#x27;,
+        appearance: &#x27;negative&#x27;,
+        autoClose: 5000,
+      })
+      .subscribe();
+  }
+
   /**
    * Обработчик ввода данных в поле маршрута.
    *
@@ -809,19 +1108,32 @@ export class EndpointDialogComponent {
    */
   protected onInput(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
-    const value &#x3D; input.value;
-    const cleanedValue &#x3D; value.replace(/[^a-zA-Z0-9]/g, &#x27;&#x27;);
-    input.value &#x3D; cleanedValue;
-    this.data.route &#x3D; cleanedValue;
+    const cleanedValue &#x3D; input.value.replace(/[^a-zA-Z0-9]/g, &#x27;&#x27;);
+
+    const maxLength &#x3D; 200; 
+    const finalValue &#x3D; this.checkLengthAndWarn(cleanedValue, maxLength);
+
+    input.value &#x3D; finalValue;
+    this.data.route &#x3D; finalValue; 
   }
-}
-</code></pre>
+
+  private checkLengthAndWarn(value: string, maxLength: number, warningThreshold: number &#x3D; 15): string {
+    if (value.length &gt; maxLength) {
+      this.showError(&#x60;Вы превышаете допустимую длину в ${maxLength} символов, добавление новых символов невозможно.&#x60;);
+      return value.slice(0, maxLength); 
+    } else if (value.length &gt; maxLength - warningThreshold) {
+      this.showWarning(&#x60;Вы приближаетесь к границе по длине символов. Осталось ${maxLength - value.length} символов.&#x60;);
+    }
+    return value;
+  }
+}</code></pre>
     </div>
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;tui-input
   tuiAutoFocus
   tuiTextfieldSize&#x3D;&quot;m&quot;
+  maxlength&#x3D;&quot;200&quot;
   [(ngModel)]&#x3D;&quot;data.route&quot;
   (input)&#x3D;&quot;onInput($event)&quot;
   (keydown.enter)&#x3D;&quot;submit()&quot;
@@ -847,12 +1159,6 @@ export class EndpointDialogComponent {
 </code></pre>
     </div>
 
-    <div class="tab-pane fade " id="styleData">
-                <p class="comment">
-                    <code>./endpoint-dialog.component.css</code>
-                </p>
-                <pre class="line-numbers"><code class="language-scss"></code></pre>
-    </div>
 
     <div class="tab-pane fade " id="tree">
         <div id="tree-container"></div>
@@ -879,7 +1185,7 @@ export class EndpointDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><tui-input  tuiAutoFocus  tuiTextfieldSize="m"  [(ngModel)]="data.route"  (input)="onInput($event)"  (keydown.enter)="submit()">  Имя эндпоинта</tui-input><br><tui-select  tuiAutoFocus  tuiTextfieldSize="m"  [(ngModel)]="data.type"  (keydown.enter)="submit()">  Тип  <select tuiSelect [items]="types"></select></tui-select><p>  <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="submit()">    Отправить  </button></p></div>'
+        var COMPONENT_TEMPLATE = '<div><tui-input  tuiAutoFocus  tuiTextfieldSize="m"  maxlength="200"  [(ngModel)]="data.route"  (input)="onInput($event)"  (keydown.enter)="submit()">  Имя эндпоинта</tui-input><br><tui-select  tuiAutoFocus  tuiTextfieldSize="m"  [(ngModel)]="data.type"  (keydown.enter)="submit()">  Тип  <select tuiSelect [items]="types"></select></tui-select><p>  <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="submit()">    Отправить  </button></p></div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EndpointDialogComponent'};

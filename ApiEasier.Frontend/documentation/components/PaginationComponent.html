@@ -661,7 +661,7 @@ export class PaginationComponent {
   [index]&#x3D;&quot;currentPage - 1&quot;
   [length]&#x3D;&quot;totalPages&quot;
   (indexChange)&#x3D;&quot;goToPage($event + 1)&quot;
-  [activePadding] &#x3D; &#x27;0&#x27;
+  [activePadding] &#x3D; &#x27;1&#x27;
   [sidePadding] &#x3D;&#x27;1&#x27;
 /&gt;
 </code></pre>
@@ -699,7 +699,7 @@ export class PaginationComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><ng-template #inputCustomContent>Page {{ currentPage }}</ng-template><tui-pagination  [index]="currentPage - 1"  [length]="totalPages"  (indexChange)="goToPage($event + 1)"  [activePadding] = \'0\'  [sidePadding] =\'1\'/></div>'
+        var COMPONENT_TEMPLATE = '<div><ng-template #inputCustomContent>Page {{ currentPage }}</ng-template><tui-pagination  [index]="currentPage - 1"  [length]="totalPages"  (indexChange)="goToPage($event + 1)"  [activePadding] = \'1\'  [sidePadding] =\'1\'/></div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'PaginationComponent'};

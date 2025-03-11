@@ -2027,7 +2027,7 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
     &lt;tui-accordion tuiAppearance&#x3D;&quot;floating&quot; [closeOthers]&#x3D;&quot;false&quot;&gt;
       &lt;ng-container *ngFor&#x3D;&quot;let entity of entities&quot;&gt;
         &lt;button tuiAccordion class&#x3D;&quot;accordion&quot;&gt;
-          {{ entity.name }}
+          &lt;span class&#x3D;&quot;limited-text&quot;&gt;{{ entity.name }}&lt;/span&gt;
           &lt;app-switch
             [value]&#x3D;&quot;entity.isActive&quot;
             (toggle)&#x3D;&quot;onEntityToggleChange(entity, $event)&quot;
@@ -2137,13 +2137,22 @@ export class ApiEndpointListComponent implements OnInit, OnDestroy {
 }
 
 h1 {
-  font-size: 2.5rem;
-  color: #333;
   margin-bottom: 3rem;
-  font-weight: 600;
-  text-align: center;
+    font-weight: 600;
+    color: #333;
+    width: 65%; /* Ширина элемента */
+    text-overflow: ellipsis; /* Добавляем троеточие */
+    white-space: nowrap; /* Запрещаем перенос текста на новую строку */
+    overflow: hidden; /* Скрываем текст, который не помещается */
+    height: 2rem;
 }
-
+.limited-text {
+  display: block; /* или inline-block, в зависимости от ваших нужд */
+  width: 35%; /* Установите нужную ширину */
+  white-space: nowrap; /* Запретить перенос строк */
+  overflow: hidden; /* Скрыть переполнение */
+  text-overflow: ellipsis; /* Добавить многоточие в конце */
+}
 /* Ensure the accordion button is positioned relatively */
 .accordion {
     position: relative;
@@ -2230,12 +2239,17 @@ ul {
 .endpoint-route {
   font-weight: bold;
   color: #0056a6; /* Установлено на черный цвет */
+  width: 25%;
   word-wrap: break-word;
+  white-space: nowrap; /* Запретить перенос строк */
+  overflow: hidden; /* Скрыть переполнение */
+  text-overflow: ellipsis; /* Добавить многоточие в конце */
   font-size: 1rem;
 }
 .endpoint-type {
   color: #000; /* Установлено на черный цвет */
   word-wrap: break-word;
+  align-items: normal;
   font-size: 1rem;
 }
 
@@ -2365,7 +2379,7 @@ ul {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><app-header />@if (loading) {<app-loading></app-loading>} @else {<div class="endpoint-list">  <div class="api-header">    <h1>{{ apiName }}</h1>    <app-switch      [value]="apiInfo.isActive"      (toggle)="onApiToggleChange($event)"    ></app-switch>  </div>  <ng-container *ngIf="entities.length > 0; else noEntities">    <tui-accordion tuiAppearance="floating" [closeOthers]="false">      <ng-container *ngFor="let entity of entities">        <button tuiAccordion class="accordion">          {{ entity.name }}          <app-switch            [value]="entity.isActive"            (toggle)="onEntityToggleChange(entity, $event)"          ></app-switch>        </button>        <tui-expand>          <ng-container            *ngIf="              entity?.endpoints && entity.endpoints.length > 0;              else emptyEntityOrApi            "          >            <ul>              <li                *ngFor="let endpoint of entity.endpoints"                class="endpoint-item"              >                <div class="endpoint-header">                  <div class="endpoint-route">{{ endpoint.route }}</div>                  <div class="endpoint-type">{{ endpoint.type }}</div>                  <app-switch                    [value]="endpoint.isActive"                    (toggle)="onEndpointToggleChange(entity, endpoint, $event)"                  ></app-switch>                </div>                <div class="url-container">                  <div class="copy-url-field">                    <input                      type="text"                      readonly                      [value]="getUrl(entity.name, endpoint)"                      class="url-input"                      #urlInput                    />                    <button                      tuiButton                      tuiAppearance="flat"                      (click)="copyToClipboard(entity.name, endpoint)"                      class="copy-button"                      [class.copied]="                        isCopied === getUrl(entity.name, endpoint)                      "                    >                      <i                        class="fas"                        [ngClass]="{                          \'fa-clone\':                            isCopied !== getUrl(entity.name, endpoint),                          \'fa-check\': isCopied === getUrl(entity.name, endpoint)                        }"                      ></i>                    </button>                  </div>                </div>              </li>            </ul>          </ng-container>          <ng-template #emptyEntityOrApi>            <ng-container              *ngIf="entity?.endpoints?.length === 0; else noendpoints"            >              <p>Нет доступных эндпоинтов.</p>              <button                class="primary-button"                tuiButton                tuiAppearance="floating"                routerLink="/ApiEntity/{{ apiName }}/{{ entity.name }}"              >                Перейти к деталям сущности              </button>            </ng-container>            <ng-template #noendpoints>              <button                class="primary-button"                tuiButton                tuiAppearance="floating"                routerLink="/ApiDetails/{{ apiName }}"              >                Перейти к деталям API              </button>            </ng-template>          </ng-template>        </tui-expand>      </ng-container>    </tui-accordion>  </ng-container>  <ng-template #noEntities>    <p>Нет доступных сущностей и эндпоинтов</p>  </ng-template></div>}</div>'
+        var COMPONENT_TEMPLATE = '<div><app-header />@if (loading) {<app-loading></app-loading>} @else {<div class="endpoint-list">  <div class="api-header">    <h1>{{ apiName }}</h1>    <app-switch      [value]="apiInfo.isActive"      (toggle)="onApiToggleChange($event)"    ></app-switch>  </div>  <ng-container *ngIf="entities.length > 0; else noEntities">    <tui-accordion tuiAppearance="floating" [closeOthers]="false">      <ng-container *ngFor="let entity of entities">        <button tuiAccordion class="accordion">          <span class="limited-text">{{ entity.name }}</span>          <app-switch            [value]="entity.isActive"            (toggle)="onEntityToggleChange(entity, $event)"          ></app-switch>        </button>        <tui-expand>          <ng-container            *ngIf="              entity?.endpoints && entity.endpoints.length > 0;              else emptyEntityOrApi            "          >            <ul>              <li                *ngFor="let endpoint of entity.endpoints"                class="endpoint-item"              >                <div class="endpoint-header">                  <div class="endpoint-route">{{ endpoint.route }}</div>                  <div class="endpoint-type">{{ endpoint.type }}</div>                  <app-switch                    [value]="endpoint.isActive"                    (toggle)="onEndpointToggleChange(entity, endpoint, $event)"                  ></app-switch>                </div>                <div class="url-container">                  <div class="copy-url-field">                    <input                      type="text"                      readonly                      [value]="getUrl(entity.name, endpoint)"                      class="url-input"                      #urlInput                    />                    <button                      tuiButton                      tuiAppearance="flat"                      (click)="copyToClipboard(entity.name, endpoint)"                      class="copy-button"                      [class.copied]="                        isCopied === getUrl(entity.name, endpoint)                      "                    >                      <i                        class="fas"                        [ngClass]="{                          \'fa-clone\':                            isCopied !== getUrl(entity.name, endpoint),                          \'fa-check\': isCopied === getUrl(entity.name, endpoint)                        }"                      ></i>                    </button>                  </div>                </div>              </li>            </ul>          </ng-container>          <ng-template #emptyEntityOrApi>            <ng-container              *ngIf="entity?.endpoints?.length === 0; else noendpoints"            >              <p>Нет доступных эндпоинтов.</p>              <button                class="primary-button"                tuiButton                tuiAppearance="floating"                routerLink="/ApiEntity/{{ apiName }}/{{ entity.name }}"              >                Перейти к деталям сущности              </button>            </ng-container>            <ng-template #noendpoints>              <button                class="primary-button"                tuiButton                tuiAppearance="floating"                routerLink="/ApiDetails/{{ apiName }}"              >                Перейти к деталям API              </button>            </ng-template>          </ng-template>        </tui-expand>      </ng-container>    </tui-accordion>  </ng-container>  <ng-template #noEntities>    <p>Нет доступных сущностей и эндпоинтов</p>  </ng-template></div>}</div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ApiEndpointListComponent'};

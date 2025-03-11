@@ -213,6 +213,11 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#alerts" >alerts</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Readonly</span>
                                 <a href="#context" >context</a>
@@ -243,8 +248,16 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#checkLengthAndWarn" >checkLengthAndWarn</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Protected</span>
                                 <a href="#moveFocus" >moveFocus</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#onDescriptionInput" >onDescriptionInput</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
@@ -253,6 +266,14 @@
                             <li>
                                     <span class="modifier">Protected</span>
                                 <a href="#showDialog" >showDialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showError" >showError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showWarning" >showWarning</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
@@ -301,6 +322,107 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="checkLengthAndWarn"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>checkLengthAndWarn</b></span>
+                        <a href="#checkLengthAndWarn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkLengthAndWarn(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, maxLength: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, warningThreshold: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="205"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:205</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>maxLength</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>warningThreshold</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>15</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="moveFocus"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -319,8 +441,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="173"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:173</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:224</a></div>
                         </td>
                     </tr>
 
@@ -380,6 +502,75 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="onDescriptionInput"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>onDescriptionInput</b></span>
+                        <a href="#onDescriptionInput"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onDescriptionInput(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:195</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="onInput"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -398,8 +589,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="156"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:156</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="184"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:184</a></div>
                         </td>
                     </tr>
 
@@ -477,8 +668,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:152</a></div>
                         </td>
                     </tr>
 
@@ -538,6 +729,144 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="showError"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showError</b></span>
+                        <a href="#showError"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showError(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:166</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showWarning"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showWarning</b></span>
+                        <a href="#showWarning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showWarning(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="submit"></a>
                     <span class="name">
                             <span class="modifier">Protected</span>
@@ -556,8 +885,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:134</a></div>
                         </td>
                     </tr>
 
@@ -623,6 +952,40 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="alerts"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>alerts</b></span>
+                        <a href="#alerts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(TuiAlertService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:78</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Сервис для управления алертами.</p>
+<p>Внедряется с использованием Angular DI.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="context"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
@@ -641,7 +1004,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:90</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -718,7 +1081,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:79</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -797,7 +1160,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:102</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:111</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -832,7 +1195,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:112</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/data/components/api-dialog/api-dialog.component.ts:121</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -861,7 +1224,7 @@ import { Component, inject, ViewChild } from &#x27;@angular/core&#x27;;
 import { FormsModule } from &#x27;@angular/forms&#x27;;
 import { TuiAutoFocus } from &#x27;@taiga-ui/cdk&#x27;;
 import type { TuiDialogContext } from &#x27;@taiga-ui/core&#x27;;
-import { TuiButton, TuiDialogService, TuiTextfield } from &#x27;@taiga-ui/core&#x27;;
+import { TuiAlertService, TuiButton, TuiDialogService, TuiTextfield } from &#x27;@taiga-ui/core&#x27;;
 import { TuiDataListWrapper, TuiSlider } from &#x27;@taiga-ui/kit&#x27;;
 import {
   TuiInputModule,
@@ -924,7 +1287,16 @@ export class ApiDialogComponent {
    */
   @ViewChild(&#x27;descriptionInput&#x27;, { read: ElementRef })
   descriptionInputRef!: ElementRef;
-
+   /**
+   * Сервис для управления алертами.
+   *
+   * @remarks
+   * Внедряется с использованием Angular DI.
+   *
+   * @type {TuiDialogService}
+   * @memberof ApiDialogComponent
+   */
+ private readonly alerts &#x3D; inject(TuiAlertService);
   /**
    * Сервис для управления диалоговыми окнами.
    *
@@ -1002,6 +1374,25 @@ export class ApiDialogComponent {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  private showWarning(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Предупреждение&#x27;,
+        appearance: &#x27;warning&#x27;,
+        autoClose: 5000,
+      })
+      .subscribe();
+  }
+
+  private showError(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Ошибка&#x27;,
+        appearance: &#x27;negative&#x27;,
+        autoClose: 5000,
+      })
+      .subscribe();
+  }
   /**
    * Обработчик ввода данных в поле имени.
    *
@@ -1013,10 +1404,33 @@ export class ApiDialogComponent {
    */
   protected onInput(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
-    const value &#x3D; input.value;
-    const cleanedValue &#x3D; value.replace(/[^a-zA-Z0-9]/g, &#x27;&#x27;);
-    input.value &#x3D; cleanedValue;
-    this.data.name &#x3D; cleanedValue;
+    const cleanedValue &#x3D; input.value.replace(/[^a-zA-Z0-9]/g, &#x27;&#x27;);
+  
+    const maxLength &#x3D; 200; 
+    const finalValue &#x3D; this.checkLengthAndWarn(cleanedValue, maxLength);
+  
+    input.value &#x3D; finalValue;
+    this.data.name &#x3D; finalValue;
+  }
+  
+  protected onDescriptionInput(event: Event): void {
+    const input &#x3D; event.target as HTMLInputElement;
+    const maxLength &#x3D; 1000; 
+    const warningThreshold &#x3D; 25; 
+    const finalValue &#x3D; this.checkLengthAndWarn(input.value, maxLength, warningThreshold);
+  
+    input.value &#x3D; finalValue;
+    this.data.description &#x3D; finalValue;
+  }
+  
+  private checkLengthAndWarn(value: string, maxLength: number, warningThreshold: number &#x3D; 15): string {
+    if (value.length &gt; maxLength) {
+      this.showError(&#x60;Вы превышаете допустимую длину в ${maxLength} символов, добавление новых символов невозможно.&#x60;);
+      return value.slice(0, maxLength); 
+    } else if (value.length &gt; maxLength - warningThreshold) {
+      this.showWarning(&#x60;Вы приближаетесь к границе по длине символов. Осталось ${maxLength - value.length} символов.&#x60;);
+    }
+    return value;
   }
 
   /**
@@ -1040,6 +1454,7 @@ export class ApiDialogComponent {
   #nameInput
   tuiAutoFocus
   tuiTextfieldSize&#x3D;&quot;m&quot;
+  maxlength&#x3D;&quot;200&quot;
   [(ngModel)]&#x3D;&quot;data.name&quot;
   (input)&#x3D;&quot;onInput($event)&quot;
   (keydown.enter)&#x3D;&quot;submit($event)&quot;
@@ -1053,7 +1468,9 @@ export class ApiDialogComponent {
   #descriptionInput
   tuiAutoFocus
   tuiTextfieldSize&#x3D;&quot;m&quot;
+  maxlength&#x3D;&quot;1000&quot;
   [(ngModel)]&#x3D;&quot;data.description&quot;
+  (input)&#x3D;&quot;onDescriptionInput($event)&quot;
   (keydown.enter)&#x3D;&quot;submit($event)&quot;
   (keydown.arrowUp)&#x3D;&quot;moveFocus(nameInputRef)&quot;
   (keydown.arrowDown)&#x3D;&quot;moveFocus(nameInputRef)&quot;
@@ -1107,7 +1524,7 @@ export class ApiDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><tui-input  #nameInput  tuiAutoFocus  tuiTextfieldSize="m"  [(ngModel)]="data.name"  (input)="onInput($event)"  (keydown.enter)="submit($event)"  (keydown.arrowDown)="moveFocus(descriptionInputRef)"  (keydown.arrowUp)="moveFocus(descriptionInputRef)">  Имя API</tui-input><br /><tui-input  #descriptionInput  tuiAutoFocus  tuiTextfieldSize="m"  [(ngModel)]="data.description"  (keydown.enter)="submit($event)"  (keydown.arrowUp)="moveFocus(nameInputRef)"  (keydown.arrowDown)="moveFocus(nameInputRef)">  Описание</tui-input><p>  <button    size="m"    tuiButton    type="button"    [disabled]="!hasValue"    (click)="submit($event)"  >    Отправить  </button></p></div>'
+        var COMPONENT_TEMPLATE = '<div><tui-input  #nameInput  tuiAutoFocus  tuiTextfieldSize="m"  maxlength="200"  [(ngModel)]="data.name"  (input)="onInput($event)"  (keydown.enter)="submit($event)"  (keydown.arrowDown)="moveFocus(descriptionInputRef)"  (keydown.arrowUp)="moveFocus(descriptionInputRef)">  Имя API</tui-input><br /><tui-input  #descriptionInput  tuiAutoFocus  tuiTextfieldSize="m"  maxlength="1000"  [(ngModel)]="data.description"  (input)="onDescriptionInput($event)"  (keydown.enter)="submit($event)"  (keydown.arrowUp)="moveFocus(nameInputRef)"  (keydown.arrowDown)="moveFocus(nameInputRef)">  Описание</tui-input><p>  <button    size="m"    tuiButton    type="button"    [disabled]="!hasValue"    (click)="submit($event)"  >    Отправить  </button></p></div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ApiDialogComponent'};

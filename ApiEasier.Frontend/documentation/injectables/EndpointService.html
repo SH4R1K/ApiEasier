@@ -172,10 +172,6 @@
                                 <a href="#getEndpointList" >getEndpointList</a>
                             </li>
                             <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#handleError" >handleError</a>
-                            </li>
-                            <li>
                                 <a href="#updateEndpoint" >updateEndpoint</a>
                             </li>
                             <li>
@@ -199,12 +195,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(http: HttpClient, errorHandler: <a href="../injectables/ErrorHandlerService.html" target="_self">ErrorHandlerService</a>, alerts: TuiAlertService)</code>
+<code>constructor(http: HttpClient)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/endpoint-service.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/services/endpoint-service.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -226,30 +222,6 @@
                                                   
                                                         <td>
                                                                     <code>HttpClient</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>errorHandler</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/ErrorHandlerService.html" target="_self" >ErrorHandlerService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>alerts</td>
-                                                  
-                                                        <td>
-                                                                    <code>TuiAlertService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -291,8 +263,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -404,8 +376,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -517,8 +489,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="81"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:81</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -630,8 +602,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:34</a></div>
                         </td>
                     </tr>
 
@@ -709,85 +681,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleError"></a>
-                    <span class="name">
-                            <span class="modifier">Private</span>
-                        <span ><b>handleError</b></span>
-                        <a href="#handleError"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleError(error: HttpErrorResponse)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="170"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:170</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Обрабатывает ошибки HTTP-запросов.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>error</td>
-                                            <td>
-                                                        <code>HttpErrorResponse</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Объект ошибки HTTP.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>Observable&lt;never&gt;</code>
-
-                        </div>
-                            <div class="io-description">
-                                <p>Наблюдаемый объект, указывающий на ошибку.</p>
-
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="updateEndpoint"></a>
                     <span class="name">
                         <span ><b>updateEndpoint</b></span>
@@ -804,8 +697,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="103"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:103</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -935,8 +828,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="148"
-                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:148</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/services/endpoint-service.service.ts:133</a></div>
                         </td>
                     </tr>
 
@@ -1071,7 +964,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/services/endpoint-service.service.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/app/services/endpoint-service.service.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -1084,10 +977,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
-import { Injectable } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
 import { Observable, throwError } from &#x27;rxjs&#x27;;
 import { catchError } from &#x27;rxjs/operators&#x27;;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -1095,9 +988,11 @@ import { Router } from &#x27;@angular/router&#x27;;
 >>>>>>> 0eb3894 (добавлена документация к обычным компонентам)
 =======
 >>>>>>> c1b38d2 (документация)
+=======
+import { Router } from &#x27;@angular/router&#x27;;
+>>>>>>> f12d8b4 (вкусно и точка.)
 import { Endpoint } from &quot;../interfaces/Endpoint&quot;;
-import { TuiAlertService } from &#x27;@taiga-ui/core&#x27;;
-import { ErrorHandlerService } from &#x27;./error-handler.service&#x27;;
+import { HttpClient } from &#x27;@angular/common/http&#x27;;
 
 /**
  * Сервис для управления конечными точками (endpoints).
@@ -1115,11 +1010,7 @@ import { ErrorHandlerService } from &#x27;./error-handler.service&#x27;;
 export class EndpointService {
   private baseUrl &#x3D; &#x60;${window.location.origin}/api&#x60;;
 
-  constructor(
-    private http: HttpClient,
-    private errorHandler: ErrorHandlerService,
-    private alerts: TuiAlertService
-  ) {}
+  constructor(private http: HttpClient) {}
 
   /**
    * Получает список конечных точек для указанного API сервиса и сущности.
@@ -1133,11 +1024,9 @@ export class EndpointService {
     apiServiceName: string,
     entityName: string
   ): Observable&lt;Endpoint[]&gt; {
-    return this.http
-      .get&lt;Endpoint[]&gt;(
-        &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}&#x60;
-      )
-      .pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; this.handleError(err)));
+    return this.http.get&lt;Endpoint[]&gt;(
+      &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}&#x60;
+    );
   }
 
   /**
@@ -1154,12 +1043,10 @@ export class EndpointService {
     entityName: string,
     action: Endpoint
   ): Observable&lt;Endpoint&gt; {
-    return this.http
-      .post&lt;Endpoint&gt;(
-        &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}&#x60;,
-        action
-      )
-      .pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; this.handleError(err)));
+    return this.http.post&lt;Endpoint&gt;(
+      &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}&#x60;,
+      action
+    );
   }
 
   /**
@@ -1176,11 +1063,9 @@ export class EndpointService {
     entityName: string,
     actionName: string
   ): Observable&lt;Endpoint&gt; {
-    return this.http
-      .get&lt;Endpoint&gt;(
-        &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}/${actionName}&#x60;
-      )
-      .pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; this.handleError(err)));
+    return this.http.get&lt;Endpoint&gt;(
+      &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}/${actionName}&#x60;
+    );
   }
 
   /**
@@ -1199,12 +1084,10 @@ export class EndpointService {
     actionName: string,
     action: Endpoint
   ): Observable&lt;Endpoint&gt; {
-    return this.http
-      .put&lt;Endpoint&gt;(
-        &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}/${actionName}&#x60;,
-        action
-      )
-      .pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; this.handleError(err)));
+    return this.http.put&lt;Endpoint&gt;(
+      &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}/${actionName}&#x60;,
+      action
+    );
   }
 
   /**
@@ -1221,11 +1104,9 @@ export class EndpointService {
     entityName: string,
     actionName: string
   ): Observable&lt;void&gt; {
-    return this.http
-      .delete&lt;void&gt;(
-        &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}/${actionName}&#x60;
-      )
-      .pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; this.handleError(err)));
+    return this.http.delete&lt;void&gt;(
+      &#x60;${this.baseUrl}/ApiEndpoint/${apiServiceName}/${entityName}/${actionName}&#x60;
+    );
   }
 
   /**
@@ -1244,28 +1125,13 @@ export class EndpointService {
     endpoint: string,
     isActive: boolean
   ): Observable&lt;any&gt; {
-    return this.http
-      .patch&lt;any&gt;(
-        &#x60;${this.baseUrl}/ApiEndpoint/${serviceName}/${entityName}/${endpoint}/${isActive}&#x60;,
-        null
-      )
-      .pipe(catchError((err: HttpErrorResponse) &#x3D;&gt; this.handleError(err)));
-  }
-
-  /**
-   * Обрабатывает ошибки HTTP-запросов.
-   *
-   * @private
-   * @param {HttpErrorResponse} error - Объект ошибки HTTP.
-   * @returns {Observable&lt;never&gt;} Наблюдаемый объект, указывающий на ошибку.
-   * @memberof EndpointService
-   */
-  private handleError(error: HttpErrorResponse): Observable&lt;never&gt; {
-    this.errorHandler.handleError(error);
-    this.alerts.open(error.message, { appearance: &#x27;negative&#x27; }).subscribe();
-    return throwError(error);
+    return this.http.patch&lt;any&gt;(
+      &#x60;${this.baseUrl}/ApiEndpoint/${serviceName}/${entityName}/${endpoint}/${isActive}&#x60;,
+      null
+    );
   }
 }
+
 </code></pre>
     </div>
 

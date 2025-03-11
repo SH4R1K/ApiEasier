@@ -216,6 +216,17 @@
                             <li>
                                 <a href="#errorMessage" >errorMessage</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#interval" >interval</a>
+                            </li>
+                            <li>
+                                <a href="#timeLeft" >timeLeft</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#timer" >timer</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -230,6 +241,9 @@
                         <ul class="index-list">
                             <li>
                                 <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit" >ngOnInit</a>
@@ -252,12 +266,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(route: ActivatedRoute, router: Router)</code>
+<code>constructor(route: ActivatedRoute, location: Location)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:36</a></div>
                             </td>
                         </tr>
 
@@ -296,10 +310,10 @@
                                                         </td>
                                                 </tr>
                                                 <tr>
-                                                        <td>router</td>
+                                                        <td>location</td>
                                                   
                                                         <td>
-                                                                    <code>Router</code>
+                                                                    <code>Location</code>
                                                         </td>
                                                   
                                                     <td>
@@ -307,10 +321,6 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <ul>
-<li>Роутер для навигации между представлениями.</li>
-</ul>
-
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -351,8 +361,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="65"
-                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:65</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -361,6 +371,43 @@
                 <td class="col-md-4">
                         <div class="io-description"><p>Метод для возврата на главную страницу.</p>
 </div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:72</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
 
                         <div class="io-description">
                             <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
@@ -390,8 +437,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -435,16 +482,10 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:30</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:26</a></div>
                         </td>
                     </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Код ошибки.</p>
-</div>
-                </td>
-            </tr>
 
         </tbody>
     </table>
@@ -467,7 +508,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -480,14 +521,100 @@
 
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="interval"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>interval</b></span>
+                        <a href="#interval"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:36</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timeLeft"></a>
+                    <span class="name">
+                        <span ><b>timeLeft</b></span>
+                        <a href="#timeLeft"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>20</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:34</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timer"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>timer</b></span>
+                        <a href="#timer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/data/pages/error-display/error-display.component.ts:35</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
 </section>
 
 </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, OnDestroy } from &#x27;@angular/core&#x27;;
 import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { Location } from &#x27;@angular/common&#x27;;
 import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
 
 /**
@@ -510,11 +637,6 @@ import { TuiButton } from &#x27;@taiga-ui/core&#x27;;
   styleUrls: [&#x27;./error-display.component.css&#x27;],
 })
 export class ErrorDisplayComponent implements OnInit {
-  /**
-   * Код ошибки.
-   * @type {string}
-   * @memberof ErrorDisplayComponent
-   */
   errorCode!: string;
 
   /**
@@ -523,13 +645,18 @@ export class ErrorDisplayComponent implements OnInit {
    * @memberof ErrorDisplayComponent
    */
   errorMessage!: string;
+  timeLeft: number &#x3D; 20;
+  private timer: any;
+  private interval: any;
 
   /**
    * Конструктор компонента.
    * @param {ActivatedRoute} route - Активированный маршрут для получения параметров маршрута.
-   * @param {Router} router - Роутер для навигации между представлениями.
    */
-  constructor(private route: ActivatedRoute, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location
+  ) {}
 
   /**
    * Метод жизненного цикла, который вызывается при инициализации компонента.
@@ -540,9 +667,30 @@ export class ErrorDisplayComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) &#x3D;&gt; {
       this.errorCode &#x3D; params[&#x27;code&#x27;] || &#x27;Unknown Error&#x27;;
-      this.errorMessage &#x3D;
-        params[&#x27;message&#x27;] || &#x27;Произошла непредвиденная ошибка.&#x27;;
+      this.errorMessage &#x3D; params[&#x27;message&#x27;] || &#x27;Произошла непредвиденная ошибка.&#x27;;
     });
+
+    // Установите таймер на 20 секунд
+    this.timer &#x3D; setTimeout(() &#x3D;&gt; {
+      this.location.back();
+    }, 20000);
+
+    // Обновляйте таймер каждую секунду
+    this.interval &#x3D; setInterval(() &#x3D;&gt; {
+      if (this.timeLeft &gt; 0) {
+        this.timeLeft--;
+      }
+    }, 1000);
+  }
+
+  ngOnDestroy(): void {
+    // Очистите таймер и интервал при уничтожении компонента
+    if (this.timer) {
+      clearTimeout(this.timer);
+    }
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
   }
 
   /**
@@ -551,7 +699,7 @@ export class ErrorDisplayComponent implements OnInit {
    * @memberof ErrorDisplayComponent
    */
   goBack(): void {
-    this.router.navigate([&#x27;/&#x27;]);
+    this.location.back();
   }
 }
 </code></pre>
@@ -559,20 +707,24 @@ export class ErrorDisplayComponent implements OnInit {
 
     <div class="tab-pane fade " id="templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;error-container&quot;&gt;
-    &lt;h1&gt;{{ errorCode }}&lt;/h1&gt;
-    &lt;p&gt;{{ errorMessage }}&lt;/p&gt;
-    &lt;button
-      appearance&#x3D;&quot;outline-grayscale&quot;
-      size&#x3D;&quot;s&quot;
-      tuiButton
-      type&#x3D;&quot;button&quot;
-      class&#x3D;&quot;tui-space_right-1&quot;
-      (click)&#x3D;&quot;goBack()&quot;
-    &gt;
-      Go Back
-    &lt;/button&gt;
-  &lt;/div&gt;
-  </code></pre>
+  &lt;h1&gt;{{ errorCode }}&lt;/h1&gt;
+  &lt;p&gt;{{ errorMessage }}&lt;/p&gt;
+  &lt;p&gt;
+    Вы будете автоматически возвращены на предыдущую страницу через
+    {{ timeLeft }} секунд...
+  &lt;/p&gt;
+  &lt;button
+    appearance&#x3D;&quot;outline-grayscale&quot;
+    size&#x3D;&quot;s&quot;
+    tuiButton
+    type&#x3D;&quot;button&quot;
+    class&#x3D;&quot;tui-space_right-1&quot;
+    (click)&#x3D;&quot;goBack()&quot;
+  &gt;
+    Go Back
+  &lt;/button&gt;
+&lt;/div&gt;
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="styleData">
@@ -703,7 +855,7 @@ p::-webkit-scrollbar-thumb:hover {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="error-container">    <h1>{{ errorCode }}</h1>    <p>{{ errorMessage }}</p>    <button      appearance="outline-grayscale"      size="s"      tuiButton      type="button"      class="tui-space_right-1"      (click)="goBack()"    >      Go Back    </button>  </div>  </div>'
+        var COMPONENT_TEMPLATE = '<div><div class="error-container">  <h1>{{ errorCode }}</h1>  <p>{{ errorMessage }}</p>  <p>    Вы будете автоматически возвращены на предыдущую страницу через    {{ timeLeft }} секунд...  </p>  <button    appearance="outline-grayscale"    size="s"    tuiButton    type="button"    class="tui-space_right-1"    (click)="goBack()"  >    Go Back  </button></div></div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ErrorDisplayComponent'};

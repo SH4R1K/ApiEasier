@@ -256,7 +256,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier"></span>
+                                    <span class="modifier">Private</span>
+                                <a href="#checkLengthAndWarn" >checkLengthAndWarn</a>
+                            </li>
+                            <li>
                                 <a href="#handleKeyboardEvent" >handleKeyboardEvent</a>
                             </li>
                             <li>
@@ -279,27 +282,17 @@
                                     <span class="modifier">Private</span>
                                 <a href="#showError" >showError</a>
                             </li>
-                        </ul>
-                    </td>
-                </tr>
-
-
-
-
-                <tr>
-                    <td class="col-md-4">
-                        <h6><b>HostListeners</b></h6>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <ul class="index-list">
                             <li>
-                                <a href="#document:keydown" >document:keydown</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#showWarning" >showWarning</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+
+
+
+
 
                     <tr>
                         <td class="col-md-4">
@@ -329,79 +322,7 @@
 
 
 
-    <section data-compodoc="block-methods">
-    <h3>HostListeners</h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="document:keydown"></a>
-                    <span class="name">
-                        <span ><b>document:keydown</b></span>
-                        <a href="#document:keydown"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <i>Arguments : </i><code>'$event' </code>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-<code>document:keydown(event: KeyboardEvent)</code>
-                </td>
-            </tr>
 
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:178</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-description"><p>Обработчик событий клавиатуры.</p>
-<p>Обрабатывает нажатия клавиш &quot;Enter&quot; и &quot;Escape&quot;.</p>
-</div>
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                            <td>Optional</td>
-                                                <td>Description</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>event</td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                            <td>
-                                                    <ul>
-<li>Событие клавиатуры.</li>
-</ul>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
     <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -411,9 +332,109 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="checkLengthAndWarn"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>checkLengthAndWarn</b></span>
+                        <a href="#checkLengthAndWarn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>checkLengthAndWarn(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, maxLength: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, warningThreshold: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="266"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:266</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>maxLength</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                                <td>warningThreshold</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>15</code>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="handleKeyboardEvent"></a>
                     <span class="name">
-                            <span class="modifier"></span>
                         <span ><b>handleKeyboardEvent</b></span>
                         <a href="#handleKeyboardEvent"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -421,23 +442,15 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleKeyboardEvent(event: KeyboardEvent)</code>
+<code>handleKeyboardEvent(event: KeyboardEvent)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@HostListener(&#x27;document:keydown&#x27;, [&#x27;$event&#x27;])<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="178"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:178</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:176</a></div>
                         </td>
                     </tr>
 
@@ -515,8 +528,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="194"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:194</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="191"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:191</a></div>
                         </td>
                     </tr>
 
@@ -557,17 +570,14 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="263"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:263</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="277"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:277</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                        <div class="io-description"><p>Перемещает фокус на указанное поле ввода.</p>
-<p>Используется для управления фокусом между полями ввода.</p>
-</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -578,7 +588,6 @@
                                             <td>Name</td>
                                                 <td>Type</td>
                                             <td>Optional</td>
-                                                <td>Description</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -593,12 +602,6 @@
                                             </td>
 
 
-                                            <td>
-                                                    <ul>
-<li>Ссылка на элемент ввода.</li>
-</ul>
-
-                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -636,8 +639,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="246"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:246</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="255"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:255</a></div>
                         </td>
                     </tr>
 
@@ -715,8 +718,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="216"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:216</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="213"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:213</a></div>
                         </td>
                     </tr>
 
@@ -794,8 +797,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="227"
-                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:227</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="236"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:236</a></div>
                         </td>
                     </tr>
 
@@ -850,6 +853,75 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showWarning"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>showWarning</b></span>
+                        <a href="#showWarning"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showWarning(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="217"
+                                    class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:217</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section data-compodoc="block-properties">
     
@@ -876,7 +948,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:91</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -909,7 +981,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="108" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:108</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:107</a></div>
                         </td>
                     </tr>
 
@@ -942,7 +1014,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:83</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="82" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -980,7 +1052,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:100</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -1022,7 +1094,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:66</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:65</a></div>
                         </td>
                     </tr>
 
@@ -1064,7 +1136,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:75</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="74" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -1099,7 +1171,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:117</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:116</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1134,7 +1206,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:127</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:126</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1169,7 +1241,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="138" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:138</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:137</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1193,7 +1265,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="154" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:154</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/data/components/entity-dialog/entity-dialog.component.ts:153</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1254,7 +1326,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   inject,
-  HostListener,
   ViewChild,
   ElementRef,
 } from &#x27;@angular/core&#x27;;
@@ -1425,12 +1496,10 @@ export class EntityDialogComponent {
    *
    * @memberof EntityDialogComponent
    */
-  @HostListener(&#x27;document:keydown&#x27;, [&#x27;$event&#x27;])
   handleKeyboardEvent(event: KeyboardEvent): void {
     if (event.key &#x3D;&#x3D;&#x3D; &#x27;Enter&#x27;) {
       this.handleSubmit();
     } else if (event.key &#x3D;&#x3D;&#x3D; &#x27;Escape&#x27;) {
-      // Обработка нажатия клавиши &quot;Escape&quot;
     }
   }
 
@@ -1468,6 +1537,18 @@ export class EntityDialogComponent {
     this.dialogs.open(content, { dismissible: true }).subscribe();
   }
 
+  private showWarning(message: string): void {
+    this.alerts
+      .open(message, {
+        label: &#x27;Предупреждение&#x27;,
+        appearance: &#x27;warning&#x27;,
+        autoClose: 5000,
+      })
+      .subscribe();
+  }
+
+ 
+
   /**
    * Отображает сообщение об ошибке.
    *
@@ -1496,21 +1577,26 @@ export class EntityDialogComponent {
    */
   protected onInput(event: Event): void {
     const input &#x3D; event.target as HTMLInputElement;
-    const value &#x3D; input.value;
-    const cleanedValue &#x3D; value.replace(/[^a-zA-Z0-9]/g, &#x27;&#x27;);
-    input.value &#x3D; cleanedValue;
-    this.data.name &#x3D; cleanedValue;
+    const cleanedValue &#x3D; input.value.replace(/[^a-zA-Z0-9]/g, &#x27;&#x27;);
+
+    const maxLength &#x3D; 200; 
+    const finalValue &#x3D; this.checkLengthAndWarn(cleanedValue, maxLength);
+
+    input.value &#x3D; finalValue;
+    this.data.name &#x3D; finalValue;
   }
 
-  /**
-   * Перемещает фокус на указанное поле ввода.
-   *
-   * @param targetInput - Ссылка на элемент ввода.
-   * @remarks
-   * Используется для управления фокусом между полями ввода.
-   *
-   * @memberof EntityDialogComponent
-   */
+  private checkLengthAndWarn(value: string, maxLength: number, warningThreshold: number &#x3D; 15): string {
+    if (value.length &gt; maxLength) {
+      this.showError(&#x60;Вы превышаете допустимую длину в ${maxLength} символов, добавление новых символов невозможно &#x60;);
+      return value.slice(0, maxLength); 
+    } else if (value.length &gt; maxLength - warningThreshold) {
+      this.showWarning(&#x60;Вы приближаетесь к границе по длине символов. Осталось ${maxLength - value.length} символов.&#x60;);
+    }
+    return value;
+  }
+
+    
   protected moveFocus(targetInput: ElementRef): void {
     targetInput.nativeElement.querySelector(&#x27;input, textarea&#x27;).focus();
   }
@@ -1524,6 +1610,8 @@ export class EntityDialogComponent {
       #nameInput
       tuiAutoFocus
       tuiTextfieldSize&#x3D;&quot;m&quot;
+      maxlength&#x3D;&quot;200&quot;
+      max
       [(ngModel)]&#x3D;&quot;data.name&quot;
       (input)&#x3D;&quot;onInput($event)&quot;
       (keydown.enter)&#x3D;&quot;handleSubmit()&quot;
@@ -1547,7 +1635,7 @@ export class EntityDialogComponent {
     &lt;/tui-textarea&gt;
   
     &lt;p&gt;
-      &lt;button size&#x3D;&quot;m&quot; tuiButton type&#x3D;&quot;button&quot; [disabled]&#x3D;&quot;!hasValue&quot; (click)&#x3D;&quot;handleSubmit()&quot;&gt;
+      &lt;button size&#x3D;&quot;m&quot; tuiButton type&#x3D;&quot;button&quot; [disabled]&#x3D;&quot;!hasValue&quot;  (click)&#x3D;&quot;handleSubmit()&quot;&gt;
         Отправить
       &lt;/button&gt;
     &lt;/p&gt;
@@ -1587,7 +1675,7 @@ export class EntityDialogComponent {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div (keydown.enter)="handleSubmit()">    <tui-input      #nameInput      tuiAutoFocus      tuiTextfieldSize="m"      [(ngModel)]="data.name"      (input)="onInput($event)"      (keydown.enter)="handleSubmit()"      (keydown.arrowDown)="moveFocus(structureInputRef)"      (keydown.arrowUp)="moveFocus(structureInputRef)"    >      Имя сущности    </tui-input>    <br />      <tui-textarea      #descriptionInput      tuiAutoFocus      tuiTextfieldSize="m"      [(ngModel)]="structure"      (keydown.enter)="$event.stopPropagation()"      (keydown.arrowUp)="moveFocus(nameInputRef)"      (keydown.arrowDown)="moveFocus(nameInputRef)"    >      Структура    </tui-textarea>      <p>      <button size="m" tuiButton type="button" [disabled]="!hasValue" (click)="handleSubmit()">        Отправить      </button>    </p>  </div>  </div>'
+        var COMPONENT_TEMPLATE = '<div><div (keydown.enter)="handleSubmit()">    <tui-input      #nameInput      tuiAutoFocus      tuiTextfieldSize="m"      maxlength="200"      max      [(ngModel)]="data.name"      (input)="onInput($event)"      (keydown.enter)="handleSubmit()"      (keydown.arrowDown)="moveFocus(structureInputRef)"      (keydown.arrowUp)="moveFocus(structureInputRef)"    >      Имя сущности    </tui-input>    <br />      <tui-textarea      #descriptionInput      tuiAutoFocus      tuiTextfieldSize="m"      [(ngModel)]="structure"      (keydown.enter)="$event.stopPropagation()"      (keydown.arrowUp)="moveFocus(nameInputRef)"      (keydown.arrowDown)="moveFocus(nameInputRef)"    >      Структура    </tui-textarea>      <p>      <button size="m" tuiButton type="button" [disabled]="!hasValue"  (click)="handleSubmit()">        Отправить      </button>    </p>  </div>  </div>'
     var COMPONENTS = [{'name': 'AlertDeleteComponent', 'selector': 'app-alert-on-delete'},{'name': 'ApiDialogComponent', 'selector': 'app-api-edit-dialog'},{'name': 'ApiEndpointListComponent', 'selector': 'app-api-endpoint-list'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BackButtonComponent', 'selector': 'app-back-button'},{'name': 'CardApiComponent', 'selector': 'app-card-api'},{'name': 'CardApiListComponent', 'selector': 'app-card-api-list'},{'name': 'CardEndpointComponent', 'selector': 'app-card-endpoint'},{'name': 'CardEntityComponent', 'selector': 'app-card-entity'},{'name': 'EndpointCardListComponent', 'selector': 'app-endpoint-card-list'},{'name': 'EndpointDialogComponent', 'selector': 'app-endpoint-dialog'},{'name': 'EntityCardListComponent', 'selector': 'app-entity-card-list'},{'name': 'EntityDialogComponent', 'selector': 'app-entity-edit-dialog'},{'name': 'ErrorDisplayComponent', 'selector': 'app-error-display'},{'name': 'ExportApiButtonComponent', 'selector': 'app-export-api-button'},{'name': 'FilterByInputComponent', 'selector': 'app-filter-by-input'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'IconTrashComponent', 'selector': 'app-icon-trash'},{'name': 'ImportDialogComponent', 'selector': 'app-import-dialog'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'PageNotFoundComponent', 'selector': 'app-page-not-found'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'SwitchComponent', 'selector': 'app-switch'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EntityDialogComponent'};

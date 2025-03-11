@@ -393,7 +393,6 @@ export class BackButtonComponent {
    * @memberof BackButtonComponent
    */
   goBack(): void {
-    const currentUrl &#x3D; this.router.url;
     try {
       const previousUrl &#x3D; this.location.path(true);
       const baseDomain &#x3D; &#x27;/&#x27;;
